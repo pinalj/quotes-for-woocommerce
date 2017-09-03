@@ -42,10 +42,10 @@ The users can then make the payments using the link in the email or the My Accou
 
 == Changelog ==
 
-= 1.0 =
-* Initial release.
-
-= 1.1 =
+= 1.1 (03.09.2017) =
 * Added the code to remove the plugin data when deleted.
 * Added WC Verison check support.
 * Added plugin version data in the DB.
+
+= 1.0 (29.08.2017) =
+* Initial release.
