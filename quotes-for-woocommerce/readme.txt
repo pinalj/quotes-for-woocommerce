@@ -44,3 +44,8 @@ The users can then make the payments using the link in the email or the My Accou
 
 = 1.0 =
 * Initial release.
+
+= 1.1 =
+* Added the code to remove the plugin data when deleted.
+* Added WC Verison check support.
+* Added plugin version data in the DB.

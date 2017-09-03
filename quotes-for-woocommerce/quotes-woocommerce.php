@@ -2,8 +2,10 @@
 /*
 Plugin Name: Quotes for WooCommerce
 Description: This plugin allows you to convert your WooCommerce store into a quote only store. It will hide the prices for the products and not take any payment at Checkout. You can then setup prices for the items in the order and send a notification to the Customer. 
-Version: 1.0
-Author: Pinal Shah
+Version: 1.1
+Author: Pinal Shah 
+WC Requires at least: 3.0.0
+WC tested up to: 3.1.2
 */
 
 if ( ! class_exists( 'quotes_for_wc' ) ) {
@@ -12,6 +14,12 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         public function __construct() {
             
             define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+            
+            // Initialize settings
+            register_activation_hook( __FILE__, array( &$this, 'qwc_activate' ) );
+            // Update DB as needed
+            add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
+            
             // add setting to hide wc prices
             add_action( 'woocommerce_product_options_inventory_product_data', array( &$this, 'qwc_setting' ) );
             // hook in to save the quote settings
@@ -66,6 +74,23 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
+        }
+        
+        /**
+         * Runs when the plugin is activated
+         * @since 1.1
+         */
+        function qwc_activate() {
+            update_option( 'quotes_for_wc', '1.1' );
+        }
+        
+        /**
+         * Used for DB or any other changes when an
+         * update is released.
+         * @since 1.1
+         */
+        function qwc_update_db_check() {
+            update_option( 'quotes_for_wc', '1.1' );
         }
         
         /**
@@ -164,13 +189,13 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @since 1.0
          */
         function qwc_css() {
-            
+            $plugin_version = get_option( 'quotes_for_wc' );
             // load only on Cart, Checkout pages
             if ( is_cart() || is_checkout() ) {
                 
                 // add css file only if cart contains products that require quotes
                 if ( cart_contains_quotable() ) {
-                    wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', '1.0.0', false );
+                    wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
                 }
             }
             
@@ -189,7 +214,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                     }));
                     
                     if ( isset( $found->meta_value ) && $found->meta_value === 'on' ) {
-                        wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', '1.0.0', false );
+                        wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
                     }
                 }
                 
@@ -204,7 +229,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             $quote_status = get_post_meta( $order_id, '_quote_status', true );
             
             if ( 'quote-pending' === $quote_status ) {
-                wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', '1.0.0', false );
+                $plugin_version = get_option( 'quotes_for_wc' );
+                wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
             }
         }
         
@@ -216,7 +242,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
 
             global $post;
             if ( isset( $post->post_type ) && $post->post_type === 'shop_order' ) {
-                wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', '1.0.0', false );
+                $plugin_version = get_option( 'quotes_for_wc' );
+                wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', $plugin_version, false );
                 
                 $ajax_url = get_admin_url() . 'admin-ajax.php';
                 
