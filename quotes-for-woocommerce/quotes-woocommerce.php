@@ -145,6 +145,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         function qwc_include_files() {
             include_once( 'includes/class-qwc-gateway.php' );
             include_once( 'includes/qwc-functions.php' );
+            include_once( 'includes/class-email-manager.php' );
         }        
         
         /**

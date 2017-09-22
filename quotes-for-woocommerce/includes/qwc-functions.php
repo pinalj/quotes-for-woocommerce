@@ -27,4 +27,22 @@ function cart_contains_quotable() {
     return $quotable;
     
 }
+
+function order_requires_quote( $order ) {
+
+    $requires = false;
+
+    if ( $order ) {
+        foreach( $order->get_items() as $item ) {
+            $product_quote = product_quote_enabled( $item[ 'product_id' ] );
+            if ( $product_quote ) {
+                $requires = true;
+                break;
+            }
+        }
+    }
+
+    return $requires;
+}
+
 ?>
