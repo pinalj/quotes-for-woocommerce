@@ -32,7 +32,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // modify the 'add to cart' button text
             add_filter( 'woocommerce_product_add_to_cart_text', array( &$this, 'qwc_change_button_text' ) );
-            add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ) );
+            add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99 );
             
             // hide price on the cart & checkout pages
             add_filter( 'wp_enqueue_scripts', array( &$this, 'qwc_css' ) );
@@ -145,6 +145,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         function qwc_include_files() {
             include_once( 'includes/class-qwc-gateway.php' );
             include_once( 'includes/qwc-functions.php' );
+            include_once( 'includes/class-email-manager.php' );
         }        
         
         /**
