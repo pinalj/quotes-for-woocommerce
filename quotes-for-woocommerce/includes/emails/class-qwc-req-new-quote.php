@@ -45,7 +45,7 @@ class QWC_Request_New_Quote extends WC_Email {
         if ( $order_id > 0 && $send_email ) {
         
             $this->object = $this->get_order_details( $order_id );
-            mail( 'pinalj1612@gmail.com','order',print_r($this->object,true ));
+            
             // allowed quote statuses
             $_status = array(
                 'quote-pending',

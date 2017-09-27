@@ -25,12 +25,12 @@ if ( $order_obj ) {
 	
         echo $items->get_name();
         echo $items->get_quantity();
-        echo $items->get_subtotal();
+        echo $order_obj->get_formatted_line_subtotal( $items );;
         echo "\n";
             
 	} 
 	
-    echo sprintf( __( 'This order is awaiting a quote. Please check and inform the customer appropriately.', 'quote-wc' ) );
+    echo sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) );
     
     echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) );
     

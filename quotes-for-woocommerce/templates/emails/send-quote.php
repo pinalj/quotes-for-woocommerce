@@ -13,7 +13,7 @@ if ( $order_obj ) :
 	<p><?php printf( __( 'Hello %s', 'quote-wc' ), $billing_first_name ); ?></p>
 <?php endif; ?>
 
-<p><?php printf( __( 'Your have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), $order->blogname ); ?></p>
+<p><?php printf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), $order->blogname ); ?></p>
 
 <?php if ( $order_obj ) : ?>
 
@@ -85,9 +85,9 @@ if ( $order_obj ) :
 		</tbody>
 		<tfoot>
 			<?php
-				if ( $totals = $order_obj->get_order_item_totals() ) {
+				if ( $order_obj->get_order_item_totals() ) {
 					$i = 0;
-					foreach ( $totals as $total ) {
+					foreach ( $order_obj->get_order_item_totals() as $total ) {
 						$i++;
 						?><tr>
 							<th scope="row" colspan="2" style="text-align:left; border: 1px solid #eee; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>

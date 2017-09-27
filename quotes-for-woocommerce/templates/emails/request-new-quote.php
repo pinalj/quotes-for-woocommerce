@@ -30,7 +30,7 @@ if ( $order && $billing_first_name && $billing_last_name ) : ?>
 		    <tr>
                 <td style="text-align:left; border: 1px solid #eee;"><?php echo $items->get_name(); ?></td>
                 <td style="text-align:left; border: 1px solid #eee;"><?php echo $items->get_quantity(); ?></td>
-                <td style="text-align:left; border: 1px solid #eee;"><?php echo $items->get_subtotal(); ?></td>
+                <td style="text-align:left; border: 1px solid #eee;"><?php echo $order_obj->get_formatted_line_subtotal( $items ); ?></td>
             </tr>
             <?php 
 		} 
@@ -38,7 +38,7 @@ if ( $order && $billing_first_name && $billing_last_name ) : ?>
 	</tbody>
 </table>
 
-<p><?php _e( 'This order is awaiting a quote. Please check and inform the customer appropriately.', 'quote-wc' ); ?></p>
+<p><?php _e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
 
 <p><?php echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) ); ?></p>
 
