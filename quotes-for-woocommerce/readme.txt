@@ -1,7 +1,7 @@
 === Quotes for WooCommerce ===
 
 Contributors: pinal.shah
-Tags: woocommerce, quotes, proposals, hide-price
+Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 4.8.1
 Stable tag: 4.8.0
@@ -41,6 +41,10 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.2 (28.09.2017) =
+* Added an email template to be sent to admin when a request for quote is received.
+* Fixed an issue where Add to Cart text was not modified for quote products on the single product page.
 
 = 1.1 (03.09.2017) =
 * Added the code to remove the plugin data when deleted.
