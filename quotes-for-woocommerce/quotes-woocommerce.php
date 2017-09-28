@@ -20,11 +20,6 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             // Update DB as needed
             add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
             
-            // add setting to hide wc prices
-            add_action( 'woocommerce_product_options_inventory_product_data', array( &$this, 'qwc_setting' ) );
-            // hook in to save the quote settings
-            add_action( 'woocommerce_process_product_meta', array( &$this, 'qwc_save_setting' ), 10, 1 );
-
             // hide the prices
             add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 10, 2 );
             add_filter( 'woocommerce_variable_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
@@ -74,6 +69,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
+            
+            // Init post type
+            add_action( 'init', array( &$this, 'qwc_init_post_types' ) );
         }
         
         /**
@@ -94,48 +92,15 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         }
         
         /**
-         * Add a setting to enable/disabe quotes
-         * in the Inventory tab.
-         * @since 1.0
-         */
-        function qwc_setting() {
-            
-            global $post;
-            
-            $post_id = ( isset( $post->ID ) && $post->ID > 0 ) ? $post->ID : 0;
-            
-            if ( $post_id > 0 ) {
-                
-                $enable_quotes = get_post_meta( $post_id, 'qwc_enable_quotes', true );
-                $quotes_checked = ( $enable_quotes === 'on' ) ? 'yes' : 'no';
-                
-                woocommerce_wp_checkbox( 
-                            array( 'id' => 'qwc_enable_quotes', 
-                                   'label' => __( 'Enable Quotes', 'quote-wc' ), 
-                                   'description' => __( 'Enable this to allow customers to ask for a quote for the product.', 'quote-wc' ),
-                                   'value'  => $quotes_checked
-                            ) 
-                );
-            
-            }
-        }
-        
-        /**
-         * Save the quotes setting.
-         * @since 1.0
-         */
-        function qwc_save_setting( $post_id ) {
-            $enable_quotes = ( isset( $_POST[ 'qwc_enable_quotes' ] ) ) ? 'on' : '';
-            update_post_meta( $post_id, 'qwc_enable_quotes', $enable_quotes );
-        }
-
-        /**
          * Include files in the admin side.
          * @since 1.0
          */
         function qwc_include_files_admin() {
             include_once( 'includes/class-qwc-gateway.php' );
             include_once( 'includes/class-email-manager.php' );  
+            include_once( 'includes/admin/class-quotes-cpt.php' );
+            include_once( 'includes/admin/class-quote-wc-meta-boxes.php' );
+            include_once( 'includes/admin/admin.php' );
         }
         
         /**
@@ -146,6 +111,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             include_once( 'includes/class-qwc-gateway.php' );
             include_once( 'includes/qwc-functions.php' );
             include_once( 'includes/class-email-manager.php' );
+            include_once( 'includes/class-quotes-wc.php' );
         }        
         
         /**
@@ -339,7 +305,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
                     // add a notice
                     $message = 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.';
-                    wc_add_notice( __( $message, 'woocommerce-booking' ), $notice_type = 'notice' );
+                    wc_add_notice( __( $message, 'quote-wc' ), $notice_type = 'notice' );
                 }
             }
             
@@ -416,14 +382,65 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @since 1.0
          */
         function qwc_order_meta( $order_id ) {
-            
+            $create_quotes = false;
             // check the payment gateway
             if ( isset( WC()->session ) && WC()->session !== null && WC()->session->get( 'chosen_payment_method' ) === 'quotes-gateway' ) {
+                $create_quotes = true;
                 $quote_status = 'quote-pending';
             } else {
                 $quote_status = 'quote-complete';
             }
+            
+            if ( $create_quotes ) {
+                // for all the items in the order
+                $order = new WC_Order( $order_id );
+                foreach( $order->get_items() as $item_id => $item_details ) {
+                    $quote = quotes_for_wc::qwc_create_quote_post( $order_id, $item_id, $item_details );
+                }
+            }
+            
             update_post_meta( $order_id, '_quote_status', $quote_status );
+        }
+        
+        /** Creates & returns a quote post meta record
+         * array to be inserted in post meta.
+         * @param int $item_id
+         * @param int $product_id
+         * @param array $item_details
+         */
+        static function qwc_create_quote_post( $order_id, $item_id, $item_details ) {
+        
+            global $wpdb;
+        
+            $new_quote_data = array();
+        
+            // Merge quote data
+            $defaults = array(
+                'product_id'       => $item_details[ 'product_id' ], // Product ID
+                'order_item_id'    => $item_id,
+                'qty'              => $item_details[ 'quantity' ],
+                'variation_id'     => $item_details[ 'variation_id' ],
+                'cost'             => $item_details[ 'subtotal' ],
+                'order_id'         => $order_id,
+            );
+        
+            $new_quote_data = wp_parse_args( $new_quote_data, $defaults );
+        
+            $new_quote_data[ 'user_id' ]         = get_post_meta( $order_id, '_customer_user', true );
+            $new_quote_data[ 'parent_id' ]       = $order_id; // order ID
+        
+            $status = 'quote-pending';
+        
+            // Create it
+            $new_quote = quotes_for_wc::get_quotes_wc( $new_quote_data );
+            $new_quote->create( $status );
+        
+            return $new_quote;
+        
+        }
+        
+        static function get_quotes_wc( $id ) {
+            return new Quotes_WC( $id );
         }
         
         /**
@@ -538,7 +555,92 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
     	    }
     	    die();
     	}
+
+    	function qwc_init_post_types() {
+    	    register_post_type( 'quote_wc',
+    	    array(
+    	    'labels' => array(
+    	    'name' => 'Quotes',
+    	    'singular_name' => 'Quote',
+    	    'add_new' => 'Add New',
+    	    'add_new_item' => 'Add New Quote',
+    	    'edit' => 'Edit',
+    	    'edit_item' => 'Edit Quote',
+    	    'new_item' => 'New Quote',
+    	    'view' => 'View',
+    	    'view_item' => 'View Quote',
+    	    'search_items' => 'Search Quotes',
+    	    'not_found' => 'No Quotes found',
+    	    'not_found_in_trash' => 'No Quotes found in Trash',
+    	    'parent' => 'Parent Quote'
+    	        ),
+    	        'public' => true,
+    	        'menu_position' => 25,
+    	        //  'menu_icon' => plugins_url( 'images/image.png', __FILE__ ),
+    	        'has_archive' => true,
+    	        'capabilities' => array(
+    	        'create_posts' => 'do_not_allow', // do not allow to create a quote from admin
+    	        ),
+    	        'map_meta_cap'               => true,
+    	        'capability_type'            => 'post',
+    	        'show_ui'                    => true,
+    	        'supports'                   => array( '' ),
+    	        'show_in_menu'               => true,
+    	        'show_in_rest'               => true,
+    	    )
+    	    );
+    	     
+    	    register_post_status( 'quote-pending',
+    	    array(
+    	    'label'                     => '<span class="status-pending tips" data-tip="' . _x( 'Pending', 'quote-wc', 'quote-wc' ) . '">' . _x( 'Pending', 'quote-wc', 'quote-wc' ) . '</span>',
+    	    'public'                    => true,
+    	    'exclude_from_search'       => false,
+    	    'show_in_admin_all_list'    => true,
+    	    'show_in_admin_status_list' => true,
+    	    'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'quote-wc' ),
+    	    ) );
     	
+    	    register_post_status( 'quote-ready',
+    	    array(
+    	    'label'                     => '<span class="status-setup tips" data-tip="' . _x( 'Ready to Send', 'quote-wc', 'quote-wc' ) . '">' . _x( 'Ready to Send', 'quote-wc', 'quote-wc' ) . '</span>',
+    	    'public'                    => true,
+    	    'exclude_from_search'       => false,
+    	    'show_in_admin_all_list'    => true,
+    	    'show_in_admin_status_list' => true,
+    	    'label_count'               => _n_noop( 'Ready to Send <span class="count">(%s)</span>', 'Setup <span class="count">(%s)</span>', 'quote-wc' ),
+    	    ) );
+    	
+    	    register_post_status( 'quote-complete',
+    	    array(
+    	    'label'                     => '<span class="status-complete tips" data-tip="' . _x( 'Complete', 'quote-wc', 'quote-wc' ) . '">' . _x( 'Complete', 'quote-wc', 'quote-wc' ) . '</span>',
+    	    'public'                    => true,
+    	    'exclude_from_search'       => false,
+    	    'show_in_admin_all_list'    => true,
+    	    'show_in_admin_status_list' => true,
+    	    'label_count'               => _n_noop( 'Complete <span class="count">(%s)</span>', 'Complete <span class="count">(%s)</span>', 'quote-wc' ),
+    	    ) );
+    	
+    	    register_post_status( 'quote-sent',
+    	    array(
+    	    'label'                     => '<span class="status-sent tips" data-tip="' . _x( 'Sent', 'quote-wc', 'quote-wc' ) . '">' . _x( 'Sent', 'quote-wc', 'quote-wc' ) . '</span>',
+    	    'public'                    => true,
+    	    'exclude_from_search'       => false,
+    	    'show_in_admin_all_list'    => true,
+    	    'show_in_admin_status_list' => true,
+    	    'label_count'               => _n_noop( 'Sent <span class="count">(%s)</span>', 'Sent <span class="count">(%s)</span>', 'quote-wc' ),
+    	    ) );
+    	
+    	    register_post_status( 'quote-cancelled',
+    	    array(
+    	    'label'                     => '<span class="status-cancelled tips" data-tip="' . _x( 'Cancelled', 'quote-wc', 'quote-wc' ) . '">' . _x( 'Cancelled', 'quote-wc', 'quote-wc' ) . '</span>',
+    	    'public'                    => true,
+    	    'exclude_from_search'       => false,
+    	    'show_in_admin_all_list'    => true,
+    	    'show_in_admin_status_list' => true,
+    	    'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>', 'quote-wc' ),
+    	    ) );
+    	     
+    	}
     } // end of class
 } 
 $quotes_for_wc = new quotes_for_wc();

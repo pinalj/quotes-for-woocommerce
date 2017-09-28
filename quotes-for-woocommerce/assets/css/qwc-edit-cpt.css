@@ -1,0 +1,119 @@
+#qwc_data{
+	padding:15px 15px;
+}
+#qwc_data:after, #qwc_data:before{
+	content:" ";
+	display:table
+}
+#qwc_data:after{
+	clear:both
+}
+#qwc_data h2{
+	margin:0;
+	font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",sans-serif;
+	font-size:21px;
+	font-weight:400;
+	line-height:1.2;
+	padding:0;
+}
+#qwc_data h4{
+	color:#333;
+	margin:1.33em 0 0
+}
+#qwc_data p{
+	color:#777
+}
+#qwc_data p.qwc_number {
+	margin:0;
+	font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",sans-serif;
+	font-weight:400;
+	line-height:1.6em;
+	font-size:16px
+}
+#qwc_data .qwc_data_column_container{
+	clear:both
+}
+#qwc_data .qwc_data_column{
+	width:32%;
+	padding:0 2% 0 0;
+	float:left
+}
+#qwc_data .qwc_data_column:last-child{
+	padding-right:0
+}
+#qwc_data .qwc_data_column p{
+	padding:0!important
+}
+#qwc_data .qwc_data_column .form-field label{
+	display:block;
+	padding:0 0 3px
+}
+#qwc_data .qwc_data_column .form-field input[type=number],#qwc_data .qwc_data_column .form-field input[type=text]{
+	padding:6px;
+	height:auto
+}
+#qwc_data .qwc_data_column .form-field input[type=text],#qwc_data .qwc_data_column .form-field textarea{
+	width:100%
+}
+#qwc_data .qwc_data_column #qwc_qty{
+	width:40%
+}
+#qwc_data .qwc_data_column .form-field select{
+	width:100%
+}
+#qwc_data .qwc_data_column .form-field .hour,#qwc_data .qwc_data_column .form-field .minute{
+	width:3.5em
+}
+#qwc_data .qwc_data_column .form-field small{
+	display:block;
+	margin:5px 0 0;
+	color:#999
+}
+#qwc_data .qwc_data_column .form-field.form-field-wide input[type=text]{
+	width:100%
+}
+#qwc_data .qwc_data_column .form-field.last{
+	float:right
+}
+#qwc_data .qwc_data_column .form-field-wide{
+	width:100%;
+	clear:both
+}
+#qwc_data #qwc_date{
+	width:45%
+}
+#qwc_data #_qwc_customer_id, #qwc_data #_qwc_order_id, #qwc_data #qwc_product_name{
+	width:100%;
+}
+.status_head::after {
+    content: '\e011';
+    font-family: WooCommerce;
+    speak: none;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    text-indent: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-variant: normal normal;
+    margin: 0px;
+}
+
+.status_head {
+    display: block;
+    text-indent: -9999px;
+    position: relative;
+    height: 1em;
+    width: 1em;
+    margin: 0 auto;
+}
+
+.tips {
+    cursor: help;
+    text-decoration: none;
+}
