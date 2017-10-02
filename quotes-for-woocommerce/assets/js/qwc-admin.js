@@ -29,4 +29,21 @@ jQuery( document ).ready( function() {
 			}
 		});
 	});
+	
+	// Send Quote link in edit quote post page
+	jQuery( '.sendquote' ).click( function() {
+		
+		// if any item in the order has quote status pending, then the email cannot be sent
+		var data = {
+				order_id: qwc_params.order_id,
+				post_id: qwc_params.quote_id,
+				action: 'qwc_send_quote_post',
+		};
+		
+		jQuery.post( qwc_params.ajax_url, data, function( response ) {
+			// reload the page
+			location.reload();
+		});
+		
+	});
 });

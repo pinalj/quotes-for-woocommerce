@@ -109,10 +109,18 @@ if ( ! class_exists( 'Quotes_WC_CPT' ) ) :
                         echo "$quantity";
                         break;
                     case 'qwc_price':
-                        echo $quote->get_product_cost();
+                        $order = $quote->get_order();
+                        $currency = $order->get_currency();
+                        $currency_symbol = get_woocommerce_currency_symbol( $currency );
+                        
+                        echo $currency_symbol . $quote->get_product_cost();
                         break;
                     case 'qwc_quote':
-                        echo $quote->get_quote();
+                        $order = $quote->get_order();
+                        $currency = $order->get_currency();
+                        $currency_symbol = get_woocommerce_currency_symbol( $currency );
+                        
+                        echo $currency_symbol . $quote->get_quote();
                         break;
                     case 'qwc_actions':
                         echo '<p>';
@@ -124,19 +132,19 @@ if ( ! class_exists( 'Quotes_WC_CPT' ) ) :
                             ),
                         );
                         
-                        if ( in_array( $status, array( 'quote-pending', 'quote-ready' ) ) ) {
-                            $actions['complete'] = array(
-                                'url'    => wp_nonce_url( admin_url( 'admin-ajax.php?action=qwc_complete&quote_id=' . $post->ID ), 'qwc-complete' ),
-                                'name'   => __( 'Complete', 'quote-wc' ),
-                                'action' => 'complete',
-                            );
-                        }
-
                         if ( in_array( $status, array( 'quote-ready', 'quote-commplete' ) ) ) {
                             $actions['send_quote'] = array(
                                 'url'    => wp_nonce_url( admin_url( 'admin-ajax.php?action=qwc_send_quote&quote_id=' . $post->ID ), 'qwc-send-quote' ),
                                 'name'   => __( 'Send Quote', 'quote-wc' ),
                                 'action' => 'send_quote',
+                            );
+                        }
+                        
+                        if ( in_array( $status, array( 'quote-pending', 'quote-ready' ) ) ) {
+                            $actions['complete'] = array(
+                                'url'    => wp_nonce_url( admin_url( 'admin-ajax.php?action=qwc_complete&quote_id=' . $post->ID ), 'qwc-complete' ),
+                                'name'   => __( 'Complete', 'quote-wc' ),
+                                'action' => 'complete',
                             );
                         }
                         

@@ -14,12 +14,47 @@ class QWC_Admin {
 	    add_action( 'woocommerce_product_options_inventory_product_data', array( &$this, 'qwc_setting' ) );
 	    // hook in to save the quote settings
 	    add_action( 'woocommerce_process_product_meta', array( &$this, 'qwc_save_setting' ), 10, 1 );
-	    
+
+	    // load JS files
+	    add_action( 'admin_enqueue_scripts', array( &$this, 'qwc_load_js' ) );
+	     
 		add_action( 'admin_enqueue_scripts', array( $this, 'qwc_css_edit_cpt' ) );
 		
 		add_action( 'wp_insert_post_data', array( &$this, 'qwc_save_post' ), 10, 2 );
 	}
 
+	/**
+	 * Load JS files.
+	 * @since 1.0
+	 */
+	function qwc_load_js() {
+	
+	    global $post;
+	    if ( isset( $post->post_type ) && ( $post->post_type === 'shop_order' || $post->post_type = 'quote_wc' ) ) {
+	        $plugin_version = get_option( 'quotes_for_wc' );
+	        wp_register_script( 'qwc-admin', plugins_url() . '/quotes-for-woocommerce/assets/js/qwc-admin.js', '', $plugin_version, false );
+	
+	        $ajax_url = get_admin_url() . 'admin-ajax.php';
+	
+	        if ( $post->post_type === 'quote_wc' ) {
+	            $quote_id = $post->ID;
+	            $order_id = $post->post_parent;
+	             
+	        } else if( $post->post_type === 'shop_order' ) {
+	            $order_id = $post->ID;
+	            $quote_id = 0;
+	        }
+	        wp_localize_script( 'qwc-admin', 'qwc_params', array(
+	        'ajax_url' => $ajax_url,
+	        'order_id' => $order_id,
+	        'quote_id' => $quote_id,
+	        'email_msg' => __( 'Quote emailed.', 'quote-wc' ),
+	        )
+	        );
+	        wp_enqueue_script( 'qwc-admin' );
+	    }
+	}
+	
 	function qwc_css_edit_cpt() {
 		
 	    global $post;
@@ -101,5 +136,74 @@ class QWC_Admin {
         update_post_meta( $post_id, '_qwc_quote', $quote_amt );
     }	
 
+    /**
+     *  Send quote email to user.
+     *  @since 1.0
+     */
+    function qwc_send_quote() {
+         
+        $order_id = ( isset( $_POST[ 'order_id' ] ) ) ? $_POST[ 'order_id' ] : 0;
+         
+        if ( $order_id > 0 ) {
+             
+            $qwc_admin = new QWC_Admin();
+            $send_status = $qwc_admin->send_quote_email( $order_id );
+    
+            if ( $send_status === 'success' ) {
+                // update the quote status
+                update_post_meta( $order_id, '_quote_status', 'quote-sent' );
+                echo 'quote-sent';
+            }
+        }
+        die();
+    }
+    
+    function qwc_send_quote_post() {
+    
+        $order_id = $_POST[ 'order_id' ];
+        $post_id = $_POST[ 'post_id' ];
+    
+        // check if any items in the order have quote status pending
+        $return_items = get_pending_quotes( $order_id );
+    
+        if ( is_array( $return_items ) && count( $return_items ) > 0 ) {
+            // echo a message stating the quote cannot be sent
+            update_post_meta( $post_id, '_qwc_send_status', 'Failed' );
+            update_post_meta( $post_id, '_qwc_send_msg', array( 'Quote cannot be emailed as some quotes in the order are Pending. Please update the statuses and try again.' ) );
+        } else {
+            // send the quotes
+            $qwc_admin = new QWC_Admin();
+            $send_status = $qwc_admin->send_quote_email( $order_id );
+            if ( $send_status == 'success' ) {
+                // echo a message stating the quote was sent
+                update_post_meta( $post_id, '_qwc_send_status', 'Success' );
+                update_post_meta( $post_id, '_qwc_send_msg', array( 'Quote emailed successfully.' ) );
+            } else {
+                // echo a message stating the quote cannot be sent
+                update_post_meta( $post_id, '_qwc_send_status', 'Failed' );
+                update_post_meta( $post_id, '_qwc_send_msg', array( 'Quote could not be emailed. Please try again.' ) );
+            }
+        }
+    
+        die();
+    }
+    
+    function send_quote_email( $order_id ) {
+    
+        $quote_status = get_post_meta( $order_id, '_quote_status', true );
+        // allowed quote statuses
+        $_status = array(
+            'quote-complete',
+            'quote-sent',
+        );
+         
+        // create an instance of the WC_Emails class , so emails are sent out to customers
+        new WC_Emails();
+        if ( in_array( $quote_status, $_status ) ) {
+            do_action( 'qwc_send_quote_notification', $order_id );
+            return 'success';
+        }
+    
+    }
 }
 return new QWC_Admin();

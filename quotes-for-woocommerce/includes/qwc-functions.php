@@ -151,4 +151,38 @@ function qwc_check_quote_request( $product_id ) {
 
     return $quote_exists;
 }
+
+/**
+ * Returns an array of quote IDs belonging to
+ * the order with quote status Pending
+ */
+function get_pending_quotes( $order_id ) {
+
+    if ( $order_id > 0 ) {
+        // get all the quotes for the order
+        $args = array(
+            'post_type' => 'quote_wc',
+            'post_parent' => $order_id,
+            'post_status' => array( 'all' ),
+        );
+
+        $posts_list = get_posts( $args );
+
+        $pending_quotes = array();
+
+        foreach( $posts_list as $k => $v ) {
+            $quote_id = $v->ID;
+            $quote_status = $v->post_status;
+
+            if ( 'quote-pending' === $quote_status ) {
+                $pending_quotes[] = $quote_id;
+            }
+        }
+        wp_reset_postdata();
+
+        return $pending_quotes;
+    }
+
+    return false;
+}
 ?>

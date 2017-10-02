@@ -49,6 +49,30 @@ class QWC_Details_Meta_Box {
 		$this->post_types = array( 'quote_wc' );
 	}
 
+	function display_messages() {
+	    global $post;
+	    $quote_id = isset( $post->ID ) ? $post->ID : 0;
+	     
+	    if ( $quote_id > 0 ) {
+	        // check if update errors exist
+	        $qwc_status = get_post_meta( $quote_id, '_qwc_send_status', true );
+	         
+	        if ( isset( $qwc_status ) && 'Failed' === $qwc_status ) {
+	            $class = 'error';
+	        } else {
+	            $class = 'notice';
+	        }
+	        $msg_list = get_post_meta( $quote_id, '_qwc_send_msg', true );
+	        if ( is_array( $msg_list ) && count( $msg_list ) > 0 ) {
+	            foreach( $msg_list as $message ) {
+	                echo '<div class="' . $class . '"><p>' . __( $message, 'quote-wc' ) . '</p></div>';
+	            }
+	            delete_post_meta( $quote_id, '_qwc_send_msg' );
+	        }
+	        delete_post_meta( $quote_id, '_qwc_send_status' );
+	    }
+	}
+	
 	/**
 	 * Meta box content.
 	 */
@@ -79,7 +103,8 @@ class QWC_Details_Meta_Box {
 		if ( ! is_numeric( $quantity ) || $quantity < 1 ) {
 		    $quantity = 1;
 		}
-		
+
+		$this->display_messages();
 		?>
 		<style type="text/css">
 			#post-body-content, #titlediv, #major-publishing-actions, #minor-publishing-actions, #visibility, #submitdiv { display:none }
@@ -163,13 +188,17 @@ class QWC_Details_Meta_Box {
 					<div class="qwc_data_column">
 						<h4><?php _e( 'Quote Details', 'quote-wc' ); ?></h4>
 
+						<?php
+						$currency = $order->get_currency();
+						$currency_symbol = get_woocommerce_currency_symbol( $currency ); 
+						?>
 						<p class="form-field form-field-wide">
-							<label for="qwc_product_price"><?php _e( 'Product price:', 'quote-wc' ); ?></label>
+							<label for="qwc_product_price"><?php _e( "Product price ($currency_symbol):", 'quote-wc' ); ?></label>
                             <input name="qwc_product_price" id="qwc_product_price" value="<?php echo $product_price; ?>" readonly/>
 						</p>
 						
 						<p class="form-field form-field-wide">
-							<label for="qwc_quote"><?php _e( 'Price Quoted:', 'quote-wc' ); ?></label>
+							<label for="qwc_quote"><?php _e( "Price Quoted ($currency_symbol):", 'quote-wc' ); ?></label>
 							<input name="qwc_quote" id="qwc_quote" value="<?php echo $quote_price; ?>" />
 						</p>
 						

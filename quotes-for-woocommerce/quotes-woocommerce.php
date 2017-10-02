@@ -64,9 +64,6 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             // once admin sets the price, send a notification, add a button for the same
             add_action( 'woocommerce_order_item_add_action_buttons', array( &$this, 'qwc_add_buttons' ), 10, 1 );
             
-            // load JS files
-            add_action( 'admin_enqueue_scripts', array( &$this, 'qwc_load_js' ) );
-            
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
             
@@ -202,35 +199,13 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         }
         
         /**
-         * Load JS files.
-         * @since 1.0
-         */
-        function qwc_load_js() {
-
-            global $post;
-            if ( isset( $post->post_type ) && $post->post_type === 'shop_order' ) {
-                $plugin_version = get_option( 'quotes_for_wc' );
-                wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', $plugin_version, false );
-                
-                $ajax_url = get_admin_url() . 'admin-ajax.php';
-                
-                wp_localize_script( 'qwc-admin', 'qwc_params', array(
-                            'ajax_url' => $ajax_url,
-                            'order_id' => $post->ID,
-                            'email_msg' => __( 'Quote emailed.', 'quote-wc' ),
-                            )
-                );
-                wp_enqueue_script( 'qwc-admin' );
-            }
-        }
-        
-        /**
          * Ajax calls
          * @since 1.0
          */
         function qwc_ajax_admin() {
             add_action( 'wp_ajax_qwc_update_status', array( &$this, 'qwc_update_status' ) );
-            add_action( 'wp_ajax_qwc_send_quote', array( &$this, 'qwc_send_quote' ) );
+            add_action( 'wp_ajax_qwc_send_quote', array( 'QWC_Admin', 'qwc_send_quote' ) );
+            add_action( 'wp_ajax_qwc_send_quote_post', array( 'QWC_Admin', 'qwc_send_quote_post' ) );
         }
         
         /**
