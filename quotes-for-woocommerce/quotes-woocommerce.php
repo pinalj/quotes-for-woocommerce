@@ -10,6 +10,8 @@ WC tested up to: 3.1.2
 
 if ( ! class_exists( 'quotes_for_wc' ) ) {
     class quotes_for_wc {
+
+        private $messages = array();
         
         public function __construct() {
             
@@ -74,6 +76,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
+            
+            add_action( 'admin_menu', array( &$this, 'qwc_admin_menu' ), 10 );
         }
         
         /**
@@ -538,7 +542,100 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
     	    }
     	    die();
     	}
+
+    	function qwc_admin_menu() {
+    	    	
+    	    add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array(&$this, 'qwc_settings' ) );
+    	    $page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings',  array( &$this, 'qwc_settings' ) );
+    	    remove_submenu_page( 'qwc_settings', 'qwc_settings' );
+    	     
+    	}
     	
+    	function qwc_settings() {
+    	    	
+    	    try {
+    	        if ( ! empty( $_POST[ 'qwc_save' ] ) ) {
+    	            if( isset( $_POST[ 'enable_global_quote' ] ) ) { // it is on
+    	                $quote = $_POST[ 'enable_global_quote' ];
+    	            } else { // it is blanks
+    	                $quote = '';
+    	            }
+    	             
+    	            // save the global option record
+    	            update_option( 'qwc_enable_quote', $quote );
+    	            // get all the list of products & save in there
+    	            $number_of_batches = $this->qwc_get_post_count();
+    	             
+    	            for( $i = 1; $i <= $number_of_batches; $i++ ) {
+    	                $this->qwc_all_quotes( $quote, $i );
+    	            }
+    	             
+    	            $this->messages[] = __( 'Settings saved.', 'quote-wc' );
+    	        }
+    	    } catch ( Exception $e ) {
+    	    }
+    	    	
+    	    $quote_checked = '';
+    	    $enable_quote = get_option( 'qwc_enable_quote' );
+    	    if( isset( $enable_quote ) && 'on' == $enable_quote ) {
+    	        $quote_checked = 'checked';
+    	    }
+    	    ?>
+    	    <h1><?php _e( 'Quote Settings' );?></h1>
+    	    <br>
+    	    <form method="POST">
+                <?php $this->show_messages(); ?>
+                <div>
+                    <table>
+                        <tr>
+                            <th width="20%" style="align:left;"><label for="enable_global_quote"><?php _e( 'Enable Quotes:', 'quote-wc' ); ?></label></th>
+                            <td width="10%"><input style="margin-left:12px;" name="enable_global_quote" type="checkbox" value="on" <?php echo $quote_checked;?>/></td>
+                            <td><?php _e( 'Please select if you wish to enable quotes for all the products.' ); ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" width="20%" >
+                            <input type="submit" style="margin-left:5px;margin-top:12px;" class="button-primary" name="qwc_save" value="<?php _e( 'Save', 'quote-wc' ); ?>" /></td>
+                        </tr>
+                    </table>
+                </div>
+    	    </form>
+    	    <?php 
+    	}
+    	
+    	public function show_messages() {
+    	    foreach ( $this->messages as $msg ) {
+    	        echo '<div class="notice notice-success"><p>' . esc_html( $msg ) . '</p></div>';
+    	    }
+    	}
+    	
+    	function qwc_all_quotes( $quote_setting, $loop ) {
+    	    
+    	    // get the products
+            $args       = array( 'post_type' => 'product', 'numberposts' => 500, 'suppress_filters' => false, 'post_status' => array( 'publish', 'draft' ), 'paged' => $loop );
+            $product_list = get_posts( $args );
+            	    
+            foreach ( $product_list as $k => $value ) {
+            
+                // Booking ID
+                $theid = $value->ID;
+                update_post_meta( $theid, 'qwc_enable_quotes', $quote_setting );
+            }
+            
+            wp_reset_postdata();
+            
+    	}
+    	
+    	function qwc_get_post_count() {
+    	    
+    	    $args = array( 'post_type' => 'product', 'numberposts' => -1, 'post_status' => array( 'draft', 'publish' ), 'suppress_filters' => false );
+    	    $product_list = get_posts( $args );
+    	    
+    	    $count = count( $product_list );
+    	    
+    	    $number_of_batches = ceil( $count/500 );
+    	    wp_reset_postdata();
+    	    return $number_of_batches;
+    	}
     } // end of class
 } 
 $quotes_for_wc = new quotes_for_wc();
