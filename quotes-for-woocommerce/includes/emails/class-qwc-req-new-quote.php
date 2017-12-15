@@ -74,7 +74,7 @@ class QWC_Request_New_Quote extends WC_Email {
                     return;
                 }
         
-                $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers() );
+                $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }
         } 
     }
