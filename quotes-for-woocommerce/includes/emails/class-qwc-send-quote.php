@@ -76,7 +76,7 @@ class QWC_Send_Quote extends WC_Email {
                     return;
                 }
         
-                $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers() );
+                $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }
         } 
     }
@@ -111,7 +111,9 @@ class QWC_Send_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_html, array(
         'order'       => $this->object,
-        'email_heading' => $this->get_heading()
+        'email_heading' => $this->get_heading(),
+        'send_to_admin' => false,
+        'plain_text'    => false
         ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
@@ -120,7 +122,9 @@ class QWC_Send_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_plain, array(
             'order'       => $this->object,
-            'email_heading' => $this->get_heading()
+            'email_heading' => $this->get_heading(),
+            'send_to_admin' => false,
+            'plain_text'    => true
             ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
