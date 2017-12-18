@@ -3,7 +3,7 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 4.8.1
+Tested up to: 4.9.1
 Stable tag: 4.8.0
 License: GPLv2 or later
 
@@ -41,6 +41,9 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.3 (18.12.2017) =
+* Fixed an issue where an Internal Server Error is thrown at Checkout when the Cart contains quote products.
 
 = 1.2 (28.09.2017) =
 * Added an email template to be sent to admin when a request for quote is received.
