@@ -1,0 +1,212 @@
+.status_head::after {
+    content: '\e011';
+    font-family: WooCommerce;
+    speak: none;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    text-indent: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-variant: normal normal;
+    margin: 0px;
+}
+
+.status_head {
+    display: block;
+    text-indent: -9999px;
+    position: relative;
+    height: 1em;
+    width: 1em;
+    margin: 0 auto;
+}
+
+.type-quote_wc .column-qwc_status,th.column-qwc_status{
+	text-align:center;
+	width:48px
+}
+
+.type-quote_wc .column-qwc_status span{
+	display:block;
+	text-indent:-9999px;
+	position:relative;
+	height:1em;
+	width:1em
+}
+.type-quote_wc .column-qwc_status span:before{
+	font-family:woocommerce;
+	speak:none;
+	font-weight:400;
+	font-variant:normal;
+	text-transform:none;
+	line-height:1;
+	-webkit-font-smoothing:antialiased;
+	margin:0;
+	text-indent:0;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align:center;
+	content:"\e001";
+	font-size:1.4em
+}
+/*.type-quote_wc .column-qwc_status span.status-quote_pending:before,.type-quote_wc .column-qwc_status span.status-unpaid:before{
+	content:"\e033"
+} */
+/*.type-quote_wc .column-qwc_status span.status-quote_ready:before,.type-quote_wc .column-qwc_status span.status-pending:before{
+	content:"\e012";
+	color:#ffba00
+}*/
+.type-quote_wc .column-qwc_status span.status-quote-ready:before{
+	content:"\e011";
+	color:#7ad03a
+} 
+.type-quote_wc .column-qwc_status span.status-quote-complete:before{
+	content:"\e015";
+	color:#2ea2cc
+}
+.type-quote_wc .column-qwc_status span.status-quote-cancel:before{
+	content:"\e013";
+	color:#a00
+}
+.type-quote_wc .column-qwc_status span.status-quote-pending:before{
+	content:"\e011";
+	color:#778899;
+}
+ 
+.tips {
+    cursor: help;
+    text-decoration: none;
+}
+
+// Start from here
+.column-qwc_actions a{
+	display:block;
+	text-indent:-9999px;
+	position:relative;
+	padding:0!important;
+	height:2em!important;
+	width:2em;
+	margin-right:4px!important
+}
+
+.complete, .view, .send_quote {
+	display:block;
+	text-indent:-9999px;
+	position:relative;
+	padding:0!important;
+	height:2em!important;
+	width:2em;
+	margin-right:4px!important;
+	font-family:woocommerce;
+}
+/*
+.column-qwc_actions a:after {
+	font-family:woocommerce;
+	speak:none;
+	font-weight:400;
+	font-variant:normal;
+	text-transform:none;
+	-webkit-font-smoothing:antialiased;
+	margin:0;
+	text-indent:0;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align:center;
+	line-height:1.85 
+} */
+.send_quote{
+	content:"\e02d"
+}
+.view{
+	content:"\e010"
+}
+
+.complete::after {
+    font-family: Dashicons;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+	content: "";
+    line-height: 1.85;
+}
+
+.view::after {
+    font-family: Dashicons;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+	content: "";
+    line-height: 1.85;
+}
+
+.send_quote::after {
+    font-family: Dashicons;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+	content: "";
+    line-height: 1.85;
+}
+/*
+mark.cancelled::after, mark.completed::after, mark.failed::after, mark.on-hold::after, mark.pending::after, mark.processing::after, mark.refunded::after {
+    font-family: WooCommerce;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+*/
