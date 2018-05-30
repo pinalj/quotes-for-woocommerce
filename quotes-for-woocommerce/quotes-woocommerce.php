@@ -116,7 +116,18 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                                    'value'  => $quotes_checked
                             ) 
                 );
-            
+
+                $display = get_post_meta( $post_id, 'qwc_display_prices', true );
+                $prices_enabled = ( $display === 'on' ) ? 'yes' : 'no';
+                
+                woocommerce_wp_checkbox(
+                            array( 'id' => 'qwc_display_prices',
+                                    'label' => __( 'Display Product Price', 'quote-wc' ),
+                                    'description' => __( 'Enable this to display the product price on the Shop & Product pages.', 'quote-wc' ),
+                                    'value'  => $prices_enabled
+                            )
+                );
+                
             }
         }
         
@@ -127,6 +138,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         function qwc_save_setting( $post_id ) {
             $enable_quotes = ( isset( $_POST[ 'qwc_enable_quotes' ] ) ) ? 'on' : '';
             update_post_meta( $post_id, 'qwc_enable_quotes', $enable_quotes );
+            
+            $display = ( isset( $_POST[ 'qwc_display_prices' ] ) ) ? 'on' : '';
+            update_post_meta( $post_id, 'qwc_display_prices', $display );
         }
 
         /**
@@ -159,7 +173,11 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             $enable_quote = get_post_meta( $post->ID, 'qwc_enable_quotes', true );
             
             if ( isset( $enable_quote ) && 'on' === $enable_quote ) {
-                $price = '';
+                // check if price should be displayed or no
+                $display = get_post_meta( $post->ID, 'qwc_display_prices', true );
+                if( ( isset( $display ) && 'on' != $display ) || ! isset( $display ) ) {
+                    $price = '';
+                }
             }
             return $price;
         }
@@ -195,7 +213,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             if ( is_cart() || is_checkout() ) {
                 
                 // add css file only if cart contains products that require quotes
-                if ( cart_contains_quotable() ) {
+                if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
                     wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
                 }
             }
@@ -203,6 +221,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             // My Account page - Orders List
             if ( is_wc_endpoint_url( 'orders' ) ) {
                 global $wpdb;
+                
+                $display = true;
+                
                 // check if any products allow for quotes
                 $quote_query = "SELECT meta_value FROM `" . $wpdb->prefix . "postmeta`
                                 WHERE meta_key = %s";
@@ -215,10 +236,30 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                     }));
                     
                     if ( isset( $found->meta_value ) && $found->meta_value === 'on' ) {
-                        wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+                        // if quote products are present, check if price display is set to on for any of them
+                        $price_query = "SELECT meta_value FROM `" . $wpdb->prefix . "postmeta`
+                                WHERE meta_key = %s";
+                        
+                        $results_price = $wpdb->get_results( $wpdb->prepare( $price_query, 'qwc_display_prices' ) );
+                        
+                        if ( isset( $results_price ) && count( $results_price ) > 0 ) {
+                            
+                            $found_price = current( array_filter( $results_price, function( $value ) {
+                                return isset( $value->meta_value ) && 'on' == $value->meta_value;
+                            }));
+                            
+                            $display = ( isset( $found->meta_value ) && $found->meta_value === 'on' ) ? true : false;
+                                
+                        } else {
+                            $display = false;
+                        }
                     }
                 }
                 
+                // hide the prices
+                if( ! $display ) {
+                    wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+                }
             } 
         }
 
@@ -229,7 +270,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
         function qwc_thankyou_css( $order_id ) {
             $quote_status = get_post_meta( $order_id, '_quote_status', true );
             
-            if ( 'quote-pending' === $quote_status ) {
+            $order = new WC_Order( $order_id );
+            if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
                 $plugin_version = get_option( 'quotes_for_wc' );
                 wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
             }
@@ -277,7 +319,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             $quotes = product_quote_enabled( $product_id );
             
-            if ( $quotes ) {
+            if ( $quotes && ! qwc_cart_display_price() ) {
                 $price = '';
             }
             return $price;
@@ -293,7 +335,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
                 $cart_quotes = cart_contains_quotable();
                 
-                if ( $cart_quotes ) {
+                if ( $cart_quotes && ! qwc_cart_display_price() ) {
                     $price = '';
                     ob_start();
                     
