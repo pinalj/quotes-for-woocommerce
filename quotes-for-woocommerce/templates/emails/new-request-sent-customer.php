@@ -3,7 +3,7 @@
  * Request New Quote email
  */
 $order_obj = new WC_order( $order->order_id );
-
+$display_price = false;
 $opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
 ?>
 
@@ -19,7 +19,12 @@ if ( $order ) : ?>
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;"><?php _e( 'Product', 'quote-wc' ); ?></th>
 			<th style="text-align:left; border: 1px solid #eee;"><?php _e( 'Quantity', 'quote-wc' ); ?></th>
+			<?php 
+			if ( qwc_order_display_price( $order_obj ) ) {
+			    $display_price = true; 
+            ?>
 			<th style="text-align:left; border: 1px solid #eee;"><?php _e( 'Product Price', 'quote-wc' ); ?></th>
+			<?php } ?>
 			
 		</tr>
 		<?php
@@ -28,7 +33,9 @@ if ( $order ) : ?>
 		    <tr>
                 <td style="text-align:left; border: 1px solid #eee;"><?php echo $items->get_name(); ?></td>
                 <td style="text-align:left; border: 1px solid #eee;"><?php echo $items->get_quantity(); ?></td>
+                <?php if( $display_price ) { ?>
                 <td style="text-align:left; border: 1px solid #eee;"><?php echo $order_obj->get_formatted_line_subtotal( $items ); ?></td>
+                <?php } ?>
             </tr>
             <?php 
 		} 
