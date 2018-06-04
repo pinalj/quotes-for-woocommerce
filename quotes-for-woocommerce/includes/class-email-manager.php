@@ -15,6 +15,8 @@ class QWC_Email_manager {
             'qwc_pending_quote',
             // Send Quotes
             'qwc_send_quote',
+            // new request customer
+            'qwc_request_sent',
         );
         
         foreach ( $email_actions as $action ) {
@@ -38,6 +40,7 @@ class QWC_Email_manager {
             if ( $quote ) {
                 new WC_Emails();
                 do_action( 'qwc_pending_quote_notification', $order_id );
+                do_action( 'qwc_request_sent_notification', $order_id );
             }
         }
     
@@ -50,6 +53,9 @@ class QWC_Email_manager {
         }
         if( ! isset( $emails[ 'QWC_Request_New_Quote' ] ) ) {
             $emails[ 'QWC_Request_New_Quote' ] = include_once( plugin_dir_path( __FILE__ ) . 'emails/class-qwc-req-new-quote.php' );
+        }
+        if( ! isset( $emails[ 'QWC_Request_Sent' ] ) ) {
+            $emails[ 'QWC_Request_Sent' ] = include_once( plugin_dir_path( __FILE__ ) . 'emails/class-qwc-request-sent.php' );
         }
         return $emails;
     }
