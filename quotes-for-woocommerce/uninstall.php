@@ -15,6 +15,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Delete the settings at product level for all the products
 delete_post_meta_by_key( 'qwc_enable_quotes' );
+delete_post_meta_by_key( 'qwc_display_prices' );
+
 // delete the quote statuses
 delete_post_meta_by_key( '_quote_status' );
 // delete the payment meta
