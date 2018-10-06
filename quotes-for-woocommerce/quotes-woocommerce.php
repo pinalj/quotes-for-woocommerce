@@ -74,6 +74,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
+
+            // Added to Cart messages.
+            add_filter( 'wc_add_to_cart_message', array( &$this, 'add_to_cart_message' ), 10, 2 );
         }
         
         /**
@@ -580,7 +583,23 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
     	    }
     	    die();
     	}
-    	
+
+        /**
+         * Change "Cart" to "Quote" after adding a quote-only product to the cart.
+         *
+         * @param string $message    Added to cart message HTML.
+         * @param int    $product_id Current product ID.
+         * @return string
+         */
+        public function add_to_cart_message( $message, $product_id ) {
+            if ( product_quote_enabled( $product_id ) ) {
+                $message = str_replace( 'added to your cart', 'added to your quote', $message );
+                $message = str_replace( 'View cart', 'View quote', $message );
+            }
+
+            return $message;
+        }
+
     } // end of class
 } 
 $quotes_for_wc = new quotes_for_wc();
