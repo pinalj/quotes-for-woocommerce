@@ -77,6 +77,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
 
             // Added to Cart messages.
             add_filter( 'wc_add_to_cart_message', array( &$this, 'add_to_cart_message' ), 10, 2 );
+
+            // Page titles.
+            add_filter( 'the_title', array( &$this, 'woocommerce_title' ), 99, 2 );
         }
         
         /**
@@ -598,6 +601,21 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             }
 
             return $message;
+        }
+
+        /**
+         * Update the Cart title if is a quote
+         *
+         * @param string $title The post tile.
+         * @param int    $id    The post ID.
+         * @return string
+         */
+        public function woocommerce_title( $title,  $id ) {
+            if ( cart_contains_quotable() && $id === wc_get_page_id( 'cart' ) ) {
+                $title = __( 'Quote', 'quote-wc' );
+            }
+
+            return $title;
         }
 
     } // end of class
