@@ -51,7 +51,7 @@ class QWC_Request_New_Quote extends WC_Email {
                 'quote-pending',
             );
              
-            if ( in_array( $this->object->quote_status , $_status ) ) {
+            if ( in_array( $this->object->quote_status , $_status ) && $this->is_enabled() ) {
 
                 $this->recipient     = $this->get_option( 'recipient', get_option( 'admin_email' ) );
                 if ( $this->object->order_id ) {

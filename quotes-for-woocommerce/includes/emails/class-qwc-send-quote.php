@@ -52,7 +52,7 @@ class QWC_Send_Quote extends WC_Email {
                 'quote-sent',
             );
              
-            if ( in_array( $this->object->quote_status , $_status ) ) {
+            if ( in_array( $this->object->quote_status , $_status ) && $this->is_enabled() ) {
 
                 $this->recipient = $this->object->billing_email;
                 if ( $this->object->order_id ) {
