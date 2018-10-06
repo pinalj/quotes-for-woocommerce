@@ -80,6 +80,13 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
 
             // Page titles.
             add_filter( 'the_title', array( &$this, 'woocommerce_title' ), 99, 2 );
+
+            // Disable shipping for quotes.
+            add_filter( 'woocommerce_cart_needs_shipping', array( &$this, 'cart_needs_shipping' ) );
+
+            // Disable address fields on checkout for quotes.
+            add_filter( 'woocommerce_billing_fields', array( &$this, 'billing_fields' ), 999 );
+            add_filter( 'woocommerce_checkout_fields', array( &$this, 'checkout_fields' ), 9999 );
         }
         
         /**
@@ -616,6 +623,61 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             }
 
             return $title;
+        }
+
+        /**
+         * Disable shipping for quotes
+         *
+         * @param bool $needs_shipping Whether cart needs shipping or not.
+         * @return bool
+         */
+        public function cart_needs_shipping( $needs_shipping ) {
+            if ( cart_contains_quotable() ) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        /**
+         * Remove the billing fields if the cart is a quote.
+         *
+         * @param array $fields Billing fields.
+         * @return array
+         */
+        public function billing_fields( $fields = array() ) {
+            if ( cart_contains_quotable() ) {
+                unset( $fields['billing_company'] );
+                unset( $fields['billing_address_1'] );
+                unset( $fields['billing_address_2'] );
+                unset( $fields['billing_state'] );
+                unset( $fields['billing_city'] );
+                unset( $fields['billing_phone'] );
+                unset( $fields['billing_postcode'] );
+                unset( $fields['billing_country'] );
+            }
+
+            return $fields;
+        }
+
+        /**
+         * Remove the billing fields at checkout if the cart is a quote.
+         *
+         * @param array $fields Billing fields.
+         * @return array
+         */
+        public function checkout_fields( $fields ) {
+            if ( cart_contains_quotable() ) {
+                unset( $fields['billing']['billing_company'] );
+                unset( $fields['billing']['billing_country'] );
+                unset( $fields['billing']['billing_address_1'] );
+                unset( $fields['billing']['billing_address_2'] );
+                unset( $fields['billing']['billing_city'] );
+                unset( $fields['billing']['billing_state'] );
+                unset( $fields['billing']['billing_postcode'] );
+            }
+
+            return $fields;
         }
 
     } // end of class
