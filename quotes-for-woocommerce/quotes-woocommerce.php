@@ -74,6 +74,15 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
+            
+            // Admin Menu for Quotes
+            add_action( 'admin_menu', array( &$this, 'qwc_admin_menu' ), 10 );
+            // Wordpress settings API
+            add_action( 'admin_init', array( &$this, 'qwc_plugin_settings' ) );
+            
+            // update product setting when global settings are updated
+            add_action( 'update_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
+            add_action( 'update_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
         }
         
         /**
@@ -580,7 +589,214 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
     	    }
     	    die();
     	}
+
+    	/**
+    	 * Adds the Quotes menu to WordPress Dashboard
+    	 * @since 1.5
+    	 */
+    	function qwc_admin_menu() {
     	
+    	    add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array(&$this, 'qwc_settings' ) );
+    	    $page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings',  array( &$this, 'qwc_settings' ) );
+    	    remove_submenu_page( 'qwc_settings', 'qwc_settings' );
+    	
+    	}
+    	 
+    	/**
+    	 * Adds the content to Quotes->Settings page
+    	 * @since 1.5
+    	 */
+    	function qwc_settings() {
+    	
+    	    if ( is_user_logged_in() ) {
+    	        global $wpdb;
+    	        // Check the user capabilities
+    	        if ( ! current_user_can( 'manage_woocommerce' ) ) {
+    	            wp_die( __( 'You do not have sufficient permissions to access this page.', 'quote-wc' ) );
+    	        }
+    	         
+    	        // $action = isset( $_GET['action'] ) ? $_GET['action'] : '';
+    	        ?>
+    	                
+                <h1><?php _e( 'Quote Settings' );?></h1>
+                <br>
+                <div>
+    	        <form method="post" action="options.php">
+                    <?php settings_errors(); ?>
+                    <?php settings_fields( 'quote_settings' ); ?>
+                    <?php do_settings_sections( 'qwc_page' ); ?>
+                    <?php submit_button(); ?>    
+                </form>
+                </div>
+                <?php 
+    	    }
+    	}
+
+    	/**
+    	 * Adds the Section and fields to Quotes->Settings page
+    	 * @since 1.5
+    	 */
+    	function qwc_plugin_settings() {
+    	    
+    	    // First, we register a section. This is necessary since all future options must belong to a
+    	    add_settings_section(
+        	    'qwc_general_settings_section',                    // ID used to identify this section and with which to register options
+        	    __( 'Settings', 'quote-wc' ),                      // Title to be displayed on the administration page
+        	    array( $this, 'qwc_general_options_callback' ),    // Callback used to render the description of the section
+        	    'qwc_page'                                         // Page on which to add this section of options
+    	    );
+    	    
+    	    add_settings_field(
+        	    'qwc_enable_global_quote',
+        	    __( 'Enable Quotes', 'quote-wc' ),
+        	    array( $this, 'qwc_enable_global_quote_callback' ),
+        	    'qwc_page',
+        	    'qwc_general_settings_section',
+        	    array( __( 'Select if you wish to enable quotes for all the products.', 'quote-wc' ) )
+    	    );
+    	    
+    	    add_settings_field(
+        	    'qwc_enable_global_prices',
+        	    __( 'Enable Price Display', 'quote-wc' ),
+        	    array( $this, 'qwc_enable_global_price_callback' ),
+        	    'qwc_page',
+        	    'qwc_general_settings_section',
+        	    array( __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quote-wc' ) )
+    	    );
+    	    	
+    	    register_setting(
+    	       'quote_settings',
+    	       'qwc_enable_global_quote'
+    	       
+    	    );
+    	    
+    	    register_setting(
+        	    'quote_settings',
+        	    'qwc_enable_global_prices'
+	        );
+    	    	
+    	}
+    	
+    	/**
+    	 * Updates the product level quote settings when global settings
+    	 * are updated in Quotes->Settings for Enable Quotes
+    	 * 
+    	 * @param string $old_value - Old Setting Value
+    	 * @param string $new_value - New Setting Value
+    	 * @since 1.5
+    	 */
+    	function qwc_update_global_quotes_callback( $old_value, $new_value ) {
+
+    	    // get all the list of products & save in there
+    	    $number_of_batches = $this->qwc_get_post_count();
+    	    
+    	    for( $i = 1; $i <= $number_of_batches; $i++ ) {
+    	        $this->qwc_all_quotes( 'qwc_enable_quotes', $new_value, $i );
+    	    }
+    	}
+
+    	/**
+    	 * Updates the product level quote settings when global settings
+    	 * are updated in Quotes->Settings for Enable Price Display
+    	 * 
+    	 * @param string $old_value - Old Setting Value
+    	 * @param string $new_value - New Setting Value
+    	 * @since 1.5
+    	 */
+    	function qwc_update_global_prices_callback( $old_value, $new_value ) {
+    	
+    	    // get all the list of products & save in there
+    	    $number_of_batches = $this->qwc_get_post_count();
+    	    	
+    	    for( $i = 1; $i <= $number_of_batches; $i++ ) {
+    	        $this->qwc_all_quotes( 'qwc_display_prices', $new_value, $i );
+    	    }
+    	}
+    	 
+    	/**
+    	 * Section callback
+    	 * @since 1.5
+    	 */
+    	function qwc_general_options_callback() {}
+    	
+    	/**
+    	 * Displays the Enable Quotes field in Quotes->Settings
+    	 * @since 1.5
+    	 */
+    	function qwc_enable_global_quote_callback( $args ) {
+    	    
+    	    $enable_quotes_global = get_option( 'qwc_enable_global_quote' );
+    	    
+    	    printf(
+    	       '<input type="checkbox" id="qwc_enable_global_quote" name="qwc_enable_global_quote" value="on" ' . checked('on', $enable_quotes_global, false) . ' />'    	    
+	        );
+    
+	        $html = '<label for="qwc_enable_global_quote"> '  . $args[0] . '</label>';
+	        echo $html;
+    	}
+    	
+    	/**
+    	 * Displays the Enable Price Display field in
+    	 * Quotes->Settings
+    	 * @since 1.5
+    	 */
+    	function qwc_enable_global_price_callback( $args ) {
+    	    
+    	    $enable_prices_global = get_option( 'qwc_enable_global_prices' );
+    	    	
+    	    printf(
+    	    '<input type="checkbox" id="qwc_enable_global_prices" name="qwc_enable_global_prices" value="on" ' . checked('on', $enable_prices_global, false) . ' />'
+    	        );
+    	    
+    	    $html = '<label for="qwc_enable_global_prices"> '  . $args[0] . '</label>';
+    	    echo $html;
+    	}
+    	
+    	/**
+    	 * Updates the Quote Settings for all published and draft products
+    	 * 
+    	 * @param $quote_setting_name - Setting to be updated in Post Meta
+    	 * @param $quote_setting_value - Setting Value to be updated
+    	 * @param $loop - Batch Number of Products to be fetched (Only 500 products are updated at one go)
+    	 * @since 1.5
+    	 */
+    	function qwc_all_quotes( $quote_setting_name, $quote_setting_value, $loop ) {
+    	    
+    	    $quote_setting_value = NULL == $quote_setting_value ? '' : $quote_setting_value;
+    	    
+    	    // get the products
+            $args       = array( 'post_type' => 'product', 'numberposts' => 500, 'suppress_filters' => false, 'post_status' => array( 'publish', 'draft' ), 'paged' => $loop );
+            $product_list = get_posts( $args );
+            	    
+            foreach ( $product_list as $k => $value ) {
+            
+                // Product ID
+                $theid = $value->ID;
+                update_post_meta( $theid, $quote_setting_name, $quote_setting_value );
+            }
+            
+            wp_reset_postdata();
+            
+    	}
+    	    	
+    	/**
+    	 * Gets the count of batches that need to be run to update the 
+    	 * settings for all the published and draft products.
+    	 * 
+    	 * @return $number_of_batches - Number of batches (each batch consists of 500 products)
+    	 * @since 1.5
+    	 */
+    	function qwc_get_post_count() {
+    	    
+    	    $args = array( 'post_type' => 'product', 'numberposts' => -1, 'post_status' => array( 'draft', 'publish' ), 'suppress_filters' => false );
+    	    $product_list = get_posts( $args );
+    	    
+    	    $count = count( $product_list );
+    	    
+    	    $number_of_batches = ceil( $count/500 );
+    	    wp_reset_postdata();
+    	    return $number_of_batches;
+    	}
     } // end of class
 } 
 $quotes_for_wc = new quotes_for_wc();
