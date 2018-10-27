@@ -4,26 +4,27 @@
  *
  * An email sent to admin when a new quote request arrives
  * 
- * @class       QWC_Request_New_Quote
+ * @class       QWC_Request_Sent
  * @extends     WC_Email
+ * @since       1.4
  *
  */
-class QWC_Request_New_Quote extends WC_Email {
+class QWC_Request_Sent extends WC_Email {
     
     function __construct() {
         
-        $this->id                   = 'qwc_req_new_quote';
-        $this->title                = __( 'Request for New Quote', 'quote-wc' );
-        $this->description          = __( 'This email is sent to the site admin when a equest for a quotation comes through.', 'quote-wc' );
+        $this->id                   = 'qwc_request_sent';
+        $this->title                = __( 'New Quote Request Sent', 'quote-wc' );
+        $this->description          = __( 'This email is sent to the customer when a quote request is raised', 'quote-wc' );
         
-        $this->heading              = __( 'Quotation Request for #{order_number}', 'quote-wc' );
-        $this->subject              = __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
+        $this->heading              = __( 'Quotation Request Sent for #{order_number}', 'quote-wc' );
+        $this->subject              = __( '[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}', 'quote-wc' );
         
-        $this->template_html    = 'emails/request-new-quote.php';
-        $this->template_plain   = 'emails/plain/request-new-quote.php';
+        $this->template_html    = 'emails/new-request-sent-customer.php';
+        $this->template_plain   = 'emails/plain/new-request-sent-customer.php';
         
         // Triggers for this email
-        add_action( 'qwc_pending_quote_notification', array( $this, 'trigger' ) );
+        add_action( 'qwc_request_sent_notification', array( $this, 'trigger' ) );
         
         // Call parent constructor
         parent::__construct();
@@ -40,7 +41,7 @@ class QWC_Request_New_Quote extends WC_Email {
         // add a filter using which an addon can modify the email send status
         // setting it to true will send the email
         // setting it to false will make sure that the email is not sent for the given item
-        $send_email = apply_filters( 'qwc_request_new_quote_email', $send_email, $order_id );
+        $send_email = apply_filters( 'qwc_request_sent_email', $send_email, $order_id );
         
         if ( $order_id > 0 && $send_email ) {
         
@@ -53,7 +54,7 @@ class QWC_Request_New_Quote extends WC_Email {
              
             if ( in_array( $this->object->quote_status , $_status ) ) {
 
-                $this->recipient     = $this->get_option( 'recipient', get_option( 'admin_email' ) );
+                $this->recipient     = $this->object->billing_email;
                 if ( $this->object->order_id ) {
                     
                     $this->find[]    = '{order_date}';
@@ -109,6 +110,7 @@ class QWC_Request_New_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_html, array(
         'order'       => $this->object,
+        'site_name'   => get_option( 'blogname' ),
         'email_heading' => $this->get_heading()
         ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
@@ -118,6 +120,7 @@ class QWC_Request_New_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_plain, array(
             'order'       => $this->object,
+            'site_name'   => get_option( 'blogname' ),
             'email_heading' => $this->get_heading()
             ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
@@ -144,12 +147,6 @@ class QWC_Request_New_Quote extends WC_Email {
                 'type' 			=> 'checkbox',
                 'label' 		=> __( 'Enable this email notification', 'quote-wc' ),
                 'default' 		=> 'yes'
-            ),
-            'recipient' => array(
-                'title'         => __( 'Recipient', 'quote-wc' ),
-                'type'          => 'text',
-                'description'   => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to %s', 'quote-wc' ), get_option( 'admin_email' ) ),
-                'default'       => get_option( 'admin_email' )
             ),
             'subject' => array(
                 'title' 		=> __( 'Subject', 'quote-wc' ),
@@ -181,5 +178,5 @@ class QWC_Request_New_Quote extends WC_Email {
     }
     
 }
-return new QWC_Request_New_Quote();
+return new QWC_Request_Sent();
 ?>
