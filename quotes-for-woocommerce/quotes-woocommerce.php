@@ -80,7 +80,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             // Wordpress settings API
             add_action( 'admin_init', array( &$this, 'qwc_plugin_settings' ) );
             
-            // update product setting when global settings are updated
+            // update product setting when global settings are added/updated
+            add_action( 'add_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
+            add_action( 'add_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
             add_action( 'update_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
             add_action( 'update_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
         }
