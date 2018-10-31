@@ -42,6 +42,11 @@ The users can then make the payments using the link in the email or the My Accou
 
 == Changelog ==
 
+= 1.5 (31.10.2018) =
+* When the order contains only variable products, the Checkout process fails as no Payment medium is found. Fixed the same.
+* Added a new menu Quote->Settings. This menu can now be used to create quote settings for all products at once.
+* Fixed an issue where turning off the Quote emails from WooCommerce->Settings->Emails was not stopping the mails from being sent.
+
 = 1.4 (19.06.2018) =
 * Fixed an issue where a warning is entered in debug.log when a quote email is sent to the Customer.
 * Added a new setting using which the site admin can display product prices for quotable products.
