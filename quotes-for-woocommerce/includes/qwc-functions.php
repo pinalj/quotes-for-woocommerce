@@ -10,12 +10,25 @@ function product_quote_enabled( $product_id ) {
     return $quote_enabled;
 } 
 
+function qwc_get_product_id_by_variation_id($var_id) {
+    $post = get_post($var_id);
+    if ($post) {
+        return $post->post_parent;
+    } else {
+        return false;
+    }
+}
+
 function cart_contains_quotable() {
     
     $quotable = false;
     
     if ( isset( WC()->cart ) ) {
         foreach ( WC()->cart->cart_contents as $item ) {
+            
+            if($item['product_id'] === 0)			{
+                $item['product_id'] = qwc_get_product_id_by_variation_id($item['variation_id']);
+            }
             $quote_enabled = product_quote_enabled( $item['product_id'] );
     
             if ( $quote_enabled ) {

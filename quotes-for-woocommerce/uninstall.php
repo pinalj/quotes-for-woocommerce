@@ -24,6 +24,11 @@ delete_post_meta_by_key( '_qwc_quote' );
 
 // delete the plugin version
 delete_option( 'quotes_for_wc' );
+
+// delete the global settings in options table
+delete_option( 'qwc_enable_global_prices' );
+delete_option( 'qwc_enable_global_quote' );
+
 // Clear any cached data that has been removed
 wp_cache_flush();
 
