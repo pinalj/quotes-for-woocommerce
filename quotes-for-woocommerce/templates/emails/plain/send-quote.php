@@ -89,7 +89,7 @@ if ( $order_obj ) :
 
 	echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
-	do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text );
+	do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text, $email );
 endif;
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
