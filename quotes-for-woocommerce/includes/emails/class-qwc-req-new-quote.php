@@ -14,7 +14,7 @@ class QWC_Request_New_Quote extends WC_Email {
         
         $this->id                   = 'qwc_req_new_quote';
         $this->title                = __( 'Request for New Quote', 'quote-wc' );
-        $this->description          = __( 'This email is sent to the site admin when a equest for a quotation comes through.', 'quote-wc' );
+        $this->description          = __( 'This email is sent to the site admin when a request for a quotation comes through.', 'quote-wc' );
         
         $this->heading              = __( 'Quotation Request for #{order_number}', 'quote-wc' );
         $this->subject              = __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
@@ -123,17 +123,13 @@ class QWC_Request_New_Quote extends WC_Email {
         return ob_get_clean();
     }
     
-    function get_subject() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_subject_' . $this->id, $this->format_string( $this->subject ), $this->object );
+    function get_default_subject() {
+        return  __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
     
     }
     
-    public function get_heading() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_heading_' . $this->id, $this->format_string( $this->heading ), $this->object );
+    public function get_default_heading() {
+        return __( 'Quotation Request for #{order_number}', 'quote-wc' );
 
     }
     
