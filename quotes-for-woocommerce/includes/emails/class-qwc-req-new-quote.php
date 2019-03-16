@@ -70,6 +70,9 @@ class QWC_Request_New_Quote extends WC_Email {
                     $this->replace[] = __( 'N/A', 'quote-wc' );
                 }
     
+                $this->find[]    = '{blogname}';
+                $this->replace[] = $this->object->blogname;
+
                 if ( ! $this->get_recipient() ) {
                     return;
                 }
