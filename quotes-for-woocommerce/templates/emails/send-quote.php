@@ -99,7 +99,7 @@ if ( $order_obj ) :
 		</tfoot>
 	</table>
 
-	<?php do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text ); ?>
+	<?php do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text, $email ); ?>
 
 	<?php do_action( 'woocommerce_email_order_meta', $order_obj, $send_to_admin, $plain_text ); ?>
 

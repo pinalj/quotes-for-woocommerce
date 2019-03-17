@@ -71,6 +71,9 @@ class QWC_Request_Sent extends WC_Email {
                     $this->replace[] = __( 'N/A', 'quote-wc' );
                 }
     
+                $this->find[]    = '{blogname}';
+                $this->replace[] = $this->object->blogname;
+
                 if ( ! $this->get_recipient() ) {
                     return;
                 }
@@ -126,18 +129,12 @@ class QWC_Request_Sent extends WC_Email {
         return ob_get_clean();
     }
     
-    function get_subject() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_subject_' . $this->id, $this->format_string( $this->subject ), $this->object );
-    
+    function get_default_subject() {
+        return __( '[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}', 'quote-wc' );
     }
     
-    public function get_heading() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_heading_' . $this->id, $this->format_string( $this->heading ), $this->object );
-
+    public function get_default_heading() {
+        return __( 'Quotation Request Sent for #{order_number}', 'quote-wc' );
     }
     
     function init_form_fields() {

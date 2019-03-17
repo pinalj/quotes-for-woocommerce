@@ -71,7 +71,9 @@ class QWC_Send_Quote extends WC_Email {
                     $this->replace[] = __( 'N/A', 'quote-wc' );
                 }
     
-                
+                $this->find[]    = '{blogname}';
+                $this->replace[] = $this->object->blogname;
+
                 if ( ! $this->get_recipient() ) {
                     return;
                 }
@@ -113,7 +115,8 @@ class QWC_Send_Quote extends WC_Email {
         'order'       => $this->object,
         'email_heading' => $this->get_heading(),
         'send_to_admin' => false,
-        'plain_text'    => false
+        'plain_text'    => false,
+        'email'         => $this,
         ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
@@ -124,23 +127,18 @@ class QWC_Send_Quote extends WC_Email {
             'order'       => $this->object,
             'email_heading' => $this->get_heading(),
             'send_to_admin' => false,
-            'plain_text'    => true
+            'plain_text'    => true,
+            'email'         => $this,
             ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
     
-    function get_subject() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_subject_' . $this->id, $this->format_string( $this->subject ), $this->object );
-    
+    function get_default_subject() {
+        return __( '[{blogname}] Quotation for (Order {order_number}) - {order_date}', 'quote-wc' );
     }
     
-    public function get_heading() {
-        
-        $order = new WC_order( $this->object->order_id );
-        return apply_filters( 'woocommerce_email_heading_' . $this->id, $this->format_string( $this->heading ), $this->object );
-
+    public function get_default_heading() {
+        return __( 'Quote for #{order_number}', 'quote-wc' );
     }
     
     function init_form_fields() {
