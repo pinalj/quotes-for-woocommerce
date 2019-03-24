@@ -11,6 +11,14 @@ WC tested up to: 3.5.0
 if ( ! class_exists( 'quotes_for_wc' ) ) {
     class quotes_for_wc {
         
+        /**
+         * Plugin version.
+         *
+         * @var   string
+         * @since 1.0.0
+         */
+        public $version = '1.6';
+    
         public function __construct() {
             
             define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
@@ -18,7 +26,9 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             // Initialize settings
             register_activation_hook( __FILE__, array( &$this, 'qwc_activate' ) );
             // Update DB as needed
-            add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
+            if( $this->version != get_option( 'quotes_for_wc' ) ) {
+                add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
+            }
             
             // add setting to hide wc prices
             add_action( 'woocommerce_product_options_inventory_product_data', array( &$this, 'qwc_setting' ) );
@@ -107,7 +117,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @since 1.1
          */
         function qwc_update_db_check() {
-            update_option( 'quotes_for_wc', '1.2' );
+            update_option( 'quotes_for_wc', '1.6' );
         }
         
         /**
