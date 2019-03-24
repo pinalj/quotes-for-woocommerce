@@ -632,10 +632,16 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                 <div>
     	        <form method="post" action="options.php">
                     <?php settings_errors(); ?>
+                    <?php settings_fields( 'qwc_bulk_settings' ); ?>
+                    <?php do_settings_sections( 'qwc_bulk_page' ); ?>
+                    <?php submit_button(); ?>    
+                </form>
+                <form method="post" action="options.php">
                     <?php settings_fields( 'quote_settings' ); ?>
                     <?php do_settings_sections( 'qwc_page' ); ?>
                     <?php submit_button(); ?>    
                 </form>
+                
                 </div>
                 <?php 
     	    }

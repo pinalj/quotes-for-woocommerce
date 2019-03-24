@@ -25,14 +25,14 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
                 'qwc_general_settings_section',                    // ID used to identify this section and with which to register options
                 __( 'Global Settings', 'quote-wc' ),                      // Title to be displayed on the administration page
                 array( $this, 'qwc_general_options_callback' ),    // Callback used to render the description of the section
-                'qwc_page'                                         // Page on which to add this section of options
+                'qwc_bulk_page'                                         // Page on which to add this section of options
             );
             
             add_settings_field(
                 'qwc_enable_global_quote',
                 __( 'Enable Quotes:', 'quote-wc' ),
                 array( $this, 'qwc_enable_global_quote_callback' ),
-                'qwc_page',
+                'qwc_bulk_page',
                 'qwc_general_settings_section',
                 array( __( 'Select if you wish to enable quotes for all the products.', 'quote-wc' ) )
             );
@@ -41,14 +41,14 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
                 'qwc_enable_global_prices',
                 __( 'Enable Price Display:', 'quote-wc' ),
                 array( $this, 'qwc_enable_global_price_callback' ),
-                'qwc_page',
+                'qwc_bulk_page',
                 'qwc_general_settings_section',
                 array( __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quote-wc' ) )
             );
             
             add_settings_section(
                 'qwc_cart_settings_section',                    // ID used to identify this section and with which to register options
-                __( 'Cart Settings', 'quote-wc' ),                      // Title to be displayed on the administration page
+                __( 'Cart & Checkout Settings', 'quote-wc' ),   // Title to be displayed on the administration page
                 array( $this, 'qwc_cart_settings_callback' ),    // Callback used to render the description of the section
                 'qwc_page'                                         // Page on which to add this section of options
             );
@@ -72,13 +72,13 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
             );
 
             register_setting(
-               'quote_settings',
+               'qwc_bulk_settings',
                'qwc_enable_global_quote'
                
             );
             
             register_setting(
-                'quote_settings',
+                'qwc_bulk_settings',
                 'qwc_enable_global_prices'
             );
 
