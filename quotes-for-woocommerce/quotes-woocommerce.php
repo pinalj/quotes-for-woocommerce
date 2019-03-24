@@ -74,7 +74,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             
             // admin ajax 
             add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
-            
+
             // Admin Menu for Quotes
             add_action( 'admin_menu', array( &$this, 'qwc_admin_menu' ), 10 );
             // Wordpress settings API
@@ -85,6 +85,20 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             add_action( 'add_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
             add_action( 'update_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
             add_action( 'update_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
+
+            // Added to Cart messages.
+            add_filter( 'wc_add_to_cart_message', array( &$this, 'add_to_cart_message' ), 10, 2 );
+
+            // Page titles.
+            add_filter( 'the_title', array( &$this, 'woocommerce_title' ), 99, 2 );
+
+            // Disable shipping for quotes.
+            add_filter( 'woocommerce_cart_needs_shipping', array( &$this, 'cart_needs_shipping' ) );
+
+            // Disable address fields on checkout for quotes.
+            add_filter( 'woocommerce_billing_fields', array( &$this, 'billing_fields' ), 999 );
+            add_filter( 'woocommerce_checkout_fields', array( &$this, 'checkout_fields' ), 9999 );
+
         }
         
         /**
@@ -799,6 +813,93 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
     	    wp_reset_postdata();
     	    return $number_of_batches;
     	}
+
+        /**
+         * Change "Cart" to "Quote" after adding a quote-only product to the cart.
+         *
+         * @param string $message    Added to cart message HTML.
+         * @param int    $product_id Current product ID.
+         * @return string
+         */
+        public function add_to_cart_message( $message, $product_id ) {
+            if ( product_quote_enabled( $product_id ) ) {
+                $message = str_replace( 'added to your cart', 'added to your quote', $message );
+                $message = str_replace( 'View cart', 'View quote', $message );
+            }
+
+            return $message;
+        }
+
+        /**
+         * Update the Cart title if is a quote
+         *
+         * @param string $title The post tile.
+         * @param int    $id    The post ID.
+         * @return string
+         */
+        public function woocommerce_title( $title,  $id ) {
+            if ( cart_contains_quotable() && $id === wc_get_page_id( 'cart' ) ) {
+                $title = __( 'Quote', 'quote-wc' );
+            }
+
+            return $title;
+        }
+
+        /**
+         * Disable shipping for quotes
+         *
+         * @param bool $needs_shipping Whether cart needs shipping or not.
+         * @return bool
+         */
+        public function cart_needs_shipping( $needs_shipping ) {
+            if ( cart_contains_quotable() ) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        /**
+         * Remove the billing fields if the cart is a quote.
+         *
+         * @param array $fields Billing fields.
+         * @return array
+         */
+        public function billing_fields( $fields = array() ) {
+            if ( cart_contains_quotable() ) {
+                unset( $fields['billing_company'] );
+                unset( $fields['billing_address_1'] );
+                unset( $fields['billing_address_2'] );
+                unset( $fields['billing_state'] );
+                unset( $fields['billing_city'] );
+                unset( $fields['billing_phone'] );
+                unset( $fields['billing_postcode'] );
+                unset( $fields['billing_country'] );
+            }
+
+            return $fields;
+        }
+
+        /**
+         * Remove the billing fields at checkout if the cart is a quote.
+         *
+         * @param array $fields Billing fields.
+         * @return array
+         */
+        public function checkout_fields( $fields ) {
+            if ( cart_contains_quotable() ) {
+                unset( $fields['billing']['billing_company'] );
+                unset( $fields['billing']['billing_country'] );
+                unset( $fields['billing']['billing_address_1'] );
+                unset( $fields['billing']['billing_address_2'] );
+                unset( $fields['billing']['billing_city'] );
+                unset( $fields['billing']['billing_state'] );
+                unset( $fields['billing']['billing_postcode'] );
+            }
+
+            return $fields;
+        }
+
     } // end of class
 } 
 $quotes_for_wc = new quotes_for_wc();
