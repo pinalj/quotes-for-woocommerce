@@ -28,6 +28,8 @@ delete_option( 'quotes_for_wc' );
 // delete the global settings in options table
 delete_option( 'qwc_enable_global_prices' );
 delete_option( 'qwc_enable_global_quote' );
+delete_option( 'qwc_cart_page_name' );
+delete_option( 'qwc_hide_address_fields' );
 
 // Clear any cached data that has been removed
 wp_cache_flush();
