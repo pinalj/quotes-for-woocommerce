@@ -54,8 +54,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             add_filter( 'woocommerce_cancel_unpaid_order', array( $this, 'qwc_prevent_cancel' ), 10, 2 );
             
             // add payment gateway to override the usual ones
-            add_action( 'init', array( &$this, 'qwc_include_files' ) );
-            add_action( 'admin_init', array( &$this, 'qwc_include_files_admin' ) );
+            add_action( 'init', array( &$this, 'qwc_include_files' ), 5 );
+            add_action( 'admin_init', array( &$this, 'qwc_include_files_admin' ), 5 );
             add_action( 'woocommerce_payment_gateways', array( &$this, 'qwc_add_gateway' ), 10, 1 );
 
             // Checkout Payment Gateway load
