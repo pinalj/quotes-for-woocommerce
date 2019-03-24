@@ -77,15 +77,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
 
             // Admin Menu for Quotes
             add_action( 'admin_menu', array( &$this, 'qwc_admin_menu' ), 10 );
-            // Wordpress settings API
-            add_action( 'admin_init', array( &$this, 'qwc_plugin_settings' ) );
             
-            // update product setting when global settings are added/updated
-            add_action( 'add_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
-            add_action( 'add_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
-            add_action( 'update_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
-            add_action( 'update_option_qwc_enable_global_prices', array( &$this, 'qwc_update_global_prices_callback' ), 10, 2 );
-
             // Added to Cart messages.
             add_filter( 'wc_add_to_cart_message', array( &$this, 'add_to_cart_message' ), 10, 2 );
 
@@ -174,7 +166,8 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          */
         function qwc_include_files_admin() {
             include_once( 'includes/class-qwc-gateway.php' );
-            include_once( 'includes/class-email-manager.php' );  
+            include_once( 'includes/class-email-manager.php' );
+            include_once( 'includes/admin/qwc-global-settings.php' );   
         }
         
         /**
@@ -647,185 +640,24 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                 <?php 
     	    }
     	}
-
-    	/**
-    	 * Adds the Section and fields to Quotes->Settings page
-    	 * @since 1.5
-    	 */
-    	function qwc_plugin_settings() {
-    	    
-    	    // First, we register a section. This is necessary since all future options must belong to a
-    	    add_settings_section(
-        	    'qwc_general_settings_section',                    // ID used to identify this section and with which to register options
-        	    __( 'Settings', 'quote-wc' ),                      // Title to be displayed on the administration page
-        	    array( $this, 'qwc_general_options_callback' ),    // Callback used to render the description of the section
-        	    'qwc_page'                                         // Page on which to add this section of options
-    	    );
-    	    
-    	    add_settings_field(
-        	    'qwc_enable_global_quote',
-        	    __( 'Enable Quotes', 'quote-wc' ),
-        	    array( $this, 'qwc_enable_global_quote_callback' ),
-        	    'qwc_page',
-        	    'qwc_general_settings_section',
-        	    array( __( 'Select if you wish to enable quotes for all the products.', 'quote-wc' ) )
-    	    );
-    	    
-    	    add_settings_field(
-        	    'qwc_enable_global_prices',
-        	    __( 'Enable Price Display', 'quote-wc' ),
-        	    array( $this, 'qwc_enable_global_price_callback' ),
-        	    'qwc_page',
-        	    'qwc_general_settings_section',
-        	    array( __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quote-wc' ) )
-    	    );
-    	    	
-    	    register_setting(
-    	       'quote_settings',
-    	       'qwc_enable_global_quote'
-    	       
-    	    );
-    	    
-    	    register_setting(
-        	    'quote_settings',
-        	    'qwc_enable_global_prices'
-	        );
-    	    	
-    	}
     	
-    	/**
-    	 * Updates the product level quote settings when global settings
-    	 * are updated in Quotes->Settings for Enable Quotes
-    	 * 
-    	 * @param string $old_value - Old Setting Value
-    	 * @param string $new_value - New Setting Value
-    	 * @since 1.5
-    	 */
-    	function qwc_update_global_quotes_callback( $old_value, $new_value ) {
-
-    	    // get all the list of products & save in there
-    	    $number_of_batches = $this->qwc_get_post_count();
-    	    
-    	    for( $i = 1; $i <= $number_of_batches; $i++ ) {
-    	        $this->qwc_all_quotes( 'qwc_enable_quotes', $new_value, $i );
-    	    }
-    	}
-
-    	/**
-    	 * Updates the product level quote settings when global settings
-    	 * are updated in Quotes->Settings for Enable Price Display
-    	 * 
-    	 * @param string $old_value - Old Setting Value
-    	 * @param string $new_value - New Setting Value
-    	 * @since 1.5
-    	 */
-    	function qwc_update_global_prices_callback( $old_value, $new_value ) {
-    	
-    	    // get all the list of products & save in there
-    	    $number_of_batches = $this->qwc_get_post_count();
-    	    	
-    	    for( $i = 1; $i <= $number_of_batches; $i++ ) {
-    	        $this->qwc_all_quotes( 'qwc_display_prices', $new_value, $i );
-    	    }
-    	}
-    	 
-    	/**
-    	 * Section callback
-    	 * @since 1.5
-    	 */
-    	function qwc_general_options_callback() {}
-    	
-    	/**
-    	 * Displays the Enable Quotes field in Quotes->Settings
-    	 * @since 1.5
-    	 */
-    	function qwc_enable_global_quote_callback( $args ) {
-    	    
-    	    $enable_quotes_global = get_option( 'qwc_enable_global_quote' );
-    	    
-    	    printf(
-    	       '<input type="checkbox" id="qwc_enable_global_quote" name="qwc_enable_global_quote" value="on" ' . checked('on', $enable_quotes_global, false) . ' />'    	    
-	        );
-    
-	        $html = '<label for="qwc_enable_global_quote"> '  . $args[0] . '</label>';
-	        echo $html;
-    	}
-    	
-    	/**
-    	 * Displays the Enable Price Display field in
-    	 * Quotes->Settings
-    	 * @since 1.5
-    	 */
-    	function qwc_enable_global_price_callback( $args ) {
-    	    
-    	    $enable_prices_global = get_option( 'qwc_enable_global_prices' );
-    	    	
-    	    printf(
-    	    '<input type="checkbox" id="qwc_enable_global_prices" name="qwc_enable_global_prices" value="on" ' . checked('on', $enable_prices_global, false) . ' />'
-    	        );
-    	    
-    	    $html = '<label for="qwc_enable_global_prices"> '  . $args[0] . '</label>';
-    	    echo $html;
-    	}
-    	
-    	/**
-    	 * Updates the Quote Settings for all published and draft products
-    	 * 
-    	 * @param $quote_setting_name - Setting to be updated in Post Meta
-    	 * @param $quote_setting_value - Setting Value to be updated
-    	 * @param $loop - Batch Number of Products to be fetched (Only 500 products are updated at one go)
-    	 * @since 1.5
-    	 */
-    	function qwc_all_quotes( $quote_setting_name, $quote_setting_value, $loop ) {
-    	    
-    	    $quote_setting_value = NULL == $quote_setting_value ? '' : $quote_setting_value;
-    	    
-    	    // get the products
-            $args       = array( 'post_type' => 'product', 'numberposts' => 500, 'suppress_filters' => false, 'post_status' => array( 'publish', 'draft' ), 'paged' => $loop );
-            $product_list = get_posts( $args );
-            	    
-            foreach ( $product_list as $k => $value ) {
-            
-                // Product ID
-                $theid = $value->ID;
-                update_post_meta( $theid, $quote_setting_name, $quote_setting_value );
-            }
-            
-            wp_reset_postdata();
-            
-    	}
-    	    	
-    	/**
-    	 * Gets the count of batches that need to be run to update the 
-    	 * settings for all the published and draft products.
-    	 * 
-    	 * @return $number_of_batches - Number of batches (each batch consists of 500 products)
-    	 * @since 1.5
-    	 */
-    	function qwc_get_post_count() {
-    	    
-    	    $args = array( 'post_type' => 'product', 'numberposts' => -1, 'post_status' => array( 'draft', 'publish' ), 'suppress_filters' => false );
-    	    $product_list = get_posts( $args );
-    	    
-    	    $count = count( $product_list );
-    	    
-    	    $number_of_batches = ceil( $count/500 );
-    	    wp_reset_postdata();
-    	    return $number_of_batches;
-    	}
-
         /**
-         * Change "Cart" to "Quote" after adding a quote-only product to the cart.
+         * Change "Cart" to User Selected name after adding a quote-only product to the cart.
          *
          * @param string $message    Added to cart message HTML.
          * @param int    $product_id Current product ID.
          * @return string
+         * @since 1.6
          */
         public function add_to_cart_message( $message, $product_id ) {
+            $cart_name = get_option( 'qwc_cart_page_name' );
+            $cart_name = $cart_name == '' ? 'Cart' : $cart_name;
+
             if ( product_quote_enabled( $product_id ) ) {
-                $message = str_replace( 'added to your cart', 'added to your quote', $message );
-                $message = str_replace( 'View cart', 'View quote', $message );
+                $message = str_replace( 'added to your cart', "added to your $cart_name", $message );
+                $message = str_replace( 'View cart', "View $cart_name", $message );
             }
+
 
             return $message;
         }
@@ -836,10 +668,14 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @param string $title The post tile.
          * @param int    $id    The post ID.
          * @return string
+         * @since 1.6
          */
         public function woocommerce_title( $title,  $id ) {
             if ( cart_contains_quotable() && $id === wc_get_page_id( 'cart' ) ) {
-                $title = __( 'Quote', 'quote-wc' );
+                $cart_name = get_option( 'qwc_cart_page_name' );
+                $cart_name = '' == $cart_name ? 'Cart' : $cart_name;
+            
+                $title = __( $cart_name, 'quote-wc' );
             }
 
             return $title;
@@ -850,9 +686,10 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          *
          * @param bool $needs_shipping Whether cart needs shipping or not.
          * @return bool
+         * @since 1.6
          */
         public function cart_needs_shipping( $needs_shipping ) {
-            if ( cart_contains_quotable() ) {
+            if ( cart_contains_quotable() && 'on' == get_option( 'qwc_hide_address_fields' ) ) {
                 return false;
             } else {
                 return true;
@@ -864,15 +701,15 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          *
          * @param array $fields Billing fields.
          * @return array
+         * @since 1.6
          */
         public function billing_fields( $fields = array() ) {
-            if ( cart_contains_quotable() ) {
+            if ( cart_contains_quotable() && 'on' == get_option( 'qwc_hide_address_fields' ) ) {
                 unset( $fields['billing_company'] );
                 unset( $fields['billing_address_1'] );
                 unset( $fields['billing_address_2'] );
                 unset( $fields['billing_state'] );
                 unset( $fields['billing_city'] );
-                unset( $fields['billing_phone'] );
                 unset( $fields['billing_postcode'] );
                 unset( $fields['billing_country'] );
             }
@@ -885,9 +722,10 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          *
          * @param array $fields Billing fields.
          * @return array
+         * @since 1.6
          */
         public function checkout_fields( $fields ) {
-            if ( cart_contains_quotable() ) {
+            if ( cart_contains_quotable() && 'on' == get_option( 'qwc_hide_address_fields' ) ) {
                 unset( $fields['billing']['billing_company'] );
                 unset( $fields['billing']['billing_country'] );
                 unset( $fields['billing']['billing_address_1'] );
