@@ -3,7 +3,7 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 4.9.6
+Tested up to: 5.1.1
 Stable tag: 4.8.0
 License: GPLv2 or later
 
@@ -41,6 +41,14 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.6 (25.03.2019) =
+* Added a new setting in Quotes->Settings that allow to change the name of the Cart page when the cart contains only quotable products.
+* Added a new setting in Quotes->Settings that allows the admin to disable Billing & Shipping addresses for quote orders.
+* Fixed a conflict error with Stream plugin.
+* Fixed an issue where the {blogname} merge tag is not replaced with the correct details.
+* Email subject & headings were not customizable from WooCommerce->Settings->Eamils. Fixed the same.
+* Fixed an error being logged in the debug log for quote emails. 
 
 = 1.5 (31.10.2018) =
 * When the order contains only variable products, the Checkout process fails as no Payment medium is found. Fixed the same.
