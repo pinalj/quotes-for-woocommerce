@@ -114,7 +114,7 @@ class QWC_Send_Quote extends WC_Email {
         wc_get_template( $this->template_html, array(
         'order'       => $this->object,
         'email_heading' => $this->get_heading(),
-        'send_to_admin' => false,
+        'sent_to_admin' => false,
         'plain_text'    => false,
         'email'         => $this,
         ), 'quotes-for-wc/', $this->template_base );
@@ -126,7 +126,7 @@ class QWC_Send_Quote extends WC_Email {
         wc_get_template( $this->template_plain, array(
             'order'       => $this->object,
             'email_heading' => $this->get_heading(),
-            'send_to_admin' => false,
+            'sent_to_admin' => false,
             'plain_text'    => true,
             'email'         => $this,
             ), 'quotes-for-wc/', $this->template_base );

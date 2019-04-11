@@ -20,7 +20,7 @@ if ( $order_obj ) :
         echo sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), $order_obj->get_checkout_payment_url() );
 	endif;
 
-	do_action( 'woocommerce_email_before_order_table', $order_obj, $send_to_admin, $plain_text );
+	do_action( 'woocommerce_email_before_order_table', $order_obj, $sent_to_admin, $plain_text );
 
     
     if ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) {
@@ -33,7 +33,7 @@ if ( $order_obj ) :
     echo sprintf( __( 'Order number: %s', 'quote-wc'), $order_obj->get_order_number() ) . "\n";
     echo sprintf( __( 'Order date: %s', 'quote-wc'), date_i18n( wc_date_format(), strtotime( $order_date ) ) ) . "\n";
     
-	do_action( 'woocommerce_email_order_meta', $order_obj, $send_to_admin, $plain_text );
+	do_action( 'woocommerce_email_order_meta', $order_obj, $sent_to_admin, $plain_text );
 
 	echo "\n";
 
@@ -89,7 +89,7 @@ if ( $order_obj ) :
 
 	echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
-	do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text, $email );
+	do_action( 'woocommerce_email_after_order_table', $order_obj, $sent_to_admin, $plain_text, $email );
 endif;
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
