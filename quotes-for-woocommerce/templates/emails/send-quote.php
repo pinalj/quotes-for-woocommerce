@@ -23,7 +23,7 @@ if ( $order_obj ) :
 		<p><?php printf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), '<a href="' . esc_url( $order_obj->get_checkout_payment_url() ) . '">' . __( 'Pay for order', 'quote-wc' ) . '</a>' ); ?></p>
 	<?php endif; ?>
 
-	<?php do_action( 'woocommerce_email_before_order_table', $order_obj, $send_to_admin, $plain_text ); ?>
+	<?php do_action( 'woocommerce_email_before_order_table', $order_obj, $sent_to_admin, $plain_text ); ?>
 
     <?php 
         if ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) {
@@ -99,9 +99,9 @@ if ( $order_obj ) :
 		</tfoot>
 	</table>
 
-	<?php do_action( 'woocommerce_email_after_order_table', $order_obj, $send_to_admin, $plain_text, $email ); ?>
+	<?php do_action( 'woocommerce_email_after_order_table', $order_obj, $sent_to_admin, $plain_text, $email ); ?>
 
-	<?php do_action( 'woocommerce_email_order_meta', $order_obj, $send_to_admin, $plain_text ); ?>
+	<?php do_action( 'woocommerce_email_order_meta', $order_obj, $sent_to_admin, $plain_text ); ?>
 
 <?php endif; ?>
 

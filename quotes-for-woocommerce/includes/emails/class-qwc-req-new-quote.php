@@ -112,7 +112,10 @@ class QWC_Request_New_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_html, array(
         'order'       => $this->object,
-        'email_heading' => $this->get_heading()
+        'email_heading' => $this->get_heading(),
+        'sent_to_admin' => true,
+        'plain_text'    => false,
+        'email'         => $this,
         ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
@@ -121,7 +124,10 @@ class QWC_Request_New_Quote extends WC_Email {
         ob_start();
         wc_get_template( $this->template_plain, array(
             'order'       => $this->object,
-            'email_heading' => $this->get_heading()
+            'email_heading' => $this->get_heading(),
+            'sent_to_admin' => true,
+            'plain_text'    => true,
+            'email'         => $this,
             ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
