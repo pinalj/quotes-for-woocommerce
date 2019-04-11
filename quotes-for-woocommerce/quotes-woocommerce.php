@@ -2,7 +2,7 @@
 /*
 Plugin Name: Quotes for WooCommerce
 Description: This plugin allows you to convert your WooCommerce store into a quote only store. It will hide the prices for the products and not take any payment at Checkout. You can then setup prices for the items in the order and send a notification to the Customer. 
-Version: 1.6
+Version: 1.6.1
 Author: Pinal Shah 
 WC Requires at least: 3.0.0
 WC tested up to: 3.5.7
@@ -17,7 +17,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @var   string
          * @since 1.0.0
          */
-        public $version = '1.6';
+        public $version = '1.6.1';
     
         public function __construct() {
             
@@ -108,7 +108,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @since 1.1
          */
         function qwc_activate() {
-            update_option( 'quotes_for_wc', '1.6' );
+            update_option( 'quotes_for_wc', '1.6.1' );
         }
         
         /**
@@ -117,7 +117,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
          * @since 1.1
          */
         function qwc_update_db_check() {
-            update_option( 'quotes_for_wc', '1.6' );
+            update_option( 'quotes_for_wc', '1.6.1' );
         }
         
         /**
