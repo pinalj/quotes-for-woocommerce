@@ -114,7 +114,10 @@ class QWC_Request_Sent extends WC_Email {
         wc_get_template( $this->template_html, array(
         'order'       => $this->object,
         'site_name'   => get_option( 'blogname' ),
-        'email_heading' => $this->get_heading()
+        'email_heading' => $this->get_heading(),
+        'sent_to_admin' => false,
+        'plain_text'    => false,
+        'email'         => $this,
         ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
@@ -124,7 +127,10 @@ class QWC_Request_Sent extends WC_Email {
         wc_get_template( $this->template_plain, array(
             'order'       => $this->object,
             'site_name'   => get_option( 'blogname' ),
-            'email_heading' => $this->get_heading()
+            'email_heading' => $this->get_heading(),
+            'sent_to_admin' => false,
+            'plain_text'    => true,
+            'email'         => $this,
             ), 'quotes-for-wc/', $this->template_base );
         return ob_get_clean();
     }
