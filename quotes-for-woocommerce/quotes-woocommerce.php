@@ -222,7 +222,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
             $enable_quote = product_quote_enabled( $post_id );
             
             if ( $enable_quote ) {
-                $cart_text = __( 'Request Quote', 'quote-wc' );
+                $cart_text = '' == get_option( 'qwc_add_to_cart_button_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
             } else {
                 $cart_text = __( 'Add to Cart', 'quote-wc' );
             }
