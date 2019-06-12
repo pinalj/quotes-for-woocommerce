@@ -6,6 +6,8 @@ Version: 1.6.1
 Author: Pinal Shah 
 WC Requires at least: 3.0.0
 WC tested up to: 3.5.7
+Text Domain: quote-wc
+Domain Path: /languages/
 */
 
 if ( ! class_exists( 'quotes_for_wc' ) ) {
