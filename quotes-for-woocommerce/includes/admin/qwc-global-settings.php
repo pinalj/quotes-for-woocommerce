@@ -47,6 +47,22 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
             );
             
             add_settings_section(
+                'qwc_shop_product_settings_section',                    // ID used to identify this section and with which to register options
+                __( 'Shop & Product Page Settings', 'quote-wc' ),   // Title to be displayed on the administration page
+                array( $this, 'qwc_shop_product_settings_callback' ),    // Callback used to render the description of the section
+                'qwc_page'                                         // Page on which to add this section of options
+            );
+
+            add_settings_field(
+                'qwc_add_to_cart_button_text',
+                __( 'Add to Cart button text:', 'quote-wc' ),
+                array( $this, 'qwc_add_to_cart_button_text_callback' ),
+                'qwc_page',
+                'qwc_shop_product_settings_section',
+                array( __( 'Text that should be displayed on the Add to Cart button for quotable products.', 'quote-wc' ) )
+            );
+            
+            add_settings_section(
                 'qwc_cart_settings_section',                    // ID used to identify this section and with which to register options
                 __( 'Cart & Checkout Settings', 'quote-wc' ),   // Title to be displayed on the administration page
                 array( $this, 'qwc_cart_settings_callback' ),    // Callback used to render the description of the section
@@ -82,6 +98,11 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
                 'qwc_enable_global_prices'
             );
 
+            register_setting(
+               'quote_settings',
+               'qwc_add_to_cart_button_text'
+            );
+            
             register_setting(
                 'quote_settings',
                 'qwc_cart_page_name'
@@ -168,7 +189,27 @@ if ( ! class_exists( 'quotes_admin_settings' ) ) {
             $html = '<label for="qwc_enable_global_prices"> '  . $args[0] . '</label>';
             echo $html;
         }
+
+        function qwc_shop_product_settings_callback(){}
         
+        /**
+         * Callback for setting to modify the add to cart button text
+         * @since
+         */
+        function qwc_add_to_cart_button_text_callback( $args ) {
+            
+            $add_to_cart_button_text = get_option( 'qwc_add_to_cart_button_text' );
+                
+            $add_to_cart_button_text = '' == $add_to_cart_button_text ? __( 'Request Quote', 'quote-wc' ) : $add_to_cart_button_text;
+
+            printf(
+            '<input type="text" id="qwc_add_to_cart_button_text" name="qwc_add_to_cart_button_text" value="%s" />', $add_to_cart_button_text
+                );
+            
+            $html = '<label for="qwc_add_to_cart_button_text"> '  . $args[0] . '</label>';
+            echo $html;
+        }
+
         function qwc_cart_settings_callback() {}
         
         /**
