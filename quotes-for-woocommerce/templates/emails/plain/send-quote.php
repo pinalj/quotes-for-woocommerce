@@ -20,7 +20,7 @@ if ( $order_obj ) :
         echo sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), $order_obj->get_checkout_payment_url() );
 	endif;
 
-	do_action( 'woocommerce_email_before_order_table', $order_obj, $sent_to_admin, $plain_text );
+	do_action( 'woocommerce_email_before_order_table', $order_obj, $sent_to_admin, $plain_text, $email );
 
     
     if ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) {
