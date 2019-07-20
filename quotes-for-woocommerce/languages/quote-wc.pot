@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-12 22:33+0530\n"
+"POT-Creation-Date: 2019-07-20 21:18+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: quotes-woocommerce.php:141
+#: quotes-woocommerce.php:143
 msgid "Enable Quotes"
 msgstr ""
 
-#: quotes-woocommerce.php:142
+#: quotes-woocommerce.php:144
 msgid "Enable this to allow customers to ask for a quote for the product."
 msgstr ""
 
-#: quotes-woocommerce.php:152
+#: quotes-woocommerce.php:154
 msgid "Display Product Price"
 msgstr ""
 
-#: quotes-woocommerce.php:153
+#: quotes-woocommerce.php:155
 msgid "Enable this to display the product price on the Shop & Product pages."
 msgstr ""
 
-#: quotes-woocommerce.php:225 includes/class-qwc-gateway.php:21
+#: quotes-woocommerce.php:227 includes/class-qwc-gateway.php:21
+#: includes/admin/qwc-global-settings.php:203
 msgid "Request Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:227
+#: quotes-woocommerce.php:229
 msgid "Add to Cart"
 msgstr ""
 
-#: quotes-woocommerce.php:324
+#: quotes-woocommerce.php:326
 msgid "Quote emailed."
 msgstr ""
 
-#: quotes-woocommerce.php:540
+#: quotes-woocommerce.php:542
 msgid "Quote Complete"
 msgstr ""
 
-#: quotes-woocommerce.php:544 includes/emails/class-qwc-send-quote.php:16
+#: quotes-woocommerce.php:546 includes/emails/class-qwc-send-quote.php:16
 msgid "Send Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:546
+#: quotes-woocommerce.php:548
 msgid "Resend Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:570
+#: quotes-woocommerce.php:572
 msgid "Quote Complete."
 msgstr ""
 
-#: quotes-woocommerce.php:619 includes/class-qwc-gateway.php:31
+#: quotes-woocommerce.php:621 includes/class-qwc-gateway.php:31
 msgid "Settings"
 msgstr ""
 
-#: quotes-woocommerce.php:634
+#: quotes-woocommerce.php:636
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: quotes-woocommerce.php:640
+#: quotes-woocommerce.php:642
 msgid "Quote Settings"
 msgstr ""
 
@@ -122,30 +123,44 @@ msgid ""
 msgstr ""
 
 #: includes/admin/qwc-global-settings.php:51
-msgid "Cart & Checkout Settings"
+msgid "Shop & Product Page Settings"
 msgstr ""
 
 #: includes/admin/qwc-global-settings.php:58
-msgid "Cart page Name for Quotable Products:"
+msgid "Add to Cart button text:"
 msgstr ""
 
 #: includes/admin/qwc-global-settings.php:62
+msgid ""
+"Text that should be displayed on the Add to Cart button for quotable "
+"products."
+msgstr ""
+
+#: includes/admin/qwc-global-settings.php:67
+msgid "Cart & Checkout Settings"
+msgstr ""
+
+#: includes/admin/qwc-global-settings.php:74
+msgid "Cart page Name for Quotable Products:"
+msgstr ""
+
+#: includes/admin/qwc-global-settings.php:78
 msgid ""
 "Display a custom name for Cart page when cart contains only quotable "
 "products."
 msgstr ""
 
-#: includes/admin/qwc-global-settings.php:67
+#: includes/admin/qwc-global-settings.php:83
 msgid "Hide Address fields at Checkout:"
 msgstr ""
 
-#: includes/admin/qwc-global-settings.php:71
+#: includes/admin/qwc-global-settings.php:87
 msgid ""
 "Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
 "quotable products."
 msgstr ""
 
-#: includes/admin/qwc-global-settings.php:183
+#: includes/admin/qwc-global-settings.php:224
 msgid "Cart"
 msgstr ""
 
