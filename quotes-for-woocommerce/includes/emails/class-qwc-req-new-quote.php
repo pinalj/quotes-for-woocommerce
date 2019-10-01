@@ -61,12 +61,36 @@ class QWC_Request_New_Quote extends WC_Email {
         
                     $this->find[]    = '{order_number}';
                     $this->replace[] = $this->object->order_id;
+
+                    $this->find[]    = '{billing_first_name}';
+                    $this->replace[] = $this->object->billing_first_name;
+
+                    $this->find[]    = '{billing_last_name}';
+                    $this->replace[] = $this->object->billing_last_name;
+
+                    $this->find[]    = '{billing_email}';
+                    $this->replace[] = $this->object->billing_email;
+
+                    $this->find[]    = '{billing_phone}';
+                    $this->replace[] = $this->object->billing_phone;
                 } else {
                     
                     $this->find[]    = '{order_date}';
                     $this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->item_hidden_date ) );
         
                     $this->find[]    = '{order_number}';
+                    $this->replace[] = __( 'N/A', 'quote-wc' );
+
+                    $this->find[]    = '{billing_first_name}';
+                    $this->replace[] = __( 'N/A', 'quote-wc' );
+
+                    $this->find[]    = '{billing_last_name}';
+                    $this->replace[] = __( 'N/A', 'quote-wc' );
+
+                    $this->find[]    = '{billing_email}';
+                    $this->replace[] = __( 'N/A', 'quote-wc' );
+
+                    $this->find[]    = '{billing_phone}';
                     $this->replace[] = __( 'N/A', 'quote-wc' );
                 }
     
@@ -99,6 +123,15 @@ class QWC_Request_New_Quote extends WC_Email {
         
         // customer ID
         $order_obj->customer_id = ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->user_id : $order->get_user_id();
+
+        // billing first name
+        $order_obj->billing_first_name = (version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
+
+        // billing last name
+        $order_obj->billing_last_name = (version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name();
+
+        // billing phone
+        $order_obj->billing_phone = (version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_phone : $order->get_billing_phone();
         
         // quote status
         $order_obj->quote_status = get_post_meta( $order_id, '_quote_status', true );

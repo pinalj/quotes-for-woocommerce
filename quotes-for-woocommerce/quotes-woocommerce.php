@@ -10,6 +10,8 @@ Text Domain: quote-wc
 Domain Path: /languages/
 */
 
+load_plugin_textdomain( 'quote-wc', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
 if ( ! class_exists( 'quotes_for_wc' ) ) {
     class quotes_for_wc {
         
