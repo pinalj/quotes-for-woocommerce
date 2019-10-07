@@ -280,7 +280,7 @@ if ( ! class_exists( 'quotes_for_wc' ) ) {
                                 return isset( $value->meta_value ) && 'on' == $value->meta_value;
                             }));
                             
-                            $display = ( isset( $found->meta_value ) && $found->meta_value === 'on' ) ? true : false;
+                            $display = ( isset( $found_price->meta_value ) && $found_price->meta_value === 'on' ) ? true : false;
                                 
                         } else {
                             $display = false;
