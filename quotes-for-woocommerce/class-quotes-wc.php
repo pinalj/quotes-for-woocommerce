@@ -191,7 +191,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_include_files_admin() {
 			include_once 'includes/class-quotes-payment-gateway.php';
 			include_once 'includes/class-qwc-email-manager.php';
-			include_once 'includes/admin/qwc-global-settings.php';
+			include_once 'includes/admin/class-quotes-global-settings.php';
 		}
 
 		/**
