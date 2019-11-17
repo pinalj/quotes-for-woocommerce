@@ -1,5 +1,11 @@
 <?php
 /**
+ * Common Functions.
+ *
+ * @package Quotes for WooCommerce
+ */
+
+/**
  * Returns whether quotes are enabled.
  *
  * @param int $product_id - Product ID.
@@ -105,7 +111,6 @@ function product_price_display( $product_id ) {
  * Returns whether price should be displayed for carts or no.
  *
  * @return bool $display - true|false
- *
  */
 function qwc_cart_display_price() {
 

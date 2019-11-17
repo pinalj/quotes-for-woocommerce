@@ -1,8 +1,15 @@
 <?php
 /**
+ * Email Manager.
+ *
+ * @package     Quotes For WooCommerce
+ * @class       QWC_Email_manager
+ */
+
+/**
  * Handles Emails
  */
-class QWC_Email_manager {
+class QWC_Email_Manager {
 
 	/**
 	 * Constructor.
@@ -63,7 +70,7 @@ class QWC_Email_manager {
 			$emails['QWC_Send_Quote'] = include_once plugin_dir_path( __FILE__ ) . 'emails/class-qwc-send-quote.php';
 		}
 		if ( ! isset( $emails['QWC_Request_New_Quote'] ) ) {
-			$emails['QWC_Request_New_Quote'] = include_once plugin_dir_path( __FILE__ ) . 'emails/class-qwc-req-new-quote.php';
+			$emails['QWC_Request_New_Quote'] = include_once plugin_dir_path( __FILE__ ) . 'emails/class-qwc-request-new-quote.php';
 		}
 		if ( ! isset( $emails['QWC_Request_Sent'] ) ) {
 			$emails['QWC_Request_Sent'] = include_once plugin_dir_path( __FILE__ ) . 'emails/class-qwc-request-sent.php';
@@ -88,5 +95,5 @@ class QWC_Email_manager {
 	}
 
 } // end of class
-return new QWC_Email_manager();
+return new QWC_Email_Manager();
 

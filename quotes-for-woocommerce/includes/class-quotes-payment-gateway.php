@@ -1,4 +1,11 @@
 <?php
+/**
+ * Payment Gateway Class.
+ *
+ * @package     Quotes For WooCommerce
+ * @class       Quotes_Payment_Gateway
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
