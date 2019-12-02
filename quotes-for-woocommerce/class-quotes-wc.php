@@ -660,7 +660,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				);
 
 				// Create an instance of the WC_Emails class , so emails are sent out to customers.
-				new WC_Emails();
+				WC_Emails::instance();
 				if ( in_array( $quote_status, $_status, true ) ) {
 					do_action( 'qwc_send_quote_notification', $order_id );
 				}

@@ -49,7 +49,7 @@ class QWC_Email_Manager {
 			$quote = order_requires_quote( $order );
 
 			if ( $quote ) {
-				new WC_Emails();
+				WC_Emails::instance();
 				do_action( 'qwc_pending_quote_notification', $order_id );
 				do_action( 'qwc_request_sent_notification', $order_id );
 			}
