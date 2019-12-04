@@ -189,9 +189,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_include_files_admin() {
-			include_once( '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
-			include_once( '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
-			include_once( '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php' );
 		}
 
 		/**
@@ -200,9 +200,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_include_files() {
-			include_once( '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
-			include_once( '/quotes-for-woocommerce/includes/qwc-functions.php' );
-			include_once( '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/qwc-functions.php' );
+			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
 		}
 
 		/**
