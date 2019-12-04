@@ -17,5 +17,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'Quotes_WC' ) ) {
-	include_once 'class-quotes-wc.php';
+	include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/class-quotes-wc.php';
 }
