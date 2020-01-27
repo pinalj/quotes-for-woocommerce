@@ -127,7 +127,7 @@ if ( $order_obj ) :
 								echo 'border-top-width: 4px;';
 							}
 							?>
-							"><?php echo esc_attr( $total['value'] ); ?></td>
+							"><?php echo wp_kses_post( $total['value'] ); ?></td>
 						</tr>
 						<?php
 				}
