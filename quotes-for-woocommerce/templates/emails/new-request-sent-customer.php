@@ -40,7 +40,7 @@ if ( $order ) :
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $items->get_name() ); ?></td>
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_attr( $items->get_quantity() ); ?></td>
 				<?php if ( $display_price ) { ?>
-				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_attr( $order_obj->get_formatted_line_subtotal( $items ) ); ?></td>
+				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $order_obj->get_formatted_line_subtotal( $items ) ); ?></td>
 				<?php } ?>
 			</tr>
 			<?php
