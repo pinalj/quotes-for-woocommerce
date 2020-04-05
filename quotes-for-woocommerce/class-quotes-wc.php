@@ -776,7 +776,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
 				return false;
 			} else {
-				return true;
+				return $needs_shipping;
 			}
 		}
 
