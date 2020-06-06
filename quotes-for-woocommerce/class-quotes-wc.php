@@ -47,8 +47,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			add_filter( 'woocommerce_get_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
 
 			// Modify the 'add to cart' button text.
-			add_filter( 'woocommerce_product_add_to_cart_text', array( &$this, 'qwc_change_button_text' ) );
-			add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99 );
+			add_filter( 'woocommerce_product_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
+			add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
 
 			// Hide price on the cart & checkout pages.
 			add_filter( 'wp_enqueue_scripts', array( &$this, 'qwc_css' ) );
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 *
 		 * @since 1.0
 		 */
-		public function qwc_change_button_text() {
+		public function qwc_change_button_text( $cart_text ) {
 
 			global $post;
 			$post_id = $post->ID;
@@ -242,8 +242,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( $enable_quote ) {
 				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
-			} else {
-				$cart_text = esc_html__( 'Add to Cart', 'quote-wc' );
 			}
 
 			return $cart_text;
