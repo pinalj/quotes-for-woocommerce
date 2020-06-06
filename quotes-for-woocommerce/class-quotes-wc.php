@@ -730,8 +730,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.6
 		 */
 		public function add_to_cart_message( $message, $products ) {
-			$cart_name = get_option( 'qwc_cart_page_name' );
-			$cart_name = '' === $cart_name ? 'Cart' : $cart_name;
+			$cart_name = get_option( 'qwc_cart_page_name', '' );
+			$cart_name = '' === $cart_name ? __( 'Cart', 'quote-wc' ) : $cart_name;
 
 			if ( is_array( $products ) && count( $products ) > 0 ) {
 				foreach ( $products as $product_id => $value ) {
