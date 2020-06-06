@@ -84,6 +84,15 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			);
 
 			add_settings_field(
+				'qwc_place_order_text',
+				__( 'Place Order button text for Quotable Products:', 'quote-wc' ),
+				array( $this, 'qwc_place_order_text_callback' ),
+				'qwc_page',
+				'qwc_cart_settings_section',
+				array( __( 'Place Order button text for Quotable products at Checkout.', 'quote-wc' ) )
+			);
+
+			add_settings_field(
 				'qwc_cart_page_name',
 				__( 'Cart page Name for Quotable Products:', 'quote-wc' ),
 				array( $this, 'qwc_cart_page_name_callback' ),
@@ -119,6 +128,11 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			register_setting(
 				'quote_settings',
 				'qwc_cart_page_name'
+			);
+
+			register_setting(
+				'quote_settings',
+				'qwc_place_order_text'
 			);
 
 			register_setting(
@@ -179,7 +193,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 		 */
 		public function qwc_enable_global_quote_callback( $args ) {
 
-			$enable_quotes_global = get_option( 'qwc_enable_global_quote' );
+			$enable_quotes_global = get_option( 'qwc_enable_global_quote', '' );
 
 			printf(
 				'<input type="checkbox" id="qwc_enable_global_quote" name="qwc_enable_global_quote" value="on" ' . checked( 'on', $enable_quotes_global, false ) . ' />'
@@ -198,7 +212,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 		 */
 		public function qwc_enable_global_price_callback( $args ) {
 
-			$enable_prices_global = get_option( 'qwc_enable_global_prices' );
+			$enable_prices_global = get_option( 'qwc_enable_global_prices', '' );
 
 			printf(
 				'<input type="checkbox" id="qwc_enable_global_prices" name="qwc_enable_global_prices" value="on" ' . checked( 'on', $enable_prices_global, false ) . ' />'
@@ -220,7 +234,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 		 */
 		public function qwc_add_to_cart_button_text_callback( $args ) {
 
-			$add_to_cart_button_text = get_option( 'qwc_add_to_cart_button_text' );
+			$add_to_cart_button_text = get_option( 'qwc_add_to_cart_button_text', '' );
 
 			$add_to_cart_button_text = '' === $add_to_cart_button_text ? esc_html__( 'Request Quote', 'quote-wc' ) : $add_to_cart_button_text;
 
@@ -246,7 +260,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 		 */
 		public function qwc_cart_page_name_callback( $args ) {
 
-			$cart_page_name = get_option( 'qwc_cart_page_name' );
+			$cart_page_name = get_option( 'qwc_cart_page_name', '' );
 
 			if ( '' === $cart_page_name ) {
 				$cart_page_name = esc_html__( 'Cart', 'quote-wc' );
@@ -261,13 +275,33 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 		}
 
 		/**
+		 * Callback function for Global Settings - Place Order text button field.
+		 *
+		 * @param array $args - Arguments.
+		 */
+		public function qwc_place_order_text_callback( $args ) {
+			$place_order_button_text = get_option( 'qwc_place_order_text', '' );
+
+			if ( '' === $place_order_button_text ) {
+				$place_order_button_text = esc_html__( 'Request Quote', 'quote-wc' );
+			}
+			echo sprintf(
+				'<input type="text" id="qwc_place_order_text" name="qwc_place_order_text" value="%s" />',
+				esc_attr( $place_order_button_text )
+			);
+
+			$html = '<label for="qwc_place_order_text"> ' . $args[0] . '</label>';
+			echo wp_kses_post( $html );
+		}
+
+		/**
 		 * Callback function for Global Settings - Hide Address field.
 		 *
 		 * @param array $args - Arguments.
 		 */
 		public function qwc_hide_address_fields_callback( $args ) {
 
-			$enable_hide_address = get_option( 'qwc_hide_address_fields' );
+			$enable_hide_address = get_option( 'qwc_hide_address_fields', '' );
 
 			printf(
 				'<input type="checkbox" id="qwc_hide_address_fields" name="qwc_hide_address_fields" value="on" ' . checked( 'on', $enable_hide_address, false ) . ' />'
