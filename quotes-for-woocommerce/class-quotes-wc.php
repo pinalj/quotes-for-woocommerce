@@ -107,6 +107,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			add_filter( 'woocommerce_billing_fields', array( &$this, 'billing_fields' ), 999 );
 			add_filter( 'woocommerce_checkout_fields', array( &$this, 'checkout_fields' ), 9999 );
 
+			// Add Settings link in Plugins page.
+			$plugin = dirname( plugin_basename( __FILE__ ) ) . '/quotes-woocommerce.php';
+			add_action( 'plugin_action_links_' . $plugin, array( &$this, 'qwc_plugin_settings_link' ), 10, 1 );
 		}
 
 		/**
@@ -189,9 +192,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_include_files_admin() {
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php' );
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php';
 		}
 
 		/**
@@ -200,8 +203,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_include_files() {
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
 		}
 
 		/**
@@ -230,6 +233,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		/**
 		 * Modify the Add to Cart button text based on settings.
 		 *
+		 * @param string $cart_text - Add to Cart button text.
 		 * @since 1.0
 		 */
 		public function qwc_change_button_text( $cart_text ) {
@@ -818,6 +822,21 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			return $fields;
 		}
+
+		/**
+		 * Add Settings link on Plugins page.
+		 *
+		 * @param array $links - List of links in array.
+		 * @return array $links - List of links including the Settings link.
+		 * @since 1.7
+		 */
+		public static function qwc_plugin_settings_link( $links ) {
+			$settings_link = array(
+				'settings' => '<a href="admin.php?page=quote_settings">' . __( 'Settings', 'quote-wc' ) . '</a>',
+			);
+			return array_merge( $settings_link, $links );
+		}
+
 
 	} // end of class
 }
