@@ -201,7 +201,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_include_files() {
 			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php' );
-			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/qwc-functions.php' );
 			include_once( WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php' );
 		}
 
