@@ -31,6 +31,7 @@ delete_option( 'qwc_enable_global_quote' );
 delete_option( 'qwc_cart_page_name' );
 delete_option( 'qwc_hide_address_fields' );
 delete_option( 'qwc_add_to_cart_button_text' );
+delete_option( 'qwc_place_order_text' );
 
 // Clear any cached data that has been removed.
 wp_cache_flush();
