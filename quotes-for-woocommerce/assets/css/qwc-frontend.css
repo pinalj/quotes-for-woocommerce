@@ -1,3 +1,7 @@
 span.woocommerce-Price-amount.amount {
     display: none;
 }
+
+.site-header-cart .cart-contents .amount {
+    display: none;
+}

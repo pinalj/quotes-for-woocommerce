@@ -1,6 +1,6 @@
 jQuery( document ).ready( function() {
 	
-	jQuery( '#qwc_quote_complete' ).click( function() {
+	jQuery( document ).on( 'click', '#qwc_quote_complete', function() {
 		
 		// update the DB quote status
 		var data = {
@@ -15,7 +15,7 @@ jQuery( document ).ready( function() {
 		});
 	});
 	
-	jQuery( '#qwc_send_quote' ).click( function() {
+	jQuery( document ).on( 'click', '#qwc_send_quote', function() {
 		// send an email
 		var data = {
 			order_id: qwc_params.order_id,
