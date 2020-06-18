@@ -59,8 +59,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			add_action( 'woocommerce_view_order', array( &$this, 'qwc_thankyou_css' ), 10, 1 );
 			// Hide prices on the cart widget.
 			add_filter( 'woocommerce_cart_item_price', array( &$this, 'qwc_cart_widget_prices' ), 10, 2 );
+
+			// Stop WC from displaying the price in the cart widget.
+			add_action( 'woocommerce_widget_shopping_cart_total', array( &$this, 'qwc_remove_wc_function' ), 1 );
 			// Hide the subtotal on the cart widget.
-			add_filter( 'woocommerce_add_to_cart_fragments', array( &$this, 'qwc_widget_subtotal' ), 10, 1 );
+			add_action( 'woocommerce_widget_shopping_cart_total', array( &$this, 'qwc_widget_subtotal' ), 999 );
+
 			// Cart Validations.
 			add_filter( 'woocommerce_add_to_cart_validation', array( &$this, 'qwc_cart_validations' ), 10, 3 );
 			// Check if Cart contains any quotable product.
@@ -258,13 +262,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_css() {
 			$plugin_version = get_option( 'quotes_for_wc' );
-			// Load only on Cart, Checkout pages.
-			if ( is_cart() || is_checkout() ) {
 
-				// Add css file only if cart contains products that require quotes.
-				if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
-				}
+			// Add css file only if cart contains products that require quotes.
+			if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
+				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
 			}
 
 			// My Account page - Orders List.
@@ -390,13 +391,26 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		}
 
 		/**
+		 * Remove WC cart widget total display hook, if cart contains quotable products.
+		 *
+		 * @since 1.7.0
+		 */
+		public static function qwc_remove_wc_function() {
+			if ( isset( WC()->cart ) ) {
+
+				$cart_quotes = cart_contains_quotable();
+				if ( $cart_quotes && ! qwc_cart_display_price() ) {
+					remove_action( 'woocommerce_widget_shopping_cart_total', 'woocommerce_widget_shopping_cart_subtotal', 10 );
+				}
+			}
+		}
+
+		/**
 		 * Hide Cart Widget subtotal.
 		 *
-		 * @param array $fragments - Cart Data.
-		 * @return array $fragments - Cart Data.
 		 * @since 1.0
 		 */
-		public function qwc_widget_subtotal( $fragments ) {
+		public function qwc_widget_subtotal() {
 
 			if ( isset( WC()->cart ) ) {
 
@@ -404,15 +418,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				if ( $cart_quotes && ! qwc_cart_display_price() ) {
 					$price = '';
-					ob_start();
-
-					// translators: Subtotal Amount.
-					echo sprintf( __( "<p class='total'><strong>Subtotal:</strong> <span class='amount'>%s</span></p>", 'quotes-wc' ), esc_attr( $price ) );
-
-					$fragments['p.total'] = ob_get_clean();
+					// translators: Leave price blanks as its not be displayed.
+					echo wp_kses_post( sprintf( __( "<strong>Subtotal:</strong> <span class='amount'>%s</span>", 'quotes-wc' ), esc_attr( $price ) ) );
 				}
 			}
-			return $fragments;
 		}
 
 		/**
