@@ -272,7 +272,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Add css file only if cart contains products that require quotes.
 			if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
-				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
+				wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
 			}
 
 			// My Account page - Orders List.
