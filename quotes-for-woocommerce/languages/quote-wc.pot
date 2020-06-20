@@ -1,401 +1,403 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Copyright (C) 2020 Pinal Shah
+# This file is distributed under the same license as the Quotes for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 21:18+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Quotes for WooCommerce 1.6.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-06-20T16:37:48+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: quote-wc\n"
 
-#: quotes-woocommerce.php:143
+#. Plugin Name of the plugin
+msgid "Quotes for WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin allows you to convert your WooCommerce store into a quote only store. It will hide the prices for the products and not take any payment at Checkout. You can then setup prices for the items in the order and send a notification to the Customer."
+msgstr ""
+
+#. Author of the plugin
+msgid "Pinal Shah"
+msgstr ""
+
+#: class-quotes-wc.php:158
 msgid "Enable Quotes"
 msgstr ""
 
-#: quotes-woocommerce.php:144
+#: class-quotes-wc.php:159
 msgid "Enable this to allow customers to ask for a quote for the product."
 msgstr ""
 
-#: quotes-woocommerce.php:154
+#: class-quotes-wc.php:170
 msgid "Display Product Price"
 msgstr ""
 
-#: quotes-woocommerce.php:155
+#: class-quotes-wc.php:171
 msgid "Enable this to display the product price on the Shop & Product pages."
 msgstr ""
 
-#: quotes-woocommerce.php:227 includes/class-qwc-gateway.php:21
-#: includes/admin/qwc-global-settings.php:203
+#: class-quotes-wc.php:251
+#: includes/admin/class-quotes-global-settings.php:239
+#: includes/admin/class-quotes-global-settings.php:286
+#: includes/class-quotes-payment-gateway.php:29
 msgid "Request Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:229
-msgid "Add to Cart"
-msgstr ""
-
-#: quotes-woocommerce.php:326
+#: class-quotes-wc.php:363
 msgid "Quote emailed."
 msgstr ""
 
-#: quotes-woocommerce.php:542
+#: class-quotes-wc.php:468
+msgid "It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart."
+msgstr ""
+
+#: class-quotes-wc.php:615
 msgid "Quote Complete"
 msgstr ""
 
-#: quotes-woocommerce.php:546 includes/emails/class-qwc-send-quote.php:16
+#: class-quotes-wc.php:619
+#: includes/emails/class-qwc-send-quote.php:23
 msgid "Send Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:548
+#: class-quotes-wc.php:621
 msgid "Resend Quote"
 msgstr ""
 
-#: quotes-woocommerce.php:572
+#: class-quotes-wc.php:646
 msgid "Quote Complete."
 msgstr ""
 
-#: quotes-woocommerce.php:621 includes/class-qwc-gateway.php:31
+#: class-quotes-wc.php:700
+#: class-quotes-wc.php:851
+#: includes/class-quotes-payment-gateway.php:39
 msgid "Settings"
 msgstr ""
 
-#: quotes-woocommerce.php:636
+#: class-quotes-wc.php:716
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: quotes-woocommerce.php:642
-msgid "Quote Settings"
-msgstr ""
-
-#: includes/class-qwc-gateway.php:19
-msgid "Ask for Quote"
-msgstr ""
-
-#: includes/class-qwc-gateway.php:35
-msgid "This is fictitious payment method used for quotes."
-msgstr ""
-
-#: includes/class-qwc-gateway.php:36
-msgid "This gateway requires no configuration."
-msgstr ""
-
-#: includes/class-qwc-gateway.php:54
-msgid "This order is awaiting quote."
-msgstr ""
-
-#: includes/class-qwc-gateway.php:74
-msgid "We have received your order. Thank you."
-msgstr ""
-
-#: includes/class-qwc-gateway.php:76
-msgid ""
-"We have received your request for a quote. You will be notified via email "
-"soon."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:26
-msgid "Global Settings"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:33
-msgid "Enable Quotes:"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:37
-msgid "Select if you wish to enable quotes for all the products."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:42
-msgid "Enable Price Display:"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:46
-msgid ""
-"Select to display the product price on the Shop & Product pages for all "
-"quotable products."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:51
-msgid "Shop & Product Page Settings"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:58
-msgid "Add to Cart button text:"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:62
-msgid ""
-"Text that should be displayed on the Add to Cart button for quotable "
-"products."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:67
-msgid "Cart & Checkout Settings"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:74
-msgid "Cart page Name for Quotable Products:"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:78
-msgid ""
-"Display a custom name for Cart page when cart contains only quotable "
-"products."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:83
-msgid "Hide Address fields at Checkout:"
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:87
-msgid ""
-"Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
-"quotable products."
-msgstr ""
-
-#: includes/admin/qwc-global-settings.php:224
+#: class-quotes-wc.php:751
+#: includes/admin/class-quotes-global-settings.php:266
 msgid "Cart"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:16
+#: includes/admin/class-quotes-global-settings.php:40
+msgid "Global Settings"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:47
+msgid "Enable Quotes:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:51
+msgid "Select if you wish to enable quotes for all the products."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:56
+msgid "Enable Price Display:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:60
+msgid "Select to display the product price on the Shop & Product pages for all quotable products."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:65
+msgid "Shop & Product Page Settings"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:72
+msgid "Add to Cart button text:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:76
+msgid "Text that should be displayed on the Add to Cart button for quotable products."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:81
+msgid "Cart & Checkout Settings"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:88
+msgid "Place Order button text for Quotable Products:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:92
+msgid "Place Order button text for Quotable products at Checkout."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:97
+msgid "Cart page Name for Quotable Products:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:101
+msgid "Display a custom name for Cart page when cart contains only quotable products."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:106
+msgid "Hide Address fields at Checkout:"
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:110
+msgid "Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products."
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:27
+msgid "Ask for Quote"
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:43
+msgid "This is fictitious payment method used for quotes."
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:44
+msgid "This gateway requires no configuration."
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:64
+msgid "This order is awaiting quote."
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:85
+msgid "We have received your order. Thank you."
+msgstr ""
+
+#: includes/class-quotes-payment-gateway.php:87
+msgid "We have received your request for a quote. You will be notified via email soon."
+msgstr ""
+
+#: includes/emails/class-qwc-request-new-quote.php:23
 msgid "Request for New Quote"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:17
-msgid ""
-"This email is sent to the site admin when a request for a quotation comes "
-"through."
+#: includes/emails/class-qwc-request-new-quote.php:24
+msgid "This email is sent to the site admin when a request for a quotation comes through."
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:19
-#: includes/emails/class-qwc-req-new-quote.php:141
+#: includes/emails/class-qwc-request-new-quote.php:26
+#: includes/emails/class-qwc-request-new-quote.php:213
 msgid "Quotation Request for #{order_number}"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:20
-#: includes/emails/class-qwc-req-new-quote.php:136
+#: includes/emails/class-qwc-request-new-quote.php:27
+#: includes/emails/class-qwc-request-new-quote.php:205
 msgid "[{blogname}] Quotation Request (Order {order_number}) - {order_date}"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:70
-#: includes/emails/class-qwc-request-sent.php:71
-#: includes/emails/class-qwc-send-quote.php:71
+#: includes/emails/class-qwc-request-new-quote.php:94
+#: includes/emails/class-qwc-request-new-quote.php:97
+#: includes/emails/class-qwc-request-new-quote.php:100
+#: includes/emails/class-qwc-request-new-quote.php:103
+#: includes/emails/class-qwc-request-new-quote.php:106
+#: includes/emails/class-qwc-request-sent.php:83
+#: includes/emails/class-qwc-send-quote.php:83
 msgid "N/A"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:148
-#: includes/emails/class-qwc-request-sent.php:149
-#: includes/emails/class-qwc-send-quote.php:147
+#: includes/emails/class-qwc-request-new-quote.php:222
+#: includes/emails/class-qwc-request-sent.php:191
+#: includes/emails/class-qwc-send-quote.php:189
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:150
-#: includes/emails/class-qwc-request-sent.php:151
-#: includes/emails/class-qwc-send-quote.php:149
+#: includes/emails/class-qwc-request-new-quote.php:224
+#: includes/emails/class-qwc-request-sent.php:193
+#: includes/emails/class-qwc-send-quote.php:191
 msgid "Enable this email notification"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:154
+#: includes/emails/class-qwc-request-new-quote.php:228
 msgid "Recipient"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:156
-#, php-format
+#. translators: Email recipients.
+#: includes/emails/class-qwc-request-new-quote.php:231
 msgid "Enter recipients (comma separated) for this email. Defaults to %s"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:160
-#: includes/emails/class-qwc-request-sent.php:155
-#: includes/emails/class-qwc-send-quote.php:153
+#: includes/emails/class-qwc-request-new-quote.php:235
+#: includes/emails/class-qwc-request-sent.php:197
+#: includes/emails/class-qwc-send-quote.php:195
 msgid "Subject"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:162
-#: includes/emails/class-qwc-request-sent.php:157
-#: includes/emails/class-qwc-send-quote.php:155
-#, php-format
-msgid ""
-"This controls the email subject line. Leave blank to use the default "
-"subject: <code>%s</code>."
+#. translators: Email Subject.
+#: includes/emails/class-qwc-request-new-quote.php:238
+#: includes/emails/class-qwc-request-sent.php:200
+#: includes/emails/class-qwc-send-quote.php:198
+msgid "This controls the email subject line. Leave blank to use the default subject: <code>%s</code>."
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:167
-#: includes/emails/class-qwc-request-sent.php:162
-#: includes/emails/class-qwc-send-quote.php:160
+#: includes/emails/class-qwc-request-new-quote.php:243
+#: includes/emails/class-qwc-request-sent.php:205
+#: includes/emails/class-qwc-send-quote.php:203
 msgid "Email Heading"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:169
-#: includes/emails/class-qwc-request-sent.php:164
-#: includes/emails/class-qwc-send-quote.php:162
-#, php-format
-msgid ""
-"This controls the main heading contained within the email notification. "
-"Leave blank to use the default heading: <code>%s</code>."
+#. translators: Email Heading.
+#: includes/emails/class-qwc-request-new-quote.php:246
+#: includes/emails/class-qwc-request-sent.php:208
+#: includes/emails/class-qwc-send-quote.php:206
+msgid "This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>."
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:174
-#: includes/emails/class-qwc-request-sent.php:169
-#: includes/emails/class-qwc-send-quote.php:167
+#: includes/emails/class-qwc-request-new-quote.php:251
+#: includes/emails/class-qwc-request-sent.php:213
+#: includes/emails/class-qwc-send-quote.php:211
 msgid "Email type"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:176
-#: includes/emails/class-qwc-request-sent.php:171
-#: includes/emails/class-qwc-send-quote.php:169
+#: includes/emails/class-qwc-request-new-quote.php:253
+#: includes/emails/class-qwc-request-sent.php:215
+#: includes/emails/class-qwc-send-quote.php:213
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:180
-#: includes/emails/class-qwc-request-sent.php:175
-#: includes/emails/class-qwc-send-quote.php:173
+#: includes/emails/class-qwc-request-new-quote.php:257
+#: includes/emails/class-qwc-request-sent.php:219
+#: includes/emails/class-qwc-send-quote.php:217
 msgid "Plain text"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:181
-#: includes/emails/class-qwc-request-sent.php:176
-#: includes/emails/class-qwc-send-quote.php:174
+#: includes/emails/class-qwc-request-new-quote.php:258
+#: includes/emails/class-qwc-request-sent.php:220
+#: includes/emails/class-qwc-send-quote.php:218
 msgid "HTML"
 msgstr ""
 
-#: includes/emails/class-qwc-req-new-quote.php:182
-#: includes/emails/class-qwc-request-sent.php:177
-#: includes/emails/class-qwc-send-quote.php:175
+#: includes/emails/class-qwc-request-new-quote.php:259
+#: includes/emails/class-qwc-request-sent.php:221
+#: includes/emails/class-qwc-send-quote.php:219
 msgid "Multipart"
 msgstr ""
 
-#: includes/emails/class-qwc-request-sent.php:17
+#: includes/emails/class-qwc-request-sent.php:24
 msgid "New Quote Request Sent"
 msgstr ""
 
-#: includes/emails/class-qwc-request-sent.php:18
+#: includes/emails/class-qwc-request-sent.php:25
 msgid "This email is sent to the customer when a quote request is raised"
 msgstr ""
 
-#: includes/emails/class-qwc-request-sent.php:20
-#: includes/emails/class-qwc-request-sent.php:143
+#: includes/emails/class-qwc-request-sent.php:27
+#: includes/emails/class-qwc-request-sent.php:182
 msgid "Quotation Request Sent for #{order_number}"
 msgstr ""
 
-#: includes/emails/class-qwc-request-sent.php:21
-#: includes/emails/class-qwc-request-sent.php:139
-msgid ""
-"[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
+#: includes/emails/class-qwc-request-sent.php:28
+#: includes/emails/class-qwc-request-sent.php:175
+msgid "[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
 msgstr ""
 
-#: includes/emails/class-qwc-send-quote.php:17
+#: includes/emails/class-qwc-send-quote.php:24
 msgid "This email is sent to Customers for orders that need quotations."
 msgstr ""
 
-#: includes/emails/class-qwc-send-quote.php:19
-#: includes/emails/class-qwc-send-quote.php:141
+#: includes/emails/class-qwc-send-quote.php:26
+#: includes/emails/class-qwc-send-quote.php:180
 msgid "Quote for #{order_number}"
 msgstr ""
 
-#: includes/emails/class-qwc-send-quote.php:20
-#: includes/emails/class-qwc-send-quote.php:137
+#: includes/emails/class-qwc-send-quote.php:27
+#: includes/emails/class-qwc-send-quote.php:173
 msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
 msgstr ""
 
-#: templates/emails/new-request-sent-customer.php:7
+#. translators: Site Name.
+#: templates/emails/new-request-sent-customer.php:12
 #: templates/emails/plain/new-request-sent-customer.php:7
-#, php-format
-msgid ""
-"You have made a request for a quote on %s. The details of the order are as "
-"follows:"
-msgstr ""
-
-#: templates/emails/new-request-sent-customer.php:20
-#: templates/emails/request-new-quote.php:22
-#: templates/emails/send-quote.php:40
-#: templates/emails/plain/new-request-sent-customer.php:16
-#: templates/emails/plain/request-new-quote.php.php:18
-msgid "Product"
-msgstr ""
-
-#: templates/emails/new-request-sent-customer.php:21
-#: templates/emails/request-new-quote.php:23
-#: templates/emails/send-quote.php:41
-#: templates/emails/plain/new-request-sent-customer.php:17
-#: templates/emails/plain/request-new-quote.php.php:19
-msgid "Quantity"
+msgid "You have made a request for a quote on %s. The details of the order are as follows:"
 msgstr ""
 
 #: templates/emails/new-request-sent-customer.php:26
-#: templates/emails/request-new-quote.php:24
+#: templates/emails/plain/new-request-sent-customer.php:16
+#: templates/emails/plain/request-new-quote.php.php:18
+#: templates/emails/request-new-quote.php:26
+#: templates/emails/send-quote.php:61
+msgid "Product"
+msgstr ""
+
+#: templates/emails/new-request-sent-customer.php:27
+#: templates/emails/plain/new-request-sent-customer.php:17
+#: templates/emails/plain/request-new-quote.php.php:19
+#: templates/emails/request-new-quote.php:27
+#: templates/emails/send-quote.php:62
+msgid "Quantity"
+msgstr ""
+
+#: templates/emails/new-request-sent-customer.php:32
 #: templates/emails/plain/new-request-sent-customer.php:20
 #: templates/emails/plain/request-new-quote.php.php:20
+#: templates/emails/request-new-quote.php:28
 msgid "Product Price"
 msgstr ""
 
-#: templates/emails/new-request-sent-customer.php:46
-#: templates/emails/request-new-quote.php:41
+#: templates/emails/new-request-sent-customer.php:52
 #: templates/emails/plain/new-request-sent-customer.php:36
 #: templates/emails/plain/request-new-quote.php.php:33
+#: templates/emails/request-new-quote.php:45
 msgid "This order is awaiting a quote."
 msgstr ""
 
-#: templates/emails/new-request-sent-customer.php:48
+#: templates/emails/new-request-sent-customer.php:54
 #: templates/emails/plain/new-request-sent-customer.php:38
 msgid "You shall receive a quote email from the site admin soon."
 msgstr ""
 
-#: templates/emails/request-new-quote.php:7
+#. translators: Billing Name.
 #: templates/emails/plain/request-new-quote.php.php:7
-#, php-format
-msgid ""
-"A request for quote has been made by %s and is awaiting your attention. The "
-"details of the order are as follows:"
+#: templates/emails/request-new-quote.php:10
+msgid "A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:"
 msgstr ""
 
-#: templates/emails/request-new-quote.php:43
+#. translators: Admin Url for payment.
 #: templates/emails/plain/request-new-quote.php.php:35
-#, php-format
+#: templates/emails/request-new-quote.php:50
 msgid "You can view and edit this order in the dashboard here: %s"
 msgstr ""
 
-#: templates/emails/send-quote.php:13 templates/emails/plain/send-quote.php:11
-#, php-format
+#. translators: Billing First Name.
+#: templates/emails/plain/send-quote.php:11
+#: templates/emails/send-quote.php:20
 msgid "Hello %s"
 msgstr ""
 
-#: templates/emails/send-quote.php:16 templates/emails/plain/send-quote.php:14
-#, php-format
-msgid ""
-"You have received a quotation for your order on %s. The details of the same "
-"are shown below."
+#. translators: Site Name.
+#: templates/emails/plain/send-quote.php:14
+#: templates/emails/send-quote.php:28
+msgid "You have received a quotation for your order on %s. The details of the same are shown below."
 msgstr ""
 
-#: templates/emails/send-quote.php:23 templates/emails/plain/send-quote.php:20
-#, php-format
+#. translators: Payment Link Url.
+#: templates/emails/plain/send-quote.php:20
+#: templates/emails/send-quote.php:41
 msgid "To pay for this order please use the following link: %s"
 msgstr ""
 
-#: templates/emails/send-quote.php:23
-msgid "Pay for order"
-msgstr ""
-
-#: templates/emails/send-quote.php:36
-msgid "Order"
-msgstr ""
-
-#: templates/emails/send-quote.php:42
-msgid "Price"
-msgstr ""
-
 #: templates/emails/plain/send-quote.php:33
-#, php-format
 msgid "Order number: %s"
 msgstr ""
 
 #: templates/emails/plain/send-quote.php:34
-#, php-format
 msgid "Order date: %s"
+msgstr ""
+
+#. translators: Payment Link Url.
+#: templates/emails/send-quote.php:41
+msgid "Pay for order"
+msgstr ""
+
+#: templates/emails/send-quote.php:57
+msgid "Order"
+msgstr ""
+
+#: templates/emails/send-quote.php:63
+msgid "Price"
 msgstr ""
