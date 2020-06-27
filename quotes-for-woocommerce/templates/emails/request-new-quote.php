@@ -7,7 +7,7 @@
 
 $order_obj = new WC_order( $order->order_id );
 // translators: Billing Name.
-$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quotes-for-woocommerce' );
 ?>
 
 <?php do_action( 'woocommerce_email_header', $email_heading ); ?>
@@ -23,9 +23,9 @@ if ( $order && $billing_first_name && $billing_last_name ) :
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quote-wc' ); ?></th>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quote-wc' ); ?></th>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product Price', 'quote-wc' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quotes-for-woocommerce' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quotes-for-woocommerce' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product Price', 'quotes-for-woocommerce' ); ?></th>
 
 		</tr>
 		<?php
@@ -42,12 +42,12 @@ if ( $order && $billing_first_name && $billing_last_name ) :
 	</tbody>
 </table>
 
-<p><?php esc_html_e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
+<p><?php esc_html_e( 'This order is awaiting a quote.', 'quotes-for-woocommerce' ); ?></p>
 
 <p>
 	<?php
 	// translators: Admin Url for payment.
-	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), esc_url( admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) ) ) );
+	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quotes-for-woocommerce' ), esc_url( admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) ) ) );
 	?>
 </p>
 <?php do_action( 'woocommerce_email_customer_details', $order_obj, $sent_to_admin, $plain_text, $email ); ?>

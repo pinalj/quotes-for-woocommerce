@@ -17,7 +17,7 @@ if ( $order_obj ) :
 	<p>
 		<?php
 		// translators: Billing First Name.
-		echo sprintf( esc_html__( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) );
+		echo sprintf( esc_html__( 'Hello %s', 'quotes-for-woocommerce' ), esc_attr( $billing_first_name ) );
 		?>
 	</p>
 <?php endif; ?>
@@ -25,7 +25,7 @@ if ( $order_obj ) :
 <p>
 	<?php
 	// translators: Site Name.
-	echo sprintf( esc_html__( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order->blogname ) );
+	echo sprintf( esc_html__( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quotes-for-woocommerce' ), esc_attr( $order->blogname ) );
 	?>
 </p>
 
@@ -38,7 +38,7 @@ if ( $order_obj ) :
 		<p>
 			<?php
 			// translators: Payment Link Url.
-			echo sprintf( esc_html__( 'To pay for this order please use the following link: %s', 'quote-wc' ), '<a href="' . esc_url( $order_obj->get_checkout_payment_url() ) . '">' . esc_html__( 'Pay for order', 'quote-wc' ) . '</a>' );
+			echo sprintf( esc_html__( 'To pay for this order please use the following link: %s', 'quotes-for-woocommerce' ), '<a href="' . esc_url( $order_obj->get_checkout_payment_url() ) . '">' . esc_html__( 'Pay for order', 'quotes-for-woocommerce' ) . '</a>' );
 			?>
 		</p>
 	<?php endif; ?>
@@ -54,13 +54,13 @@ if ( $order_obj ) :
 		$order_date = date( 'Y-m-d H:i:s', $post_date ); //phpcs:ignore
 	}
 	?>
-	<h2><?php echo esc_html__( 'Order', 'quote-wc' ) . ': ' . esc_html( $order_obj->get_order_number() ); ?> (<?php printf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( $order_date ) ), date_i18n( wc_date_format(), strtotime( $order_date ) ) ); // phpcs:ignore ?>)</h2>
+	<h2><?php echo esc_html__( 'Order', 'quotes-for-woocommerce' ) . ': ' . esc_html( $order_obj->get_order_number() ); ?> (<?php printf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( $order_date ) ), date_i18n( wc_date_format(), strtotime( $order_date ) ) ); // phpcs:ignore ?>)</h2>
 	<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 		<thead>
 			<tr>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quote-wc' ); ?></th>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quote-wc' ); ?></th>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Price', 'quote-wc' ); ?></th>
+				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quotes-for-woocommerce' ); ?></th>
+				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quotes-for-woocommerce' ); ?></th>
+				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Price', 'quotes-for-woocommerce' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>

@@ -37,77 +37,77 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			// First, we register a section. This is necessary since all future options must belong to a section.
 			add_settings_section(
 				'qwc_general_settings_section',                    // ID used to identify this section and with which to register options.
-				__( 'Global Settings', 'quote-wc' ),                      // Title to be displayed on the administration page.
+				__( 'Global Settings', 'quotes-for-woocommerce' ),                      // Title to be displayed on the administration page.
 				array( $this, 'qwc_general_options_callback' ),    // Callback used to render the description of the section.
 				'qwc_bulk_page'                                         // Page on which to add this section of options.
 			);
 
 			add_settings_field(
 				'qwc_enable_global_quote',
-				__( 'Enable Quotes:', 'quote-wc' ),
+				__( 'Enable Quotes:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_enable_global_quote_callback' ),
 				'qwc_bulk_page',
 				'qwc_general_settings_section',
-				array( __( 'Select if you wish to enable quotes for all the products.', 'quote-wc' ) )
+				array( __( 'Select if you wish to enable quotes for all the products.', 'quotes-for-woocommerce' ) )
 			);
 
 			add_settings_field(
 				'qwc_enable_global_prices',
-				__( 'Enable Price Display:', 'quote-wc' ),
+				__( 'Enable Price Display:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_enable_global_price_callback' ),
 				'qwc_bulk_page',
 				'qwc_general_settings_section',
-				array( __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quote-wc' ) )
+				array( __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quotes-for-woocommerce' ) )
 			);
 
 			add_settings_section(
 				'qwc_shop_product_settings_section',                    // ID used to identify this section and with which to register options.
-				__( 'Shop & Product Page Settings', 'quote-wc' ),   // Title to be displayed on the administration page.
+				__( 'Shop & Product Page Settings', 'quotes-for-woocommerce' ),   // Title to be displayed on the administration page.
 				array( $this, 'qwc_shop_product_settings_callback' ),    // Callback used to render the description of the section.
 				'qwc_page'                                         // Page on which to add this section of options.
 			);
 
 			add_settings_field(
 				'qwc_add_to_cart_button_text',
-				__( 'Add to Cart button text:', 'quote-wc' ),
+				__( 'Add to Cart button text:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_add_to_cart_button_text_callback' ),
 				'qwc_page',
 				'qwc_shop_product_settings_section',
-				array( __( 'Text that should be displayed on the Add to Cart button for quotable products.', 'quote-wc' ) )
+				array( __( 'Text that should be displayed on the Add to Cart button for quotable products.', 'quotes-for-woocommerce' ) )
 			);
 
 			add_settings_section(
 				'qwc_cart_settings_section',                    // ID used to identify this section and with which to register options.
-				__( 'Cart & Checkout Settings', 'quote-wc' ),   // Title to be displayed on the administration page.
+				__( 'Cart & Checkout Settings', 'quotes-for-woocommerce' ),   // Title to be displayed on the administration page.
 				array( $this, 'qwc_cart_settings_callback' ),   // Callback used to render the description of the section.
 				'qwc_page'                                      // Page on which to add this section of options.
 			);
 
 			add_settings_field(
 				'qwc_place_order_text',
-				__( 'Place Order button text for Quotable Products:', 'quote-wc' ),
+				__( 'Place Order button text for Quotable Products:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_place_order_text_callback' ),
 				'qwc_page',
 				'qwc_cart_settings_section',
-				array( __( 'Place Order button text for Quotable products at Checkout.', 'quote-wc' ) )
+				array( __( 'Place Order button text for Quotable products at Checkout.', 'quotes-for-woocommerce' ) )
 			);
 
 			add_settings_field(
 				'qwc_cart_page_name',
-				__( 'Cart page Name for Quotable Products:', 'quote-wc' ),
+				__( 'Cart page Name for Quotable Products:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_cart_page_name_callback' ),
 				'qwc_page',
 				'qwc_cart_settings_section',
-				array( __( 'Display a custom name for Cart page when cart contains only quotable products.', 'quote-wc' ) )
+				array( __( 'Display a custom name for Cart page when cart contains only quotable products.', 'quotes-for-woocommerce' ) )
 			);
 
 			add_settings_field(
 				'qwc_hide_address_fields',
-				__( 'Hide Address fields at Checkout:', 'quote-wc' ),
+				__( 'Hide Address fields at Checkout:', 'quotes-for-woocommerce' ),
 				array( $this, 'qwc_hide_address_fields_callback' ),
 				'qwc_page',
 				'qwc_cart_settings_section',
-				array( __( 'Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products.', 'quote-wc' ) )
+				array( __( 'Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products.', 'quotes-for-woocommerce' ) )
 			);
 
 			register_setting(
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 
 			$add_to_cart_button_text = get_option( 'qwc_add_to_cart_button_text', '' );
 
-			$add_to_cart_button_text = '' === $add_to_cart_button_text ? esc_html__( 'Request Quote', 'quote-wc' ) : $add_to_cart_button_text;
+			$add_to_cart_button_text = '' === $add_to_cart_button_text ? esc_html__( 'Request Quote', 'quotes-for-woocommerce' ) : $add_to_cart_button_text;
 
 			echo sprintf(
 				'<input type="text" id="qwc_add_to_cart_button_text" name="qwc_add_to_cart_button_text" value="%s" />',
@@ -263,7 +263,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			$cart_page_name = get_option( 'qwc_cart_page_name', '' );
 
 			if ( '' === $cart_page_name ) {
-				$cart_page_name = esc_html__( 'Cart', 'quote-wc' );
+				$cart_page_name = esc_html__( 'Cart', 'quotes-for-woocommerce' );
 			}
 			echo sprintf(
 				'<input type="text" id="qwc_cart_page_name" name="qwc_cart_page_name" value="%s" />',
@@ -283,7 +283,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			$place_order_button_text = get_option( 'qwc_place_order_text', '' );
 
 			if ( '' === $place_order_button_text ) {
-				$place_order_button_text = esc_html__( 'Request Quote', 'quote-wc' );
+				$place_order_button_text = esc_html__( 'Request Quote', 'quotes-for-woocommerce' );
 			}
 			echo sprintf(
 				'<input type="text" id="qwc_place_order_text" name="qwc_place_order_text" value="%s" />',

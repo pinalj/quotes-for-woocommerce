@@ -24,9 +24,9 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->id                = 'quotes-gateway';
 			$this->icon              = '';
 			$this->has_fields        = false;
-			$this->method_title      = __( 'Ask for Quote', 'quote-wc' );
+			$this->method_title      = __( 'Ask for Quote', 'quotes-for-woocommerce' );
 			$this->title             = $this->method_title;
-			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_place_order_text' );
+			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quotes-for-woocommerce' ) : get_option( 'qwc_place_order_text' );
 
 			// Actions.
 			add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
@@ -36,12 +36,12 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		 * Admin Settings.
 		 */
 		public function admin_options() {
-			$title = ( ! empty( $this->method_title ) ) ? $this->method_title : esc_html__( 'Settings', 'quote-wc' );
+			$title = ( ! empty( $this->method_title ) ) ? $this->method_title : esc_html__( 'Settings', 'quotes-for-woocommerce' );
 
 			echo '<h3>' . esc_attr( $title ) . '</h3>';
 
-			echo '<p>' . esc_html__( 'This is fictitious payment method used for quotes.', 'quote-wc' ) . '</p>';
-			echo '<p>' . esc_html__( 'This gateway requires no configuration.', 'quote-wc' ) . '</p>';
+			echo '<p>' . esc_html__( 'This is fictitious payment method used for quotes.', 'quotes-for-woocommerce' ) . '</p>';
+			echo '<p>' . esc_html__( 'This gateway requires no configuration.', 'quotes-for-woocommerce' ) . '</p>';
 
 			// Hides the save button.
 			echo '<style>p.submit input[type="submit"] { display: none }</style>';
@@ -61,7 +61,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			update_post_meta( $order_id, '_qwc_quote', '1' );
 
 			// Add custom order note.
-			$order->add_order_note( esc_html__( 'This order is awaiting quote.', 'quote-wc' ) );
+			$order->add_order_note( esc_html__( 'This order is awaiting quote.', 'quotes-for-woocommerce' ) );
 
 			// Remove cart.
 			WC()->cart->empty_cart();
@@ -82,9 +82,9 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$order = new WC_Order( $order_id );
 
 			if ( 'completed' === $order->get_status() ) {
-				echo '<p>' . esc_html__( 'We have received your order. Thank you.', 'quote-wc' ) . '</p>';
+				echo '<p>' . esc_html__( 'We have received your order. Thank you.', 'quotes-for-woocommerce' ) . '</p>';
 			} else {
-				echo '<p>' . esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' ) . '</p>';
+				echo '<p>' . esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quotes-for-woocommerce' ) . '</p>';
 			}
 		}
 

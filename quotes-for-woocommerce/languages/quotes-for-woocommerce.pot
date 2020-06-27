@@ -2,17 +2,17 @@
 # This file is distributed under the same license as the Quotes for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 1.6.4\n"
+"Project-Id-Version: Quotes for WooCommerce 1.7.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-06-20T16:37:48+00:00\n"
+"POT-Creation-Date: 2020-06-27T01:21:39-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: quote-wc\n"
+"X-Generator: WP-CLI 2.3.0\n"
+"X-Domain: quotes-for-woocommerce\n"
 
 #. Plugin Name of the plugin
 msgid "Quotes for WooCommerce"

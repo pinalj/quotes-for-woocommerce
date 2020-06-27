@@ -20,11 +20,11 @@ class QWC_Request_New_Quote extends WC_Email {
 	public function __construct() {
 
 		$this->id          = 'qwc_req_new_quote';
-		$this->title       = __( 'Request for New Quote', 'quote-wc' );
-		$this->description = __( 'This email is sent to the site admin when a request for a quotation comes through.', 'quote-wc' );
+		$this->title       = __( 'Request for New Quote', 'quotes-for-woocommerce' );
+		$this->description = __( 'This email is sent to the site admin when a request for a quotation comes through.', 'quotes-for-woocommerce' );
 
-		$this->heading = __( 'Quotation Request for #{order_number}', 'quote-wc' );
-		$this->subject = __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
+		$this->heading = __( 'Quotation Request for #{order_number}', 'quotes-for-woocommerce' );
+		$this->subject = __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quotes-for-woocommerce' );
 
 		$this->template_html  = 'emails/request-new-quote.php';
 		$this->template_plain = 'emails/plain/request-new-quote.php';
@@ -91,19 +91,19 @@ class QWC_Request_New_Quote extends WC_Email {
 					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->item_hidden_date ) );
 
 					$this->find[]    = '{order_number}';
-					$this->replace[] = __( 'N/A', 'quote-wc' );
+					$this->replace[] = __( 'N/A', 'quotes-for-woocommerce' );
 
 					$this->find[]    = '{billing_first_name}';
-					$this->replace[] = __( 'N/A', 'quote-wc' );
+					$this->replace[] = __( 'N/A', 'quotes-for-woocommerce' );
 
 					$this->find[]    = '{billing_last_name}';
-					$this->replace[] = __( 'N/A', 'quote-wc' );
+					$this->replace[] = __( 'N/A', 'quotes-for-woocommerce' );
 
 					$this->find[]    = '{billing_email}';
-					$this->replace[] = __( 'N/A', 'quote-wc' );
+					$this->replace[] = __( 'N/A', 'quotes-for-woocommerce' );
 
 					$this->find[]    = '{billing_phone}';
-					$this->replace[] = __( 'N/A', 'quote-wc' );
+					$this->replace[] = __( 'N/A', 'quotes-for-woocommerce' );
 				}
 
 				$this->find[]    = '{blogname}';
@@ -202,7 +202,7 @@ class QWC_Request_New_Quote extends WC_Email {
 	 * Default Email Subject.
 	 */
 	public function get_default_subject() {
-		return __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
+		return __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quotes-for-woocommerce' );
 
 	}
 
@@ -210,7 +210,7 @@ class QWC_Request_New_Quote extends WC_Email {
 	 * Default Email Heading.
 	 */
 	public function get_default_heading() {
-		return __( 'Quotation Request for #{order_number}', 'quote-wc' );
+		return __( 'Quotation Request for #{order_number}', 'quotes-for-woocommerce' );
 	}
 
 	/**
@@ -219,44 +219,44 @@ class QWC_Request_New_Quote extends WC_Email {
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled'    => array(
-				'title'   => __( 'Enable/Disable', 'quote-wc' ),
+				'title'   => __( 'Enable/Disable', 'quotes-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable this email notification', 'quote-wc' ),
+				'label'   => __( 'Enable this email notification', 'quotes-for-woocommerce' ),
 				'default' => 'yes',
 			),
 			'recipient'  => array(
-				'title'       => __( 'Recipient', 'quote-wc' ),
+				'title'       => __( 'Recipient', 'quotes-for-woocommerce' ),
 				'type'        => 'text',
 				// translators: Email recipients.
-				'description' => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to %s', 'quote-wc' ), get_option( 'admin_email' ) ),
+				'description' => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to %s', 'quotes-for-woocommerce' ), get_option( 'admin_email' ) ),
 				'default'     => get_option( 'admin_email' ),
 			),
 			'subject'    => array(
-				'title'       => __( 'Subject', 'quote-wc' ),
+				'title'       => __( 'Subject', 'quotes-for-woocommerce' ),
 				'type'        => 'text',
 				// translators: Email Subject.
-				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'quote-wc' ), $this->subject ),
+				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'quotes-for-woocommerce' ), $this->subject ),
 				'placeholder' => '',
 				'default'     => '',
 			),
 			'heading'    => array(
-				'title'       => __( 'Email Heading', 'quote-wc' ),
+				'title'       => __( 'Email Heading', 'quotes-for-woocommerce' ),
 				'type'        => 'text',
 				// translators: Email Heading.
-				'description' => sprintf( __( 'This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>.', 'quote-wc' ), $this->heading ),
+				'description' => sprintf( __( 'This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>.', 'quotes-for-woocommerce' ), $this->heading ),
 				'placeholder' => '',
 				'default'     => '',
 			),
 			'email_type' => array(
-				'title'       => __( 'Email type', 'quote-wc' ),
+				'title'       => __( 'Email type', 'quotes-for-woocommerce' ),
 				'type'        => 'select',
-				'description' => __( 'Choose which format of email to send.', 'quote-wc' ),
+				'description' => __( 'Choose which format of email to send.', 'quotes-for-woocommerce' ),
 				'default'     => 'html',
 				'class'       => 'email_type',
 				'options'     => array(
-					'plain'     => __( 'Plain text', 'quote-wc' ),
-					'html'      => __( 'HTML', 'quote-wc' ),
-					'multipart' => __( 'Multipart', 'quote-wc' ),
+					'plain'     => __( 'Plain text', 'quotes-for-woocommerce' ),
+					'html'      => __( 'HTML', 'quotes-for-woocommerce' ),
+					'multipart' => __( 'Multipart', 'quotes-for-woocommerce' ),
 				),
 			),
 		);
