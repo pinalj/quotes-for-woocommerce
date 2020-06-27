@@ -9,7 +9,7 @@ $order_obj     = new WC_order( $order->order_id );
 $display_price = false;
 
 // translators: Site Name.
-$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quotes-for-woocommerce' );
 ?>
 
 <?php do_action( 'woocommerce_email_header', $email_heading ); ?>
@@ -23,13 +23,13 @@ if ( $order ) :
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quote-wc' ); ?></th>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quote-wc' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quotes-for-woocommerce' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quotes-for-woocommerce' ); ?></th>
 			<?php
 			if ( qwc_order_display_price( $order_obj ) ) {
 				$display_price = true;
 				?>
-			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product Price', 'quote-wc' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product Price', 'quotes-for-woocommerce' ); ?></th>
 			<?php } ?>
 
 		</tr>
@@ -49,8 +49,8 @@ if ( $order ) :
 	</tbody>
 </table>
 
-<p><?php esc_html_e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
+<p><?php esc_html_e( 'This order is awaiting a quote.', 'quotes-for-woocommerce' ); ?></p>
 
-<p><?php esc_html_e( 'You shall receive a quote email from the site admin soon.', 'quote-wc' ); ?></p>
+<p><?php esc_html_e( 'You shall receive a quote email from the site admin soon.', 'quotes-for-woocommerce' ); ?></p>
 
 <?php do_action( 'woocommerce_email_footer' ); ?>

@@ -8,16 +8,16 @@ do_action( 'woocommerce_email_header', $email_heading );
 $order_obj = new WC_order( $order->order_id );
 if ( $order ) : 
     $billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order_obj->billing_first_name : $order_obj->get_billing_first_name();
-    echo sprintf( __( 'Hello %s', 'quote-wc' ), $billing_first_name ) . "\n\n";
+    echo sprintf( __( 'Hello %s', 'quotes-for-woocommerce' ), $billing_first_name ) . "\n\n";
 endif;
 
-echo sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), $order->blogname );
+echo sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quotes-for-woocommerce' ), $order->blogname );
 
 if ( $order_obj ) :
 
     $order_status = $order_obj->get_status(); 
 	if ( $order_status == 'pending' ) :
-        echo sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), $order_obj->get_checkout_payment_url() );
+        echo sprintf( __( 'To pay for this order please use the following link: %s', 'quotes-for-woocommerce' ), $order_obj->get_checkout_payment_url() );
 	endif;
 
 	do_action( 'woocommerce_email_before_order_table', $order_obj, $sent_to_admin, $plain_text, $email );
@@ -30,8 +30,8 @@ if ( $order_obj ) :
         $post_date = strtotime ( $order_post->post_date );
         $order_date = date( 'Y-m-d H:i:s', $post_date );
     }
-    echo sprintf( __( 'Order number: %s', 'quote-wc'), $order_obj->get_order_number() ) . "\n";
-    echo sprintf( __( 'Order date: %s', 'quote-wc'), date_i18n( wc_date_format(), strtotime( $order_date ) ) ) . "\n";
+    echo sprintf( __( 'Order number: %s', 'quotes-for-woocommerce'), $order_obj->get_order_number() ) . "\n";
+    echo sprintf( __( 'Order date: %s', 'quotes-for-woocommerce'), date_i18n( wc_date_format(), strtotime( $order_date ) ) ) . "\n";
     
 	do_action( 'woocommerce_email_order_meta', $order_obj, $sent_to_admin, $plain_text );
 

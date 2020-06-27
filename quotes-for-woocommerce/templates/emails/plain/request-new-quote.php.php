@@ -4,7 +4,7 @@
  */
 $order_obj = new WC_order( $order->order_id );
 
-$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quotes-for-woocommerce' );
 
 do_action( 'woocommerce_email_header', $email_heading );
 
@@ -15,9 +15,9 @@ if ( $order_obj && $billing_first_name && $billing_last_name ) :
 endif;
 
 if ( $order_obj ) {
-    echo sprintf( __( 'Product', 'quote-wc' ) );
-    echo sprintf( __( 'Quantity', 'quote-wc' ) );
-    echo sprintf( __( 'Product Price', 'quote-wc' ) );
+    echo sprintf( __( 'Product', 'quotes-for-woocommerce' ) );
+    echo sprintf( __( 'Quantity', 'quotes-for-woocommerce' ) );
+    echo sprintf( __( 'Product Price', 'quotes-for-woocommerce' ) );
 
     echo "\n";
 			
@@ -30,9 +30,9 @@ if ( $order_obj ) {
             
 	} 
 	
-    echo sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) );
+    echo sprintf( __( 'This order is awaiting a quote.', 'quotes-for-woocommerce' ) );
     
-    echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) );
+    echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quotes-for-woocommerce' ), admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) );
     
     do_action( 'woocommerce_email_footer' );
 }

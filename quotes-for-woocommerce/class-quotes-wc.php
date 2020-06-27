@@ -5,7 +5,7 @@
  * @package Quotes For WooCommerce
  */
 
-load_plugin_textdomain( 'quote-wc', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_plugin_textdomain( 'quotes-for-woocommerce', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 if ( ! class_exists( 'Quotes_WC' ) ) {
 
@@ -155,8 +155,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				woocommerce_wp_checkbox(
 					array(
 						'id'          => 'qwc_enable_quotes',
-						'label'       => __( 'Enable Quotes', 'quote-wc' ),
-						'description' => __( 'Enable this to allow customers to ask for a quote for the product.', 'quote-wc' ),
+						'label'       => __( 'Enable Quotes', 'quotes-for-woocommerce' ),
+						'description' => __( 'Enable this to allow customers to ask for a quote for the product.', 'quotes-for-woocommerce' ),
 						'value'       => $quotes_checked,
 					)
 				);
@@ -167,8 +167,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				woocommerce_wp_checkbox(
 					array(
 						'id'          => 'qwc_display_prices',
-						'label'       => __( 'Display Product Price', 'quote-wc' ),
-						'description' => __( 'Enable this to display the product price on the Shop & Product pages.', 'quote-wc' ),
+						'label'       => __( 'Display Product Price', 'quotes-for-woocommerce' ),
+						'description' => __( 'Enable this to display the product price on the Shop & Product pages.', 'quotes-for-woocommerce' ),
 						'value'       => $prices_enabled,
 					)
 				);
@@ -248,7 +248,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$enable_quote = product_quote_enabled( $post_id );
 
 			if ( $enable_quote ) {
-				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
+				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quotes-for-woocommerce' ) : get_option( 'qwc_add_to_cart_button_text' );
 			}
 
 			return $cart_text;
@@ -360,7 +360,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					array(
 						'ajax_url'  => $ajax_url,
 						'order_id'  => $post->ID,
-						'email_msg' => __( 'Quote emailed.', 'quote-wc' ),
+						'email_msg' => __( 'Quote emailed.', 'quotes-for-woocommerce' ),
 					)
 				);
 				wp_enqueue_script( 'qwc-admin' );
@@ -465,7 +465,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					// Remove existing products.
 					WC()->cart->empty_cart();
 
-					wc_add_notice( __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quote-wc' ), $notice_type = 'notice' );
+					wc_add_notice( __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quotes-for-woocommerce' ), $notice_type = 'notice' );
 				}
 			}
 
@@ -612,13 +612,13 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			if ( 'pending' === $order_status ) {
 				if ( 'quote-pending' === $quote_status ) {
 					?>
-					<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quote-wc' ); ?></button>
+					<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quotes-for-woocommerce' ); ?></button>
 					<?php
 				} else {
 					if ( 'quote-complete' === $quote_status ) {
-						$button_text = esc_html__( 'Send Quote', 'quote-wc' );
+						$button_text = esc_html__( 'Send Quote', 'quotes-for-woocommerce' );
 					} elseif ( 'quote-sent' === $quote_status ) {
-						$button_text = esc_html__( 'Resend Quote', 'quote-wc' );
+						$button_text = esc_html__( 'Resend Quote', 'quotes-for-woocommerce' );
 					}
 					?>
 					<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
@@ -643,7 +643,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Add order note that quote has been completed.
 			$order = new WC_Order( $order_id );
-			$order->add_order_note( __( 'Quote Complete.', 'quote-wc' ) );
+			$order->add_order_note( __( 'Quote Complete.', 'quotes-for-woocommerce' ) );
 			die();
 		}
 
@@ -697,7 +697,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_admin_menu() {
 
 			add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array( &$this, 'qwc_settings' ) );
-			$page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings', array( &$this, 'qwc_settings' ) );
+			$page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quotes-for-woocommerce' ), __( 'Settings', 'quotes-for-woocommerce' ), 'manage_woocommerce', 'quote_settings', array( &$this, 'qwc_settings' ) );
 			remove_submenu_page( 'qwc_settings', 'qwc_settings' );
 
 		}
@@ -713,7 +713,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				global $wpdb;
 				// Check the user capabilities.
 				if ( ! current_user_can( 'manage_woocommerce' ) ) {
-					wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'quote-wc' ) );
+					wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'quotes-for-woocommerce' ) );
 				}
 
 				?>
@@ -748,7 +748,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function add_to_cart_message( $message, $products ) {
 			$cart_name = get_option( 'qwc_cart_page_name', '' );
-			$cart_name = '' === $cart_name ? __( 'Cart', 'quote-wc' ) : $cart_name;
+			$cart_name = '' === $cart_name ? __( 'Cart', 'quotes-for-woocommerce' ) : $cart_name;
 
 			if ( is_array( $products ) && count( $products ) > 0 ) {
 				foreach ( $products as $product_id => $value ) {
@@ -776,7 +776,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$cart_name = get_option( 'qwc_cart_page_name' );
 				$cart_name = '' === $cart_name ? 'Cart' : $cart_name; //phpcs:ignore
 
-				$title = esc_attr__( $cart_name, 'quote-wc' ); //phpcs:ignore
+				$title = esc_attr__( $cart_name, 'quotes-for-woocommerce' ); //phpcs:ignore
 			}
 
 			return $title;
@@ -848,7 +848,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public static function qwc_plugin_settings_link( $links ) {
 			$settings_link = array(
-				'settings' => '<a href="admin.php?page=quote_settings">' . __( 'Settings', 'quote-wc' ) . '</a>',
+				'settings' => '<a href="admin.php?page=quote_settings">' . __( 'Settings', 'quotes-for-woocommerce' ) . '</a>',
 			);
 			return array_merge( $settings_link, $links );
 		}
