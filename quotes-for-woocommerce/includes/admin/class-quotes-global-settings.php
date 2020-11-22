@@ -350,7 +350,7 @@ if ( ! class_exists( 'Quotes_Global_Settings' ) ) {
 			// Get the products.
 			$args         = array(
 				'post_type'        => 'product',
-				'numberposts'      => 500, //phpcs:ignore.
+				'numberposts'      => 500, // phpcs:ignore.
 				'suppress_filters' => false,
 				'post_status'      => array( 'publish', 'draft' ),
 				'paged'            => $loop,

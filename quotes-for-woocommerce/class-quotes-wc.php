@@ -857,4 +857,3 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 	} // end of class
 }
 $quotes_wc = new Quotes_WC();
-?>

@@ -93,4 +93,3 @@ if ( $order_obj ) :
 endif;
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
-?>
