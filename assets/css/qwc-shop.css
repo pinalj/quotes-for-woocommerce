@@ -1,0 +1,6 @@
+.site-header-cart .cart-contents .amount {
+    display: none;
+}
+.top-cart .woocommerce-Price-amount {
+    display: none;
+}
