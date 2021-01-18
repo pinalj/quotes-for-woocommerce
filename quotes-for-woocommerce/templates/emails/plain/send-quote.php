@@ -3,7 +3,7 @@
  * Send Quote Email
  */
 
-do_action( 'woocommerce_email_header', $email_heading );
+do_action( 'woocommerce_email_header', $email_heading, $email );
 
 $order_obj = new WC_order( $order->order_id );
 if ( $order ) : 
@@ -93,4 +93,3 @@ if ( $order_obj ) :
 endif;
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
-?>

@@ -7,7 +7,7 @@
 
 ?>
 
-<?php do_action( 'woocommerce_email_header', $email_heading ); ?>
+<?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php
 $order_obj = new WC_order( $order->order_id );

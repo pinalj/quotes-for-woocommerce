@@ -6,7 +6,7 @@ $order_obj = new WC_order( $order->order_id );
 $display_price = false;
 $opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
 
-do_action( 'woocommerce_email_header', $email_heading );
+do_action( 'woocommerce_email_header', $email_heading, $email );
 
 if( $order ) {
 	echo sprintf( $opening_paragraph, $site_name );

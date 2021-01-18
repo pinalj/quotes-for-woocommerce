@@ -609,7 +609,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			$quote_status = get_post_meta( $order_id, '_quote_status', true );
 
-			if ( 'pending' === $order_status ) {
+			if ( in_array( $order_status, apply_filters( 'qwc_edit_allowed_order_statuses_for_sending_quotes', array( 'pending' ) ), true ) ) {
 				if ( 'quote-pending' === $quote_status ) {
 					?>
 					<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quote-wc' ); ?></button>
@@ -857,4 +857,3 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 	} // end of class
 }
 $quotes_wc = new Quotes_WC();
-?>

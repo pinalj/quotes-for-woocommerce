@@ -10,7 +10,7 @@ $order_obj = new WC_order( $order->order_id );
 $opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
 ?>
 
-<?php do_action( 'woocommerce_email_header', $email_heading ); ?>
+<?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php
 $billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order_obj->billing_first_name : $order_obj->get_billing_first_name();
