@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.6.3';
+		public $version = '1.7.1';
 
 		/**
 		 * Construct.
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_activate() {
-			update_option( 'quotes_for_wc', '1.7.0' );
+			update_option( 'quotes_for_wc', '1.7.1' );
 		}
 
 		/**
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_update_db_check() {
-			update_option( 'quotes_for_wc', '1.7.0' );
+			update_option( 'quotes_for_wc', '1.7.1' );
 		}
 
 		/**
