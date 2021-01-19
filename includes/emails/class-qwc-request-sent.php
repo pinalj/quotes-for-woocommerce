@@ -27,8 +27,8 @@ class QWC_Request_Sent extends WC_Email {
 		$this->heading = __( 'Quotation Request Sent for #{order_number}', 'quote-wc' );
 		$this->subject = __( '[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}', 'quote-wc' );
 
-		$this->template_html  = 'emails/new-request-sent-customer.php';
-		$this->template_plain = 'emails/plain/new-request-sent-customer.php';
+		$this->template_html  = 'emails/new-quote-request-sent-customer.php';
+		$this->template_plain = 'emails/plain/new-quote-request-sent-customer.php';
 
 		// Triggers for this email.
 		add_action( 'qwc_request_sent_notification', array( $this, 'trigger' ) );
