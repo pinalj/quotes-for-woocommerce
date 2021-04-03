@@ -1,0 +1,467 @@
+# Copyright (C) 2021 Pinal Shah
+# This file is distributed under the same license as the Quotes for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quotes for WooCommerce 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-"
+"woocommerce\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-01-18T16:50:57+00:00\n"
+"PO-Revision-Date: 2021-01-28 11:17+0100\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Domain: quote-wc\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#. Plugin Name of the plugin
+msgid "Quotes for WooCommerce"
+msgstr "Offertes voor WooCommerce"
+
+#. Description of the plugin
+msgid ""
+"This plugin allows you to convert your WooCommerce store into a quote only "
+"store. It will hide the prices for the products and not take any payment at "
+"Checkout. You can then setup prices for the items in the order and send a "
+"notification to the Customer."
+msgstr ""
+"Met deze plug-in u uw WooCommerce-winkel ombouwen tot een offertewinkel. Het "
+"zal de prijzen voor de producten verbergen en geen betaling bij het Checkout "
+"aannemen. U vervolgens prijzen instellen voor de artikelen in de bestelling "
+"en een melding naar de klant sturen."
+
+#. Author of the plugin
+msgid "Pinal Shah"
+msgstr "Pinal Shah"
+
+#: class-quotes-wc.php:158
+msgid "Enable Quotes"
+msgstr "Offertes inschakelen"
+
+#: class-quotes-wc.php:159
+msgid "Enable this to allow customers to ask for a quote for the product."
+msgstr ""
+"Schakel dit in om klanten in staat te stellen om een offerte voor het "
+"product te vragen."
+
+#: class-quotes-wc.php:170
+msgid "Display Product Price"
+msgstr "Productprijs weergeven"
+
+#: class-quotes-wc.php:171
+msgid "Enable this to display the product price on the Shop & Product pages."
+msgstr "Maak hiermee de productprijs weer op de Shop & Product pagina's."
+
+#: class-quotes-wc.php:251 includes/admin/class-quotes-global-settings.php:239
+#: includes/admin/class-quotes-global-settings.php:286
+#: includes/class-quotes-payment-gateway.php:29
+msgid "Request Quote"
+msgstr "Offerteaanvraag"
+
+#: class-quotes-wc.php:363
+msgid "Quote emailed."
+msgstr "Offerte gemaild."
+
+#: class-quotes-wc.php:468
+msgid ""
+"It is not possible to add products that require quotes to the Cart along "
+"with ones that do not. Hence, the existing products have been removed from "
+"the Cart."
+msgstr ""
+"Het is niet mogelijk om producten toe te voegen waarvoor offertes nodig "
+"zijn, samen met producten die dat niet doen. Daarom zijn de bestaande "
+"producten uit de winkelwagen verwijderd."
+
+#: class-quotes-wc.php:615
+msgid "Quote Complete"
+msgstr "Offerte compleet"
+
+#: class-quotes-wc.php:619 includes/emails/class-qwc-send-quote.php:23
+msgid "Send Quote"
+msgstr "Stuur een offerte"
+
+#: class-quotes-wc.php:621
+msgid "Resend Quote"
+msgstr "Stuur de offerte opnieuw"
+
+#: class-quotes-wc.php:646
+msgid "Quote Complete."
+msgstr "Offerte compleet"
+
+#: class-quotes-wc.php:700 class-quotes-wc.php:851
+#: includes/class-quotes-payment-gateway.php:39
+msgid "Settings"
+msgstr "Instellingen"
+
+#: class-quotes-wc.php:716
+msgid "You do not have sufficient permissions to access this page."
+msgstr "U heeft niet voldoende rechten om deze pagina te openen."
+
+#: class-quotes-wc.php:751 includes/admin/class-quotes-global-settings.php:266
+msgid "Cart"
+msgstr "Winkelwagen"
+
+#: includes/admin/class-quotes-global-settings.php:40
+msgid "Global Settings"
+msgstr "Algemene instellingen"
+
+#: includes/admin/class-quotes-global-settings.php:47
+msgid "Enable Quotes:"
+msgstr "Offertes inschakelen:"
+
+#: includes/admin/class-quotes-global-settings.php:51
+msgid "Select if you wish to enable quotes for all the products."
+msgstr "Selecteer of u offertes voor alle producten wilt inschakelen."
+
+#: includes/admin/class-quotes-global-settings.php:56
+msgid "Enable Price Display:"
+msgstr "Prijsweergave inschakelen:"
+
+#: includes/admin/class-quotes-global-settings.php:60
+msgid ""
+"Select to display the product price on the Shop & Product pages for all "
+"quotable products."
+msgstr ""
+"Selecteer om de productprijs weer te geven op de Shop & Product-pagina's "
+"voor alle aan te bieden producten."
+
+#: includes/admin/class-quotes-global-settings.php:65
+msgid "Shop & Product Page Settings"
+msgstr "Winkel- en productpagina-instellingen"
+
+#: includes/admin/class-quotes-global-settings.php:72
+msgid "Add to Cart button text:"
+msgstr "Tekst van knop Toevoegen aan winkelwagen:"
+
+#: includes/admin/class-quotes-global-settings.php:76
+msgid ""
+"Text that should be displayed on the Add to Cart button for quotable "
+"products."
+msgstr ""
+"Tekst die moet worden weergegeven op de knop Toevoegen aan winkelwagen voor "
+"producten waarvoor een offerte kan worden ingediend."
+
+#: includes/admin/class-quotes-global-settings.php:81
+msgid "Cart & Checkout Settings"
+msgstr "Instellingen voor winkelwagen en afrekenen"
+
+#: includes/admin/class-quotes-global-settings.php:88
+msgid "Place Order button text for Quotable Products:"
+msgstr "Tekst van de knop Bestelling plaatsen voor offerte producten:"
+
+#: includes/admin/class-quotes-global-settings.php:92
+msgid "Place Order button text for Quotable products at Checkout."
+msgstr ""
+"Plaats de tekst van de knop Bestelling voor offerte producten bij het "
+"afrekenen."
+
+#: includes/admin/class-quotes-global-settings.php:97
+msgid "Cart page Name for Quotable Products:"
+msgstr "Naam winkelwagenpagina voor offerte producten:"
+
+#: includes/admin/class-quotes-global-settings.php:101
+msgid ""
+"Display a custom name for Cart page when cart contains only quotable "
+"products."
+msgstr ""
+"Geef een aangepaste naam weer voor de winkelwagenpagina als de winkelwagen "
+"alleen producten bevat die aan te bieden zijn."
+
+#: includes/admin/class-quotes-global-settings.php:106
+msgid "Hide Address fields at Checkout:"
+msgstr "Verberg adresvelden bij het afrekenen:"
+
+#: includes/admin/class-quotes-global-settings.php:110
+msgid ""
+"Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
+"quotable products."
+msgstr ""
+"Verberg de velden voor factuur- en verzendadres bij het afrekenen als de "
+"winkelwagen alleen producten bevat die kunnen worden geciteerd."
+
+#: includes/class-quotes-payment-gateway.php:27
+msgid "Ask for Quote"
+msgstr "Vraag een offerte aan"
+
+#: includes/class-quotes-payment-gateway.php:43
+msgid "This is fictitious payment method used for quotes."
+msgstr "Dit is een fictieve betalingsmethode die wordt gebruikt voor offertes."
+
+#: includes/class-quotes-payment-gateway.php:44
+msgid "This gateway requires no configuration."
+msgstr "Deze gateway vereist geen configuratie."
+
+#: includes/class-quotes-payment-gateway.php:64
+msgid "This order is awaiting quote."
+msgstr "Deze bestelling wacht op offerte."
+
+#: includes/class-quotes-payment-gateway.php:85
+msgid "We have received your order. Thank you."
+msgstr "We hebben je bestelling ontvangen. Dank je."
+
+#: includes/class-quotes-payment-gateway.php:87
+msgid ""
+"We have received your request for a quote. You will be notified via email "
+"soon."
+msgstr ""
+"We hebben uw aanvraag voor een offerte ontvangen. U ontvangt binnenkort een "
+"e-mail."
+
+#: includes/emails/class-qwc-request-new-quote.php:23
+msgid "Request for New Quote"
+msgstr "Verzoek om nieuwe offerte"
+
+#: includes/emails/class-qwc-request-new-quote.php:24
+msgid ""
+"This email is sent to the site admin when a request for a quotation comes "
+"through."
+msgstr ""
+"Deze e-mail wordt naar de sitebeheerder gestuurd wanneer er een "
+"offerteaanvraag binnenkomt."
+
+#: includes/emails/class-qwc-request-new-quote.php:26
+#: includes/emails/class-qwc-request-new-quote.php:213
+msgid "Quotation Request for #{order_number}"
+msgstr "Offerte aanvraag voor #{order_number}"
+
+#: includes/emails/class-qwc-request-new-quote.php:27
+#: includes/emails/class-qwc-request-new-quote.php:205
+msgid "[{blogname}] Quotation Request (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Offerte aanvraag (Bestelling {order_number}) - {order_date}"
+
+#: includes/emails/class-qwc-request-new-quote.php:94
+#: includes/emails/class-qwc-request-new-quote.php:97
+#: includes/emails/class-qwc-request-new-quote.php:100
+#: includes/emails/class-qwc-request-new-quote.php:103
+#: includes/emails/class-qwc-request-new-quote.php:106
+#: includes/emails/class-qwc-request-sent.php:83
+#: includes/emails/class-qwc-send-quote.php:83
+msgid "N/A"
+msgstr "N/A"
+
+#: includes/emails/class-qwc-request-new-quote.php:222
+#: includes/emails/class-qwc-request-sent.php:191
+#: includes/emails/class-qwc-send-quote.php:189
+msgid "Enable/Disable"
+msgstr "Inschakelen / uitschakelen"
+
+#: includes/emails/class-qwc-request-new-quote.php:224
+#: includes/emails/class-qwc-request-sent.php:193
+#: includes/emails/class-qwc-send-quote.php:191
+msgid "Enable this email notification"
+msgstr "Schakel deze e-mailmelding in"
+
+#: includes/emails/class-qwc-request-new-quote.php:228
+msgid "Recipient"
+msgstr "Ontvanger"
+
+#. translators: Email recipients.
+#: includes/emails/class-qwc-request-new-quote.php:231
+msgid "Enter recipients (comma separated) for this email. Defaults to %s"
+msgstr "Enter recipients (comma separated) for this email. Defaults to %s"
+
+#: includes/emails/class-qwc-request-new-quote.php:235
+#: includes/emails/class-qwc-request-sent.php:197
+#: includes/emails/class-qwc-send-quote.php:195
+msgid "Subject"
+msgstr "Onderwerp"
+
+#. translators: Email Subject.
+#: includes/emails/class-qwc-request-new-quote.php:238
+#: includes/emails/class-qwc-request-sent.php:200
+#: includes/emails/class-qwc-send-quote.php:198
+msgid ""
+"This controls the email subject line. Leave blank to use the default "
+"subject: <code>%s</code>."
+msgstr ""
+"Dit bepaalt de onderwerpregel van de e-mail. Laat leeg om het "
+"standaardonderwerp te gebruiken: <code>%s</code>."
+
+#: includes/emails/class-qwc-request-new-quote.php:243
+#: includes/emails/class-qwc-request-sent.php:205
+#: includes/emails/class-qwc-send-quote.php:203
+msgid "Email Heading"
+msgstr "E-mailkop"
+
+#. translators: Email Heading.
+#: includes/emails/class-qwc-request-new-quote.php:246
+#: includes/emails/class-qwc-request-sent.php:208
+#: includes/emails/class-qwc-send-quote.php:206
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: <code>%s</code>."
+msgstr ""
+"Dit bepaalt de hoofdkop in de e-mailmelding. Laat leeg om de standaardkop te "
+"gebruiken: <code>%s</code>."
+
+#: includes/emails/class-qwc-request-new-quote.php:251
+#: includes/emails/class-qwc-request-sent.php:213
+#: includes/emails/class-qwc-send-quote.php:211
+msgid "Email type"
+msgstr "E-mail type"
+
+#: includes/emails/class-qwc-request-new-quote.php:253
+#: includes/emails/class-qwc-request-sent.php:215
+#: includes/emails/class-qwc-send-quote.php:213
+msgid "Choose which format of email to send."
+msgstr "Kies welk formaat e-mail u wilt verzenden."
+
+#: includes/emails/class-qwc-request-new-quote.php:257
+#: includes/emails/class-qwc-request-sent.php:219
+#: includes/emails/class-qwc-send-quote.php:217
+msgid "Plain text"
+msgstr "Tekst"
+
+#: includes/emails/class-qwc-request-new-quote.php:258
+#: includes/emails/class-qwc-request-sent.php:220
+#: includes/emails/class-qwc-send-quote.php:218
+msgid "HTML"
+msgstr "HTML"
+
+#: includes/emails/class-qwc-request-new-quote.php:259
+#: includes/emails/class-qwc-request-sent.php:221
+#: includes/emails/class-qwc-send-quote.php:219
+msgid "Multipart"
+msgstr "Meerdelig"
+
+#: includes/emails/class-qwc-request-sent.php:24
+msgid "New Quote Request Sent"
+msgstr "Nieuw offerteaanvraag verzonden"
+
+#: includes/emails/class-qwc-request-sent.php:25
+msgid "This email is sent to the customer when a quote request is raised"
+msgstr ""
+"Deze e-mail wordt naar de klant gestuurd wanneer een offerteaanvraag wordt "
+"ingediend"
+
+#: includes/emails/class-qwc-request-sent.php:27
+#: includes/emails/class-qwc-request-sent.php:182
+msgid "Quotation Request Sent for #{order_number}"
+msgstr "Offerte aanvraag verzonden voor #{order_number}"
+
+#: includes/emails/class-qwc-request-sent.php:28
+#: includes/emails/class-qwc-request-sent.php:175
+msgid ""
+"[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Offerte aanvraag gestuurd (Bestelling {order_number}) - "
+"{order_date}"
+
+#: includes/emails/class-qwc-send-quote.php:24
+msgid "This email is sent to Customers for orders that need quotations."
+msgstr ""
+"Deze e-mail wordt naar klanten gestuurd voor bestellingen die een offerte "
+"nodig hebben."
+
+#: includes/emails/class-qwc-send-quote.php:26
+#: includes/emails/class-qwc-send-quote.php:180
+msgid "Quote for #{order_number}"
+msgstr "Offerte voor #{order_number}"
+
+#: includes/emails/class-qwc-send-quote.php:27
+#: includes/emails/class-qwc-send-quote.php:173
+msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
+msgstr "[{blogname}] Offerte van (Bestelling {order_number}) - {order_date}"
+
+#. translators: Site Name.
+#: templates/emails/new-request-sent-customer.php:12
+#: templates/emails/plain/new-request-sent-customer.php:7
+msgid ""
+"You have made a request for a quote on %s. The details of the order are as "
+"follows:"
+msgstr ""
+"U heeft een offerte aangevraagd voor %s. De details van de bestelling zijn "
+"als volgt:"
+
+#: templates/emails/new-request-sent-customer.php:26
+#: templates/emails/plain/new-request-sent-customer.php:16
+#: templates/emails/plain/request-new-quote.php.php:18
+#: templates/emails/request-new-quote.php:26 templates/emails/send-quote.php:61
+msgid "Product"
+msgstr "Product"
+
+#: templates/emails/new-request-sent-customer.php:27
+#: templates/emails/plain/new-request-sent-customer.php:17
+#: templates/emails/plain/request-new-quote.php.php:19
+#: templates/emails/request-new-quote.php:27 templates/emails/send-quote.php:62
+msgid "Quantity"
+msgstr "Aantal"
+
+#: templates/emails/new-request-sent-customer.php:32
+#: templates/emails/plain/new-request-sent-customer.php:20
+#: templates/emails/plain/request-new-quote.php.php:20
+#: templates/emails/request-new-quote.php:28
+msgid "Product Price"
+msgstr "Product prijs"
+
+#: templates/emails/new-request-sent-customer.php:52
+#: templates/emails/plain/new-request-sent-customer.php:36
+#: templates/emails/plain/request-new-quote.php.php:33
+#: templates/emails/request-new-quote.php:45
+msgid "This order is awaiting a quote."
+msgstr "Deze bestelling wacht op een offerte."
+
+#: templates/emails/new-request-sent-customer.php:54
+#: templates/emails/plain/new-request-sent-customer.php:38
+msgid "You shall receive a quote email from the site admin soon."
+msgstr "U ontvangt binnenkort een e-mail met een offerte van de sitebeheerder."
+
+#. translators: Billing Name.
+#: templates/emails/plain/request-new-quote.php.php:7
+#: templates/emails/request-new-quote.php:10
+msgid ""
+"A request for quote has been made by %s and is awaiting your attention. The "
+"details of the order are as follows:"
+msgstr ""
+"Een offerteaanvraag is gedaan door %s en wacht op uw aandacht. De details "
+"van de bestelling zijn als volgt:"
+
+#. translators: Admin Url for payment.
+#: templates/emails/plain/request-new-quote.php.php:35
+#: templates/emails/request-new-quote.php:50
+msgid "You can view and edit this order in the dashboard here: %s"
+msgstr "U kunt deze bestelling hier in het dashboard bekijken en bewerken: %s"
+
+#. translators: Billing First Name.
+#: templates/emails/plain/send-quote.php:11 templates/emails/send-quote.php:20
+msgid "Hello %s"
+msgstr "Hallo %s"
+
+#. translators: Site Name.
+#: templates/emails/plain/send-quote.php:14 templates/emails/send-quote.php:28
+msgid ""
+"You have received a quotation for your order on %s. The details of the same "
+"are shown below."
+msgstr ""
+"U heeft een offerte ontvangen voor uw bestelling op %s. De details hiervan "
+"worden hieronder getoond."
+
+#. translators: Payment Link Url.
+#: templates/emails/plain/send-quote.php:20 templates/emails/send-quote.php:41
+msgid "To pay for this order please use the following link: %s"
+msgstr "Gebruik de volgende link om deze bestelling te betalen: %s"
+
+#: templates/emails/plain/send-quote.php:33
+msgid "Order number: %s"
+msgstr "Bestelnummer: %s"
+
+#: templates/emails/plain/send-quote.php:34
+msgid "Order date: %s"
+msgstr "Besteldatum: %s"
+
+#. translators: Payment Link Url.
+#: templates/emails/send-quote.php:41
+msgid "Pay for order"
+msgstr "Betaal voor bestelling"
+
+#: templates/emails/send-quote.php:57
+msgid "Order"
+msgstr "Bestelling"
+
+#: templates/emails/send-quote.php:63
+msgid "Price"
+msgstr "Prijs"

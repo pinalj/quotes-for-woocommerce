@@ -1,0 +1,454 @@
+# Copyright (C) 2021 Pinal Shah
+# This file is distributed under the same license as the Quotes for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quotes for WooCommerce 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-"
+"woocommerce\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-01-18T16:50:57+00:00\n"
+"PO-Revision-Date: 2021-03-01 21:44+0600\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Domain: quote-wc\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru_RU\n"
+
+#. Plugin Name of the plugin
+msgid "Quotes for WooCommerce"
+msgstr "Запрос цены WooCommerce"
+
+#. Description of the plugin
+msgid ""
+"This plugin allows you to convert your WooCommerce store into a quote only "
+"store. It will hide the prices for the products and not take any payment at "
+"Checkout. You can then setup prices for the items in the order and send a "
+"notification to the Customer."
+msgstr ""
+"Этот плагин позволяет вам преобразовать ваш магазин WooCommerce в магазин с "
+"запросом цены. Он скроет цены на товары и не будет принимать оплату при "
+"оформлении заказа. Затем вы можете установить цены на товары в заказе и "
+"отправить уведомление клиенту."
+
+#. Author of the plugin
+msgid "Pinal Shah"
+msgstr "Пинал Шах"
+
+#: class-quotes-wc.php:158
+msgid "Enable Quotes"
+msgstr "Запрос цены"
+
+#: class-quotes-wc.php:159
+msgid "Enable this to allow customers to ask for a quote for the product."
+msgstr "Включите это, чтобы позволить клиентам запросить цену товара."
+
+#: class-quotes-wc.php:170
+msgid "Display Product Price"
+msgstr "Отображать цену товара"
+
+#: class-quotes-wc.php:171
+msgid "Enable this to display the product price on the Shop & Product pages."
+msgstr "Включите, чтобы отображать цену в галерее магазина и странице товара."
+
+#: class-quotes-wc.php:251 includes/admin/class-quotes-global-settings.php:239
+#: includes/admin/class-quotes-global-settings.php:286
+#: includes/class-quotes-payment-gateway.php:29
+msgid "Request Quote"
+msgstr "Запросить цену"
+
+#: class-quotes-wc.php:363
+msgid "Quote emailed."
+msgstr "Цена отправлена на электронную почту."
+
+#: class-quotes-wc.php:468
+msgid ""
+"It is not possible to add products that require quotes to the Cart along "
+"with ones that do not. Hence, the existing products have been removed from "
+"the Cart."
+msgstr ""
+"Невозможно добавить товар без цены в Корзину вместе с оцененным товаром. "
+"Поэтому оцененные товары были удалены из Корзины."
+
+#: class-quotes-wc.php:615
+msgid "Quote Complete"
+msgstr "Запрос цены выполнен"
+
+#: class-quotes-wc.php:619 includes/emails/class-qwc-send-quote.php:23
+msgid "Send Quote"
+msgstr "Отправить запрос цены"
+
+#: class-quotes-wc.php:621
+msgid "Resend Quote"
+msgstr "Отправить запрос цены повторно"
+
+#: class-quotes-wc.php:646
+msgid "Quote Complete."
+msgstr "Запрос цены выполнен."
+
+#: class-quotes-wc.php:700 class-quotes-wc.php:851
+#: includes/class-quotes-payment-gateway.php:39
+msgid "Settings"
+msgstr "Настройки"
+
+#: class-quotes-wc.php:716
+msgid "You do not have sufficient permissions to access this page."
+msgstr "У вас недостаточно прав для доступа к этой странице."
+
+#: class-quotes-wc.php:751 includes/admin/class-quotes-global-settings.php:266
+msgid "Cart"
+msgstr "Корзина"
+
+#: includes/admin/class-quotes-global-settings.php:40
+msgid "Global Settings"
+msgstr "Общие настройки"
+
+#: includes/admin/class-quotes-global-settings.php:47
+msgid "Enable Quotes:"
+msgstr "Включить запросы цен:"
+
+#: includes/admin/class-quotes-global-settings.php:51
+msgid "Select if you wish to enable quotes for all the products."
+msgstr "Запрашивать цены для всех товаров магазина."
+
+#: includes/admin/class-quotes-global-settings.php:56
+msgid "Enable Price Display:"
+msgstr "Включить отображение цены:"
+
+#: includes/admin/class-quotes-global-settings.php:60
+msgid ""
+"Select to display the product price on the Shop & Product pages for all "
+"quotable products."
+msgstr ""
+"Показывать цену в галерее магазина и на странице товара даже если товар "
+"отмечен как \"товар с запросом цены\"."
+
+#: includes/admin/class-quotes-global-settings.php:65
+msgid "Shop & Product Page Settings"
+msgstr "Настройка страницы магазина и страницы товара"
+
+#: includes/admin/class-quotes-global-settings.php:72
+msgid "Add to Cart button text:"
+msgstr "Текст кнопки Добавить в корзину:"
+
+#: includes/admin/class-quotes-global-settings.php:76
+msgid ""
+"Text that should be displayed on the Add to Cart button for quotable "
+"products."
+msgstr ""
+"Текст отображаемый на кнопке Добавить в корзину для товаров с запросом цены."
+
+#: includes/admin/class-quotes-global-settings.php:81
+msgid "Cart & Checkout Settings"
+msgstr "Настройки страницы Корзины и Оплаты"
+
+#: includes/admin/class-quotes-global-settings.php:88
+msgid "Place Order button text for Quotable Products:"
+msgstr "Текст для кнопки Заказать:"
+
+#: includes/admin/class-quotes-global-settings.php:92
+msgid "Place Order button text for Quotable products at Checkout."
+msgstr ""
+"Текст для кнопки Заказать для продуктов с запросом цены на странице оплаты."
+
+#: includes/admin/class-quotes-global-settings.php:97
+msgid "Cart page Name for Quotable Products:"
+msgstr "Называние страницы Корзина:"
+
+#: includes/admin/class-quotes-global-settings.php:101
+msgid ""
+"Display a custom name for Cart page when cart contains only quotable "
+"products."
+msgstr ""
+"Название страницы Корзина, когда корзина содержит только товары с запросом "
+"цены."
+
+#: includes/admin/class-quotes-global-settings.php:106
+msgid "Hide Address fields at Checkout:"
+msgstr "Скрыть поля Адрес на странице Оплаты:"
+
+#: includes/admin/class-quotes-global-settings.php:110
+msgid ""
+"Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
+"quotable products."
+msgstr ""
+"Скрывает Адрес выставления счета и Адрес доставки на странице Оплаты если "
+"Корзина содержит только товары с запросом цены."
+
+#: includes/class-quotes-payment-gateway.php:27
+msgid "Ask for Quote"
+msgstr "Запросить цену"
+
+#: includes/class-quotes-payment-gateway.php:43
+msgid "This is fictitious payment method used for quotes."
+msgstr "Это фиктивный метод оплаты используется для запроса цены товара."
+
+#: includes/class-quotes-payment-gateway.php:44
+msgid "This gateway requires no configuration."
+msgstr "Этот метод оплаты не имеет настроек."
+
+#: includes/class-quotes-payment-gateway.php:64
+msgid "This order is awaiting quote."
+msgstr "Этот заказ ожидает оценки."
+
+#: includes/class-quotes-payment-gateway.php:85
+msgid "We have received your order. Thank you."
+msgstr "Мы получили ваш заказ. Спасибо."
+
+#: includes/class-quotes-payment-gateway.php:87
+msgid ""
+"We have received your request for a quote. You will be notified via email "
+"soon."
+msgstr ""
+"Мы получили ваш запрос цены. Мы скоро ответим вам по электронной почте."
+
+#: includes/emails/class-qwc-request-new-quote.php:23
+msgid "Request for New Quote"
+msgstr "Запрос цены - администратор"
+
+#: includes/emails/class-qwc-request-new-quote.php:24
+msgid ""
+"This email is sent to the site admin when a request for a quotation comes "
+"through."
+msgstr ""
+"Это электронное письмо отправляется администратору сайта, когда приходит "
+"запрос цены."
+
+#: includes/emails/class-qwc-request-new-quote.php:26
+#: includes/emails/class-qwc-request-new-quote.php:213
+msgid "Quotation Request for #{order_number}"
+msgstr "Запрос цены для #{order_number}"
+
+#: includes/emails/class-qwc-request-new-quote.php:27
+#: includes/emails/class-qwc-request-new-quote.php:205
+msgid "[{blogname}] Quotation Request (Order {order_number}) - {order_date}"
+msgstr "[{blogname}] Запрос цены (Заказ {order_number}) - {order_date}"
+
+#: includes/emails/class-qwc-request-new-quote.php:94
+#: includes/emails/class-qwc-request-new-quote.php:97
+#: includes/emails/class-qwc-request-new-quote.php:100
+#: includes/emails/class-qwc-request-new-quote.php:103
+#: includes/emails/class-qwc-request-new-quote.php:106
+#: includes/emails/class-qwc-request-sent.php:83
+#: includes/emails/class-qwc-send-quote.php:83
+msgid "N/A"
+msgstr "Нет данных"
+
+#: includes/emails/class-qwc-request-new-quote.php:222
+#: includes/emails/class-qwc-request-sent.php:191
+#: includes/emails/class-qwc-send-quote.php:189
+msgid "Enable/Disable"
+msgstr "Включить/Выключить"
+
+#: includes/emails/class-qwc-request-new-quote.php:224
+#: includes/emails/class-qwc-request-sent.php:193
+#: includes/emails/class-qwc-send-quote.php:191
+msgid "Enable this email notification"
+msgstr "Включить это оповещение по электронной почте"
+
+#: includes/emails/class-qwc-request-new-quote.php:228
+msgid "Recipient"
+msgstr "Получатель"
+
+#. translators: Email recipients.
+#: includes/emails/class-qwc-request-new-quote.php:231
+msgid "Enter recipients (comma separated) for this email. Defaults to %s"
+msgstr "Введите получателей разделяя запятой. По умолчанию %s"
+
+#: includes/emails/class-qwc-request-new-quote.php:235
+#: includes/emails/class-qwc-request-sent.php:197
+#: includes/emails/class-qwc-send-quote.php:195
+msgid "Subject"
+msgstr "Тема письма"
+
+#. translators: Email Subject.
+#: includes/emails/class-qwc-request-new-quote.php:238
+#: includes/emails/class-qwc-request-sent.php:200
+#: includes/emails/class-qwc-send-quote.php:198
+msgid ""
+"This controls the email subject line. Leave blank to use the default "
+"subject: <code>%s</code>."
+msgstr ""
+"Тема письма. Оставьте поле пустым, чтобы использовать тему по умолчанию: "
+"<code>% s </code>."
+
+#: includes/emails/class-qwc-request-new-quote.php:243
+#: includes/emails/class-qwc-request-sent.php:205
+#: includes/emails/class-qwc-send-quote.php:203
+msgid "Email Heading"
+msgstr "Заголовок письма"
+
+#. translators: Email Heading.
+#: includes/emails/class-qwc-request-new-quote.php:246
+#: includes/emails/class-qwc-request-sent.php:208
+#: includes/emails/class-qwc-send-quote.php:206
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: <code>%s</code>."
+msgstr ""
+"Заголовок письма. Оставьте поле пустым, чтобы использовать заголовок по "
+"умолчанию: <code>% s </code>."
+
+#: includes/emails/class-qwc-request-new-quote.php:251
+#: includes/emails/class-qwc-request-sent.php:213
+#: includes/emails/class-qwc-send-quote.php:211
+msgid "Email type"
+msgstr "Тип письма"
+
+#: includes/emails/class-qwc-request-new-quote.php:253
+#: includes/emails/class-qwc-request-sent.php:215
+#: includes/emails/class-qwc-send-quote.php:213
+msgid "Choose which format of email to send."
+msgstr "Выберете формат письма для отправки."
+
+#: includes/emails/class-qwc-request-new-quote.php:257
+#: includes/emails/class-qwc-request-sent.php:219
+#: includes/emails/class-qwc-send-quote.php:217
+msgid "Plain text"
+msgstr "Простой текст"
+
+#: includes/emails/class-qwc-request-new-quote.php:258
+#: includes/emails/class-qwc-request-sent.php:220
+#: includes/emails/class-qwc-send-quote.php:218
+msgid "HTML"
+msgstr "HTML"
+
+#: includes/emails/class-qwc-request-new-quote.php:259
+#: includes/emails/class-qwc-request-sent.php:221
+#: includes/emails/class-qwc-send-quote.php:219
+msgid "Multipart"
+msgstr "Составное"
+
+#: includes/emails/class-qwc-request-sent.php:24
+msgid "New Quote Request Sent"
+msgstr "Цены для клиента"
+
+#: includes/emails/class-qwc-request-sent.php:25
+msgid "This email is sent to the customer when a quote request is raised"
+msgstr "Это письмо с утвержденными ценами отправляется клиенту"
+
+#: includes/emails/class-qwc-request-sent.php:27
+#: includes/emails/class-qwc-request-sent.php:182
+msgid "Quotation Request Sent for #{order_number}"
+msgstr "Запрос цены для заказа #{order_number} отправлен"
+
+#: includes/emails/class-qwc-request-sent.php:28
+#: includes/emails/class-qwc-request-sent.php:175
+msgid ""
+"[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Запрос цены отправлен (Заказ {order_number}) - {order_date}"
+
+#: includes/emails/class-qwc-send-quote.php:24
+msgid "This email is sent to Customers for orders that need quotations."
+msgstr "Это письмо уведомляет клиентов о том, что они запросили цену на товар."
+
+#: includes/emails/class-qwc-send-quote.php:26
+#: includes/emails/class-qwc-send-quote.php:180
+msgid "Quote for #{order_number}"
+msgstr "Запрос цены для заказа #{order_number}"
+
+#: includes/emails/class-qwc-send-quote.php:27
+#: includes/emails/class-qwc-send-quote.php:173
+msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
+msgstr "[{blogname}] Запрос цены для (Заказ {order_number}) - {order_date}"
+
+#. translators: Site Name.
+#: templates/emails/new-request-sent-customer.php:12
+#: templates/emails/plain/new-request-sent-customer.php:7
+msgid ""
+"You have made a request for a quote on %s. The details of the order are as "
+"follows:"
+msgstr "Вы запросили цену в %s. Детали запроса следующие:"
+
+#: templates/emails/new-request-sent-customer.php:26
+#: templates/emails/plain/new-request-sent-customer.php:16
+#: templates/emails/plain/request-new-quote.php.php:18
+#: templates/emails/request-new-quote.php:26 templates/emails/send-quote.php:61
+msgid "Product"
+msgstr "Товар"
+
+#: templates/emails/new-request-sent-customer.php:27
+#: templates/emails/plain/new-request-sent-customer.php:17
+#: templates/emails/plain/request-new-quote.php.php:19
+#: templates/emails/request-new-quote.php:27 templates/emails/send-quote.php:62
+msgid "Quantity"
+msgstr "Количество"
+
+#: templates/emails/new-request-sent-customer.php:32
+#: templates/emails/plain/new-request-sent-customer.php:20
+#: templates/emails/plain/request-new-quote.php.php:20
+#: templates/emails/request-new-quote.php:28
+msgid "Product Price"
+msgstr "Цена товара"
+
+#: templates/emails/new-request-sent-customer.php:52
+#: templates/emails/plain/new-request-sent-customer.php:36
+#: templates/emails/plain/request-new-quote.php.php:33
+#: templates/emails/request-new-quote.php:45
+msgid "This order is awaiting a quote."
+msgstr "Этот заказ ожидает оценки."
+
+#: templates/emails/new-request-sent-customer.php:54
+#: templates/emails/plain/new-request-sent-customer.php:38
+msgid "You shall receive a quote email from the site admin soon."
+msgstr "Вы скоро получите цены по электронной почте от менеджера магазина."
+
+#. translators: Billing Name.
+#: templates/emails/plain/request-new-quote.php.php:7
+#: templates/emails/request-new-quote.php:10
+msgid ""
+"A request for quote has been made by %s and is awaiting your attention. The "
+"details of the order are as follows:"
+msgstr "%s сделал запрос цен и ожидает ответа. Детали заказа следующие:"
+
+#. translators: Admin Url for payment.
+#: templates/emails/plain/request-new-quote.php.php:35
+#: templates/emails/request-new-quote.php:50
+msgid "You can view and edit this order in the dashboard here: %s"
+msgstr ""
+"Вы можете просмотреть и отредактировать этот заказ на панели управления "
+"здесь: %s"
+
+#. translators: Billing First Name.
+#: templates/emails/plain/send-quote.php:11 templates/emails/send-quote.php:20
+msgid "Hello %s"
+msgstr "Здравствуйте, %s"
+
+#. translators: Site Name.
+#: templates/emails/plain/send-quote.php:14 templates/emails/send-quote.php:28
+msgid ""
+"You have received a quotation for your order on %s. The details of the same "
+"are shown below."
+msgstr ""
+"Вы получили коммерческое предложение по вашему запросу цен на сайте %s. "
+"Подробности показаны ниже."
+
+#. translators: Payment Link Url.
+#: templates/emails/plain/send-quote.php:20 templates/emails/send-quote.php:41
+msgid "To pay for this order please use the following link: %s"
+msgstr "Для оплаты этого заказа воспользуйтесь следующей ссылкой: %s"
+
+#: templates/emails/plain/send-quote.php:33
+msgid "Order number: %s"
+msgstr "Заказ номер: %s"
+
+#: templates/emails/plain/send-quote.php:34
+msgid "Order date: %s"
+msgstr "Дата заказа: %s"
+
+#. translators: Payment Link Url.
+#: templates/emails/send-quote.php:41
+msgid "Pay for order"
+msgstr "Оплатить заказ"
+
+#: templates/emails/send-quote.php:57
+msgid "Order"
+msgstr "Заказ"
+
+#: templates/emails/send-quote.php:63
+msgid "Price"
+msgstr "Цена"

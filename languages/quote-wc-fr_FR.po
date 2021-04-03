@@ -1,0 +1,431 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-20 21:18+0530\n"
+"PO-Revision-Date: 2020-06-05 10:32+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+
+#: quotes-woocommerce.php:143
+msgid "Enable Quotes"
+msgstr "Activer les Devis"
+
+#: quotes-woocommerce.php:144
+msgid "Enable this to allow customers to ask for a quote for the product."
+msgstr ""
+"Activer pour permettre aux clients de demander un Devis pour le produit."
+
+#: quotes-woocommerce.php:154
+msgid "Display Product Price"
+msgstr "Afficher le Prix Produit"
+
+#: quotes-woocommerce.php:155
+msgid "Enable this to display the product price on the Shop & Product pages."
+msgstr ""
+"Activer pour afficher le prix du produit sur les pages Boutique (Shop) et "
+"Produit."
+
+#: quotes-woocommerce.php:227 includes/class-qwc-gateway.php:21
+#: includes/admin/qwc-global-settings.php:203
+msgid "Request Quote"
+msgstr "Demande De Prix"
+
+#: quotes-woocommerce.php:229
+msgid "Add to Cart"
+msgstr "Ajouter Au Caddie"
+
+#: quotes-woocommerce.php:326
+msgid "Quote emailed."
+msgstr "Devis envoyé par email."
+
+#: quotes-woocommerce.php:542
+msgid "Quote Complete"
+msgstr "Devis terminé"
+
+#: quotes-woocommerce.php:546 includes/emails/class-qwc-send-quote.php:16
+msgid "Send Quote"
+msgstr "Envoyer le Devis"
+
+#: quotes-woocommerce.php:548
+msgid "Resend Quote"
+msgstr "Ré-envoyer le Devis"
+
+#: quotes-woocommerce.php:572
+msgid "Quote Complete."
+msgstr "Devis terminé."
+
+#: quotes-woocommerce.php:621 includes/class-qwc-gateway.php:31
+msgid "Settings"
+msgstr "Paramètres"
+
+#: quotes-woocommerce.php:636
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+"Vous ne disposez pas des permissions suffisantes pour accéder à cette page."
+
+#: quotes-woocommerce.php:642
+msgid "Quote Settings"
+msgstr "Paramètres de Devis"
+
+#: includes/class-qwc-gateway.php:19
+msgid "Ask for Quote"
+msgstr "Demande De Prix"
+
+#: includes/class-qwc-gateway.php:35
+msgid "This is fictitious payment method used for quotes."
+msgstr "Ceci est une méthode de paiement fictive utilisée pour les devis."
+
+#: includes/class-qwc-gateway.php:36
+msgid "This gateway requires no configuration."
+msgstr "Cette passerelle ne requiert aucune configuration."
+
+#: includes/class-qwc-gateway.php:54
+msgid "This order is awaiting quote."
+msgstr "Cette commande est en attente de Devis."
+
+#: includes/class-qwc-gateway.php:74
+msgid "We have received your order. Thank you."
+msgstr "Nous avons bien reçu votre commande. Nous vous en remercions."
+
+#: includes/class-qwc-gateway.php:76
+msgid ""
+"We have received your request for a quote. You will be notified via email "
+"soon."
+msgstr ""
+"Nous avons bien reçu votre demande de Devis. Nous vous préviendrons dès que "
+"celui-ci sera prêt."
+
+#: includes/admin/qwc-global-settings.php:26
+msgid "Global Settings"
+msgstr "Paramètres généraux"
+
+#: includes/admin/qwc-global-settings.php:33
+msgid "Enable Quotes:"
+msgstr "Activer les Devis:"
+
+#: includes/admin/qwc-global-settings.php:37
+msgid "Select if you wish to enable quotes for all the products."
+msgstr ""
+"Sélectionner si vous souhaitez activer les Devis pour tous les produits."
+
+#: includes/admin/qwc-global-settings.php:42
+msgid "Enable Price Display:"
+msgstr "Activer l'affichage de Prix:"
+
+#: includes/admin/qwc-global-settings.php:46
+msgid ""
+"Select to display the product price on the Shop & Product pages for all "
+"quotable products."
+msgstr ""
+"Sélectionner d'afficher le prix du produit sur les pages Boutique et Produit "
+"pour tous les produits à Devis."
+
+#: includes/admin/qwc-global-settings.php:51
+msgid "Shop & Product Page Settings"
+msgstr "Paramètres des pages Shop et Produit"
+
+#: includes/admin/qwc-global-settings.php:58
+msgid "Add to Cart button text:"
+msgstr "Texte du bouton Ajouter au Caddie:"
+
+#: includes/admin/qwc-global-settings.php:62
+msgid ""
+"Text that should be displayed on the Add to Cart button for quotable "
+"products."
+msgstr ""
+"Texte à afficher sur le bouton Ajouter au Caddie pour les produits à Devis."
+
+#: includes/admin/qwc-global-settings.php:67
+msgid "Cart & Checkout Settings"
+msgstr "Paramètres de Caddie et Paiement"
+
+#: includes/admin/qwc-global-settings.php:74
+msgid "Cart page Name for Quotable Products:"
+msgstr "Nom de la page Caddie pour les produits à Devis:"
+
+#: includes/admin/qwc-global-settings.php:78
+msgid ""
+"Display a custom name for Cart page when cart contains only quotable "
+"products."
+msgstr ""
+"Afficher un nom personnalisé pour la page Caddie lorsque le Caddie ne "
+"contient que des produits à Devis."
+
+#: includes/admin/qwc-global-settings.php:83
+msgid "Hide Address fields at Checkout:"
+msgstr "Cacher les champs Adresse et Paiement:"
+
+#: includes/admin/qwc-global-settings.php:87
+msgid ""
+"Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
+"quotable products."
+msgstr ""
+"Cacher les champs d'adresse de Facturation et de Livraison au moment du "
+"Paiement si le Caddie ne contient que des produits à Devis."
+
+#: includes/admin/qwc-global-settings.php:224
+msgid "Cart"
+msgstr "Caddie"
+
+#: includes/emails/class-qwc-req-new-quote.php:16
+msgid "Request for New Quote"
+msgstr "Demander un nouveau Devis"
+
+#: includes/emails/class-qwc-req-new-quote.php:17
+msgid ""
+"This email is sent to the site admin when a request for a quotation comes "
+"through."
+msgstr ""
+"Cet email est envoyé à l'administrateur lorsque une demande de Devis arrive."
+
+#: includes/emails/class-qwc-req-new-quote.php:19
+#: includes/emails/class-qwc-req-new-quote.php:141
+msgid "Quotation Request for #{order_number}"
+msgstr "Demande de Devis for #{order_number}"
+
+#: includes/emails/class-qwc-req-new-quote.php:20
+#: includes/emails/class-qwc-req-new-quote.php:136
+msgid "[{blogname}] Quotation Request (Order {order_number}) - {order_date}"
+msgstr "[{blogname}] Demande de Devis (Commande {order_number}) - {order_date}"
+
+#: includes/emails/class-qwc-req-new-quote.php:70
+#: includes/emails/class-qwc-request-sent.php:71
+#: includes/emails/class-qwc-send-quote.php:71
+msgid "N/A"
+msgstr "N/A"
+
+#: includes/emails/class-qwc-req-new-quote.php:148
+#: includes/emails/class-qwc-request-sent.php:149
+#: includes/emails/class-qwc-send-quote.php:147
+msgid "Enable/Disable"
+msgstr "Activer/Désactiver"
+
+#: includes/emails/class-qwc-req-new-quote.php:150
+#: includes/emails/class-qwc-request-sent.php:151
+#: includes/emails/class-qwc-send-quote.php:149
+msgid "Enable this email notification"
+msgstr "Activer la notification par email"
+
+#: includes/emails/class-qwc-req-new-quote.php:154
+msgid "Recipient"
+msgstr "Email destinataire"
+
+#: includes/emails/class-qwc-req-new-quote.php:156
+#, php-format
+msgid "Enter recipients (comma separated) for this email. Defaults to %s"
+msgstr ""
+"Entrer les adresses email destinataires (séparées par une virgule) pour cet "
+"email. Par défaut à %s"
+
+#: includes/emails/class-qwc-req-new-quote.php:160
+#: includes/emails/class-qwc-request-sent.php:155
+#: includes/emails/class-qwc-send-quote.php:153
+msgid "Subject"
+msgstr "Sujet"
+
+#: includes/emails/class-qwc-req-new-quote.php:162
+#: includes/emails/class-qwc-request-sent.php:157
+#: includes/emails/class-qwc-send-quote.php:155
+#, php-format
+msgid ""
+"This controls the email subject line. Leave blank to use the default "
+"subject: <code>%s</code>."
+msgstr ""
+"Ceci gère le ligne de sujet de l'email. Laisser à blanc pour utiliser le "
+"sujet par défaut: <code>%s</code>."
+
+#: includes/emails/class-qwc-req-new-quote.php:167
+#: includes/emails/class-qwc-request-sent.php:162
+#: includes/emails/class-qwc-send-quote.php:160
+msgid "Email Heading"
+msgstr "Entête d'email"
+
+#: includes/emails/class-qwc-req-new-quote.php:169
+#: includes/emails/class-qwc-request-sent.php:164
+#: includes/emails/class-qwc-send-quote.php:162
+#, php-format
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: <code>%s</code>."
+msgstr ""
+"Ceci gère l'entête principal contenu dans la notification d'email. Laisser à "
+"blanc pour utiliser l'entête par défaut: <code>%s</code>."
+
+#: includes/emails/class-qwc-req-new-quote.php:174
+#: includes/emails/class-qwc-request-sent.php:169
+#: includes/emails/class-qwc-send-quote.php:167
+msgid "Email type"
+msgstr "Type d'email"
+
+#: includes/emails/class-qwc-req-new-quote.php:176
+#: includes/emails/class-qwc-request-sent.php:171
+#: includes/emails/class-qwc-send-quote.php:169
+msgid "Choose which format of email to send."
+msgstr "Choisir le format d'email à envoyer."
+
+#: includes/emails/class-qwc-req-new-quote.php:180
+#: includes/emails/class-qwc-request-sent.php:175
+#: includes/emails/class-qwc-send-quote.php:173
+msgid "Plain text"
+msgstr "Texte"
+
+#: includes/emails/class-qwc-req-new-quote.php:181
+#: includes/emails/class-qwc-request-sent.php:176
+#: includes/emails/class-qwc-send-quote.php:174
+msgid "HTML"
+msgstr "HTML"
+
+#: includes/emails/class-qwc-req-new-quote.php:182
+#: includes/emails/class-qwc-request-sent.php:177
+#: includes/emails/class-qwc-send-quote.php:175
+msgid "Multipart"
+msgstr "Multipart"
+
+#: includes/emails/class-qwc-request-sent.php:17
+msgid "New Quote Request Sent"
+msgstr "La demande de Devis a bien été envoyée"
+
+#: includes/emails/class-qwc-request-sent.php:18
+msgid "This email is sent to the customer when a quote request is raised"
+msgstr ""
+"Cet email est envoyé au client lorsqu'une demande de Devis a été formulée"
+
+#: includes/emails/class-qwc-request-sent.php:20
+#: includes/emails/class-qwc-request-sent.php:143
+msgid "Quotation Request Sent for #{order_number}"
+msgstr "Demande de Devis Envoyée pour #{order_number}"
+
+#: includes/emails/class-qwc-request-sent.php:21
+#: includes/emails/class-qwc-request-sent.php:139
+msgid ""
+"[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Demande de Devis Envoyée (Commande {order_number}) - "
+"{order_date}"
+
+#: includes/emails/class-qwc-send-quote.php:17
+msgid "This email is sent to Customers for orders that need quotations."
+msgstr ""
+"L'email est envoyé aux Clients pour les commandes qui requiert des Devis."
+
+#: includes/emails/class-qwc-send-quote.php:19
+#: includes/emails/class-qwc-send-quote.php:141
+msgid "Quote for #{order_number}"
+msgstr "Devis pour #{order_number}"
+
+#: includes/emails/class-qwc-send-quote.php:20
+#: includes/emails/class-qwc-send-quote.php:137
+msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
+msgstr "[{blogname}] Devis Pour (Commande {order_number}) - {order_date}"
+
+#: templates/emails/new-request-sent-customer.php:7
+#: templates/emails/plain/new-request-sent-customer.php:7
+#, php-format
+msgid ""
+"You have made a request for a quote on %s. The details of the order are as "
+"follows:"
+msgstr ""
+"Vous venez de faire une demande de Devis pour %s. Ci-dessous les détails:"
+
+#: templates/emails/new-request-sent-customer.php:20
+#: templates/emails/request-new-quote.php:22 templates/emails/send-quote.php:40
+#: templates/emails/plain/new-request-sent-customer.php:16
+#: templates/emails/plain/request-new-quote.php.php:18
+msgid "Product"
+msgstr "Produit"
+
+#: templates/emails/new-request-sent-customer.php:21
+#: templates/emails/request-new-quote.php:23 templates/emails/send-quote.php:41
+#: templates/emails/plain/new-request-sent-customer.php:17
+#: templates/emails/plain/request-new-quote.php.php:19
+msgid "Quantity"
+msgstr "Quantité"
+
+#: templates/emails/new-request-sent-customer.php:26
+#: templates/emails/request-new-quote.php:24
+#: templates/emails/plain/new-request-sent-customer.php:20
+#: templates/emails/plain/request-new-quote.php.php:20
+msgid "Product Price"
+msgstr "Pric Produit"
+
+#: templates/emails/new-request-sent-customer.php:46
+#: templates/emails/request-new-quote.php:41
+#: templates/emails/plain/new-request-sent-customer.php:36
+#: templates/emails/plain/request-new-quote.php.php:33
+msgid "This order is awaiting a quote."
+msgstr "Cette commande est en attente de Devis."
+
+#: templates/emails/new-request-sent-customer.php:48
+#: templates/emails/plain/new-request-sent-customer.php:38
+msgid "You shall receive a quote email from the site admin soon."
+msgstr ""
+"Vous allez recevoir un Devis envoyé par email par l'administrateur du site."
+
+#: templates/emails/request-new-quote.php:7
+#: templates/emails/plain/request-new-quote.php.php:7
+#, php-format
+msgid ""
+"A request for quote has been made by %s and is awaiting your attention. The "
+"details of the order are as follows:"
+msgstr ""
+"Une demande de Devis vient d'être faite by %s et est requiert votre "
+"attention. Ci-dessous les détails:"
+
+#: templates/emails/request-new-quote.php:43
+#: templates/emails/plain/request-new-quote.php.php:35
+#, php-format
+msgid "You can view and edit this order in the dashboard here: %s"
+msgstr ""
+"Vous pouvez voir et éditer cette commande dans la tableau de bord ici: %s"
+
+#: templates/emails/send-quote.php:13 templates/emails/plain/send-quote.php:11
+#, php-format
+msgid "Hello %s"
+msgstr "Bonjour %s"
+
+#: templates/emails/send-quote.php:16 templates/emails/plain/send-quote.php:14
+#, php-format
+msgid ""
+"You have received a quotation for your order on %s. The details of the same "
+"are shown below."
+msgstr ""
+"Vous avez reçu un devis pour la commande de %s. Ci-dessous les détails."
+
+#: templates/emails/send-quote.php:23 templates/emails/plain/send-quote.php:20
+#, php-format
+msgid "To pay for this order please use the following link: %s"
+msgstr "Pour payer cette commande, utilisez le lien suivant: %s"
+
+#: templates/emails/send-quote.php:23
+msgid "Pay for order"
+msgstr "Payer pour cette commande"
+
+#: templates/emails/send-quote.php:36
+msgid "Order"
+msgstr "Commande"
+
+#: templates/emails/send-quote.php:42
+msgid "Price"
+msgstr "Prix"
+
+#: templates/emails/plain/send-quote.php:33
+#, php-format
+msgid "Order number: %s"
+msgstr "N° de commande: %s"
+
+#: templates/emails/plain/send-quote.php:34
+#, php-format
+msgid "Order date: %s"
+msgstr "Date de commande: %s"
