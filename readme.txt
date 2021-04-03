@@ -3,9 +3,10 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 5.6
-Stable tag: 1.7.1
+Tested up to: 5.7
+Stable tag: 1.7.2
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
 This WordPress plugin extends the WooCommerce Plugin. It allows the site admin the ability to send quotes for products. All prices are hidden from the user on all pages until the admin sends a quote. No payments will be taken at Checkout. 
 
@@ -41,6 +42,10 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.7.2 (03.04.2021) =
+* Fix - The PHP email templates were being copied to an incorrect location in the theme folder.
+* Tweak - Added nl_NL, fr_FR, ru_RU translation files.
 
 = 1.7.1 (18.01.2021) =
 * Fix - Internal Server Error with WooCommerce 4.9.0.

@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.7.1';
+		public $version = '1.7.2';
 
 		/**
 		 * Construct.
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_activate() {
-			update_option( 'quotes_for_wc', '1.7.1' );
+			update_option( 'quotes_for_wc', self::$version );
 		}
 
 		/**
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_update_db_check() {
-			update_option( 'quotes_for_wc', '1.7.1' );
+			update_option( 'quotes_for_wc', self::$version );
 		}
 
 		/**
@@ -248,7 +248,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$enable_quote = product_quote_enabled( $post_id );
 
 			if ( $enable_quote ) {
-				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_add_to_cart_button_text' ), 'quote-wc' );
+				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_add_to_cart_button_text' ), 'quote-wc' ); // phpcs:ignore
 			}
 
 			return $cart_text;
