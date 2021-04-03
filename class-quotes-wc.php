@@ -122,7 +122,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_activate() {
-			update_option( 'quotes_for_wc', self::$version );
+			update_option( 'quotes_for_wc', $this->version );
 		}
 
 		/**
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_update_db_check() {
-			update_option( 'quotes_for_wc', self::$version );
+			update_option( 'quotes_for_wc', $this->version );
 		}
 
 		/**
