@@ -248,7 +248,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$enable_quote = product_quote_enabled( $post_id );
 
 			if ( $enable_quote ) {
-				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
+				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_add_to_cart_button_text' ), 'quote-wc' );
 			}
 
 			return $cart_text;
@@ -774,7 +774,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function woocommerce_title( $title, $id ) {
 			if ( cart_contains_quotable() && wc_get_page_id( 'cart' ) === $id ) {
 				$cart_name = get_option( 'qwc_cart_page_name' );
-				$cart_name = '' === $cart_name ? 'Cart' : $cart_name; //phpcs:ignore
+				$cart_name = '' === $cart_name ? __( 'Cart', 'quote-wc' ) : $cart_name; //phpcs:ignore
 
 				$title = esc_attr__( $cart_name, 'quote-wc' ); //phpcs:ignore
 			}
