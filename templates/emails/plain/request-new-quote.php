@@ -29,7 +29,7 @@ if ( $order_obj ) {
         echo "\n";
             
 	} 
-	
+    do_action( 'qwc_new_quote_admin_row', $order->order_id, $order_obj );
     echo sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) );
     
     echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), admin_url( 'post.php?post=' . $order->order_id . '&action=edit' ) ) );

@@ -38,6 +38,7 @@ if ( $order && $billing_first_name && $billing_last_name ) :
 			</tr>
 			<?php
 		}
+		do_action( 'qwc_new_quote_admin_row', $order->order_id, $order_obj );
 		?>
 	</tbody>
 </table>
