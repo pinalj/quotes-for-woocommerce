@@ -4,7 +4,7 @@ Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 5.7
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -42,6 +42,14 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.7.3 (02.05.2021) =
+* Enhancement - Made the plugin compatible with YayMail Pro.
+* Tweak - Added a filter to allow the site admin the ability to change the Payment medium name.
+* Tweak - Added a filter to add new rows to the new quote request email sent to admin.
+* Fix - Plain Text Email Template file name was incorrect.
+* Fix - Incorrect text domain listed in the plugin file.
+* Fix - Incorrect text domain was used for the Subtotal text.
 
 = 1.7.2 (03.04.2021) =
 * Fix - The PHP email templates were being copied to an incorrect location in the theme folder.

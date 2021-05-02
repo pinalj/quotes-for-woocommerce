@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.7.2';
+		public $version = '1.7.3';
 
 		/**
 		 * Construct.
