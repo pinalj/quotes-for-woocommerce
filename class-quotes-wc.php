@@ -426,7 +426,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				if ( $cart_quotes && ! qwc_cart_display_price() ) {
 					$price = '';
 					// translators: Leave price blanks as its not be displayed.
-					echo wp_kses_post( sprintf( __( "<strong>Subtotal:</strong> <span class='amount'>%s</span>", 'quotes-wc' ), esc_attr( $price ) ) );
+					echo wp_kses_post( sprintf( __( "<strong>Subtotal:</strong> <span class='amount'>%s</span>", 'quote-wc' ), esc_attr( $price ) ) );
 				}
 			}
 		}
