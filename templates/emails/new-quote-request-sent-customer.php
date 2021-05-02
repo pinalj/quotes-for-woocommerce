@@ -5,7 +5,6 @@
  * @package Quotes for WooCommerce/Emails
  */
 
-$order_obj     = new WC_order( $order->order_id );
 $display_price = false;
 
 // translators: Site Name.
@@ -15,7 +14,7 @@ $opening_paragraph = __( 'You have made a request for a quote on %s. The details
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php
-if ( $order ) :
+if ( $order_details ) :
 	?>
 	<p><?php printf( esc_html( $opening_paragraph ), esc_attr( $site_name ) ); ?></p>
 <?php endif; ?>
@@ -26,7 +25,7 @@ if ( $order ) :
 			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'quote-wc' ); ?></th>
 			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'quote-wc' ); ?></th>
 			<?php
-			if ( qwc_order_display_price( $order_obj ) ) {
+			if ( qwc_order_display_price( $order ) ) {
 				$display_price = true;
 				?>
 			<th style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product Price', 'quote-wc' ); ?></th>
@@ -34,13 +33,13 @@ if ( $order ) :
 
 		</tr>
 		<?php
-		foreach ( $order_obj->get_items() as $items ) {
+		foreach ( $order->get_items() as $items ) {
 			?>
 			<tr>
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $items->get_name() ); ?></td>
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_attr( $items->get_quantity() ); ?></td>
 				<?php if ( $display_price ) { ?>
-				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $order_obj->get_formatted_line_subtotal( $items ) ); ?></td>
+				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) ); ?></td>
 				<?php } ?>
 			</tr>
 			<?php
