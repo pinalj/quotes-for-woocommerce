@@ -7,7 +7,7 @@
  * Requires at least: 4.5
  * WC Requires at least: 3.0
  * WC tested up to: 5.1.0
- * Text Domain: quotes-for-woocommerce
+ * Text Domain: quote-wc
  * Domain Path: /languages/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
