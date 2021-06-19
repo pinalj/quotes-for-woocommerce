@@ -19,6 +19,7 @@ function product_quote_enabled( $product_id ) {
 	if ( 'on' === $quote_setting ) {
 		$quote_enabled = true;
 	}
+	$quote_enabled = apply_filters( 'qwc_product_quote_enabled', $quote_enabled, $product_id );
 	return $quote_enabled;
 }
 

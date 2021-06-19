@@ -222,9 +222,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			global $post;
 
-			$enable_quote = get_post_meta( $post->ID, 'qwc_enable_quotes', true );
+			$enable_quote = product_quote_enabled( $post->ID );
 
-			if ( isset( $enable_quote ) && 'on' === $enable_quote ) {
+			if ( $enable_quote ) {
 				// Check if price should be displayed or no.
 				$display = get_post_meta( $post->ID, 'qwc_display_prices', true );
 				if ( ( isset( $display ) && 'on' !== $display ) || ! isset( $display ) ) {
