@@ -6,6 +6,9 @@
  */
 
 // translators: Billing Name.
+$text_align  = is_rtl() ? 'right' : 'left';
+$margin_side = is_rtl() ? 'left' : 'right';
+
 $opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
 ?>
 
@@ -29,9 +32,25 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 		</tr>
 		<?php
 		foreach ( $order->get_items() as $items ) {
+			$item_id = $items->get_id();
 			?>
 			<tr>
-				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $items->get_name() ); ?></td>
+				<td style="text-align:left; border: 1px solid #eee;">
+					<?php echo wp_kses_post( $items->get_name() );
+					// allow other plugins to add additional product information here.
+					do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
+
+					wc_display_item_meta(
+						$items,
+						array(
+							'label_before' => '<strong class="wc-item-meta-label" style="float: ' . esc_attr( $text_align ) . '; margin-' . esc_attr( $margin_side ) . ': .25em; clear: both">',
+						)
+					);
+
+					// allow other plugins to add additional product information here.
+					do_action( 'woocommerce_order_item_meta_end', $item_id, $items, $order, $plain_text );
+					?>
+				</td>
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_attr( $items->get_quantity() ); ?></td>
 				<td style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) ); ?></td>
 			</tr>

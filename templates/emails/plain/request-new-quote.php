@@ -2,6 +2,9 @@
 /**
  * Request New Quote email
  */
+$text_align  = is_rtl() ? 'right' : 'left';
+$margin_side = is_rtl() ? 'left' : 'right';
+
 $opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 do_action( 'woocommerce_email_header', $email_heading, $email );
@@ -21,8 +24,26 @@ if ( $order ) {
     echo "\n";
 			
 	foreach( $order->get_items() as $items ) {
-	
+        $item_id = $items->get_id();
         echo $items->get_name();
+        // allow other plugins to add additional product information here.
+		do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo strip_tags(
+			wc_display_item_meta(
+				$items,
+				array(
+					'before'    => "\n- ",
+					'separator' => "\n- ",
+					'after'     => '',
+					'echo'      => false,
+					'autop'     => false,
+				)
+			)
+		);
+
+		// allow other plugins to add additional product information here.
+		do_action( 'woocommerce_order_item_meta_end', $item_id, $items, $order, $plain_text );
         echo $items->get_quantity();
         echo $order->get_formatted_line_subtotal( $items );
         echo "\n";
