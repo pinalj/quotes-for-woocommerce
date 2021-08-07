@@ -36,11 +36,13 @@ if ( $order_details ) :
 		</tr>
 		<?php
 		foreach ( $order->get_items() as $items ) {
-			$item_id = $items->get_id();
+			$item_id    = $items->get_id();
+			$product_id = $items->get_variation_id() > 0 ? $items->get_variation_id() : $items->get_product_id();
 			?>
 			<tr>
 				<td style="text-align:left; border: 1px solid #eee;">
-					<?php echo wp_kses_post( $items->get_name() );
+					<a href='<?php echo esc_url( get_permalink( $product_id ) ); ?>' target='_blank'><?php echo wp_kses_post( $items->get_name() );?></a>
+					<?php
 					// allow other plugins to add additional product information here.
 					do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
 
