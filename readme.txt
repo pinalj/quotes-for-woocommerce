@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 5.7
-Stable tag: 1.7.3
+Tested up to: 5.8
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -42,6 +42,11 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.8 (10.08.2021) =
+* Tweak - Added the ability to display item attributes in the initial quote emails sent to the site admin & customer.'
+* Tweak - Converted product names to links to redirect to front-end product page in the initial quote emails sent to the site admin & customer.'
+* Tweak - Included a filter which can be used modify product quote status on the front end.'
 
 = 1.7.3 (02.05.2021) =
 * Enhancement - Made the plugin compatible with YayMail Pro.
