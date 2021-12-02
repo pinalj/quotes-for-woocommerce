@@ -806,13 +806,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function billing_fields( $fields = array() ) {
 			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
-				unset( $fields['billing_company'] );
-				unset( $fields['billing_address_1'] );
-				unset( $fields['billing_address_2'] );
-				unset( $fields['billing_state'] );
-				unset( $fields['billing_city'] );
-				unset( $fields['billing_postcode'] );
-				unset( $fields['billing_country'] );
+				$qwc_hide_fields_list = apply_filters(
+					'qwc_hide_billing_fields',
+					array(
+						'billing_company'   => 'billing_company',
+						'billing_address_1' => 'billing_address_1',
+						'billing_address_2' => 'billing_address_2',
+						'billing_state'     => 'billing_state',
+						'billing_city'      => 'billing_city',
+						'billing_postcode'  => 'billing_postcode',
+						'billing_country'   => 'billing_country',
+					)
+				);
+
+				foreach( $qwc_hide_fields_list as $field_name ) {
+					unset( $fields[ $field_name ] );
+				}
 			}
 
 			return $fields;
@@ -827,13 +836,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function checkout_fields( $fields ) {
 			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
-				unset( $fields['billing']['billing_company'] );
-				unset( $fields['billing']['billing_country'] );
-				unset( $fields['billing']['billing_address_1'] );
-				unset( $fields['billing']['billing_address_2'] );
-				unset( $fields['billing']['billing_city'] );
-				unset( $fields['billing']['billing_state'] );
-				unset( $fields['billing']['billing_postcode'] );
+				$qwc_hide_fields_list = apply_filters(
+					'qwc_hide_billing_fields_at_checkout',
+					array(
+						'billing_company'   => 'billing_company',
+						'billing_address_1' => 'billing_address_1',
+						'billing_address_2' => 'billing_address_2',
+						'billing_state'     => 'billing_state',
+						'billing_city'      => 'billing_city',
+						'billing_postcode'  => 'billing_postcode',
+						'billing_country'   => 'billing_country',
+					)
+				);
+
+				foreach( $qwc_hide_fields_list as $field_name ) {
+					unset( $fields['billing'][ $field_name ] );
+				}
 			}
 
 			return $fields;
