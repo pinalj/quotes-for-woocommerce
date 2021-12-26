@@ -1,0 +1,478 @@
+# Copyright (C) 2020 Pinal Shah
+# This file is distributed under the same license as the Quotes for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quotes for WooCommerce 1.6.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-"
+"woocommerce\n"
+"Last-Translator: \n"
+"Language-Team: Español\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-06-20T16:37:48+00:00\n"
+"PO-Revision-Date: 2021-12-26 16:07+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: quote-wc\n"
+"Language: es-ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.5.5; wp-5.8.2"
+
+#. translators: Leave price blanks as its not be displayed.
+#: class-quotes-wc.php:429
+msgid "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
+msgstr "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
+
+#: includes/emails/class-qwc-send-quote.php:27 
+#: includes/emails/class-qwc-send-quote.php:175
+msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Cotización correspondiente a la orden nº{order_number} - "
+"{order_date}"
+
+#: includes/emails/class-qwc-request-new-quote.php:27 
+#: includes/emails/class-qwc-request-new-quote.php:207
+msgid "[{blogname}] Quotation Request (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] RECIBIDA Solicitud de cotización (Orden nº{order_number}) - "
+"{order_date}"
+
+#: includes/emails/class-qwc-request-sent.php:28 
+#: includes/emails/class-qwc-request-sent.php:177
+msgid ""
+"[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}"
+msgstr ""
+"[{blogname}] Solicitud de cotización enviada (Orden nº{order_number}) - "
+"{order_date}"
+
+#: templates/emails/plain/request-new-quote.php:8 
+#: templates/emails/request-new-quote.php:12
+msgid ""
+"A request for quote has been made by %s and is awaiting your attention. The "
+"details of the order are as follows:"
+msgstr ""
+"Una solicitud de cotización ha sido realizada por %s y está esperando ser "
+"procesada. Los detalles son los siguientes:"
+
+#: includes/admin/class-quotes-global-settings.php:72
+msgid "Add to Cart button text:"
+msgstr "Texto del botón Agregar al Carrito"
+
+#: includes/class-quotes-payment-gateway.php:27
+msgid "Ask for Quote"
+msgstr "Cotización"
+
+#: class-quotes-wc.php:751 class-quotes-wc.php:777 
+#: includes/admin/class-quotes-global-settings.php:266
+msgid "Cart"
+msgstr "Cotización"
+
+#: includes/admin/class-quotes-global-settings.php:81
+msgid "Cart & Checkout Settings"
+msgstr "Ajustes de Carrito y Finalizar Compra"
+
+#: includes/admin/class-quotes-global-settings.php:97
+msgid "Cart page Name for Quotable Products:"
+msgstr "Nombre de la página del carrito para los productos cotizables"
+
+#: includes/emails/class-qwc-request-new-quote.php:255 
+#: includes/emails/class-qwc-request-sent.php:217 
+#: includes/emails/class-qwc-send-quote.php:215
+msgid "Choose which format of email to send."
+msgstr "Escoja un formato para los correos."
+
+#: includes/admin/class-quotes-global-settings.php:101
+msgid ""
+"Display a custom name for Cart page when cart contains only quotable "
+"products."
+msgstr ""
+"Mostrar un nombre personalizado para la página del carrito cuando contiene "
+"sólo productos cotizables"
+
+#: class-quotes-wc.php:170
+msgid "Display Product Price"
+msgstr "Mostrar el precio del producto"
+
+#: includes/emails/class-qwc-request-new-quote.php:245 
+#: includes/emails/class-qwc-request-sent.php:207 
+#: includes/emails/class-qwc-send-quote.php:205
+msgid "Email Heading"
+msgstr "Encabezado del correo"
+
+#: includes/emails/class-qwc-request-new-quote.php:253 
+#: includes/emails/class-qwc-request-sent.php:215 
+#: includes/emails/class-qwc-send-quote.php:213
+msgid "Email type"
+msgstr "Tipo de correo"
+
+#: includes/admin/class-quotes-global-settings.php:56
+msgid "Enable Price Display:"
+msgstr "Activar el precio del producto:"
+
+#: class-quotes-wc.php:158
+msgid "Enable Quotes"
+msgstr "Activar cotizaciones"
+
+#: includes/admin/class-quotes-global-settings.php:47
+msgid "Enable Quotes:"
+msgstr "Activar Cotizaciones:"
+
+#: includes/emails/class-qwc-request-new-quote.php:226 
+#: includes/emails/class-qwc-request-sent.php:195 
+#: includes/emails/class-qwc-send-quote.php:193
+msgid "Enable this email notification"
+msgstr "Activar esta notificación de correo"
+
+#: class-quotes-wc.php:159
+msgid "Enable this to allow customers to ask for a quote for the product."
+msgstr "Activa esto para permitir que los clientes puedan cotizar el producto"
+
+#: class-quotes-wc.php:171
+msgid "Enable this to display the product price on the Shop & Product pages."
+msgstr ""
+"Activa esto para mostrar el precio en las páginas de categorías y en la "
+"página de producto individual"
+
+#: includes/emails/class-qwc-request-new-quote.php:224 
+#: includes/emails/class-qwc-request-sent.php:193 
+#: includes/emails/class-qwc-send-quote.php:191
+msgid "Enable/Disable"
+msgstr "Activar/Desactivar"
+
+#. translators: Email recipients.
+#: includes/emails/class-qwc-request-new-quote.php:233
+msgid "Enter recipients (comma separated) for this email. Defaults to %s"
+msgstr ""
+"Escriba los destinatarios (separados por comas) para esta notificación de "
+"correo. Por defecto es %s"
+
+#: includes/admin/class-quotes-global-settings.php:40
+msgid "Global Settings"
+msgstr "Ajustes Globales"
+
+#. translators: Billing First Name.
+#: templates/emails/plain/send-quote.php:10 templates/emails/send-quote.php:19
+msgid "Hello %s"
+msgstr "Hola %s"
+
+#: includes/admin/class-quotes-global-settings.php:106
+msgid "Hide Address fields at Checkout:"
+msgstr "Ocultar los campos de Dirección en Página de Finalizar Compra"
+
+#: includes/admin/class-quotes-global-settings.php:110
+msgid ""
+"Hide Billing & Shipping Address fields at Checkout if the Cart contains only "
+"quotable products."
+msgstr ""
+"Oculta campos de direcciones del cliente y de despacho al finalizar compra "
+"si el carrito contiene sólo productos cotizables"
+
+#: includes/emails/class-qwc-request-new-quote.php:260 
+#: includes/emails/class-qwc-request-sent.php:222 
+#: includes/emails/class-qwc-send-quote.php:220
+msgid "HTML"
+msgstr "HTML"
+
+#: class-quotes-wc.php:468
+msgid ""
+"It is not possible to add products that require quotes to the Cart along "
+"with ones that do not. Hence, the existing products have been removed from "
+"the Cart."
+msgstr ""
+"No es posible cotizar productos y comprar al mismo tiempo. Debido a esto, "
+"borramos los productos que habían carrito."
+
+#: includes/emails/class-qwc-request-new-quote.php:261 
+#: includes/emails/class-qwc-request-sent.php:223 
+#: includes/emails/class-qwc-send-quote.php:221
+msgid "Multipart"
+msgstr "Múltiple"
+
+#: includes/emails/class-qwc-request-new-quote.php:94 
+#: includes/emails/class-qwc-request-new-quote.php:97 
+#: includes/emails/class-qwc-request-new-quote.php:100 
+#: includes/emails/class-qwc-request-new-quote.php:103 
+#: includes/emails/class-qwc-request-new-quote.php:106 
+#: includes/emails/class-qwc-request-sent.php:83 
+#: includes/emails/class-qwc-send-quote.php:83
+msgid "N/A"
+msgstr "N/A"
+
+#: includes/emails/class-qwc-request-sent.php:24
+msgid "New Quote Request Sent"
+msgstr "Nueva cotización correo cliente"
+
+#: templates/emails/send-quote.php:56
+msgid "Order"
+msgstr "Orden"
+
+#: templates/emails/plain/send-quote.php:34
+msgid "Order date: %s"
+msgstr "Fecha de la solicitud:"
+
+#: templates/emails/plain/send-quote.php:33
+msgid "Order number: %s"
+msgstr "Número de la solicitud:"
+
+#. translators: Payment Link Url.
+#: templates/emails/send-quote.php:40
+msgid "Pay for order"
+msgstr "Realizar el pedido"
+
+#. Author of the plugin
+msgid "Pinal Shah"
+msgstr "Pinal Shah"
+
+#: includes/admin/class-quotes-global-settings.php:92
+msgid "Place Order button text for Quotable products at Checkout."
+msgstr "Texto del botón Confirmar el Pedido en la página de pago"
+
+#: includes/admin/class-quotes-global-settings.php:88
+msgid "Place Order button text for Quotable Products:"
+msgstr "Texto del botón Confirmar el Pedido para los productos cotizables"
+
+#: includes/emails/class-qwc-request-new-quote.php:259 
+#: includes/emails/class-qwc-request-sent.php:221 
+#: includes/emails/class-qwc-send-quote.php:219
+msgid "Plain text"
+msgstr "Texto sin formato"
+
+#: templates/emails/send-quote.php:62
+msgid "Price"
+msgstr "Precio"
+
+#: templates/emails/new-quote-request-sent-customer.php:27 
+#: templates/emails/plain/new-quote-request-sent-customer.php:19 
+#: templates/emails/plain/request-new-quote.php:20 
+#: templates/emails/request-new-quote.php:28 templates/emails/send-quote.php:60
+msgid "Product"
+msgstr "Producto"
+
+#: templates/emails/new-quote-request-sent-customer.php:33 
+#: templates/emails/plain/new-quote-request-sent-customer.php:23 
+#: templates/emails/plain/request-new-quote.php:22 
+#: templates/emails/request-new-quote.php:30
+msgid "Product Price"
+msgstr "Precio del producto"
+
+#: templates/emails/new-quote-request-sent-customer.php:28 
+#: templates/emails/plain/new-quote-request-sent-customer.php:20 
+#: templates/emails/plain/request-new-quote.php:21 
+#: templates/emails/request-new-quote.php:29 templates/emails/send-quote.php:61
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: includes/emails/class-qwc-request-new-quote.php:26 
+#: includes/emails/class-qwc-request-new-quote.php:215
+msgid "Quotation Request for #{order_number}"
+msgstr ""
+"RECIBIDA Solicitud de cotización correspondiente a la orden nº{order_number}"
+
+#: includes/emails/class-qwc-request-sent.php:27 
+#: includes/emails/class-qwc-request-sent.php:184
+msgid "Quotation Request Sent for #{order_number}"
+msgstr ""
+"Enviada solicitud de cotización correspondiente a la orden nº{order_number}"
+
+#: class-quotes-wc.php:615
+msgid "Quote Complete"
+msgstr "Cotización lista"
+
+#: class-quotes-wc.php:646
+msgid "Quote Complete."
+msgstr "Cotización lista."
+
+#: class-quotes-wc.php:363
+msgid "Quote emailed."
+msgstr "Cotización enviada."
+
+#: includes/emails/class-qwc-send-quote.php:26 
+#: includes/emails/class-qwc-send-quote.php:182
+msgid "Quote for #{order_number}"
+msgstr "Cotización correspondiente a la orden nº{order_number}"
+
+#. Plugin Name of the plugin
+msgid "Quotes for WooCommerce"
+msgstr "Quotes for WooCommerce (Cotizaciones para Woocommerce)"
+
+#: includes/emails/class-qwc-request-new-quote.php:230
+msgid "Recipient"
+msgstr "Destinatario"
+
+#: includes/emails/class-qwc-request-new-quote.php:23
+msgid "Request for New Quote"
+msgstr "Nueva cotización correo admin"
+
+#: class-quotes-wc.php:251 includes/admin/class-quotes-global-settings.php:239 
+#: includes/admin/class-quotes-global-settings.php:286 
+#: includes/class-quotes-payment-gateway.php:29
+msgid "Request Quote"
+msgstr "Solicitar Cotización"
+
+#: class-quotes-wc.php:621
+msgid "Resend Quote"
+msgstr "Reenviar cotización"
+
+#: includes/admin/class-quotes-global-settings.php:51
+msgid "Select if you wish to enable quotes for all the products."
+msgstr ""
+"Seleccionar si deseas activar las cotizaciones para todos los productos"
+
+#: includes/admin/class-quotes-global-settings.php:60
+msgid ""
+"Select to display the product price on the Shop & Product pages for all "
+"quotable products."
+msgstr ""
+"Seleccionar para mostrar los precios en todas las páginas de categorías y de "
+"producto individual"
+
+#: class-quotes-wc.php:619 includes/emails/class-qwc-send-quote.php:23
+msgid "Send Quote"
+msgstr "Cotización completada correo cliente"
+
+#: class-quotes-wc.php:700 class-quotes-wc.php:851 
+#: includes/class-quotes-payment-gateway.php:39
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/admin/class-quotes-global-settings.php:65
+msgid "Shop & Product Page Settings"
+msgstr "Ajustes de páginas de tienda y de producto individual"
+
+#: includes/emails/class-qwc-request-new-quote.php:237 
+#: includes/emails/class-qwc-request-sent.php:199 
+#: includes/emails/class-qwc-send-quote.php:197
+msgid "Subject"
+msgstr "Asunto"
+
+#: includes/admin/class-quotes-global-settings.php:76
+msgid ""
+"Text that should be displayed on the Add to Cart button for quotable "
+"products."
+msgstr ""
+"Texto que debe mostrarse en el botón de agregar al carrito para los "
+"productos cotizables"
+
+#. translators: Email Subject.
+#: includes/emails/class-qwc-request-new-quote.php:240 
+#: includes/emails/class-qwc-request-sent.php:202 
+#: includes/emails/class-qwc-send-quote.php:200
+msgid ""
+"This controls the email subject line. Leave blank to use the default subject:"
+" <code>%s</code>."
+msgstr ""
+"Escriba un asunto para estos correos de notificación o déjelo en blanco para "
+"usar el asunto por defecto: <code>%s</code>."
+
+#. translators: Email Heading.
+#: includes/emails/class-qwc-request-new-quote.php:248 
+#: includes/emails/class-qwc-request-sent.php:210 
+#: includes/emails/class-qwc-send-quote.php:208
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: <code>%s</code>."
+msgstr ""
+"Escriba un encabezado para estos correos de notificación o déjelo en blanco "
+"para usar el encabezado por defecto: <code>%s</code>."
+
+#: includes/emails/class-qwc-send-quote.php:24
+msgid "This email is sent to Customers for orders that need quotations."
+msgstr ""
+"Este correo es enviado al cliente cuando la cotización se completa por parte "
+"del encargado del sitio"
+
+#: includes/emails/class-qwc-request-sent.php:25
+msgid "This email is sent to the customer when a quote request is raised"
+msgstr ""
+"Este correo es enviado al cliente cuando este solicita una nueva cotización"
+
+#: includes/emails/class-qwc-request-new-quote.php:24
+msgid ""
+"This email is sent to the site admin when a request for a quotation comes "
+"through."
+msgstr ""
+"Este correo es enviado al encargado del sitio cuando hay nueva una solicitud "
+"de cotización"
+
+#: includes/class-quotes-payment-gateway.php:44
+msgid "This gateway requires no configuration."
+msgstr "No requiere configuración"
+
+#: includes/class-quotes-payment-gateway.php:43
+msgid "This is fictitious payment method used for quotes."
+msgstr "Esta es una forma de pago ficticia usada para las cotizaciones"
+
+#: templates/emails/new-quote-request-sent-customer.php:71 
+#: templates/emails/plain/new-quote-request-sent-customer.php:57 
+#: templates/emails/plain/request-new-quote.php:54 
+#: templates/emails/request-new-quote.php:66
+msgid "This order is awaiting a quote."
+msgstr "Esta solicitud será procesada"
+
+#: includes/class-quotes-payment-gateway.php:64
+msgid "This order is awaiting quote."
+msgstr "Esta orden está esperando cotización"
+
+#. Description of the plugin
+msgid ""
+"This plugin allows you to convert your WooCommerce store into a quote only "
+"store. It will hide the prices for the products and not take any payment at "
+"Checkout. You can then setup prices for the items in the order and send a "
+"notification to the Customer."
+msgstr ""
+"Este plugin le permite convertir su tienda WooCommerce en una sitio para "
+"cotizaciones. Podrá ocultar los precios y las formas de pago al finalizar la "
+"cotización. Puede entonces establecer los precios por los productos "
+"cotizados en la orden y enviárselos a través de una notificación por correo "
+"al cliente"
+
+#. translators: Payment Link Url.
+#: templates/emails/plain/send-quote.php:19 templates/emails/send-quote.php:40
+msgid "To pay for this order please use the following link: %s"
+msgstr "Para pagar el pedido, por favor haga click en el siguiente enlace: %s"
+
+#: includes/class-quotes-payment-gateway.php:85
+msgid "We have received your order. Thank you."
+msgstr "Hemos recibido su solicitud. Gracias."
+
+#: includes/class-quotes-payment-gateway.php:87
+msgid ""
+"We have received your request for a quote. You will be notified via email "
+"soon."
+msgstr ""
+"Hemos recibido tu solicitud de cotización para ser procesada. Ya te enviamos "
+"un correo con los detalles."
+
+#. translators: Admin Url for payment.
+#: templates/emails/plain/request-new-quote.php:56 
+#: templates/emails/request-new-quote.php:71
+msgid "You can view and edit this order in the dashboard here: %s"
+msgstr "Puedes revisar y editar esta orden en el panel administrativo aquí:%s"
+
+#: class-quotes-wc.php:716
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes permiso de acceder a esta página"
+
+#. translators: Site Name.
+#: templates/emails/new-quote-request-sent-customer.php:13 
+#: templates/emails/plain/new-quote-request-sent-customer.php:9
+msgid ""
+"You have made a request for a quote on %s. The details of the order are as "
+"follows:"
+msgstr ""
+"Has enviado una solicitud de cotización a %s. Los detalles de la orden son "
+"los siguientes:"
+
+#. translators: Site Name.
+#: templates/emails/plain/send-quote.php:13 templates/emails/send-quote.php:27
+msgid ""
+"You have received a quotation for your order on %s. The details of the same "
+"are shown below."
+msgstr ""
+"Has recibido una cotización para tu solicitud en %s. Los detalles están a "
+"continuación."
+
+#: templates/emails/new-quote-request-sent-customer.php:73 
+#: templates/emails/plain/new-quote-request-sent-customer.php:59
+msgid "You shall receive a quote email from the site admin soon."
+msgstr "Pronto recibirás un correo con tu cotización de nuestra parte"
