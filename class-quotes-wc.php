@@ -464,8 +464,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				if ( 'YES' === $conflict ) {
 					// Remove existing products.
 					WC()->cart->empty_cart();
-
-					wc_add_notice( __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quote-wc' ), $notice_type = 'notice' );
+					$message = apply_filters( 'qwc_cart_conflict_msg', __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quote-wc' ) );
+					wc_add_notice( $message, $notice_type = 'notice' );
 				}
 			}
 
