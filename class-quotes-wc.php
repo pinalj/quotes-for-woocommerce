@@ -451,7 +451,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			$conflict = 'NO';
 
-			if ( count( WC()->cart->cart_contents ) > 0 ) {
+			if ( isset( WC()->cart ) && count( WC()->cart->cart_contents ) > 0 ) {
 				// If product requires confirmation and cart contains product that does not.
 				if ( $product_quotable && ! $cart_contains_quotable ) {
 					$conflict = 'YES';
