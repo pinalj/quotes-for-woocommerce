@@ -360,7 +360,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					array(
 						'ajax_url'  => $ajax_url,
 						'order_id'  => $post->ID,
-						'email_msg' => __( 'Quote emailed.', 'quote-wc' ),
+						'email_msg' => __( 'Quote emailed', 'quote-wc' ),
 					)
 				);
 				wp_enqueue_script( 'qwc-admin' );
@@ -464,8 +464,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				if ( 'YES' === $conflict ) {
 					// Remove existing products.
 					WC()->cart->empty_cart();
-
-					wc_add_notice( __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quote-wc' ), $notice_type = 'notice' );
+					$message = apply_filters( 'qwc_cart_conflict_msg', __( 'It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart.', 'quote-wc' ) );
+					wc_add_notice( $message, $notice_type = 'notice' );
 				}
 			}
 
@@ -622,7 +622,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					}
 					?>
 					<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
-					<text style='margin-left:0px;' type='hidden' id='qwc_msg'></text>
+					<text style='margin-left:0px; font-weight: bold; font-size: 20px;' type='hidden' id='qwc_msg'></text>
 					<?php
 				}
 			}
@@ -684,6 +684,11 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				// Update the quote status.
 				update_post_meta( $order_id, '_quote_status', 'quote-sent' );
+				// Add an order note.
+				$order         = wc_get_order( $order_id );
+				$billing_email = $order->get_billing_email();
+				$note          = __( 'Quote email sent to ', 'quote-wc' ) . $billing_email;
+				$order->add_order_note( $note );
 				echo 'quote-sent';
 			}
 			die();
@@ -806,13 +811,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function billing_fields( $fields = array() ) {
 			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
-				unset( $fields['billing_company'] );
-				unset( $fields['billing_address_1'] );
-				unset( $fields['billing_address_2'] );
-				unset( $fields['billing_state'] );
-				unset( $fields['billing_city'] );
-				unset( $fields['billing_postcode'] );
-				unset( $fields['billing_country'] );
+				$qwc_hide_fields_list = apply_filters(
+					'qwc_hide_billing_fields',
+					array(
+						'billing_company'   => 'billing_company',
+						'billing_address_1' => 'billing_address_1',
+						'billing_address_2' => 'billing_address_2',
+						'billing_state'     => 'billing_state',
+						'billing_city'      => 'billing_city',
+						'billing_postcode'  => 'billing_postcode',
+						'billing_country'   => 'billing_country',
+					)
+				);
+
+				foreach( $qwc_hide_fields_list as $field_name ) {
+					unset( $fields[ $field_name ] );
+				}
 			}
 
 			return $fields;
@@ -827,13 +841,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function checkout_fields( $fields ) {
 			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
-				unset( $fields['billing']['billing_company'] );
-				unset( $fields['billing']['billing_country'] );
-				unset( $fields['billing']['billing_address_1'] );
-				unset( $fields['billing']['billing_address_2'] );
-				unset( $fields['billing']['billing_city'] );
-				unset( $fields['billing']['billing_state'] );
-				unset( $fields['billing']['billing_postcode'] );
+				$qwc_hide_fields_list = apply_filters(
+					'qwc_hide_billing_fields_at_checkout',
+					array(
+						'billing_company'   => 'billing_company',
+						'billing_address_1' => 'billing_address_1',
+						'billing_address_2' => 'billing_address_2',
+						'billing_state'     => 'billing_state',
+						'billing_city'      => 'billing_city',
+						'billing_postcode'  => 'billing_postcode',
+						'billing_country'   => 'billing_country',
+					)
+				);
+
+				foreach( $qwc_hide_fields_list as $field_name ) {
+					unset( $fields['billing'][ $field_name ] );
+				}
 			}
 
 			return $fields;
