@@ -360,7 +360,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					array(
 						'ajax_url'  => $ajax_url,
 						'order_id'  => $post->ID,
-						'email_msg' => __( 'Quote emailed.', 'quote-wc' ),
+						'email_msg' => __( 'Quote emailed', 'quote-wc' ),
 					)
 				);
 				wp_enqueue_script( 'qwc-admin' );
@@ -622,7 +622,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					}
 					?>
 					<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
-					<text style='margin-left:0px;' type='hidden' id='qwc_msg'></text>
+					<text style='margin-left:0px; font-weight: bold; font-size: 20px;' type='hidden' id='qwc_msg'></text>
 					<?php
 				}
 			}
@@ -684,6 +684,11 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				// Update the quote status.
 				update_post_meta( $order_id, '_quote_status', 'quote-sent' );
+				// Add an order note.
+				$order         = wc_get_order( $order_id );
+				$billing_email = $order->get_billing_email();
+				$note          = __( 'Quote email sent to ', 'quote-wc' ) . $billing_email;
+				$order->add_order_note( $note );
 				echo 'quote-sent';
 			}
 			die();
