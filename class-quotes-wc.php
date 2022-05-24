@@ -783,7 +783,20 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				$title = esc_attr__( $cart_name, 'quote-wc' ); //phpcs:ignore
 			}
-
+			if ( is_wc_endpoint_url( 'order-received' ) && wc_get_page_id( 'checkout' ) === $id ) {
+				global $wp;
+			
+				$order_id     = absint( $wp->query_vars['order-received'] );
+				$order        = new WC_Order( $order_id );
+				$order_status = $order->get_status();
+				if ( in_array( $order_status, array( 'completed', 'on-hold' ) ) ) { // phpcs:ignore
+					$title = apply_filters( 'qwc_change_checkout_page_title', $title, 'order-received', $order_status );
+				} elseif ( $order->get_status() === 'pending' ) {
+					$title = apply_filters( 'qwc_change_checkout_page_title', $title, 'order-received', $order_status );
+				}
+			} elseif ( is_wc_endpoint_url( 'order-pay' ) && wc_get_page_id( 'checkout' ) === $id ) {
+				$title = apply_filters( 'qwc_change_checkout_page_title', $title, 'order-pay', 'pending' );
+			}
 			return $title;
 		}
 
