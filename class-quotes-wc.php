@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.8';
+		public $version = '1.9';
 
 		/**
 		 * Construct.
@@ -785,7 +785,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 			if ( is_wc_endpoint_url( 'order-received' ) && wc_get_page_id( 'checkout' ) === $id ) {
 				global $wp;
-			
+
 				$order_id     = absint( $wp->query_vars['order-received'] );
 				$order        = new WC_Order( $order_id );
 				$order_status = $order->get_status();
