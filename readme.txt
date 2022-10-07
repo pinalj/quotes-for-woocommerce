@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 5.8
-Stable tag: 1.8
+Tested up to: 6.0
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -28,8 +28,9 @@ The users can then make the payments using the link in the email or the My Accou
 1. Install and activate the plugin from the Wordpress->Plugins page. 
 2. Once the plugin is enabled, a product can be setup as quotable using the settings in Product Data->Inventory tab.
 3. Once enabled, the price for the product is hidden from the user.
-4. User can add such products to the cart and place orders without making a payment.
-5. Payments can be collected once a quote email is sent to the user.
+4. Settings are available to enable/disable prices for quote products.
+5. User can add such products to the cart and place orders without making a payment.
+6. Payments can be collected once a quote email is sent to the user.
 
 == Screenshots ==
 
@@ -42,6 +43,14 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.9 (25.05.2022) =
+* Enhancement - Add an order note to the WooCommerce Order once a quote email has been sent.
+* Enhancement - Added .po file for Spanish. Thank you @
+* Tweak - Allow site admin to change the field list displayed/hidden at Checkout when 'Hide Address fields at Checkout' is enabled using <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#display-country-field-in-billing-at-checkout-when-hide-address-fields-at-checkout-is-enabled" target="_blank">a hook.<a>
+* Tweak - Add <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#change-conflict-message-displayed-on-the-cart-page-when-products-containing-quotes-and-without-quotes-are-added-at-the-same-time" target="_blank">hook</a> to change the conflict message displayed when products with quotes are added to carts containing normal WooCommerce products and vice-versa.
+* Tweak - Added <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#change-page-title-for-checkout-page-and-pay-for-order-page" target="_blank">hook</a> to change the page title for Checkout and Order Payment page.
+* Fix - Prices are hidden in the WordPress admin dashboard when quotes are enabled for products in the Product listing page.
 
 = 1.8 (10.08.2021) =
 * Tweak - Added the ability to display item attributes in the initial quote emails sent to the site admin & customer.'
