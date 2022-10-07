@@ -14,7 +14,7 @@
 function product_quote_enabled( $product_id ) {
 	$quote_enabled = false;
 
-	if ( ! is_admin() ) {
+	if ( ! is_admin() || wp_doing_ajax() ) {
 		$quote_setting = get_post_meta( $product_id, 'qwc_enable_quotes', true );
 
 		if ( 'on' === $quote_setting ) {
