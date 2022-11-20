@@ -1,0 +1,9 @@
+<wpml-config>
+
+<admin-texts>
+	<key name="qwc_place_order_text"/>
+	<key name="qwc_add_to_cart_button_text"/>
+	<key name="qwc_cart_page_name"/>
+</admin-texts>
+
+</wpml-config>
