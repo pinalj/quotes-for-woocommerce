@@ -106,11 +106,10 @@ class QWC_Request_Sent extends WC_Email {
 
 		$order_obj->order_id = $order_id;
 
-		$order = new WC_order( $order_id );
+		$order = wc_get_order( $order_id );
 
 		// Order date.
-		$post_data             = get_post( $order_id );
-		$order_obj->order_date = $post_data->post_date;
+		$order_obj->order_date = $order->get_date_created();
 
 		// Email address.
 		$order_obj->billing_email = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_email : $order->get_billing_email();
@@ -119,7 +118,7 @@ class QWC_Request_Sent extends WC_Email {
 		$order_obj->customer_id = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->user_id : $order->get_user_id();
 
 		// Quote status.
-		$order_obj->quote_status = get_post_meta( $order_id, '_quote_status', true );
+		$order_obj->quote_status = $order->get_meta( '_quote_status' );
 
 		$order_obj->blogname = get_option( 'blogname' );
 		return $order_obj;

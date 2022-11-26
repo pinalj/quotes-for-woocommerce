@@ -55,14 +55,14 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		 * @return array - Payment processed status.
 		 */
 		public function process_payment( $order_id ) {
-			$order = new WC_Order( $order_id );
+			$order = wc_get_order( $order_id );
 
 			// Add meta.
-			update_post_meta( $order_id, '_qwc_quote', '1' );
+			$order->update_meta_data( '_qwc_quote', '1' );
 
 			// Add custom order note.
 			$order->add_order_note( esc_html__( 'This order is awaiting quote.', 'quote-wc' ) );
-
+			$order->save();
 			// Remove cart.
 			WC()->cart->empty_cart();
 

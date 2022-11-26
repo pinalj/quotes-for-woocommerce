@@ -331,9 +331,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_thankyou_css( $order_id ) {
-			$quote_status = get_post_meta( $order_id, '_quote_status', true );
+			$order        = wc_get_order( $order_id );
+			$quote_status = $order->get_meta( '_quote_status' );
 
-			$order = new WC_Order( $order_id );
 			if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
 				$plugin_version = get_option( 'quotes_for_wc' );
 				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
@@ -347,8 +347,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_load_js() {
 
-			global $post;
-			if ( isset( $post->post_type ) && 'shop_order' === $post->post_type ) {
+			$include  = false;
+			$order_id = 0;
+			if ( is_hpos_enabled() ) {
+				if ( isset( $_GET['page'], $_GET['id'] ) && 'wc-orders' === $_GET['page'] && $_GET['id'] > 0 ) { //phpcs:ignore WordPress.Security.NonceVerification
+					$include  = true;
+					$order_id = sanitize_text_field( wp_unslash( $_GET['id'] ) ); //phpcs:ignore WordPress.Security.NonceVerification
+				}
+			} else {
+				global $post;
+				if ( isset( $post->post_type ) && 'shop_order' === $post->post_type ) {
+					$include  = true;
+					$order_id = $post->ID;
+				}
+			}
+
+			if ( $include && $order_id > 0 ) {
 				$plugin_version = get_option( 'quotes_for_wc' );
 				wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', $plugin_version, false );
 
@@ -359,7 +373,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					'qwc_params',
 					array(
 						'ajax_url'  => $ajax_url,
-						'order_id'  => $post->ID,
+						'order_id'  => $order_id,
 						'email_msg' => __( 'Quote emailed', 'quote-wc' ),
 					)
 				);
@@ -506,7 +520,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_prevent_cancel( $return, $order ) {
-			if ( '1' === get_post_meta( $order->get_id(), '_qwc_quote', true ) ) {
+			if ( '1' === $order->get_meta( '_qwc_quote' ) ) {
 				return false;
 			}
 
@@ -563,7 +577,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			} else {
 				$quote_status = 'quote-complete';
 			}
-			update_post_meta( $order_id, '_quote_status', $quote_status );
+			$order = wc_get_order( $order_id );
+			$order->update_meta_data( '_quote_status', $quote_status );
+			$order->save();
 		}
 
 		/**
@@ -582,7 +598,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			if ( $order->has_status( 'pending' ) && 'quotes-gateway' === $order_payment_method ) {
 
 				// Get the order meta to check if quote has been sent or no.
-				$quote_status = get_post_meta( $order_id, '_quote_status', true );
+				$quote_status = $order->get_meta( '_quote_status' );
 
 				// Check the order actions.
 				if ( 'quote-pending' === $quote_status && isset( $actions['pay'] ) ) {
@@ -607,7 +623,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$order_id     = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->id : $order->get_id();
 			$order_status = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->status : $order->get_status();
 
-			$quote_status = get_post_meta( $order_id, '_quote_status', true );
+			$quote_status = $order->get_meta( '_quote_status' );
 
 			if ( in_array( $order_status, apply_filters( 'qwc_edit_allowed_order_statuses_for_sending_quotes', array( 'pending' ) ), true ) ) {
 				if ( 'quote-pending' === $quote_status ) {
@@ -655,7 +671,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public static function quote_status_update( $order_id, $_status ) {
-			update_post_meta( $order_id, '_quote_status', $_status );
+			$order = wc_get_order( $order_id );
+			$order->update_meta_data( '_quote_status', $_status );
+			$order->save();
 		}
 
 		/**
@@ -669,7 +687,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( $order_id > 0 ) {
 
-				$quote_status = get_post_meta( $order_id, '_quote_status', true );
+				$order        = wc_get_order( $order_id );
+				$quote_status = $order->get_meta( '_quote_status' );
 				// Allowed quote statuses.
 				$_status = array(
 					'quote-complete',
@@ -683,12 +702,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				}
 
 				// Update the quote status.
-				update_post_meta( $order_id, '_quote_status', 'quote-sent' );
+				$order->update_meta_data( '_quote_status', 'quote-sent' );
 				// Add an order note.
-				$order         = wc_get_order( $order_id );
 				$billing_email = $order->get_billing_email();
 				$note          = __( 'Quote email sent to ', 'quote-wc' ) . $billing_email;
 				$order->add_order_note( $note );
+				$order->save();
 				echo 'quote-sent';
 			}
 			die();
