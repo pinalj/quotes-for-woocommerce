@@ -18,6 +18,8 @@ $opening_paragraph = __( 'A request for quote has been made by %s and is awaitin
 $billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
 $billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name();
 if ( $order_details && $billing_first_name && $billing_last_name ) :
+	$order_id  = $order_details->order_id;
+	$order_url = is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 	?>
 	<p><?php echo sprintf( esc_html( $opening_paragraph ), esc_html( $billing_first_name . ' ' . $billing_last_name ) ); ?></p>
 <?php endif; ?>
@@ -68,7 +70,7 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 <p>
 	<?php
 	// translators: Admin Url for payment.
-	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), esc_url( admin_url( 'post.php?post=' . $order_details->order_id . '&action=edit' ) ) ) ) );
+	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), esc_url( $order_url ) ) ) );
 	?>
 </p>
 <?php do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email ); ?>

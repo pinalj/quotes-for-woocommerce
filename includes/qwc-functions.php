@@ -5,6 +5,7 @@
  * @package Quotes for WooCommerce
  */
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 /**
  * Returns whether quotes are enabled.
  *
@@ -154,4 +155,23 @@ function qwc_order_display_price( $order ) {
 
 	return $display;
 
+}
+
+/**
+ * Returns if HPOS is enabled.
+ *
+ * @return bool
+ * @since 1.10
+ */
+function is_hpos_enabled() {
+
+	if ( version_compare( WOOCOMMERCE_VERSION, '7.1.0' ) < 0 ) {
+		return false;
+	}
+
+	if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		return true;
+	}	
+
+	return false;		
 }

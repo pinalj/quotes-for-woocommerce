@@ -18,6 +18,7 @@ class QWC_Email_Manager {
 
 		add_action( 'woocommerce_checkout_order_processed', array( &$this, 'qwc_init_quote_emails' ), 10, 1 );
 		add_filter( 'woocommerce_email_classes', array( &$this, 'qwc_init_emails' ) );
+		add_filter( 'pllwc_order_email_actions', array( &$this, 'qwc_order_emails_list' ), 10, 1 );
 
 		// Email Actions.
 		$email_actions = array(
@@ -33,6 +34,20 @@ class QWC_Email_Manager {
 		}
 
 		add_filter( 'woocommerce_template_directory', array( $this, 'qwc_template_directory' ), 10, 2 );
+	}
+
+	/**
+	 * Translate Plugin Emails for Polylang Pro & Polylang WC.
+	 *
+	 * @param array $actions_list - Email actions.
+	 * @return array $actions_list - Includes plugin email actions.
+	 *
+	 * @since 1.10
+	 */
+	public function qwc_order_emails_list( $actions_list ) {
+
+		array_push( $actions_list, 'qwc_pending_quote_notification', 'qwc_request_sent_notification', 'qwc_send_quote_notification' );
+		return $actions_list;
 	}
 
 	/**

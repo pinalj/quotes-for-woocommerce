@@ -48,8 +48,7 @@ if ( $order ) :
 	if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {
 		$order_date = $order->order_date;
 	} else {
-		$order_post = get_post( $order_details->order_id );
-		$post_date  = strtotime( $order_post->post_date );
+		$post_date  = strtotime( $order->get_date_created() );
 		$order_date = date( 'Y-m-d H:i:s', $post_date ); //phpcs:ignore
 	}
 	?>

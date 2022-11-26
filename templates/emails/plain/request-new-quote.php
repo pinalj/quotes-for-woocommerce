@@ -10,8 +10,10 @@ echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 do_action( 'woocommerce_email_header', $email_heading, $email );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 $billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
-$billing_last_name = ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name(); 
+$billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, "3.0.0" ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name(); 
 if ( $order_details && $billing_first_name && $billing_last_name ) :
+	$order_id  = $order_details->order_id;
+	$order_url = is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 	echo sprintf( $opening_paragraph, $billing_first_name . ' ' . $billing_last_name );
 endif;
 
@@ -47,13 +49,13 @@ if ( $order ) {
         echo $items->get_quantity();
         echo $order->get_formatted_line_subtotal( $items );
         echo "\n";
-            
+
 	} 
     do_action( 'qwc_new_quote_admin_row', $order_details->order_id, $order );
     echo "\n----------------------------------------\n\n";
     echo sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) );
     
-    echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), admin_url( 'post.php?post=' . $order_details->order_id . '&action=edit' ) ) );
+    echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) );
     
     do_action( 'woocommerce_email_footer' );
 }

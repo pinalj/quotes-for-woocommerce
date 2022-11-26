@@ -23,3 +23,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 	include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/qwc-functions.php';
 	include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/class-quotes-wc.php';
 }
+
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'orders_cache', __FILE__, true );
+	}
+}, 999 );
