@@ -349,7 +349,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			$include  = false;
 			$order_id = 0;
-			if ( is_hpos_enabled() ) {
+			if ( qwc_is_hpos_enabled() ) {
 				if ( isset( $_GET['page'], $_GET['id'] ) && 'wc-orders' === $_GET['page'] && $_GET['id'] > 0 ) { //phpcs:ignore WordPress.Security.NonceVerification
 					$include  = true;
 					$order_id = sanitize_text_field( wp_unslash( $_GET['id'] ) ); //phpcs:ignore WordPress.Security.NonceVerification

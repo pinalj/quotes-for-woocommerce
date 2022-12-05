@@ -163,7 +163,7 @@ function qwc_order_display_price( $order ) {
  * @return bool
  * @since 1.10
  */
-function is_hpos_enabled() {
+function qwc_is_hpos_enabled() {
 
 	if ( version_compare( WOOCOMMERCE_VERSION, '7.1.0' ) < 0 ) {
 		return false;

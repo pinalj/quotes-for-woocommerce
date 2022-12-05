@@ -19,7 +19,7 @@ $billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? 
 $billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name();
 if ( $order_details && $billing_first_name && $billing_last_name ) :
 	$order_id  = $order_details->order_id;
-	$order_url = is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
+	$order_url = qwc_is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 	?>
 	<p><?php echo sprintf( esc_html( $opening_paragraph ), esc_html( $billing_first_name . ' ' . $billing_last_name ) ); ?></p>
 <?php endif; ?>
