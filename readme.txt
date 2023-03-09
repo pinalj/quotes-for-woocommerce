@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.0
-Stable tag: 1.9
+Tested up to: 6.1.1
+Stable tag: 1.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -43,6 +43,11 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 1.10 ( 09.03.2023) =
+* Tweak - Made the plugin compatible with WooCommerce HPOS feature.
+* Fix - Fixed compatibility issues with Woodmart Theme.
+* Fix - Fixed some bugs with WPML & Polylang string translations.
 
 = 1.9 (25.05.2022) =
 * Enhancement - Add an order note to the WooCommerce Order once a quote email has been sent.
