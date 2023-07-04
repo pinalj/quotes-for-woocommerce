@@ -23,6 +23,13 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public $version = '1.10';
 
 		/**
+		 * Class instance.
+		 *
+		 * @var $ins
+		 */
+		public static $ins = null;
+
+		/**
 		 * Construct.
 		 */
 		public function __construct() {
@@ -35,11 +42,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			if ( get_option( 'quotes_for_wc' ) !== $this->version ) {
 				add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
 			}
-
-			// Add setting to hide wc prices.
-			add_action( 'woocommerce_product_options_inventory_product_data', array( &$this, 'qwc_setting' ) );
-			// Hook in to save the quote settings.
-			add_action( 'woocommerce_process_product_meta', array( &$this, 'qwc_save_setting' ), 10, 1 );
 
 			// Hide the prices.
 			add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 10, 2 );
@@ -117,6 +119,18 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		}
 
 		/**
+		 * Get instance of the class.
+		 *
+		 * @since 2.0
+		 */
+		public static function get_instance() {
+			if ( null === self::$ins ) {
+				self::$ins = new self; // phpcs:ignore
+			}
+
+			return self::$ins;
+		}
+		/**
 		 * Runs when the plugin is activated.
 		 *
 		 * @since 1.1
@@ -136,61 +150,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		}
 
 		/**
-		 * Add a setting to enable/disabe quotes
-		 * in the Inventory tab.
-		 *
-		 * @since 1.0
-		 */
-		public function qwc_setting() {
-
-			global $post;
-
-			$post_id = ( isset( $post->ID ) && $post->ID > 0 ) ? $post->ID : 0;
-
-			if ( $post_id > 0 ) {
-
-				$enable_quotes  = get_post_meta( $post_id, 'qwc_enable_quotes', true );
-				$quotes_checked = ( 'on' === $enable_quotes ) ? 'yes' : 'no';
-
-				woocommerce_wp_checkbox(
-					array(
-						'id'          => 'qwc_enable_quotes',
-						'label'       => __( 'Enable Quotes', 'quote-wc' ),
-						'description' => __( 'Enable this to allow customers to ask for a quote for the product.', 'quote-wc' ),
-						'value'       => $quotes_checked,
-					)
-				);
-
-				$display        = get_post_meta( $post_id, 'qwc_display_prices', true );
-				$prices_enabled = ( 'on' === $display ) ? 'yes' : 'no';
-
-				woocommerce_wp_checkbox(
-					array(
-						'id'          => 'qwc_display_prices',
-						'label'       => __( 'Display Product Price', 'quote-wc' ),
-						'description' => __( 'Enable this to display the product price on the Shop & Product pages.', 'quote-wc' ),
-						'value'       => $prices_enabled,
-					)
-				);
-
-			}
-		}
-
-		/**
-		 * Save the quotes setting.
-		 *
-		 * @param int $post_id - Product ID.
-		 * @since 1.0
-		 */
-		public function qwc_save_setting( $post_id ) {
-			$enable_quotes = ( isset( $_POST['qwc_enable_quotes'] ) ) ? 'on' : ''; //phpcS:ignore WordPress.Security.NonceVerification
-			update_post_meta( $post_id, 'qwc_enable_quotes', $enable_quotes );
-
-			$display = ( isset( $_POST['qwc_display_prices'] ) ) ? 'on' : ''; //phpcS:ignore WordPress.Security.NonceVerification
-			update_post_meta( $post_id, 'qwc_display_prices', $display );
-		}
-
-		/**
 		 * Include files in the admin side.
 		 *
 		 * @since 1.0
@@ -199,6 +158,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php';
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-general-settings-page.php';
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-product-settings.php';
 		}
 
 		/**
@@ -687,7 +648,26 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( $order_id > 0 ) {
 
-				$order        = wc_get_order( $order_id );
+				$qwc_lite = self::get_instance();
+				$status   = $qwc_lite->qwc_send_quote_email( $order_id );
+				if ( $status ) {
+					echo 'quote-sent';
+				}
+			}
+			die();
+		}
+
+		/**
+		 * Send quote email to user.
+		 *
+		 * @param int $order_id - Order ID.
+		 * @return boolean true|false.
+		 *
+		 * @since 2.0
+		 */
+		public function qwc_send_quote_email( $order_id ) {
+			$order = wc_get_order( $order_id );
+			if ( $order ) {
 				$quote_status = $order->get_meta( '_quote_status' );
 				// Allowed quote statuses.
 				$_status = array(
@@ -708,9 +688,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$note          = __( 'Quote email sent to ', 'quote-wc' ) . $billing_email;
 				$order->add_order_note( $note );
 				$order->save();
-				echo 'quote-sent';
+				return true;
 			}
-			die();
+			return false;
 		}
 
 		/**
@@ -720,46 +700,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_admin_menu() {
 
-			add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array( &$this, 'qwc_settings' ) );
-			$page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings', array( &$this, 'qwc_settings' ) );
+			add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array( 'Quotes_Global_Settings', 'qwc_settings' ) );
+			$page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings', array( 'Quotes_Global_Settings', 'qwc_settings' ) );
 			remove_submenu_page( 'qwc_settings', 'qwc_settings' );
 
-		}
-
-		/**
-		 * Adds the content to Quotes->Settings page
-		 *
-		 * @since 1.5
-		 */
-		public function qwc_settings() {
-
-			if ( is_user_logged_in() ) {
-				global $wpdb;
-				// Check the user capabilities.
-				if ( ! current_user_can( 'manage_woocommerce' ) ) {
-					wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'quote-wc' ) );
-				}
-
-				?>
-
-				<h1><?php esc_html_e( 'Quote Settings' ); ?></h1>
-				<br>
-				<div>
-				<form method="post" action="options.php">
-					<?php settings_errors(); ?>
-					<?php settings_fields( 'qwc_bulk_settings' ); ?>
-					<?php do_settings_sections( 'qwc_bulk_page' ); ?>
-					<?php submit_button(); ?>    
-				</form>
-				<form method="post" action="options.php">
-					<?php settings_fields( 'quote_settings' ); ?>
-					<?php do_settings_sections( 'qwc_page' ); ?>
-					<?php submit_button(); ?>    
-				</form>
-
-				</div>
-				<?php
-			}
 		}
 
 		/**
