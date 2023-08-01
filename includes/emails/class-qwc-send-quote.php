@@ -56,7 +56,9 @@ class QWC_Send_Quote extends WC_Email {
 
 		if ( $order_id > 0 && $send_email ) {
 
-			$this->object = $this->get_order_details( $order_id );
+			$this->find    = array();
+			$this->replace = array();
+			$this->object  = $this->get_order_details( $order_id );
 
 			// Allowed quote statuses.
 			$_status = array(
