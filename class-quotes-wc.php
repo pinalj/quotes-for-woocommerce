@@ -35,6 +35,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function __construct() {
 
 			define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+			define( 'QUOTES_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			define( 'QUOTES_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 
 			// Initialize settings.
 			register_activation_hook( __FILE__, array( &$this, 'qwc_activate' ) );
@@ -116,6 +118,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// Add Settings link in Plugins page.
 			$plugin = dirname( plugin_basename( __FILE__ ) ) . '/quotes-woocommerce.php';
 			add_action( 'plugin_action_links_' . $plugin, array( &$this, 'qwc_plugin_settings_link' ), 10, 1 );
+
+			// Checkout Blocks Payment Gateway Integration.
+			add_action( 'woocommerce_blocks_loaded', array( __CLASS__, 'qwc_quotes_gateway_woocommerce_block_support' ) );
 		}
 
 		/**
@@ -852,7 +857,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			return array_merge( $settings_link, $links );
 		}
 
-
+		/**
+		 * Registers WooCommerce Blocks integration.
+		 *
+		 * @since 2.0
+		 */
+		public static function qwc_quotes_gateway_woocommerce_block_support() {
+			if ( class_exists( 'Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType' ) ) {
+				require_once 'includes/blocks/class-quotes-payment-gateway-blocks.php';
+				add_action(
+					'woocommerce_blocks_payment_method_type_registration',
+					function( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
+						$payment_method_registry->register( new WC_Quotes_Gateway_Blocks_Support );
+					}
+				);
+			}
+		}
 	} // end of class
 }
-$quotes_wc = new Quotes_WC();
+Quotes_WC::get_instance();
