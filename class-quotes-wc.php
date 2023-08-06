@@ -865,6 +865,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public static function qwc_quotes_gateway_woocommerce_block_support() {
 			if ( class_exists( 'Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType' ) ) {
 				require_once 'includes/blocks/class-quotes-payment-gateway-blocks.php';
+				include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/blocks/class-quotes-wc-blocks-integration.php';
 				add_action(
 					'woocommerce_blocks_payment_method_type_registration',
 					function( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
