@@ -29,7 +29,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' );
 
 			// Actions.
-			add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
+			add_action( 'woocommerce_thankyou_quotes-gateway', array( $this, 'thankyou_page' ) );
 		}
 
 		/**
@@ -40,7 +40,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 
 			echo '<h3>' . esc_attr( $title ) . '</h3>';
 
-			echo '<p>' . esc_html__( 'This is fictitious payment method used for quotes.', 'quote-wc' ) . '</p>';
+			echo '<p>' . esc_html__( 'This is a fictitious payment method used for quotes.', 'quote-wc' ) . '</p>';
 			echo '<p>' . esc_html__( 'This gateway requires no configuration.', 'quote-wc' ) . '</p>';
 
 			// Hides the save button.
@@ -80,11 +80,12 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		 */
 		public function thankyou_page( $order_id ) {
 			$order = new WC_Order( $order_id );
-
-			if ( 'completed' === $order->get_status() ) {
-				echo '<p>' . esc_html__( 'We have received your order. Thank you.', 'quote-wc' ) . '</p>';
-			} else {
-				echo '<p>' . esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' ) . '</p>';
+			if ( $order ) {
+				if ( 'completed' === $order->get_status() ) {
+					echo '<p>' . esc_html__( 'We have received your order. Thank you.', 'quote-wc' ) . '</p>';
+				} else {
+					echo '<p>' . esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' ) . '</p>';
+				}
 			}
 		}
 

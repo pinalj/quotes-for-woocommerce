@@ -1,3 +1,50 @@
 span.woocommerce-Price-amount.amount {
     display: none;
 }
+/* Checkout Block Order Summary */
+/* Subtotal */
+.wp-block-woocommerce-checkout-order-summary-subtotal-block {
+    display: none;
+}
+/* Total */
+.wc-block-components-totals-footer-item {
+    display: none;
+}
+/* Item total */
+/*.wc-block-components-order-summary-item__total-price {
+    display: none;
+}*/
+/*.wc-block-components-product-price {
+    display: none;
+}*/
+/* Product Description price/qty */
+div.wc-block-components-order-summary-item__description span.wc-block-components-product-price {
+    display: none;
+} 
+/* Shipping amt */
+.wc-block-components-totals-item__value {
+    display: none;
+}
+/* Cart Block */
+.wp-block-woocommerce-cart-order-summary-block {
+    display: none;
+}
+.wc-block-cart-item__total {
+    display: none;
+}
+.wc-block-cart-items__header-total {
+    display: none;
+}
+.wc-block-components-product-price {
+    display: none;
+}
+
+   
+/* Only for large screens */
+@media (min-width: 700px) {
+    .wc-block-cart__sidebar {
+        position: absolute;
+        top: 100%;
+        right: 40%;
+    }
+}
