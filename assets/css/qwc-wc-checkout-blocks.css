@@ -1,0 +1,20 @@
+/* Checkout Block Billing & Shipping Section*/
+/* Address Details */
+.wc-block-components-address-form__address_1 {
+    display: none;
+}
+.wc-block-components-address-form__address_2 {
+    display: none;
+}
+.wc-block-components-country-input {
+    display: none;
+}
+.wc-block-components-address-form__city {
+    display: none;
+}
+.wc-block-components-state-input {
+    display: none;
+}
+.wc-block-components-address-form__postcode {
+    display: none;
+}
