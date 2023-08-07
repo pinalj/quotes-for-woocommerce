@@ -236,11 +236,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				}
 			}
 
-			if ( is_checkout() ) { // CSS for WC Blocks.
-				if ( 'on' === get_option( 'qwc_hide_address_fields', '' ) ) {
-					wp_enqueue_style( 'qwc-checkout-blocks', plugins_url( '/assets/css/qwc-wc-checkout-blocks.css', __FILE__ ), '', $plugin_version, false );
-				}
-			}
 			// Add css file only if cart contains products that require quotes.
 			if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
 				wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
