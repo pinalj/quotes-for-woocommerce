@@ -1,15 +1,15 @@
-# Copyright (C) 2022 Pinal Shah
+# Copyright (C) 2023 Pinal Shah
 # This file is distributed under the same license as the Quotes for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 1.9\n"
+"Project-Id-Version: Quotes for WooCommerce 2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-05T17:13:47+00:00\n"
+"POT-Creation-Date: 2023-08-08T17:17:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: quote-wc\n"
@@ -26,145 +26,152 @@ msgstr ""
 msgid "Pinal Shah"
 msgstr ""
 
-#: class-quotes-wc.php:158
-msgid "Enable Quotes"
-msgstr ""
-
-#: class-quotes-wc.php:159
-msgid "Enable this to allow customers to ask for a quote for the product."
-msgstr ""
-
-#: class-quotes-wc.php:170
-msgid "Display Product Price"
-msgstr ""
-
-#: class-quotes-wc.php:171
-msgid "Enable this to display the product price on the Shop & Product pages."
-msgstr ""
-
-#: class-quotes-wc.php:251
-#: includes/admin/class-quotes-global-settings.php:239
-#: includes/admin/class-quotes-global-settings.php:286
+#: class-quotes-wc.php:217
+#: includes/admin/class-quotes-general-settings-page.php:239
+#: includes/admin/class-quotes-general-settings-page.php:286
+#: includes/blocks/class-quotes-payment-gateway-blocks.php:82
 #: includes/class-quotes-payment-gateway.php:29
 msgid "Request Quote"
 msgstr ""
 
-#: class-quotes-wc.php:377
+#: class-quotes-wc.php:343
 msgid "Quote emailed"
 msgstr ""
 
 #. translators: Leave price blanks as its not be displayed.
-#: class-quotes-wc.php:443
+#: class-quotes-wc.php:409
 msgid "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
 msgstr ""
 
-#: class-quotes-wc.php:481
+#: class-quotes-wc.php:447
 msgid "It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart."
 msgstr ""
 
-#: class-quotes-wc.php:631
+#: class-quotes-wc.php:597
 msgid "Quote Complete"
 msgstr ""
 
-#: class-quotes-wc.php:635
+#: class-quotes-wc.php:601
 #: includes/emails/class-qwc-send-quote.php:23
 msgid "Send Quote"
 msgstr ""
 
-#: class-quotes-wc.php:637
+#: class-quotes-wc.php:603
 msgid "Resend Quote"
 msgstr ""
 
-#: class-quotes-wc.php:662
+#: class-quotes-wc.php:628
 msgid "Quote Complete."
 msgstr ""
 
-#: class-quotes-wc.php:708
+#: class-quotes-wc.php:693
 msgid "Quote email sent to "
 msgstr ""
 
-#: class-quotes-wc.php:724
-#: class-quotes-wc.php:906
+#: class-quotes-wc.php:709
+#: class-quotes-wc.php:855
 #: includes/class-quotes-payment-gateway.php:39
 msgid "Settings"
 msgstr ""
 
-#: class-quotes-wc.php:740
-msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#: class-quotes-wc.php:775
-#: class-quotes-wc.php:801
-#: includes/admin/class-quotes-global-settings.php:266
+#: class-quotes-wc.php:724
+#: class-quotes-wc.php:750
+#: includes/admin/class-quotes-general-settings-page.php:266
 msgid "Cart"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:40
+#: includes/admin/class-quotes-general-settings-page.php:40
 msgid "Global Settings"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:47
+#: includes/admin/class-quotes-general-settings-page.php:47
 msgid "Enable Quotes:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:51
+#: includes/admin/class-quotes-general-settings-page.php:51
 msgid "Select if you wish to enable quotes for all the products."
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:56
+#: includes/admin/class-quotes-general-settings-page.php:56
 msgid "Enable Price Display:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:60
+#: includes/admin/class-quotes-general-settings-page.php:60
 msgid "Select to display the product price on the Shop & Product pages for all quotable products."
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:65
+#: includes/admin/class-quotes-general-settings-page.php:65
 msgid "Shop & Product Page Settings"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:72
+#: includes/admin/class-quotes-general-settings-page.php:72
 msgid "Add to Cart button text:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:76
+#: includes/admin/class-quotes-general-settings-page.php:76
 msgid "Text that should be displayed on the Add to Cart button for quotable products."
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:81
+#: includes/admin/class-quotes-general-settings-page.php:81
 msgid "Cart & Checkout Settings"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:88
+#: includes/admin/class-quotes-general-settings-page.php:88
 msgid "Place Order button text for Quotable Products:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:92
+#: includes/admin/class-quotes-general-settings-page.php:92
 msgid "Place Order button text for Quotable products at Checkout."
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:97
+#: includes/admin/class-quotes-general-settings-page.php:97
 msgid "Cart page Name for Quotable Products:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:101
+#: includes/admin/class-quotes-general-settings-page.php:101
 msgid "Display a custom name for Cart page when cart contains only quotable products."
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:106
+#: includes/admin/class-quotes-general-settings-page.php:106
 msgid "Hide Address fields at Checkout:"
 msgstr ""
 
-#: includes/admin/class-quotes-global-settings.php:110
+#: includes/admin/class-quotes-general-settings-page.php:110
 msgid "Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products."
 msgstr ""
 
+#: includes/admin/class-quotes-global-settings.php:55
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/admin/class-quotes-global-settings.php:73
+msgid "General"
+msgstr ""
+
+#: includes/admin/class-quotes-product-settings.php:45
+msgid "Enable Quotes"
+msgstr ""
+
+#: includes/admin/class-quotes-product-settings.php:46
+msgid "Enable this to allow customers to ask for a quote for the product."
+msgstr ""
+
+#: includes/admin/class-quotes-product-settings.php:57
+msgid "Display Product Price"
+msgstr ""
+
+#: includes/admin/class-quotes-product-settings.php:58
+msgid "Enable this to display the product price on the Shop & Product pages."
+msgstr ""
+
+#: includes/blocks/class-quotes-payment-gateway-blocks.php:80
 #: includes/class-quotes-payment-gateway.php:27
+#: src/index.js:9
 msgid "Ask for Quote"
 msgstr ""
 
 #: includes/class-quotes-payment-gateway.php:43
-msgid "This is fictitious payment method used for quotes."
+msgid "This is a fictitious payment method used for quotes."
 msgstr ""
 
 #: includes/class-quotes-payment-gateway.php:44
@@ -207,19 +214,19 @@ msgstr ""
 #: includes/emails/class-qwc-request-new-quote.php:103
 #: includes/emails/class-qwc-request-new-quote.php:106
 #: includes/emails/class-qwc-request-sent.php:83
-#: includes/emails/class-qwc-send-quote.php:83
+#: includes/emails/class-qwc-send-quote.php:85
 msgid "N/A"
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:223
 #: includes/emails/class-qwc-request-sent.php:192
-#: includes/emails/class-qwc-send-quote.php:190
+#: includes/emails/class-qwc-send-quote.php:192
 msgid "Enable/Disable"
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:225
 #: includes/emails/class-qwc-request-sent.php:194
-#: includes/emails/class-qwc-send-quote.php:192
+#: includes/emails/class-qwc-send-quote.php:194
 msgid "Enable this email notification"
 msgstr ""
 
@@ -234,57 +241,57 @@ msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:236
 #: includes/emails/class-qwc-request-sent.php:198
-#: includes/emails/class-qwc-send-quote.php:196
+#: includes/emails/class-qwc-send-quote.php:198
 msgid "Subject"
 msgstr ""
 
 #. translators: Email Subject.
 #: includes/emails/class-qwc-request-new-quote.php:239
 #: includes/emails/class-qwc-request-sent.php:201
-#: includes/emails/class-qwc-send-quote.php:199
+#: includes/emails/class-qwc-send-quote.php:201
 msgid "This controls the email subject line. Leave blank to use the default subject: <code>%s</code>."
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:244
 #: includes/emails/class-qwc-request-sent.php:206
-#: includes/emails/class-qwc-send-quote.php:204
+#: includes/emails/class-qwc-send-quote.php:206
 msgid "Email Heading"
 msgstr ""
 
 #. translators: Email Heading.
 #: includes/emails/class-qwc-request-new-quote.php:247
 #: includes/emails/class-qwc-request-sent.php:209
-#: includes/emails/class-qwc-send-quote.php:207
+#: includes/emails/class-qwc-send-quote.php:209
 msgid "This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>."
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:252
 #: includes/emails/class-qwc-request-sent.php:214
-#: includes/emails/class-qwc-send-quote.php:212
+#: includes/emails/class-qwc-send-quote.php:214
 msgid "Email type"
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:254
 #: includes/emails/class-qwc-request-sent.php:216
-#: includes/emails/class-qwc-send-quote.php:214
+#: includes/emails/class-qwc-send-quote.php:216
 msgid "Choose which format of email to send."
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:258
 #: includes/emails/class-qwc-request-sent.php:220
-#: includes/emails/class-qwc-send-quote.php:218
+#: includes/emails/class-qwc-send-quote.php:220
 msgid "Plain text"
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:259
 #: includes/emails/class-qwc-request-sent.php:221
-#: includes/emails/class-qwc-send-quote.php:219
+#: includes/emails/class-qwc-send-quote.php:221
 msgid "HTML"
 msgstr ""
 
 #: includes/emails/class-qwc-request-new-quote.php:260
 #: includes/emails/class-qwc-request-sent.php:222
-#: includes/emails/class-qwc-send-quote.php:220
+#: includes/emails/class-qwc-send-quote.php:222
 msgid "Multipart"
 msgstr ""
 
@@ -311,12 +318,12 @@ msgid "This email is sent to Customers for orders that need quotations."
 msgstr ""
 
 #: includes/emails/class-qwc-send-quote.php:26
-#: includes/emails/class-qwc-send-quote.php:181
+#: includes/emails/class-qwc-send-quote.php:183
 msgid "Quote for #{order_number}"
 msgstr ""
 
 #: includes/emails/class-qwc-send-quote.php:27
-#: includes/emails/class-qwc-send-quote.php:174
+#: includes/emails/class-qwc-send-quote.php:176
 msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
 msgstr ""
 
