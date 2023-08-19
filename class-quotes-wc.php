@@ -367,7 +367,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_cart_widget_prices( $price, $cart_item ) {
 
-			$product_id = $cart_item['product_id'];
+			$product_id = apply_filters( 'qwc_cart_check_item_product_id', $cart_item['product_id'], $cart_item );
 
 			$quotes = product_quote_enabled( $product_id );
 
