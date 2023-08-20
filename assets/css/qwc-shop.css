@@ -4,3 +4,6 @@
 .top-cart .woocommerce-Price-amount {
     display: none;
 }
+.cart-contents .woocommerce-Price-amount {
+	display: none;
+}
