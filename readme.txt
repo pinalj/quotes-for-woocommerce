@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.2.2
-Stable tag: 2.0
+Tested up to: 6.3
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -43,6 +43,10 @@ The users can then make the payments using the link in the email or the My Accou
 4. Quote email.
 
 == Changelog ==
+
+= 2.0.1 (21.08.2023 ) =
+* Tweak - Modified the help text for some settings.
+* Tweak - Declared compatibility in code with WC Blocks.
 
 = 2.0 ( 08.08.2023 ) =
 * Tweak - Modified the code to allow for extensibility.
