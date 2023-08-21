@@ -56,7 +56,8 @@ function cart_contains_quotable() {
 			if ( 0 === $item['product_id'] ) {
 				$item['product_id'] = qwc_get_product_id_by_variation_id( $item['variation_id'] );
 			}
-			$quote_enabled = product_quote_enabled( $item['product_id'] );
+			$product_id    = apply_filters( 'qwc_cart_check_item_product_id', $item['product_id'], $item );
+			$quote_enabled = product_quote_enabled( $product_id );
 
 			if ( $quote_enabled ) {
 				$quotable = true;

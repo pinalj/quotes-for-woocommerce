@@ -107,7 +107,7 @@ if ( ! class_exists( 'Quotes_General_Settings' ) ) {
 				array( $this, 'qwc_hide_address_fields_callback' ),
 				'qwc_page',
 				'qwc_cart_settings_section',
-				array( __( 'Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products.', 'quote-wc' ) )
+				array( __( 'Hide Billing & Shipping Address fields at Checkout if the Cart contains only quotable products. Works only for the traditional Checkout page built using WooCommerce shortcodes.', 'quote-wc' ) )
 			);
 
 			register_setting(

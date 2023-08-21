@@ -6,11 +6,11 @@
  * Author: Pinal Shah
  * Requires at least: 4.5
  * WC Requires at least: 3.0
- * WC tested up to: 7.9.0
+ * WC tested up to: 8.0.2
  * Text Domain: quote-wc
  * Domain Path: /languages/
- * License: GPL v2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
+ * License: GNU General Public License v3.0
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package Quotes For WooCommerce
  */
@@ -28,5 +28,6 @@ add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'orders_cache', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
 	}
 }, 999 );
