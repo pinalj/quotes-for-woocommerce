@@ -6,7 +6,8 @@ jQuery( document ).ready( function() {
 		var data = {
 			order_id: qwc_params.order_id,
 			status: 'quote-complete',
-			action: 'qwc_update_status'
+			action: 'qwc_update_status',
+			security_nonce: qwc_params.qwc_status_nonce
 		};
 		
 		jQuery.post( qwc_params.ajax_url, data, function( response ) {
@@ -19,7 +20,8 @@ jQuery( document ).ready( function() {
 		// send an email
 		var data = {
 			order_id: qwc_params.order_id,
-			action: 'qwc_send_quote'
+			action: 'qwc_send_quote',
+			security_nonce: qwc_params.qwc_send_nonce
 		};
 		
 		jQuery.post( qwc_params.ajax_url, data, function( response ) {

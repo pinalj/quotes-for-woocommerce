@@ -338,9 +338,11 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					'qwc-admin',
 					'qwc_params',
 					array(
-						'ajax_url'  => $ajax_url,
-						'order_id'  => $order_id,
-						'email_msg' => __( 'Quote emailed', 'quote-wc' ),
+						'ajax_url'         => $ajax_url,
+						'order_id'         => $order_id,
+						'email_msg'        => __( 'Quote emailed', 'quote-wc' ),
+						'qwc_status_nonce' => wp_create_nonce( 'qwc-update-status-security' ),
+						'qwc_send_nonce'   => wp_create_nonce( 'qwc-send-quote-security' ),
 					)
 				);
 				wp_enqueue_script( 'qwc-admin' );
@@ -616,8 +618,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_update_status() {
-			$order_id     = ( isset( $_POST['order_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
-			$quote_status = ( isset( $_POST['status'] ) ) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-update-status-security' ) ) {
+				wp_send_json_error( 'Invalid security token sent.' );
+				wp_die();
+			}
+			$order_id     = ( isset( $_POST['order_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : 0;
+			$quote_status = ( isset( $_POST['status'] ) ) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : '';
 
 			if ( $order_id > 0 && '' !== $quote_status ) {
 				self::quote_status_update( $order_id, $quote_status );
@@ -649,7 +655,11 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_send_quote() {
 
-			$order_id = ( isset( $_POST['order_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-send-quote-security' ) ) {
+				wp_send_json_error( 'Invalid security token sent.' );
+				wp_die();
+			}
+			$order_id = ( isset( $_POST['order_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : 0;
 
 			if ( $order_id > 0 ) {
 
