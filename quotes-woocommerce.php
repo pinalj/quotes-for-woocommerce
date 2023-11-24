@@ -19,6 +19,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+if (
+	! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ) ) &&
+	! ( is_multisite() && array_key_exists( 'woocommerce/woocommerce.php', get_site_option( 'active_sitewide_plugins', array() ) ) )
+) {
+	if ( ! function_exists( 'deactivate_plugins' ) ) {
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+	add_action(
+		'admin_notices',
+		function() {
+			// translators: plugin name with link.
+			$msg = sprintf( __( 'Please install and activate %s before activating Quotes for WooCommerce.', 'quote-wc' ), '<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>' );
+			?>
+			<div class="notice notice-error">
+				<p><?php echo wp_kses_post( $msg ); ?></p>
+			</div>
+			<?php
+		}
+	);
+	deactivate_plugins( 'quotes-for-woocommerce/quotes-woocommerce.php' );
+	return;
+}
+
 if ( ! class_exists( 'Quotes_WC' ) ) {
 	include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/qwc-functions.php';
 	include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/class-quotes-wc.php';
