@@ -26,7 +26,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->has_fields        = false;
 			$this->method_title      = apply_filters( 'qwc_payment_method_name', __( 'Ask for Quote', 'quote-wc' ) );
 			$this->title             = $this->method_title;
-			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' );
+			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
 
 			// Actions.
 			add_action( 'woocommerce_thankyou_quotes-gateway', array( $this, 'thankyou_page' ) );

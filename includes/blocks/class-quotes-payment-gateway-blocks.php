@@ -1,4 +1,10 @@
 <?php
+/**
+ * Quotes WC Blocks Payment Integration.
+ *
+ * @package Quotes for WooCommerce/Integration
+ */
+
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
 /**
@@ -26,7 +32,7 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 	 * Initializes the payment method type.
 	 */
 	public function initialize() {
-		$this->settings = get_option( 'woocommerce_quotes-gateway_settings', [] );
+		$this->settings = get_option( 'woocommerce_quotes-gateway_settings', array() );
 		$this->gateway  = new Quotes_Payment_Gateway();
 	}
 
@@ -48,18 +54,18 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 		$script_path       = '/build/index.js';
 		$script_asset_path = QUOTES_PLUGIN_DIR . '/build/index.asset.php';
 		$script_asset      = file_exists( $script_asset_path )
-			? require( $script_asset_path )
+			? require $script_asset_path
 			: array(
 				'dependencies' => array(),
-				'version'      => '2.0.0'
+				'version'      => '2.0.0',
 			);
 		$script_url        = QUOTES_PLUGIN_URL . '/' . $script_path;
 
 		wp_register_script(
 			'wc-quotes-payments-blocks',
 			$script_url,
-			$script_asset[ 'dependencies' ],
-			$script_asset[ 'version' ],
+			$script_asset['dependencies'],
+			$script_asset['version'],
 			true
 		);
 
@@ -67,7 +73,7 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 			wp_set_script_translations( 'wc-quotes-payments-blocks', 'woocommerce-gateway-quotes', QUOTES_PLUGIN_DIR . '/languages/' );
 		}
 
-		return [ 'wc-quotes-payments-blocks' ];
+		return array( 'wc-quotes-payments-blocks' );
 	}
 
 	/**
@@ -76,10 +82,10 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 	 * @return array
 	 */
 	public function get_payment_method_data() {
-		return [
-			'title'       => apply_filters( 'qwc_payment_method_name', __( 'Ask for Quote', 'quote-wc' ) ),
-			'description' => '', //$this->get_setting( 'description' )
-			'place_order_label' => '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ),
-		];
+		return array(
+			'title'             => apply_filters( 'qwc_payment_method_name', __( 'Ask for Quote', 'quote-wc' ) ),
+			'description'       => '',
+			'place_order_label' => '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ), // phpcs:ignore
+		);
 	}
 }

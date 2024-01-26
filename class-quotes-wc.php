@@ -44,7 +44,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			if ( get_option( 'quotes_for_wc' ) !== $this->version ) {
 				add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
 			}
-
+			$this->includes();
+			add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
 			// Hide the prices.
 			add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 10, 2 );
 			add_filter( 'woocommerce_variable_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
@@ -98,9 +99,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Admin ajax.
 			add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
-
-			// Admin Menu for Quotes.
-			add_action( 'admin_menu', array( &$this, 'qwc_admin_menu' ), 10 );
 
 			// Added to Cart messages.
 			add_filter( 'wc_add_to_cart_message_html', array( &$this, 'add_to_cart_message' ), 10, 2 );
@@ -162,8 +160,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_include_files_admin() {
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
-			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-global-settings.php';
-			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-general-settings-page.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-product-settings.php';
 		}
 
@@ -175,6 +171,26 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_include_files() {
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
+		}
+
+		/**
+		 * Include the WC Settings files.
+		 */
+		public function includes() {
+			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-wc-settings-section.php';
+			$this->settings     = array();
+			$this->settings[''] = include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-wc-general-settings.php';
+			return apply_filters( 'qwc_add_section_files', $this->settings );
+		}
+
+		/**
+		 * Add Settings tab in WC > Settings.
+		 *
+		 * @param array $settings - Settings tabs list.
+		 */
+		public function add_woocommerce_settings_tab( $settings ) {
+			$settings[] = include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/admin/class-quotes-wc-settings.php';
+			return $settings;
 		}
 
 		/**
@@ -709,19 +725,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		}
 
 		/**
-		 * Adds the Quotes menu to WordPress Dashboard
-		 *
-		 * @since 1.5
-		 */
-		public function qwc_admin_menu() {
-
-			add_menu_page( 'Quotes', 'Quotes', 'manage_woocommerce', 'qwc_settings', array( 'Quotes_Global_Settings', 'qwc_settings' ) );
-			$page = add_submenu_page( 'qwc_settings', __( 'Settings', 'quote-wc' ), __( 'Settings', 'quote-wc' ), 'manage_woocommerce', 'quote_settings', array( 'Quotes_Global_Settings', 'qwc_settings' ) );
-			remove_submenu_page( 'qwc_settings', 'qwc_settings' );
-
-		}
-
-		/**
 		 * Change "Cart" to User Selected name after adding a quote-only product to the cart.
 		 *
 		 * @param string $message  - Added to cart message HTML.
@@ -815,7 +818,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 
-				foreach( $qwc_hide_fields_list as $field_name ) {
+				foreach ( $qwc_hide_fields_list as $field_name ) {
 					unset( $fields[ $field_name ] );
 				}
 			}
@@ -845,7 +848,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 
-				foreach( $qwc_hide_fields_list as $field_name ) {
+				foreach ( $qwc_hide_fields_list as $field_name ) {
 					unset( $fields['billing'][ $field_name ] );
 				}
 			}
@@ -862,7 +865,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public static function qwc_plugin_settings_link( $links ) {
 			$settings_link = array(
-				'settings' => '<a href="admin.php?page=quote_settings">' . __( 'Settings', 'quote-wc' ) . '</a>',
+				'settings' => '<a href="admin.php?page=wc-settings&tab=qwc_quotes_tab">' . __( 'Settings', 'quote-wc' ) . '</a>',
 			);
 			return array_merge( $settings_link, $links );
 		}
