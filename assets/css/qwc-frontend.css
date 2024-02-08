@@ -1,5 +1,5 @@
 span.woocommerce-Price-amount.amount {
-    display: none;
+    display: none !important;
 }
 /* Checkout Block Order Summary */
 /* Subtotal */
