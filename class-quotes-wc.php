@@ -119,6 +119,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Checkout Blocks Payment Gateway Integration.
 			add_action( 'woocommerce_blocks_loaded', array( __CLASS__, 'qwc_quotes_gateway_woocommerce_block_support' ) );
+
+			// Add dismissible notice informing users about the change in menu placement.
+			add_action( 'admin_notices', array( &$this, 'qwc_menu_change_notice' ), 1 );
 		}
 
 		/**
@@ -329,6 +332,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_load_js() {
 
+			$plugin_version = get_option( 'quotes_for_wc' );
+			// File to send Quote Email.
 			$include  = false;
 			$order_id = 0;
 			if ( qwc_is_hpos_enabled() ) {
@@ -345,7 +350,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 
 			if ( $include && $order_id > 0 ) {
-				$plugin_version = get_option( 'quotes_for_wc' );
 				wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', $plugin_version, false );
 
 				$ajax_url = get_admin_url() . 'admin-ajax.php';
@@ -363,6 +367,19 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				);
 				wp_enqueue_script( 'qwc-admin' );
 			}
+			// File to dismiss admin notice.
+			$notice_dismissed = get_option( 'qwc_menu_notice_dismissed', '' );
+			if ( 'dismissed' !== $notice_dismissed ) {
+				wp_register_script( 'qwc-notice', plugins_url( '/assets/js/qwc-notice.js', __FILE__ ), '', $plugin_version, array( 'in_footer' => true ) );
+				wp_localize_script(
+					'qwc-notice',
+					'qwc_notice_params',
+					array(
+						'nonce' => wp_create_nonce( 'qwc-dismiss' ),
+					)
+				);
+				wp_enqueue_script( 'qwc-notice' );
+			}
 		}
 
 		/**
@@ -373,6 +390,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_ajax_admin() {
 			add_action( 'wp_ajax_qwc_update_status', array( &$this, 'qwc_update_status' ) );
 			add_action( 'wp_ajax_qwc_send_quote', array( &$this, 'qwc_send_quote' ) );
+			add_action( 'wp_ajax_qwc_notice_dismissed', array( &$this, 'qwc_notice_dismissed' ) );
 		}
 
 		/**
@@ -868,6 +886,41 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				'settings' => '<a href="admin.php?page=wc-settings&tab=qwc_quotes_tab">' . __( 'Settings', 'quote-wc' ) . '</a>',
 			);
 			return array_merge( $settings_link, $links );
+		}
+
+		/**
+		 * Add menu placement change notice.
+		 *
+		 * @since 2.1.0
+		 */
+		public static function qwc_menu_change_notice() {
+			if ( 'dismissed' === get_option( 'qwc_menu_notice', '' ) ) {
+				return;
+			}
+			$class   = 'notice notice-info is-dismissible qwc_menu_notice';
+			$heading = __( 'Quotes menu has moved!', 'quote-wc' );
+			$message = __( 'The Quotes settings can now be managed from WooCommerce > Settings > Quotes.', 'quote-wc' );
+
+			printf( '<div class="%1$s"><p><h3>%2$s</h3>%3$s</p></div>', esc_attr( $class ), esc_html( $heading ), esc_html( $message ) );
+
+		}
+
+		/**
+		 * Update DB with notice status.
+		 *
+		 * @since 2.1.0
+		 */
+		public function qwc_notice_dismissed() {
+
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'qwc-dismiss' ) ) {
+				die( 'Security check' );
+			}
+
+			if ( isset( $_POST['notice'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['notice'] ) ) ) {
+				$notice_name = sanitize_text_field( wp_unslash( $_POST['notice'] ) );
+				update_option( $notice_name, 'dismissed' );
+			}
+			die();
 		}
 
 		/**
