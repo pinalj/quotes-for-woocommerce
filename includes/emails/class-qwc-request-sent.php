@@ -20,9 +20,10 @@ class QWC_Request_Sent extends WC_Email {
 	 */
 	public function __construct() {
 
-		$this->id          = 'qwc_request_sent';
-		$this->title       = __( 'New Quote Request Sent', 'quote-wc' );
-		$this->description = __( 'This email is sent to the customer when a quote request is raised', 'quote-wc' );
+		$this->id             = 'qwc_request_sent';
+		$this->customer_email = true;
+		$this->title          = __( 'New Quote Request Sent', 'quote-wc' );
+		$this->description    = __( 'This email is sent to the customer when a quote request is raised', 'quote-wc' );
 
 		$this->heading = __( 'Quotation Request Sent for #{order_number}', 'quote-wc' );
 		$this->subject = __( '[{blogname}] Quotation Request Sent (Order {order_number}) - {order_date}', 'quote-wc' );

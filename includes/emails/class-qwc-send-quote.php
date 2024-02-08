@@ -19,9 +19,10 @@ class QWC_Send_Quote extends WC_Email {
 	 */
 	public function __construct() {
 
-		$this->id          = 'qwc_send_quote';
-		$this->title       = __( 'Send Quote', 'quote-wc' );
-		$this->description = __( 'This email is sent to Customers for orders that need quotations.', 'quote-wc' );
+		$this->id             = 'qwc_send_quote';
+		$this->customer_email = true;
+		$this->title          = __( 'Send Quote', 'quote-wc' );
+		$this->description    = __( 'This email is sent to Customers for orders that need quotations.', 'quote-wc' );
 
 		$this->heading = __( 'Quote for #{order_number}', 'quote-wc' );
 		$this->subject = __( '[{blogname}] Quotation for (Order {order_number}) - {order_date}', 'quote-wc' );
