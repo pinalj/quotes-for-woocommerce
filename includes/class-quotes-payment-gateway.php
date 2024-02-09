@@ -82,7 +82,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		public function thankyou_page( $message, $order ) {
 
 			if ( $order ) {
-				if ( '1' === $order->get_meta( '_qwc_quote' ) ) {
+				if ( '1' === $order->get_meta( '_qwc_quote' ) && 'pending' === $order->get_status() ) {
 					$message = esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' );
 				}
 			}
