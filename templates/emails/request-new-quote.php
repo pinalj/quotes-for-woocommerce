@@ -8,7 +8,7 @@
 // translators: Billing Name.
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
-
+// translators: Customer Name.
 $opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
 ?>
 
@@ -39,7 +39,7 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 			?>
 			<tr>
 				<td style="text-align:left; border: 1px solid #eee;">
-					<a href='<?php echo esc_url( get_permalink( $product_id ) ); ?>' target='_blank'><?php echo wp_kses_post( $items->get_name() );?></a>
+					<a href='<?php echo esc_url( get_permalink( $product_id ) ); ?>' target='_blank'><?php echo wp_kses_post( $items->get_name() ); ?></a>
 					<?php
 					// allow other plugins to add additional product information here.
 					do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );

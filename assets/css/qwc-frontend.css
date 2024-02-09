@@ -1,5 +1,5 @@
 span.woocommerce-Price-amount.amount {
-    display: none;
+    display: none !important;
 }
 /* Checkout Block Order Summary */
 /* Subtotal */
@@ -11,12 +11,12 @@ span.woocommerce-Price-amount.amount {
     display: none;
 }
 /* Item total */
-/*.wc-block-components-order-summary-item__total-price {
+.wc-block-components-order-summary-item__total-price {
     display: none;
-}*/
-/*.wc-block-components-product-price {
+}
+.wc-block-components-product-price {
     display: none;
-}*/
+}
 /* Product Description price/qty */
 div.wc-block-components-order-summary-item__description span.wc-block-components-product-price {
     display: none;

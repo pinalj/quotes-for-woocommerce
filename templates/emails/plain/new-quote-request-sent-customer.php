@@ -6,11 +6,12 @@ $display_price = false;
 $text_align    = is_rtl() ? 'right' : 'left';
 $margin_side   = is_rtl() ? 'left' : 'right';
 
+// translators: Site Name.
 $opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 do_action( 'woocommerce_email_header', $email_heading, $email );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
-if( $order_details ) {
+if ( $order_details ) {
 	echo sprintf( $opening_paragraph, $site_name );
 }
 

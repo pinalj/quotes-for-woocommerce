@@ -166,13 +166,15 @@ function qwc_order_display_price( $order ) {
  */
 function qwc_is_hpos_enabled() {
 
-	if ( version_compare( WOOCOMMERCE_VERSION, '7.1.0' ) < 0 ) {
-		return false;
+	if ( defined( 'WOOCOMMERCE_VERSION' ) ) {
+		if ( version_compare( WOOCOMMERCE_VERSION, '7.1.0' ) < 0 ) {
+			return false;
+		}
+
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			return true;
+		}
 	}
 
-	if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-		return true;
-	}	
-
-	return false;		
+	return false;
 }

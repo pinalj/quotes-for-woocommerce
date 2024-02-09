@@ -38,6 +38,7 @@ class QWC_Request_New_Quote extends WC_Email {
 		// Other settings.
 		$this->template_base = QUOTES_TEMPLATE_PATH;
 
+		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
 	}
 
 	/**

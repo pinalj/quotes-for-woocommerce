@@ -26,10 +26,10 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->has_fields        = false;
 			$this->method_title      = apply_filters( 'qwc_payment_method_name', __( 'Ask for Quote', 'quote-wc' ) );
 			$this->title             = $this->method_title;
-			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' );
+			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
 
 			// Actions.
-			add_action( 'woocommerce_thankyou_quotes-gateway', array( $this, 'thankyou_page' ) );
+			add_filter( 'woocommerce_thankyou_order_received_text', array( &$this, 'thankyou_page' ), 10, 2 );
 		}
 
 		/**
@@ -76,17 +76,17 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		/**
 		 * Thank You page content.
 		 *
-		 * @param int $order_id - Order ID.
+		 * @param string $message - Thank You page msg.
+		 * @param obj    $order - Order.
 		 */
-		public function thankyou_page( $order_id ) {
-			$order = new WC_Order( $order_id );
+		public function thankyou_page( $message, $order ) {
+
 			if ( $order ) {
-				if ( 'completed' === $order->get_status() ) {
-					echo '<p>' . esc_html__( 'We have received your order. Thank you.', 'quote-wc' ) . '</p>';
-				} else {
-					echo '<p>' . esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' ) . '</p>';
+				if ( '1' === $order->get_meta( '_qwc_quote' ) ) {
+					$message = esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' );
 				}
 			}
+			return $message;
 		}
 
 	}
