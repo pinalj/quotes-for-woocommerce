@@ -1,14 +1,16 @@
 === Quotes for WooCommerce ===
 
 Contributors: pinal.shah
-Tags: woocommerce, quotes, proposals, hide-price, request-a-quote, woocommerce-request-quote
+Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 6.4.3
 Stable tag: 2.1.0
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
+Donate link: https://www.paypal.me/pinalj
 
-This WordPress plugin extends the WooCommerce Plugin. It allows the site admin the ability to send quotes for products. All prices are hidden from the user on all pages until the admin sends a quote. No payments will be taken at Checkout. 
+This plugin allows the site admin the ability to accept quote requests for products. Prices can be hidden. No payments will be taken at Checkout.
 
 == Description ==
 
@@ -22,6 +24,41 @@ Want to convert your WooCommerce store into a Quote only program? This plugin al
 No payment is taken at Checkout. The prices for the product can be setup in the WooCommerce->Orders page and once a quote is finalized, the plugin will send an email to the end user notifying the same.
 
 The users can then make the payments using the link in the email or the My Accounts page.
+
+<strong>What will the Quotes plugin help you achieve?</strong>
+<ul>
+<li>Customize pricing for each order to meet individual customer needs.</li>
+<li>Offer payment flexibility by not taking payment at checkout for quote requests.<li>
+<li>Manage quoting process easily with one-click enable/disable option for all products.</li>
+<li>Enhance customer experience and attract new customers with personalized quotes.</li>
+</ul>
+
+<strong>Introducing the <a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Premium Version</a>: Unlock Advanced Features for Enhanced Quoting and Sales Management</strong>
+
+<ul>
+<li>Enable quotes for select variations of a product</li>
+<li>Customize quote button display based on WordPress User Roles</li>
+<li>Seamlessly process both regular orders and quote requests for all products</li>
+<li>Automatically activate quoting for out-of-stock products</li>
+<li>Streamline communication with automated quote emails</li>
+<li>Centralize quote management on a unified page for efficiency</li>
+<li>Convert quote requests to WooCommerce orders with a single click</li>
+</ul>
+
+<strong>Enable simultaneous quote requests and orders</strong>
+Enable the Request Quote form with a single click. This adds a Request Quote button on single product pages and the standard WooCommerce Add to Cart button.
+
+With both buttons available, customers can make quotation requests and purchase products simultaneously.
+
+<strong>Take quotations for back-ordered products</strong>
+Set up Quotes for WooCommerce Pro to automatically enable quotes for a product as soon as the stock quantity reaches zero. Reach out to the user when the product is back in stock with a quotation email.
+
+<a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Quotes for WooCommerce Pro</a> | <a href="mailto:support@technovama.com">Support Helpdesk</a>
+
+<strong>Effortlessly manage wholesale and retail customers</strong>
+Cater to wholesale and retail customers by enabling quotations based on user roles. The extension allows you to replace the Add to Cart button with the Request Quote button based on user roles.
+
+You can enable wholesale customer quotes while allowing retail users to place a normal WooCommerce order for the same products using WordPress user roles.
 
 == Installation ==
 
@@ -159,3 +196,7 @@ The users can then make the payments using the link in the email or the My Accou
 
 = 1.0 (29.08.2017) =
 * Initial release.
+
+== Upgrade Notice ==
+= 2.1.0 =
+Upgrade to this version in order to use the Premium version without any issues.
