@@ -6,7 +6,7 @@
  * Author: Pinal Shah
  * Requires at least: 4.5
  * WC Requires at least: 4.0
- * WC tested up to: 8.5.2
+ * WC tested up to: 8.6.1
  * Text Domain: quote-wc
  * Domain Path: /languages/
  * License: GNU General Public License v3.0

@@ -4,7 +4,7 @@ Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 6.4.3
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -80,6 +80,9 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.1.1 ( 14.03.2024 ) =
+* Tweak - Add Premium verison link.
 
 = 2.1.0 ( 10.02.2024 ) =
 * Tweak - The Quotes menu has now been moved to WooCommerce > Settings > Quotes.
