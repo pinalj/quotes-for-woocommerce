@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '2.1.0';
+		public $version = '2.1.1';
 
 		/**
 		 * Class instance.
@@ -884,6 +884,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public static function qwc_plugin_settings_link( $links ) {
 			$settings_link = array(
 				'settings' => '<a href="admin.php?page=wc-settings&tab=qwc_quotes_tab">' . __( 'Settings', 'quote-wc' ) . '</a>',
+				'premium'  => '<b><a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">' . __( 'Get Quotes Pro', 'quote-wc' ) . '</a></b>',
 			);
 			return array_merge( $settings_link, $links );
 		}
