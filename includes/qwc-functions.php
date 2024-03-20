@@ -178,3 +178,28 @@ function qwc_is_hpos_enabled() {
 
 	return false;
 }
+
+/**
+ * Modify product level settings in bulk.
+ *
+ * @param array  $products_list - List of products.
+ * @param string $quote_setting_name - Setting meta key.
+ * @param string $quote_setting_value - Settings meta value.
+ *
+ * @since 2.2
+ */
+function qwc_bulk_edit_setting_by_id( $products_list, $quote_setting_name, $quote_setting_value ) {
+
+	if ( '' === $quote_setting_name ) {
+		return;
+	}
+
+	if ( is_array( $products_list ) && count( $products_list ) > 0 ) {
+		foreach ( $products_list as $k => $value ) {
+
+			// Product ID.
+			$theid = isset( $value->ID ) ? $value->ID : $value;
+			update_post_meta( $theid, $quote_setting_name, $quote_setting_value );
+		}
+	}
+}
