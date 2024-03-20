@@ -137,6 +137,7 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'id'   => 'qwc_cart_settings_section',
 				),
 			);
+			$settings = apply_filters( 'qwc_lite_general_settings', $settings );
 			return $settings;
 		}
 
@@ -222,12 +223,17 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			);
 			$product_list = get_posts( $args );
 
-			foreach ( $product_list as $k => $value ) {
-
-				// Product ID.
-				$theid = $value->ID;
-				update_post_meta( $theid, $quote_setting_name, $quote_setting_value );
+			switch ( $quote_setting_name ) {
+				case 'qwc_enable_quotes':
+					$product_list = apply_filters( 'qwc_enable_quote_bulk', $product_list, $quote_setting_value );
+					break;
+				case 'qwc_display_prices':
+					$product_list = apply_filters( 'qwc_enable_price_display_bulk', $product_list, $quote_setting_value );
+					break;
+				default:
+					break;
 			}
+			qwc_bulk_edit_setting_by_id( $product_list, $quote_setting_name, $quote_setting_value );
 
 			wp_reset_postdata();
 
