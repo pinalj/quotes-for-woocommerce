@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Quotes for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 2.0.2\n"
+"Project-Id-Version: Quotes for WooCommerce 2.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-02-10T16:53:28+00:00\n"
+"POT-Creation-Date: 2024-03-24T11:34:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: quote-wc\n"
@@ -79,11 +79,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: class-quotes-wc.php:901
-msgid "Quotes menu has moved!"
+#: class-quotes-wc.php:887
+msgid "Get Quotes Pro"
 msgstr ""
 
 #: class-quotes-wc.php:902
+msgid "Quotes menu has moved!"
+msgstr ""
+
+#: class-quotes-wc.php:903
 msgid "The Quotes settings can now be managed from WooCommerce > Settings > Quotes."
 msgstr ""
 
