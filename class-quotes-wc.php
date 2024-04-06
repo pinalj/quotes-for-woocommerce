@@ -250,13 +250,13 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( is_cart() || is_checkout() ) {
 				// Add css file only if cart contains products that require quotes.
-				if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
+				if ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
 					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
 				}
 			}
 
 			// Add css file only if cart contains products that require quotes.
-			if ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
+			if ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
 				wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
 			}
 
