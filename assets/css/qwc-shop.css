@@ -7,6 +7,9 @@
 .cart-contents .woocommerce-Price-amount {
 	display: none;
 }
+.wd-header-cart .wd-cart-subtotal .amount {
+    display: none !important;
+}
 
 /* Cart Block */
 .wp-block-woocommerce-cart-order-summary-block {
