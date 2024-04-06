@@ -7,3 +7,29 @@
 .cart-contents .woocommerce-Price-amount {
 	display: none;
 }
+
+/* Cart Block */
+.wp-block-woocommerce-cart-order-summary-block {
+    display: none;
+}
+.wc-block-cart-item__total {
+    display: none;
+}
+.wc-block-cart-items__header-total {
+    display: none;
+}
+.wc-block-components-product-price {
+    display: none;
+}
+.wc-block-cart-item__prices {
+    display: none;
+}
+/* subtotal in the cart drawer */
+.wc-block-components-totals-item__value {
+    display: none;
+}
+
+/* Hides the amount displayed in the mini-cart header */
+span.wc-block-mini-cart__amount {
+    display: none;
+}
