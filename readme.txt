@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.4.3
-Stable tag: 2.2
+Tested up to: 6.5
+Stable tag: 2.2.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -80,6 +80,10 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.2.1 ( 06.04.2024 ) =
+* Fix - Modify plugin code to hide prices in mini-cart created using blocks.
+* Tweak - Updated plugin to preload files to hide prices based on global settings.'
 
 = 2.2 ( 25.03.2024 ) =
 * Tweak - Add filters to allow the modification of the General Settings page.
