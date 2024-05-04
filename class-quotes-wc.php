@@ -250,13 +250,25 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( is_cart() || is_checkout() ) {
 				// Add css file only if cart contains products that require quotes.
-				if ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
+				if ( is_checkout_pay_page() || is_order_received_page() ) { // The file should not be enqueued if the order pay or order received page is loaded and quotation has been sent.
+					// Find the order ID and fetch the quote status.
+					$order_id = absint( get_query_var( 'order-pay' ) );
+					if ( is_numeric( $order_id ) && $order_id > 0 ) {
+						$_order = wc_get_order( $order_id );
+						if ( $_order ) {
+							$quote_status = $_order->get_meta( '_quote_status' );
+							if ( 'quote-pending' === $quote_status ) {
+								wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+							}
+						}
+					}
+				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
 					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
 				}
 			}
 
 			// Add css file only if cart contains products that require quotes.
-			if ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
+			if ( ! is_checkout_pay_page() && ! is_order_received_page() && ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) ) {
 				wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
 			}
 
