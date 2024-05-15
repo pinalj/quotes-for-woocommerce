@@ -34,14 +34,14 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function __construct() {
 
-			define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
-			define( 'QUOTES_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			define( 'QUOTES_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
+			$this->qwc_define_constants();
 
 			// Initialize settings.
 			register_activation_hook( __FILE__, array( &$this, 'qwc_activate' ) );
+			// Deactivation actions.
+			register_deactivation_hook( __FILE__, array( &$this, 'qwc_deactivate' ) );
 			// Update DB as needed.
-			if ( get_option( 'quotes_for_wc' ) !== $this->version ) {
+			if ( get_option( 'quotes_for_wc' ) !== QUOTES_PLUGIN_VERSION ) {
 				add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
 			}
 			$this->includes();
@@ -122,6 +122,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Add dismissible notice informing users about the change in menu placement.
 			add_action( 'admin_notices', array( &$this, 'qwc_menu_change_notice' ), 1 );
+
+			add_action( 'init', array( &$this, 'qwc_include_files_tracking' ) );
 		}
 
 		/**
@@ -142,7 +144,19 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_activate() {
-			update_option( 'quotes_for_wc', $this->version );
+			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
+		}
+
+		/**
+		 * Runs when plugin is deactivated.
+		 *
+		 * @since 2.3
+		 */
+		public function qwc_deactivate() {
+			if ( false !== as_next_scheduled_action( 'qwc_tracker_send_event' ) ) {
+				as_unschedule_action( 'qwc_tracker_send_event' ); // Remove the scheduled action.
+			}
+			do_action( 'qwc_deactivate' );
 		}
 
 		/**
@@ -152,7 +166,34 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.1
 		 */
 		public function qwc_update_db_check() {
-			update_option( 'quotes_for_wc', $this->version );
+			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
+		}
+
+		/**
+		 * Define plugin constants.
+		 *
+		 * @since 2.3
+		 */
+		public function qwc_define_constants() {
+			if ( ! defined( 'QUOTES_TEMPLATE_PATH' ) ) {
+				define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_DIR' ) ) {
+				define( 'QUOTES_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_URL' ) ) {
+				define( 'QUOTES_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_VERSION' ) ) {
+				define( 'QUOTES_PLUGIN_VERSION', $this->version );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_PATH' ) ) {
+				define( 'QUOTES_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			}
 		}
 
 		/**
@@ -186,6 +227,24 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			return apply_filters( 'qwc_add_section_files', $this->settings );
 		}
 
+		/**
+		 * Include tracking files.
+		 *
+		 * @since 2.3.0
+		 */
+		public function qwc_include_files_tracking() {
+			require_once QUOTES_PLUGIN_PATH . '/includes/tracking/class-vama-plugin-tracking.php';
+			new Vama_Plugin_Tracking(
+				array(
+					'plugin_name'       => 'Quotes for WooCommerce',
+					'plugin_locale'     => 'quote-wc',
+					'plugin_short_name' => 'qwc',
+					'version'           => QUOTES_PLUGIN_VERSION,
+					'blog_link'         => 'https://www.technovama.com/quotes-for-woocommerce-usage-tracking/',
+				)
+			);
+			require_once QUOTES_PLUGIN_PATH . '/includes/class-qwc-data-tracking.php';
+		}
 		/**
 		 * Add Settings tab in WC > Settings.
 		 *
