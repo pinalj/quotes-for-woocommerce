@@ -145,7 +145,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 
 			if ( '' === get_option( $this->plugin_short_name . '_allow_tracking', '' ) ) { ?>
 				<div class="<?php echo esc_attr( $this->plugin_short_name ); ?>-message <?php echo esc_attr( $this->plugin_short_name ); ?>-tracker notice notice-info is-dismissible" style="position: relative;">
-					<div style="position: absolute;"><img class="site-logo" style="width: 80%; margin-left: -1em; margin-top: 2.5em;" src= "<?php echo esc_url( $this->api_url . 'assets/plugin-tracking/images/site-logo.png?v=' . $this->version ); ?> "></div>
+					<div style="position: absolute;"><img class="site-logo" style="width: 80%; margin-left: -1em; margin-top: 1.4em;" src= "<?php echo esc_url( $this->api_url . 'assets/plugin-tracking/images/site-logo.png?v=' . $this->version ); ?> "></div>
 					<p style="margin: 10px 0 10px 130px; font-size: medium;">
 							<?php print( __( 'Want to help make ' . $this->plugin_name . ' even more awesome? Allow ' . $this->plugin_name . ' to collect non-sensitive diagnostic data and usage information. <a href="' . $this->blog_link . '">Find out more</a>.', $this->plugin_locale ) ); //phpcs:ignore ?>
 					</p>
