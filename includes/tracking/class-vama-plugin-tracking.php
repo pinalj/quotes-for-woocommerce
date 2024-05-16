@@ -7,7 +7,7 @@
  * @author      TechnoVama
  * @package     TechnoVama
  * @category    Classes
- * @since       2.3
+ * @since       1.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 		 *
 		 * @param array $options Options.
 		 *
-		 * @since 1.1
+		 * @since 1.0
 		 */
 		public function init_vars( $options ) {
 
@@ -122,16 +122,16 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 			}
 		}
 		/**
-		 * Cron Job Scheduler.
+		 * Action Scheduler.
 		 */
 		public function schedule_action() {
 			if ( ! as_next_scheduled_action( $this->plugin_short_name . '_tracker_send_event' ) ) {
-				as_schedule_recurring_action( time() + 60, 600, $this->plugin_short_name . '_tracker_send_event' );
+				as_schedule_recurring_action( time() + 60, 604800, $this->plugin_short_name . '_tracker_send_event' );
 			}
 		}
 
 		/**
-		 * Displays the HTML template for displaying the prompt for enabling tracking.
+		 * Display the tracking notice.
 		 */
 		public function display_tracker_html_template() {
 
@@ -179,16 +179,6 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 		}
 
 		/**
-		 * It will delete the tracking option from the database.
-		 *
-		 * @param string $plugin_short_name Plugin Short Name.
-		 */
-		public static function reset_tracker_setting( $plugin_short_name ) {
-			delete_option( $plugin_short_name . '_allow_tracking' );
-			delete_option( $plugin_short_name . '_tracker_last_send' );
-		}
-
-		/**
 		 * Called when the dismiss icon is clicked on the notice.
 		 */
 		public function dismiss_notice() {
@@ -204,7 +194,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 		/**
 		 * Send the Tracking Data.
 		 *
-		 * @since 1.1
+		 * @since 1.0
 		 */
 		public function send_tracking_data() {
 
@@ -216,12 +206,12 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 
 			$last_sent_time = apply_filters( $this->plugin_short_name . '_tracker_last_send_time', get_option( $this->plugin_short_name . '_tracker_last_send', false ) );
 
-			// Send a maximum of once per week by default.
-			if ( $last_sent_time && $last_sent_time > apply_filters( 'vama_tracker_last_send_interval', strtotime( '-10 minutes' ) ) ) {
+			// Send a maximum of once per week.
+			if ( $last_sent_time && $last_sent_time > apply_filters( 'vama_tracker_last_send_interval', strtotime( '-1 week' ) ) ) {
 				return;
 			}
 
-			// Update time first before sending to ensure it is set.
+			// Update the last sent time.
 			update_option( $this->plugin_short_name . '_tracker_last_send', time() );
 
 			$params = array(
@@ -233,8 +223,8 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 
 			if ( 'yes' === $allow_tracking ) {
 
-				// Make sure there is at least a 1 hour delay between override sends, we don't want duplicate calls due to double clicking links.
-				if ( $last_sent_time && $last_sent_time > strtotime( '-5 minutes' ) ) {
+				// Add a 1 hour delay to ensure multiple requests are not sent at one go.
+				if ( $last_sent_time && $last_sent_time > strtotime( '-1 hour' ) ) {
 					return;
 				}
 
@@ -266,7 +256,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 		/**
 		 * Generates the Tracking Data.
 		 *
-		 * @since 1.1
+		 * @since 1.0
 		 */
 		public function tracking_data() {
 

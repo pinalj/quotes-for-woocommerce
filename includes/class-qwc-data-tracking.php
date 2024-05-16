@@ -18,7 +18,7 @@ if ( ! class_exists( 'QWC_Data_Tracking' ) ) {
 	class QWC_Data_Tracking {
 
 		/**
-		 * Constructor for the gateway.
+		 * Constructor for the tracker.
 		 */
 		public function __construct() {
 			add_action( 'admin_footer', array( __CLASS__, 'qwc_admin_notices_scripts' ) );
