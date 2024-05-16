@@ -4,9 +4,9 @@
  *
  * Uninstalling the post meta records for the Plugin
  *
- * @author      Pinal Shah
+ * @author      TechnoVama
  * @package     Quotes For WooCommerce/uninstall
- * @version     1.1
+ * @version     2.3
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -35,5 +35,9 @@ delete_option( 'qwc_place_order_text' );
 
 // Payment Settings.
 delete_option( 'woocommerce_quotes-gateway_settings' );
+
+// tracking settings.
+delete_option( 'qwc_allow_tracking' );
+delete_option( 'qwc_tracker_last_send' );
 // Clear any cached data that has been removed.
 wp_cache_flush();
