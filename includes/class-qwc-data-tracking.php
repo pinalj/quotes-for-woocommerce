@@ -142,6 +142,53 @@ if ( ! class_exists( 'QWC_Data_Tracking' ) ) {
 			$plugin_data['global_prices'] = get_option( 'qwc_enable_global_prices', '' );
 			// get site language.
 			$plugin_data['site_lang'] = get_bloginfo( 'language' );
+			// get count of orders with quote pending.
+			$pending_args = array(
+				'status'       => 'pending',
+				'numberposts'  => -1,
+				'meta_key'     => '_quote_status', // phpcs:ignore
+				'meta_value'   => 'quote-pending', // phpcs:ignore
+				'meta_compare' => '=',
+				'return'       => 'ids',
+			);
+
+			$plugin_data['pending_quote_count'] = count( wc_get_orders( $pending_args ) );
+			// get count of orders with quote complete.
+			$complete_args = array(
+				'status'       => 'pending',
+				'numberposts'  => -1,
+				'meta_key'     => '_quote_status', // phpcs:ignore
+				'meta_value'   => 'quote-complete', // phpcs:ignore
+				'meta_compare' => '=',
+				'return'       => 'ids',
+			);
+
+			$plugin_data['complete_quote_count'] = count( wc_get_orders( $complete_args ) );
+			// get count of orders with quote sent.
+			$sent_args = array(
+				'status'       => 'pending',
+				'numberposts'  => -1,
+				'meta_key'     => '_quote_status', // phpcs:ignore
+				'meta_value'   => 'quote-sent', // phpcs:ignore
+				'meta_compare' => '=',
+				'return'       => 'ids',
+			);
+
+			$plugin_data['sent_quote_count'] = count( wc_get_orders( $sent_args ) );
+			// get count of orders with quotes and payment received.
+			$wc_statuses = wc_get_order_statuses();
+			$wc_statuses = array_diff_key( $wc_statuses, array_flip( array( 'wc-completed', 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' ) ) );
+			$wc_statuses = array_keys( $wc_statuses );
+
+			$paid_args = array(
+				'numberposts'  => -1,
+				'status'       => $wc_statuses,
+				'meta_key'     => '_qwc_quote', // phpcs:ignore
+				'meta_value'   => '1', // phpcs:ignore
+				'meta_compare' => '=',
+				'return'       => 'ids',
+			);
+			$plugin_data['paid_quote_count'] = count( wc_get_orders( $paid_args ) );
 
 			$data['plugin_data'] = $plugin_data;
 			return $data;

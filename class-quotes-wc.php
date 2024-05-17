@@ -36,10 +36,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			$this->qwc_define_constants();
 
-			// Initialize settings.
-			register_activation_hook( __FILE__, array( &$this, 'qwc_activate' ) );
-			// Deactivation actions.
-			register_deactivation_hook( __FILE__, array( &$this, 'qwc_deactivate' ) );
 			// Update DB as needed.
 			if ( get_option( 'quotes_for_wc' ) !== QUOTES_PLUGIN_VERSION ) {
 				add_action( 'admin_init', array( &$this, 'qwc_update_db_check' ) );
@@ -143,7 +139,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 *
 		 * @since 1.1
 		 */
-		public function qwc_activate() {
+		public static function qwc_activate() {
+			if ( ! get_option( 'qwc_menu_notice' ) ) {
+				update_option( 'qwc_menu_notice', 'dismissed' );
+			}
 			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
 		}
 
@@ -152,7 +151,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 *
 		 * @since 2.3
 		 */
-		public function qwc_deactivate() {
+		public static function qwc_deactivate() {
 			if ( false !== as_next_scheduled_action( 'qwc_tracker_send_event' ) ) {
 				as_unschedule_action( 'qwc_tracker_send_event' ); // Remove the scheduled action.
 			}
@@ -439,7 +438,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				wp_enqueue_script( 'qwc-admin' );
 			}
 			// File to dismiss admin notice.
-			$notice_dismissed = get_option( 'qwc_menu_notice_dismissed', '' );
+			$notice_dismissed = get_option( 'qwc_menu_notice', '' );
 			if ( 'dismissed' !== $notice_dismissed ) {
 				wp_register_script( 'qwc-notice', plugins_url( '/assets/js/qwc-notice.js', __FILE__ ), '', $plugin_version, array( 'in_footer' => true ) );
 				wp_localize_script(
@@ -990,7 +989,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( isset( $_POST['notice'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['notice'] ) ) ) {
 				$notice_name = sanitize_text_field( wp_unslash( $_POST['notice'] ) );
-				update_option( $notice_name, 'dismissed' );
+				update_option( 'qwc_menu_notice', 'dismissed' );
 			}
 			die();
 		}
