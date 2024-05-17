@@ -59,3 +59,8 @@ add_action(
 	},
 	999
 );
+
+// Initialize settings.
+register_activation_hook( __FILE__, array( 'Quotes_WC', 'qwc_activate' ) );
+// Deactivation actions.
+register_deactivation_hook( __FILE__, array( 'Quotes_WC', 'qwc_deactivate' ) );
