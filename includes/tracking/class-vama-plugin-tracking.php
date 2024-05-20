@@ -235,6 +235,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 
 			} else {
 				$params['tracking_usage'] = 1;
+				$params['email']          = apply_filters( 'vama_tracker_admin_email', get_option( 'admin_email' ) );
 				$params                   = apply_filters( 'vama_tracker_opt_out_data', $params );
 			}
 

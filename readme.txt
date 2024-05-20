@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.5
-Stable tag: 2.2.1
+Tested up to: 6.5.3
+Stable tag: 2.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -16,7 +16,7 @@ This plugin allows the site admin the ability to accept quote requests for produ
 
 Plugins required:
 <ol>
-<li>WooCommerce 3.0.0 or higher</li>
+<li>WooCommerce 4.0 or higher</li>
 </ol>
 
 Want to convert your WooCommerce store into a Quote only program? This plugin allows the admin to hide the prices on a per product basis and modify the Add to Cart button to 'Request Quote'.
@@ -81,9 +81,14 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 
 == Changelog ==
 
+= 2.3 ( 20.05.2024 ) =
+* Fix - Added missing Spanish language .mo file.
+* Fix - Order totals are not displayed on the Pay Order page when quotes are enabled globally.
+* Tweak - Added non-sensitive diagnostic data tracking.
+
 = 2.2.1 ( 06.04.2024 ) =
 * Fix - Modify plugin code to hide prices in mini-cart created using blocks.
-* Tweak - Updated plugin to preload files to hide prices based on global settings.'
+* Tweak - Updated plugin to preload files to hide prices based on global settings.
 
 = 2.2 ( 25.03.2024 ) =
 * Tweak - Add filters to allow the modification of the General Settings page.

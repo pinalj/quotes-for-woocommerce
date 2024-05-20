@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '2.2.1';
+		public $version = '2.3';
 
 		/**
 		 * Class instance.
