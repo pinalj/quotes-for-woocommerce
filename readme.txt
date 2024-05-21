@@ -28,7 +28,7 @@ The users can then make the payments using the link in the email or the My Accou
 <strong>What will the Quotes plugin help you achieve?</strong>
 <ul>
 <li>Customize pricing for each order to meet individual customer needs.</li>
-<li>Offer payment flexibility by not taking payment at checkout for quote requests.<li>
+<li>Offer payment flexibility by not taking payment at checkout for quote requests.</li>
 <li>Manage quoting process easily with one-click enable/disable option for all products.</li>
 <li>Enhance customer experience and attract new customers with personalized quotes.</li>
 </ul>
