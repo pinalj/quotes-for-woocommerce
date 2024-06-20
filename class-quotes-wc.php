@@ -321,7 +321,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						}
 					}
 				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+					// enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
+					if ( ! class_exists( 'Quotes_WC_Pro' ) ) {
+						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+					}
 				}
 			}
 
