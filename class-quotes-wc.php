@@ -46,6 +46,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 10, 2 );
 			add_filter( 'woocommerce_variable_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
 			add_filter( 'woocommerce_get_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
+			// Composite products - individual price display in dropdown.
+			add_filter( 'woocommerce_composited_product_price_string', array( &$this, 'qwc_remove_prices' ), 10, 2 );
 
 			// Modify the 'add to cart' button text.
 			add_filter( 'woocommerce_product_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
@@ -92,7 +94,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Load JS files.
 			add_action( 'admin_enqueue_scripts', array( &$this, 'qwc_load_js' ) );
-
+			// Frontend JS files.
+			add_action( 'wp_enqueue_scripts', array( &$this, 'qwc_load_product_js' ) );
 			// Admin ajax.
 			add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
 
@@ -321,7 +324,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						}
 					}
 				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+					// enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
+					if ( ! class_exists( 'Quotes_WC_Pro' ) ) {
+						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+					}
 				}
 			}
 
@@ -395,6 +401,39 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 		}
 
+		/**
+		 * Front end JS files.
+		 *
+		 * @since 2.4
+		 */
+		public function qwc_load_product_js() {
+
+			if ( is_product() ) {
+				global $post;
+
+				$product_id = isset( $post->ID ) ? $post->ID : 0;
+
+				if ( $product_id > 0 ) {
+					$enable_quote = product_quote_enabled( $product_id );
+
+					if ( $enable_quote ) {
+						$plugin_version = get_option( 'quotes_for_wc' );
+
+						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', $plugin_version, array( 'in_footer' => true ) );
+
+						wp_localize_script(
+							'qwc-product-js',
+							'qwc_product_params',
+							array(
+								'product_id' => $product_id,
+								'quotes'     => $enable_quote,
+							)
+						);
+						wp_enqueue_script( 'qwc-product-js');
+					}
+				}
+			}
+		}
 		/**
 		 * Load JS files.
 		 *
