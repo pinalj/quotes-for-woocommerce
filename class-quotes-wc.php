@@ -333,7 +333,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Add css file only if cart contains products that require quotes.
 			if ( ! is_checkout_pay_page() && ! is_order_received_page() && ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) ) {
-				wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
+				if ( ! class_exists( 'Quotes_WC_Pro' ) ) { // enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
+					wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
+				}
 			}
 
 			// My Account page - Orders List.
