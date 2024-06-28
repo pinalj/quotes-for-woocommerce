@@ -1,0 +1,138 @@
+*** Quotes for WooCommerce ***
+
+2024-06-27 - Version 2.4
+* Enhancement - Introduced compatibility with WooCommerce Composite Products.
+* Fix - Fixed a fatal error displayed with WooCommerce 9.0.x.
+* Fixed - Fixed an issue where prices are not displayed on the Cart page for non-quotable products with the Pro version.
+
+2024-05-23 - Version 2.3
+* Tweak - Moved the individual product quote settings in Product Data > Inventory meta tab to the Premium version.
+* Fix - Added missing Spanish language .mo file.
+* Fix - Order totals are not displayed on the Pay Order page when quotes are enabled globally.
+
+2024-04-06 - Version 2.2.1
+* Fix - Modify plugin code to hide prices in mini-cart created using blocks.
+* Tweak - Updated plugin to preload files to hide prices based on global settings.'
+
+2024-03-25 - Version 2.2
+* Tweak - Add filters to allow the modification of the General Settings page.
+* Tweak - Add filters to compatibility with Pro version 1.1
+
+2024-03-14 - Version 2.1.1
+* Tweak - Add Premium verison link.
+
+2024-02-10 - Version 2.1.0
+* Tweak - The Quotes menu has now been moved to WooCommerce > Settings > Quotes.
+* Tweak - The recipient is now displayed in the emails listing page in WooCommerce > Settings > Emails.
+* Fix - Fixed an issue where the note was displayed twice on the Order Received Page for Add for Quote payment medium.
+* Fix - The item price is displayed on the Cart Blocks.
+
+2023-11-29 - Version 2.0.2
+* Fix - Added check to run the plugin only when WooCommerce is active.
+* Fix - Added nonce checks for ajax calls for security.
+
+2023-08-21 - Version 2.0.1
+* Tweak - Modified the help text for some settings.
+* Tweak - Declared compatibility in code with WC Blocks.
+
+2023-08-08 - Version 2.0
+* Tweak - Modified the code to allow for extensibility.
+* Enhancement - Introduced compatibility WC Blocks.
+
+2023-03-09 - Version 1.10
+* Tweak - Made the plugin compatible with WooCommerce HPOS feature.
+* Fix - Fixed compatibility issues with Woodmart Theme.
+* Fix - Fixed some bugs with WPML & Polylang string translations.
+
+2022-05-22 - Version 1.9
+* Enhancement - Add an order note to the WooCommerce Order once a quote email has been sent.
+* Enhancement - Added .po file for Spanish. Thank you @
+* Tweak - Allow site admin to change the field list displayed/hidden at Checkout when 'Hide Address fields at Checkout' is enabled using <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#display-country-field-in-billing-at-checkout-when-hide-address-fields-at-checkout-is-enabled" target="_blank">a hook.<a>
+* Tweak - Add <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#change-conflict-message-displayed-on-the-cart-page-when-products-containing-quotes-and-without-quotes-are-added-at-the-same-time" target="_blank">hook</a> to change the conflict message displayed when products with quotes are added to carts containing normal WooCommerce products and vice-versa.
+* Tweak - Added <a href="https://github.com/pinalj/quotes-for-woocommerce/wiki/Hooks-&-Filters#change-page-title-for-checkout-page-and-pay-for-order-page" target="_blank">hook</a> to change the page title for Checkout and Order Payment page.
+* Fix - Prices are hidden in the WordPress admin dashboard when quotes are enabled for products in the Product listing page.
+
+2021-08-10 - Version 1.8
+* Tweak - Added the ability to display item attributes in the initial quote emails sent to the site admin & customer.'
+* Tweak - Converted product names to links to redirect to front-end product page in the initial quote emails sent to the site admin & customer.'
+* Tweak - Included a filter which can be used modify product quote status on the front end.'
+
+2021-05-02 - Version 1.7.3
+* Enhancement - Made the plugin compatible with YayMail Pro.
+* Tweak - Added a filter to allow the site admin the ability to change the Payment medium name.
+* Tweak - Added a filter to add new rows to the new quote request email sent to admin.
+* Fix - Plain Text Email Template file name was incorrect.
+* Fix - Incorrect text domain listed in the plugin file.
+* Fix - Incorrect text domain was used for the Subtotal text.
+
+2021-04-03 - Version 1.7.2
+* Fix - The PHP email templates were being copied to an incorrect location in the theme folder.
+* Tweak - Added nl_NL, fr_FR, ru_RU translation files.
+
+2021-01-18 - Version 1.7.1
+* Fix - Internal Server Error with WooCommerce 4.9.0.
+* Fix - XML Sitemap showing error.
+* Tweak - Added a hook to allow the admin to send emails for statuses other than Pending Payment.
+
+2020-06-20 - Version 1.7.0
+* Fix - Price was displayed in html tags in customer email.
+* Fix - Appearance->menus disappear when the plugin is activated.
+* Fix - Product Added to Cart message is incomplete when the global settings are not saved.
+* Enhancement - Add a new setting to change Place Order button text for carts containing quotable products.
+* Fix - Incorrect Add to Cart button text for non quote products which do not have a price set.
+* Fix - WordPress crashes when the plugin is activated with themes like Jevelin & Avada.
+* Tweak - Add Settings link on the Plugins page.
+* Fix - Mini cart displays cart total when quotable products are present in the cart.
+
+2020-01-27 - Version 1.6.4
+* Fix - Order total prices were displayed with HTML in the Quote emails.
+
+2019-12-05 - Version 1.6.3
+* Enhancement - Made the plugin compatible with Loco Translate.
+* Enhancement - Added billing first name, last name, email & phone merge tags for the admin email.
+* Fix - Prices were displayed on the My Account->Orders page.
+* Fix - Double headers & footers in the plugin emails.
+* Fix - Made the plugin WPCS compatible.
+
+2019-07-20 - Version 1.6.2
+* Enhancement - Made the plugin compatible by adding .pot file & text domain details.
+* Enhancement - Added a new setting to allow the admin to modify the text displayed for the Add to Cart button.
+* Fix - Updated the parameters used in the hook 'woocommerce_email_before_order_table'.
+
+2019-04-11 - Version 1.6.1
+* Fix - Internal 500 Error when updating to version 1.6
+* Fix - Deprecated WooCommerce filter was being used. Replaced with an active one.
+* Tweak - Modified the variables being passed to the email templates.
+
+2019-03-25 - Version 1.6
+* Added a new setting in Quotes->Settings that allow to change the name of the Cart page when the cart contains only quotable products.
+* Added a new setting in Quotes->Settings that allows the admin to disable Billing & Shipping addresses for quote orders.
+* Fixed a conflict error with Stream plugin.
+* Fixed an issue where the {blogname} merge tag is not replaced with the correct details.
+* Email subject & headings were not customizable from WooCommerce->Settings->Eamils. Fixed the same.
+* Fixed an error being logged in the debug log for quote emails. 
+
+2018-10-31 - Version 1.5
+* When the order contains only variable products, the Checkout process fails as no Payment medium is found. Fixed the same.
+* Added a new menu Quote->Settings. This menu can now be used to create quote settings for all products at once.
+* Fixed an issue where turning off the Quote emails from WooCommerce->Settings->Emails was not stopping the mails from being sent.
+
+2018-06-19 - Version 1.4
+* Fixed an issue where a warning is entered in debug.log when a quote email is sent to the Customer.
+* Added a new setting using which the site admin can display product prices for quotable products.
+* Added a new email template to be sent to the customer when a request for a quote is raised.
+
+2017-12-18 - Version 1.3
+* Fixed an issue where an Internal Server Error is thrown at Checkout when the Cart contains quote products.
+
+2017-09-28 - Version 1.2
+* Added an email template to be sent to admin when a request for quote is received.
+* Fixed an issue where Add to Cart text was not modified for quote products on the single product page.
+
+2017-09-03 - Version 1.1
+* Added the code to remove the plugin data when deleted.
+* Added WC Verison check support.
+* Added plugin version data in the DB.
+
+2017-08-29 - Version 1.0
+* Initial release.

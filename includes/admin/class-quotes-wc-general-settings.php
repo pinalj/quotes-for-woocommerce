@@ -56,7 +56,7 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 
 			$place_order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_place_order_text' );
 			$cart_button_text        = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
-			$cart_page_name          = '' === get_option( 'qwc_cart_page_name' , '' ) ? __( 'Cart', 'quote-wc' ) : get_option( 'qwc_cart_page_name' );
+			$cart_page_name          = '' === get_option( 'qwc_cart_page_name', '' ) ? __( 'Cart', 'quote-wc' ) : get_option( 'qwc_cart_page_name' );
 
 			$settings = array(
 
@@ -68,7 +68,6 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 				),
 				array(
 					'title' => __( 'Enable Quotes:', 'quote-wc' ),
-					'desc'  => '',
 					'desc'  => __( 'Select if you wish to enable quotes for all the products.', 'quote-wc' ),
 					'id'    => 'qwc_enable_global_quote',
 					'type'  => 'checkbox',
@@ -76,7 +75,6 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 				),
 				array(
 					'title' => __( 'Enable Price Display:', 'quote-wc' ),
-					'desc'  => '',
 					'desc'  => __( 'Select to display the product price on the Shop & Product pages for all quotable products.', 'quote-wc' ),
 					'id'    => 'qwc_enable_global_prices',
 					'type'  => 'checkbox',

@@ -32,7 +32,8 @@ delete_option( 'qwc_cart_page_name' );
 delete_option( 'qwc_hide_address_fields' );
 delete_option( 'qwc_add_to_cart_button_text' );
 delete_option( 'qwc_place_order_text' );
-
+// Menu notice.
+delete_option( 'qwc_menu_notice' );
 // Payment Settings.
 delete_option( 'woocommerce_quotes-gateway_settings' );
 

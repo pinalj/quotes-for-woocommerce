@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '2.3';
+		public $version = '2.4';
 
 		/**
 		 * Class instance.
@@ -501,7 +501,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_ajax_admin() {
 			add_action( 'wp_ajax_qwc_update_status', array( &$this, 'qwc_update_status' ) );
 			add_action( 'wp_ajax_qwc_send_quote', array( &$this, 'qwc_send_quote' ) );
-			add_action( 'wp_ajax_qwc_notice_dismissed', array( &$this, 'qwc_notice_dismissed' ) );
+			add_action( 'wp_ajax_qwc_menu_notice_dismissed', array( &$this, 'qwc_menu_notice_dismissed' ) );
 		}
 
 		/**
@@ -1022,7 +1022,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 *
 		 * @since 2.1.0
 		 */
-		public function qwc_notice_dismissed() {
+		public function qwc_menu_notice_dismissed() {
 
 			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'qwc-dismiss' ) ) {
 				die( 'Security check' );
@@ -1047,7 +1047,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				add_action(
 					'woocommerce_blocks_payment_method_type_registration',
 					function( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
-						$payment_method_registry->register( new WC_Quotes_Gateway_Blocks_Support );
+						$payment_method_registry->register( new WC_Quotes_Gateway_Blocks_Support() );
 					}
 				);
 			}
