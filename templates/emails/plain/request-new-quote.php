@@ -1,7 +1,10 @@
 <?php
 /**
  * Request New Quote email
+ *
+ * @package Quotes for WooCommerce/Email Templates/Plain
  */
+
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
 
@@ -15,48 +18,50 @@ $billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? 
 if ( $order_details && $billing_first_name && $billing_last_name ) :
 	$order_id  = $order_details->order_id;
 	$order_url = qwc_is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
-	echo sprintf( $opening_paragraph, $billing_first_name . ' ' . $billing_last_name );
+	echo sprintf( esc_html( $opening_paragraph ), esc_attr( $billing_first_name . ' ' . $billing_last_name ) );
 endif;
 
 if ( $order ) {
 	echo "\n----------------------------------------\n\n";
-	echo sprintf( __( 'Product', 'quote-wc' ) );
-	echo sprintf( __( 'Quantity', 'quote-wc' ) );
-	echo sprintf( __( 'Product Price', 'quote-wc' ) );
+	echo sprintf( esc_html__( 'Product', 'quote-wc' ) );
+	echo sprintf( esc_html__( 'Quantity', 'quote-wc' ) );
+	echo sprintf( esc_html__( 'Product Price', 'quote-wc' ) );
 
 	echo "\n";
 
 	foreach ( $order->get_items() as $items ) {
 		$item_id = $items->get_id();
-		echo $items->get_name();
+		echo wp_kses_post( $items->get_name() );
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo strip_tags(
-			wc_display_item_meta(
-				$items,
-				array(
-					'before'    => "\n- ",
-					'separator' => "\n- ",
-					'after'     => '',
-					'echo'      => false,
-					'autop'     => false,
+		echo esc_attr(
+			wp_strip_all_tags(
+				wc_display_item_meta(
+					$items,
+					array(
+						'before'    => "\n- ",
+						'separator' => "\n- ",
+						'after'     => '',
+						'echo'      => false,
+						'autop'     => false,
+					)
 				)
 			)
 		);
 
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_end', $item_id, $items, $order, $plain_text );
-		echo $items->get_quantity();
-		echo $order->get_formatted_line_subtotal( $items );
+		echo esc_attr( $items->get_quantity() );
+		echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) );
 		echo "\n";
 
 	}
 	do_action( 'qwc_new_quote_admin_row', $order_details->order_id, $order );
 	echo "\n----------------------------------------\n\n";
-	echo sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) );
-
-	echo make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) );
+	echo sprintf( esc_html__( 'This order is awaiting a quote.', 'quote-wc' ) );
+	// translators: Order payment link.
+	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) ) );
 
 	do_action( 'woocommerce_email_footer' );
 }
