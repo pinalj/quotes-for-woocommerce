@@ -33,7 +33,7 @@ The users can then make the payments using the link in the email or the My Accou
 <li>Enhance customer experience and attract new customers with personalized quotes.</li>
 </ul>
 
-<strong>Unlock Advanced Features for Enhanced Quoting and Sales Management using the <a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Premium Version</a></strong>
+<strong>Unlock Advanced Features for Enhanced Quoting and Sales Management using the <a href="https://woocommerce.com/products/quotes-for-woocommerce-pro/" target="_blank">Premium Version</a></strong>
 
 <ul>
 <li>Enable quotes for only some products in the store.</li>
@@ -54,7 +54,7 @@ With both buttons available, customers can make quotation requests and purchase 
 <strong>Take quotations for back-ordered products</strong>
 Set up Quotes for WooCommerce Pro to automatically enable quotes for a product as soon as the stock quantity reaches zero. Reach out to the user when the product is back in stock with a quotation email.
 
-<a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Quotes for WooCommerce Pro</a> | <a href="mailto:support@technovama.com">Support Helpdesk</a>
+<a href="https://woocommerce.com/products/quotes-for-woocommerce-pro/" target="_blank">Quotes for WooCommerce Pro</a> | <a href="mailto:support@technovama.com">Support Helpdesk</a>
 
 <strong>Effortlessly manage wholesale and retail customers</strong>
 Cater to wholesale and retail customers by enabling quotations based on user roles. The extension allows you to replace the Add to Cart button with the Request Quote button based on user roles.
