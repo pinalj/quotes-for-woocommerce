@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.5.3
-Stable tag: 2.3
+Tested up to: 6.5.5
+Stable tag: 2.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -19,7 +19,7 @@ Plugins required:
 <li>WooCommerce 4.0 or higher</li>
 </ol>
 
-Want to convert your WooCommerce store into a Quote only program? This plugin allows the admin to hide the prices on a per product basis and modify the Add to Cart button to 'Request Quote'.
+Want to convert your WooCommerce store into a Quote only program? This plugin allows the admin to hide the prices and modify the Add to Cart button to 'Request Quote'.
 
 No payment is taken at Checkout. The prices for the product can be setup in the WooCommerce->Orders page and once a quote is finalized, the plugin will send an email to the end user notifying the same.
 
@@ -33,9 +33,10 @@ The users can then make the payments using the link in the email or the My Accou
 <li>Enhance customer experience and attract new customers with personalized quotes.</li>
 </ul>
 
-<strong>Introducing the <a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Premium Version</a>: Unlock Advanced Features for Enhanced Quoting and Sales Management</strong>
+<strong>Unlock Advanced Features for Enhanced Quoting and Sales Management using the <a href="https://woo.com/products/quotes-for-woocommerce-pro/" target="_blank">Premium Version</a></strong>
 
 <ul>
+<li>Enable quotes for only some products in the store.</li>
 <li>Enable quotes for select variations of a product</li>
 <li>Customize quote button display based on WordPress User Roles</li>
 <li>Seamlessly process both regular orders and quote requests for all products</li>
@@ -63,11 +64,10 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 == Installation ==
 
 1. Install and activate the plugin from the Wordpress->Plugins page. 
-2. Once the plugin is enabled, a product can be setup as quotable using the settings in Product Data->Inventory tab.
+2. Enable quotes using the settings in WooCommerce > Settings > Quotes.
 3. Once enabled, the price for the product is hidden from the user.
-4. Settings are available to enable/disable prices for quote products.
-5. User can add such products to the cart and place orders without making a payment.
-6. Payments can be collected once a quote email is sent to the user.
+4. User can add such products to the cart and place orders without making a payment.
+5. Payments can be collected once a quote email is sent to the user.
 
 == Screenshots ==
 
@@ -80,6 +80,13 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.4 ( 27.06.2024 ) =
+* Enhancement - Introduced compatibility with WooCommerce Composite Products.
+* Tweak - Moved the individual product quote settings in Product Data > Inventory meta tab to the Premium version.
+* Fix - Fixed an issue where tracking consent is sent incorrectly by the plugin.
+* Fix - Fixed a fatal error displayed with WooCommerce 9.0.x.
+* Fixed - Fixed an issue where prices are not displayed on the Cart page for non-quotable products with the Pro version.
 
 = 2.3 ( 20.05.2024 ) =
 * Fix - Added missing Spanish language .mo file.
@@ -216,3 +223,6 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 == Upgrade Notice ==
 = 2.1.0 =
 Upgrade to this version in order to use the Premium version without any issues.
+
+= 2.4.0 =
+In this upgrade to the plugin the quote settings at the product level have been moved to the premium version. Users can now avail only global quote settings in the free version.
