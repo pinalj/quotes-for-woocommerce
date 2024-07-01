@@ -13,8 +13,6 @@
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * Woo: 18734003732729:c19f70f93b8dde6576b27f7de01c644d
- *
  * @package Quotes For WooCommerce
  */
 
