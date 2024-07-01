@@ -227,6 +227,7 @@ if ( ! class_exists( 'Vama_Plugin_Tracking' ) ) {
 				if ( $last_sent_time && $last_sent_time > strtotime( '-1 hour' ) ) {
 					return;
 				}
+				$params['tracking_usage'] = get_option( 'qwc_allow_tracking' );
 
 				$params = array_merge(
 					$params,
