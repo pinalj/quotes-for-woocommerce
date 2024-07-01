@@ -91,7 +91,6 @@ if ( ! class_exists( 'QWC_Data_Tracking' ) ) {
 			);
 
 			$plugin_data['plugin_version'] = QUOTES_PLUGIN_VERSION;
-			$plugin_data['tracking_usage'] = get_option( 'qwc_allow_tracking' );
 
 			// get the count of published products.
 			$args = array(
