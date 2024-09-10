@@ -22,6 +22,7 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 endif;
 
 if ( $order ) {
+	do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email );
 	echo "\n----------------------------------------\n\n";
 	echo sprintf( esc_html__( 'Product', 'quote-wc' ) );
 	echo sprintf( esc_html__( 'Quantity', 'quote-wc' ) );
@@ -58,6 +59,9 @@ if ( $order ) {
 
 	}
 	do_action( 'qwc_new_quote_admin_row', $order_details->order_id, $order );
+	do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email );
+	do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
+
 	echo "\n----------------------------------------\n\n";
 	echo sprintf( esc_html__( 'This order is awaiting a quote.', 'quote-wc' ) );
 	// translators: Order payment link.
