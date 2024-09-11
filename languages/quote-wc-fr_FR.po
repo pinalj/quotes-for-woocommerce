@@ -358,7 +358,7 @@ msgstr "Quantité"
 #: templates/emails/plain/new-request-sent-customer.php:20
 #: templates/emails/plain/request-new-quote.php.php:20
 msgid "Product Price"
-msgstr "Pric Produit"
+msgstr "Prix Produit"
 
 #: templates/emails/new-request-sent-customer.php:46
 #: templates/emails/request-new-quote.php:41

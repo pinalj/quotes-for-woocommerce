@@ -24,6 +24,8 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 	<p><?php echo sprintf( esc_html( $opening_paragraph ), esc_html( $billing_first_name . ' ' . $billing_last_name ) ); ?></p>
 <?php endif; ?>
 
+<?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
+
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
@@ -64,6 +66,10 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 		?>
 	</tbody>
 </table>
+
+<?php do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
+
+<?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text ); ?>
 
 <p><?php esc_html_e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
 

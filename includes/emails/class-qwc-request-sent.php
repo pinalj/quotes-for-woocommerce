@@ -64,7 +64,7 @@ class QWC_Request_Sent extends WC_Email {
 			$_status = array(
 				'quote-pending',
 			);
-
+			$_status = apply_filters( 'qwc_request_sent_allowed_status', $_status );
 			if ( in_array( $this->object->quote_status, $_status, true ) && $this->is_enabled() ) {
 
 				$this->recipient = $this->object->billing_email;
