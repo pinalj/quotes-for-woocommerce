@@ -18,6 +18,14 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 	class Quotes_Payment_Gateway extends WC_Payment_Gateway {
 
 		/**
+		 * Gateway Instructions.
+		 *
+		 * @var   string
+		 * @since 2.5.0
+		 */
+		public $instructions = '';
+
+		/**
 		 * Constructor for the gateway.
 		 */
 		public function __construct() {

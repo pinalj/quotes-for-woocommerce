@@ -15,6 +15,14 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 	class Quotes_WC {
 
 		/**
+		 * Settings tabs.
+		 *
+		 * @var   array
+		 * @since 2.5.0
+		 */
+		public $settings = array();
+
+		/**
 		 * Plugin version.
 		 *
 		 * @var   string

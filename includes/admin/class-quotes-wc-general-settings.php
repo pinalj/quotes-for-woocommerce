@@ -13,6 +13,22 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 	class Quotes_WC_General_Settings extends Quotes_WC_Settings_Section {
 
 		/**
+		 * Tab ID.
+		 *
+		 * @var   string
+		 * @since 2.5.0
+		 */
+		public $id = '';
+
+		/**
+		 * Tab Description.
+		 *
+		 * @var   string
+		 * @since 2.5.0
+		 */
+		public $desc = '';
+
+		/**
 		 * Construct.
 		 */
 		public function __construct() {
