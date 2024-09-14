@@ -1,0 +1,1 @@
+(()=>{const{registerCheckoutFilters:t}=window.wc.blocksCheckout,e=filter_params.cartContainsQuotable,o=filter_params.qwcButtonText;t("quotes-for-woocommerce",{proceedToCheckoutButtonLabel:(t,c,r)=>r?.cart.items&&e?o:t})})();

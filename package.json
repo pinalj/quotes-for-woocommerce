@@ -1,6 +1,6 @@
 {
     "name": "quotes-for-woocommerce",
-    "version": "2.0.0",
+    "version": "2.4.0",
     "description": "Plugin allows store owners to accept quote requests for products.",
     "author": "Pinal Shah",
     "license": "GPL-2.0-or-later",
@@ -16,11 +16,11 @@
       },
       "devDependencies": {
           "@woocommerce/block-library": "^2.3.0",
-          "@woocommerce/dependency-extraction-webpack-plugin": "^2.2.0",
+          "@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
           "@woocommerce/eslint-plugin": "^2.2.0",
           "@wordpress/blocks": "^12.6.0",
-          "@wordpress/scripts": "^26.0.0",
-          "@wordpress/components": "^23.8.0"
+          "@wordpress/components": "^23.8.0",
+          "@wordpress/scripts": "^26.0.0"
       },
       "dependencies": {
           "classnames": "2.3.1"

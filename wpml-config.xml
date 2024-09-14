@@ -4,6 +4,8 @@
 	<key name="qwc_place_order_text"/>
 	<key name="qwc_add_to_cart_button_text"/>
 	<key name="qwc_cart_page_name"/>
+	<key name="qwc_checkout_page_name"/>
+	<key name="qwc_proceed_checkout_btn_label"/>
 </admin-texts>
 
 </wpml-config>
