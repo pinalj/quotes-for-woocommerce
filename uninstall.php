@@ -6,7 +6,7 @@
  *
  * @author      TechnoVama
  * @package     Quotes For WooCommerce/uninstall
- * @version     2.3
+ * @version     2.5.0
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
