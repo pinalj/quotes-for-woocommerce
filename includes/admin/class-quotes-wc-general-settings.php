@@ -73,6 +73,8 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			$place_order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_place_order_text' );
 			$cart_button_text        = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
 			$cart_page_name          = '' === get_option( 'qwc_cart_page_name', '' ) ? __( 'Cart', 'quote-wc' ) : get_option( 'qwc_cart_page_name' );
+			$checkout_page_name      = '' === get_option( 'qwc_checkout_page_name', '' ) ? __( 'Checkout', 'quote-wc' ) : get_option( 'qwc_checkout_page_name' );
+			$proceed_checkout_label  = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
 
 			$settings = array(
 
@@ -124,6 +126,14 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'id'    => 'qwc_cart_settings_section',
 				),
 				array(
+					'title' => __( 'Checkout page Name for Quotable Products:', 'quote-wc' ),
+					'type'  => 'text',
+					'desc'  => __( 'Display a custom name for Checkout page when cart contains only quotable products.', 'quote-wc' ),
+					'id'    => 'qwc_checkout_page_name',
+					'css'   => 'min-width:300px;',
+					'value' => $checkout_page_name,
+				),
+				array(
 					'title' => __( 'Place Order button text for Quotable Products:', 'quote-wc' ),
 					'type'  => 'text',
 					'desc'  => __( 'Place Order button text for Quotable products at Checkout.', 'quote-wc' ),
@@ -137,6 +147,14 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'id'    => 'qwc_cart_page_name',
 					'css'   => 'min-width:300px;',
 					'value' => $cart_page_name,
+				),
+				array(
+					'title' => __( 'Proceed to Checkout button text:', 'quote-wc' ),
+					'type'  => 'text',
+					'desc'  => __( 'Proceed to Checkout button label on the Cart page when cart contains only quotable products.', 'quote-wc' ),
+					'id'    => 'qwc_proceed_checkout_btn_label',
+					'css'   => 'min-width:300px;',
+					'value' => $proceed_checkout_label,
 				),
 				array(
 					'title'    => __( 'Hide Address fields at Checkout:', 'quote-wc' ),
@@ -250,7 +268,6 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			qwc_bulk_edit_setting_by_id( $product_list, $quote_setting_name, $quote_setting_value );
 
 			wp_reset_postdata();
-
 		}
 
 		/**

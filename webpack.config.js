@@ -11,7 +11,8 @@ const defaultRules = defaultConfig.module.rules.filter((rule) => {
 module.exports = {
 	...defaultConfig,
 	entry: {
-		index: path.resolve(process.cwd(), 'src', 'index.js' ),
+		index: path.resolve(process.cwd(), 'src', 'index.js' ), // First entry point.
+		filter: path.resolve(process.cwd(), 'src', 'filter.js'), // Second entry point.
 	},
 	output: {
 		path: path.resolve( __dirname, 'build' ),

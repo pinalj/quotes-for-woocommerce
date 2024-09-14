@@ -103,7 +103,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// Load JS files.
 			add_action( 'admin_enqueue_scripts', array( &$this, 'qwc_load_js' ) );
 			// Frontend JS files.
-			add_action( 'wp_enqueue_scripts', array( &$this, 'qwc_load_product_js' ) );
+			add_action( 'wp_enqueue_scripts', array( &$this, 'qwc_load_js_frontend' ) );
 			// Admin ajax.
 			add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
 
@@ -126,6 +126,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Checkout Blocks Payment Gateway Integration.
 			add_action( 'woocommerce_blocks_loaded', array( __CLASS__, 'qwc_quotes_gateway_woocommerce_block_support' ) );
+
+			// Proceed to Checkout button text edit.
+			add_action( 'woocommerce_proceed_to_checkout', array( &$this, 'qwc_change_proceed_checkout_btn_text' ), 10 );
 
 			// Add dismissible notice informing users about the change in menu placement.
 			add_action( 'admin_notices', array( &$this, 'qwc_menu_change_notice' ), 1 );
@@ -359,7 +362,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					$found = current(
 						array_filter(
 							$results_quotes,
-							function( $value ) {
+							function ( $value ) {
 								return isset( $value->meta_value ) && 'on' === $value->meta_value;
 							}
 						)
@@ -374,7 +377,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							$found_price = current(
 								array_filter(
 									$results_price,
-									function( $value ) {
+									function ( $value ) {
 										return isset( $value->meta_value ) && 'on' === $value->meta_value;
 									}
 								)
@@ -416,7 +419,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 *
 		 * @since 2.4
 		 */
-		public function qwc_load_product_js() {
+		public function qwc_load_js_frontend() {
 
 			if ( is_product() ) {
 				global $post;
@@ -439,9 +442,24 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 								'quotes'     => $enable_quote,
 							)
 						);
-						wp_enqueue_script( 'qwc-product-js');
+						wp_enqueue_script( 'qwc-product-js' );
 					}
 				}
+			}
+			if ( is_cart() ) {
+				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
+
+				wp_register_script( 'qwc-filter-js', plugins_url( '/build/filter.js', __FILE__ ), array( 'wp-blocks', 'wc-blocks-checkout' ), $plugin_version, array( 'in_footer' => true ) );
+
+				wp_localize_script(
+					'qwc-filter-js',
+					'filter_params',
+					array(
+						'cartContainsQuotable' => cart_contains_quotable(),
+						'qwcButtonText'        => $proceed_checkout_label,
+					)
+				);
+				wp_enqueue_script( 'qwc-filter-js' );
 			}
 		}
 		/**
@@ -628,7 +646,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 
 			return $needs_payment;
-
 		}
 
 		/**
@@ -636,16 +653,16 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * and/or payments are not cancelled by WooCommerce
 		 * even though the Inventory Hold Stock Limit is reached.
 		 *
-		 * @param bool   $return - Whether the order should be cancelled since its unpaid.
+		 * @param bool   $qwc_return - Whether the order should be cancelled since its unpaid.
 		 * @param object $order - WC_Order.
 		 * @since 1.0
 		 */
-		public function qwc_prevent_cancel( $return, $order ) {
+		public function qwc_prevent_cancel( $qwc_return, $order ) {
 			if ( '1' === $order->get_meta( '_qwc_quote' ) ) {
 				return false;
 			}
 
-			return $return;
+			return $qwc_return;
 		}
 
 		/**
@@ -901,6 +918,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				$title = esc_attr__( $cart_name, 'quote-wc' ); //phpcs:ignore
 			}
+			if ( cart_contains_quotable() && wc_get_page_id( 'checkout' ) === $id ) {
+				$checkout_name = get_option( 'qwc_checkout_page_name' );
+				$checkout_name = '' === $checkout_name ? __( 'Checkout', 'quote-wc' ) : $checkout_name; //phpcs:ignore
+
+				$title = esc_attr__( $checkout_name, 'quote-wc' ); //phpcs:ignore
+			}
 			if ( is_wc_endpoint_url( 'order-received' ) && wc_get_page_id( 'checkout' ) === $id ) {
 				global $wp;
 
@@ -916,6 +939,23 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$title = apply_filters( 'qwc_change_checkout_page_title', $title, 'order-pay', 'pending' );
 			}
 			return $title;
+		}
+
+		/**
+		 * Modify the Proceed to Checkout button text when cart contains quote products.
+		 *
+		 * @since 2.4
+		 */
+		public function qwc_change_proceed_checkout_btn_text() {
+			if ( cart_contains_quotable() ) {
+				remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
+				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checout_btn_label', '' ) ? __( 'Proceed to Checkout', 'woocommerce' ) : get_option( 'qwc_proceed_checout_btn_label' );
+				?>
+				<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
+					<?php echo esc_html__( $proceed_checkout_label, 'quote-wc' ); ?>
+				</a>
+				<?php
+			}
 		}
 
 		/**
@@ -1022,7 +1062,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$message = __( 'The Quotes settings can now be managed from WooCommerce > Settings > Quotes.', 'quote-wc' );
 
 			printf( '<div class="%1$s"><p><h3>%2$s</h3>%3$s</p></div>', esc_attr( $class ), esc_html( $heading ), esc_html( $message ) );
-
 		}
 
 		/**
@@ -1054,7 +1093,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/blocks/class-quotes-wc-blocks-integration.php';
 				add_action(
 					'woocommerce_blocks_payment_method_type_registration',
-					function( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
+					function ( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
 						$payment_method_registry->register( new WC_Quotes_Gateway_Blocks_Support() );
 					}
 				);
