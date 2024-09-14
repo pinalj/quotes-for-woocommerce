@@ -137,6 +137,33 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		}
 
 		/**
+		 * Define plugin constants.
+		 *
+		 * @since 2.3
+		 */
+		public function qwc_define_constants() {
+			if ( ! defined( 'QUOTES_TEMPLATE_PATH' ) ) {
+				define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_DIR' ) ) {
+				define( 'QUOTES_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_URL' ) ) {
+				define( 'QUOTES_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_VERSION' ) ) {
+				define( 'QUOTES_PLUGIN_VERSION', $this->version );
+			}
+
+			if ( ! defined( 'QUOTES_PLUGIN_PATH' ) ) {
+				define( 'QUOTES_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			}
+		}
+
+		/**
 		 * Get instance of the class.
 		 *
 		 * @since 2.0
@@ -180,33 +207,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_update_db_check() {
 			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
-		}
-
-		/**
-		 * Define plugin constants.
-		 *
-		 * @since 2.3
-		 */
-		public function qwc_define_constants() {
-			if ( ! defined( 'QUOTES_TEMPLATE_PATH' ) ) {
-				define( 'QUOTES_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
-			}
-
-			if ( ! defined( 'QUOTES_PLUGIN_DIR' ) ) {
-				define( 'QUOTES_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			}
-
-			if ( ! defined( 'QUOTES_PLUGIN_URL' ) ) {
-				define( 'QUOTES_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
-			}
-
-			if ( ! defined( 'QUOTES_PLUGIN_VERSION' ) ) {
-				define( 'QUOTES_PLUGIN_VERSION', $this->version );
-			}
-
-			if ( ! defined( 'QUOTES_PLUGIN_PATH' ) ) {
-				define( 'QUOTES_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			}
 		}
 
 		/**
@@ -318,7 +318,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_css() {
-			$plugin_version = get_option( 'quotes_for_wc' );
 
 			if ( is_cart() || is_checkout() ) {
 				// Add css file only if cart contains products that require quotes.
@@ -330,14 +329,14 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						if ( $_order ) {
 							$quote_status = $_order->get_meta( '_quote_status' );
 							if ( 'quote-pending' === $quote_status ) {
-								wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+								wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 							}
 						}
 					}
 				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
 					// enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
 					if ( ! class_exists( 'Quotes_WC_Pro' ) ) {
-						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 					}
 				}
 			}
@@ -345,7 +344,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// Add css file only if cart contains products that require quotes.
 			if ( ! is_checkout_pay_page() && ! is_order_received_page() && ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) ) {
 				if ( ! class_exists( 'Quotes_WC_Pro' ) ) { // enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
-					wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', $plugin_version, false );
+					wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 				}
 			}
 
@@ -393,7 +392,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 				// Hide the prices.
 				if ( ! $display ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 				}
 			}
 		}
@@ -409,59 +408,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$quote_status = $order->get_meta( '_quote_status' );
 
 			if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
-				$plugin_version = get_option( 'quotes_for_wc' );
-				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', $plugin_version, false );
+				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 			}
 		}
 
-		/**
-		 * Front end JS files.
-		 *
-		 * @since 2.4
-		 */
-		public function qwc_load_js_frontend() {
-
-			if ( is_product() ) {
-				global $post;
-
-				$product_id = isset( $post->ID ) ? $post->ID : 0;
-
-				if ( $product_id > 0 ) {
-					$enable_quote = product_quote_enabled( $product_id );
-
-					if ( $enable_quote ) {
-						$plugin_version = get_option( 'quotes_for_wc' );
-
-						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', $plugin_version, array( 'in_footer' => true ) );
-
-						wp_localize_script(
-							'qwc-product-js',
-							'qwc_product_params',
-							array(
-								'product_id' => $product_id,
-								'quotes'     => $enable_quote,
-							)
-						);
-						wp_enqueue_script( 'qwc-product-js' );
-					}
-				}
-			}
-			if ( is_cart() ) {
-				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
-
-				wp_register_script( 'qwc-filter-js', plugins_url( '/build/filter.js', __FILE__ ), array( 'wp-blocks', 'wc-blocks-checkout' ), $plugin_version, array( 'in_footer' => true ) );
-
-				wp_localize_script(
-					'qwc-filter-js',
-					'filter_params',
-					array(
-						'cartContainsQuotable' => cart_contains_quotable(),
-						'qwcButtonText'        => $proceed_checkout_label,
-					)
-				);
-				wp_enqueue_script( 'qwc-filter-js' );
-			}
-		}
 		/**
 		 * Load JS files.
 		 *
@@ -469,7 +419,6 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_load_js() {
 
-			$plugin_version = get_option( 'quotes_for_wc' );
 			// File to send Quote Email.
 			$include  = false;
 			$order_id = 0;
@@ -487,7 +436,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 
 			if ( $include && $order_id > 0 ) {
-				wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', $plugin_version, false );
+				wp_register_script( 'qwc-admin', plugins_url( '/assets/js/qwc-admin.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 
 				$ajax_url = get_admin_url() . 'admin-ajax.php';
 
@@ -507,7 +456,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// File to dismiss admin notice.
 			$notice_dismissed = get_option( 'qwc_menu_notice', '' );
 			if ( 'dismissed' !== $notice_dismissed ) {
-				wp_register_script( 'qwc-notice', plugins_url( '/assets/js/qwc-notice.js', __FILE__ ), '', $plugin_version, array( 'in_footer' => true ) );
+				wp_register_script( 'qwc-notice', plugins_url( '/assets/js/qwc-notice.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
 				wp_localize_script(
 					'qwc-notice',
 					'qwc_notice_params',
@@ -516,6 +465,56 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 				wp_enqueue_script( 'qwc-notice' );
+			}
+		}
+
+		/**
+		 * Front end JS files.
+		 *
+		 * @since 2.4
+		 */
+		public function qwc_load_js_frontend() {
+
+			if ( is_product() ) {
+				global $post;
+
+				$product_id = isset( $post->ID ) ? $post->ID : 0;
+
+				if ( $product_id > 0 ) {
+					$enable_quote = product_quote_enabled( $product_id );
+
+					if ( $enable_quote ) {
+
+						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
+
+						wp_localize_script(
+							'qwc-product-js',
+							'qwc_product_params',
+							array(
+								'product_id' => $product_id,
+								'quotes'     => $enable_quote,
+							)
+						);
+						wp_enqueue_script( 'qwc-product-js' );
+
+					}
+				}
+			}
+
+			if ( is_cart() ) {
+				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
+
+				wp_register_script( 'qwc-filter-js', plugins_url( '/build/filter.js', __FILE__ ), array( 'wp-blocks', 'wc-blocks-checkout' ), QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
+
+				wp_localize_script(
+					'qwc-filter-js',
+					'filter_params',
+					array(
+						'cartContainsQuotable' => cart_contains_quotable(),
+						'qwcButtonText'        => $proceed_checkout_label,
+					)
+				);
+				wp_enqueue_script( 'qwc-filter-js' );
 			}
 		}
 
@@ -944,7 +943,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		/**
 		 * Modify the Proceed to Checkout button text when cart contains quote products.
 		 *
-		 * @since 2.4
+		 * @since 2.5
 		 */
 		public function qwc_change_proceed_checkout_btn_text() {
 			if ( cart_contains_quotable() ) {
