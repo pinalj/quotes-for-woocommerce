@@ -948,7 +948,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_change_proceed_checkout_btn_text() {
 			if ( cart_contains_quotable() ) {
 				remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
-				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'woocommerce' ) : get_option( 'qwc_proceed_checkout_btn_label' );
+				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
 				?>
 				<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
 					<?php echo esc_html__( $proceed_checkout_label, 'quote-wc' ); ?>
