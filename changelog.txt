@@ -1,5 +1,12 @@
 *** Quotes for WooCommerce ***
 
+2024-09-17 - Version 2.5
+* Enhancement - Added setting to modify the Proceed to Checkout button text when cart contains only quote products.
+* Enhancement - Added setting to modify Checkout page title when cart contains only quote products.
+* Tweak - Added filters to allow users to modify the quote status for which initial emails should be sent to admin and customer.
+* Fix - Rectified incorrect french translation for the word 'Price'.
+* Fix - Modified plugin code to work correctly with PHP 8.3.x.
+
 2024-06-27 - Version 2.4
 * Enhancement - Introduced compatibility with WooCommerce Composite Products.
 * Fix - Fixed a fatal error displayed with WooCommerce 9.0.x.

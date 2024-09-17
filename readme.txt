@@ -3,8 +3,8 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.5.5
-Stable tag: 2.4
+Tested up to: 6.6.2
+Stable tag: 2.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -80,6 +80,13 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.5 ( 17.09.2024 ) =
+* Enhancement - Added setting to modify the Proceed to Checkout button text when cart contains only quote products.
+* Enhancement - Added setting to modify Checkout page title when cart contains only quote products.
+* Tweak - Added filters to allow users to modify the quote status for which initial emails should be sent to admin and customer.
+* Fix - Rectified incorrect french translation for the word 'Price'.
+* Fix - Modified plugin code to work correctly with PHP 8.3.x.
 
 = 2.4 ( 27.06.2024 ) =
 * Enhancement - Introduced compatibility with WooCommerce Composite Products.
