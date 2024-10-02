@@ -66,7 +66,6 @@ function cart_contains_quotable() {
 		}
 	}
 	return $quotable;
-
 }
 
 /**
@@ -155,7 +154,6 @@ function qwc_order_display_price( $order ) {
 	}
 
 	return $display;
-
 }
 
 /**
@@ -202,4 +200,32 @@ function qwc_bulk_edit_setting_by_id( $products_list, $quote_setting_name, $quot
 			update_post_meta( $theid, $quote_setting_name, $quote_setting_value );
 		}
 	}
+}
+
+/**
+ * Returns whether the cart contains products with quotes.
+ *
+ * @return bool Cart has quote products or no.
+ * @since 2.6
+ */
+function cart_contains_purchasable() {
+
+	$purchasable = false;
+
+	if ( isset( WC()->cart ) ) {
+		foreach ( WC()->cart->cart_contents as $item ) {
+
+			if ( 0 === $item['product_id'] ) {
+				$item['product_id'] = qwc_get_product_id_by_variation_id( $item['variation_id'] );
+			}
+			$product_id    = apply_filters( 'qwc_cart_check_item_product_id', $item['product_id'], $item );
+			$quote_enabled = product_quote_enabled( $product_id );
+
+			if ( ! $quote_enabled ) {
+				$purchasable = true;
+				break;
+			}
+		}
+	}
+	return $purchasable;
 }
