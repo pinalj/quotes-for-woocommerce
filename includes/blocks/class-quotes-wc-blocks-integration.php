@@ -20,7 +20,7 @@ if ( ! class_exists( 'Quotes_WC_Blocks_Integration' ) ) {
 			// Add Order Meta for Quote Status.
 			add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( &$this, 'qwc_wc_blocks_update_order_meta_data' ), 10, 2 );
 			// Order has been processed, initiate emails.
-			add_action( 'woocommerce_store_api_checkout_order_processed', array( &$this, 'qwc_init_quote_emails' ), 10, 1 );
+			add_action( 'woocommerce_store_api_checkout_order_processed', array( &$this, 'qwc_init_quote_emails' ), 90, 1 );
 		}
 
 		/**
@@ -51,9 +51,10 @@ if ( ! class_exists( 'Quotes_WC_Blocks_Integration' ) ) {
 		public function qwc_init_quote_emails( $order ) {
 
 			if ( $order ) {
-				$quote    = order_requires_quote( $order );
 				$order_id = $order->get_id();
-
+				$order_id = apply_filters( 'qwc_init_quote_emails', $order_id );
+				$order    = wc_get_order( $order_id ); // We refetch the order obj to ensure the correct obj is used if the order Id was modified by the filter.
+				$quote    = order_requires_quote( $order );
 				if ( $quote && isset( $order_id ) && $order_id > 0 ) {
 					WC_Emails::instance();
 					do_action( 'qwc_pending_quote_notification', $order_id );
