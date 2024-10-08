@@ -540,8 +540,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_cart_widget_prices( $price, $cart_item ) {
 
 			$product_id = apply_filters( 'qwc_cart_check_item_product_id', $cart_item['product_id'], $cart_item );
+			$quantity   = isset( $cart_item['quantity'] ) ? $cart_item['quantity'] : 1;
 
-			$quotes = product_quote_enabled( $product_id );
+			$quotes = product_quote_enabled( $product_id, $quantity );
 
 			if ( $quotes && ! qwc_cart_display_price() ) {
 				$price = '';
@@ -596,7 +597,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		public function qwc_cart_validations( $passed, $product_id, $qty ) {
 
 			// Check if the product being added is quotable.
-			$product_quotable = product_quote_enabled( $product_id );
+			$product_quotable = product_quote_enabled( $product_id, $qty );
 
 			// Check if the cart contains a product that is quotable.
 			$cart_contains_quotable = cart_contains_quotable();
@@ -635,7 +636,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( ! $needs_payment ) {
 				foreach ( $cart->cart_contents as $cart_item ) {
-					$requires_quotes = product_quote_enabled( $cart_item['product_id'] );
+					$quantity = isset( $cart_item['quantity'] ) ? $cart_item['quantity'] : 1;
+
+					$requires_quotes = product_quote_enabled( $cart_item['product_id'], $quantity );
 
 					if ( $requires_quotes ) {
 						$needs_payment = true;
@@ -890,8 +893,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$cart_name = '' === $cart_name ? __( 'Cart', 'quote-wc' ) : $cart_name;
 
 			if ( is_array( $products ) && count( $products ) > 0 ) {
-				foreach ( $products as $product_id => $value ) {
-					if ( product_quote_enabled( $product_id ) ) {
+				foreach ( $products as $product_id => $quantity ) {
+					if ( product_quote_enabled( $product_id, $quantity ) ) {
 						$message = str_replace( 'added to your cart', "added to your $cart_name", $message );
 						$message = str_replace( 'View cart', "View $cart_name", $message );
 						break;
