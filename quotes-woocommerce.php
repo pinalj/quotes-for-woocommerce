@@ -29,7 +29,7 @@ if (
 	}
 	add_action(
 		'admin_notices',
-		function() {
+		function () {
 			// translators: plugin name with link.
 			$msg = sprintf( __( 'Please install and activate %s before activating Quotes for WooCommerce.', 'quote-wc' ), '<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>' );
 			?>
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 add_action(
 	'before_woocommerce_init',
-	function() {
+	function () {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'orders_cache', __FILE__, true );

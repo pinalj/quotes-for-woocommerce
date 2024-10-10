@@ -10,6 +10,7 @@ use Automattic\WooCommerce\Utilities\OrderUtil;
  * Returns whether quotes are enabled.
  *
  * @param int $product_id - Product ID.
+ * @param int $qty - Product Qty.
  * @return bool $quotes_enabled - Quote Status.
  */
 function product_quote_enabled( $product_id, $qty = 1 ) {
