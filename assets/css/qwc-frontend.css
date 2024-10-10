@@ -41,13 +41,6 @@ div.wc-block-components-order-summary-item__description span.wc-block-components
 .wc-block-cart-item__prices {
     display: none;
 }
-/* Hide the totals, shipping etc. on the Thank You page. */
-table.woocommerce-table--order-details > tfoot {
-    display: none;
-}
-li.woocommerce-order-overview__total {
-    display: none;
-}
 /* Only for large screens */
 @media (min-width: 700px) {
     .wc-block-cart__sidebar {
