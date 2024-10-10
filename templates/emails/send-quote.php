@@ -52,7 +52,7 @@ if ( $order ) :
 		$order_date = gmdate( 'Y-m-d H:i:s', $post_date );
 	}
 	?>
-	<h2><?php echo esc_html__( 'Order', 'quote-wc' ) . ': ' . esc_html( $order->get_order_number() ); ?> (<?php printf( '<time datetime="%s">%s</time>', wp_kses_post( date_i18n( 'c', strtotime( $order_date ) ) ), wp_kses_post( date_i18n( wc_date_format(), strtotime( $order_date ) ) ) );?>)</h2>
+	<h2><?php echo esc_html__( 'Order', 'quote-wc' ) . ': ' . esc_html( $order->get_order_number() ); ?> (<?php printf( '<time datetime="%s">%s</time>', wp_kses_post( date_i18n( 'c', strtotime( $order_date ) ) ), wp_kses_post( date_i18n( wc_date_format(), strtotime( $order_date ) ) ) ); ?>)</h2>
 	<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 		<thead>
 			<tr>

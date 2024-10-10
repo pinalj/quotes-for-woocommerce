@@ -61,7 +61,6 @@ if ( ! class_exists( 'Quotes_WC_Blocks_Integration' ) ) {
 					do_action( 'qwc_request_sent_notification', $order_id );
 				}
 			}
-
 		}
 	}
 }
