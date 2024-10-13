@@ -37,6 +37,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
 
 			$this->description        = '';
+			$this->method_description = '';
 			$this->instructions       = '';
 			// Actions.
 			add_filter( 'woocommerce_thankyou_order_received_text', array( &$this, 'thankyou_page' ), 10, 2 );
