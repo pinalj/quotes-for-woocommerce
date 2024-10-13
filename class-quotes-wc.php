@@ -949,7 +949,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 2.5
 		 */
 		public function qwc_change_proceed_checkout_btn_text() {
-			if ( cart_contains_quotable() ) {
+			$modify_text = apply_filters( 'qwc_modify_proceed_checkout_button_text', true );
+			if ( cart_contains_quotable() && $modify_text ) {
 				remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
 				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
 				?>
@@ -968,7 +969,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.6
 		 */
 		public function cart_needs_shipping( $needs_shipping ) {
-			if ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) {
+			// Override lite verison shipping removal for quote orders by using this filter.
+			$shipping_choice = apply_filters(
+				'qwc_override_shipping_quotes',
+				array(
+					'override'       => false,
+					'needs_shipping' => $needs_shipping,
+				)
+			);
+			// Override should be returned true, if u want to override the default behaviour.
+			if ( isset( $shipping_choice['override'] ) && $shipping_choice['override'] ) {
+				if ( isset( $shipping_choice['needs_shipping'] ) ) {
+					return $shipping_choice['needs_shipping'];
+				} else {  // if user choice not found after overriding, return as is.
+					return $needs_shipping;
+				}
+			} elseif ( cart_contains_quotable() && 'on' === get_option( 'qwc_hide_address_fields' ) ) { // default, free verison removes shipping for quote orders.
 				return false;
 			} else {
 				return $needs_shipping;
@@ -997,8 +1013,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 
-				foreach ( $qwc_hide_fields_list as $field_name ) {
-					unset( $fields[ $field_name ] );
+				if ( is_array( $qwc_hide_fields_list ) && count( $qwc_hide_fields_list ) > 0 ) {
+					foreach ( $qwc_hide_fields_list as $field_name ) {
+						unset( $fields[ $field_name ] );
+					}
 				}
 			}
 
@@ -1027,8 +1045,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 
-				foreach ( $qwc_hide_fields_list as $field_name ) {
-					unset( $fields['billing'][ $field_name ] );
+				if ( is_array( $qwc_hide_fields_list ) && count( $qwc_hide_fields_list ) > 0 ) {
+					foreach ( $qwc_hide_fields_list as $field_name ) {
+						unset( $fields['billing'][ $field_name ] );
+					}
 				}
 			}
 
