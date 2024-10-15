@@ -4,7 +4,7 @@ Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 6.6.2
-Stable tag: 2.5
+Stable tag: 2.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -37,7 +37,9 @@ The users can then make the payments using the link in the email or the My Accou
 
 <ul>
 <li>Enable quotes for only some products in the store.</li>
+<li>Allow quote and purchasable products in a single cart.</li>
 <li>Enable quotes for select variations of a product</li>
+<li>Automatically enable quotes based on item quantity for each product.</li>
 <li>Customize quote button display based on WordPress User Roles</li>
 <li>Seamlessly process both regular orders and quote requests for all products</li>
 <li>Automatically activate quoting for out-of-stock products</li>
@@ -80,6 +82,10 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.6 ( 16.10.2024 ) =
+* Tweak - Added some filters for compatibility with Premium 1.5.
+* Fix - Address WooCommerce Payment Gateway API required fields.
 
 = 2.5 ( 17.09.2024 ) =
 * Enhancement - Added setting to modify the Proceed to Checkout button text when cart contains only quote products.

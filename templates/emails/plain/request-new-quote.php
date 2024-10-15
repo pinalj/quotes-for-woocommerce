@@ -8,7 +8,7 @@
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
 
-// translators: Site Name.
+// translators: Customer Name.
 $opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 do_action( 'woocommerce_email_header', $email_heading, $email );
@@ -64,7 +64,7 @@ if ( $order ) {
 
 	echo "\n----------------------------------------\n\n";
 	echo sprintf( esc_html__( 'This order is awaiting a quote.', 'quote-wc' ) );
-	// translators: Order payment link.
+	// translators: Admin Url for order.
 	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) ) );
 
 	do_action( 'woocommerce_email_footer' );
