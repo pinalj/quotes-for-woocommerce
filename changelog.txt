@@ -1,5 +1,9 @@
 *** Quotes for WooCommerce ***
 
+2024-10-16 - Version 2.5
+* Tweak - Added some filters for compatibility with Premium 1.5.
+* Fix - Address WooCommerce Payment Gateway API required fields.
+
 2024-09-17 - Version 2.5
 * Enhancement - Added setting to modify the Proceed to Checkout button text when cart contains only quote products.
 * Enhancement - Added setting to modify Checkout page title when cart contains only quote products.

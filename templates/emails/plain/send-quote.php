@@ -10,17 +10,17 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 if ( $order ) :
 	$billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
-	// translators: User first name.
+	// translators: Billing First Name.
 	echo sprintf( esc_html__( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) ) . "\n\n";
 endif;
-// translators: Site name.
+// translators: Site Name.
 echo sprintf( esc_html__( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order_details->blogname ) );
 
 if ( $order ) :
 
 	$order_status = $order->get_status();
 	if ( 'pending' === $order_status ) :
-		// translators: Payment URL.
+		// translators: Payment Link Url.
 		echo sprintf( esc_html__( 'To pay for this order please use the following link: %s', 'quote-wc' ), esc_url( $order->get_checkout_payment_url() ) );
 	endif;
 

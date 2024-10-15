@@ -75,7 +75,7 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 
 <p>
 	<?php
-	// translators: Admin Url for payment.
+	// translators: Admin Url for order.
 	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), esc_url( $order_url ) ) ) );
 	?>
 </p>
