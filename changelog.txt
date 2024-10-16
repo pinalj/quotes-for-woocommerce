@@ -1,6 +1,6 @@
 *** Quotes for WooCommerce ***
 
-2024-10-16 - Version 2.5
+2024-10-16 - Version 2.6
 * Tweak - Added some filters for compatibility with Premium 1.5.
 * Fix - Address WooCommerce Payment Gateway API required fields.
 
