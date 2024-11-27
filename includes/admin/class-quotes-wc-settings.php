@@ -5,12 +5,12 @@
  * @package Quotes for WooCommerce/Admin
  */
 
-if ( ! class_exists( 'Quotes_WC_Settings_T' ) && class_exists( 'WC_Settings_Page' ) ) {
+if ( ! class_exists( 'Quotes_WC_Settings' ) && class_exists( 'WC_Settings_Page' ) ) {
 
 	/**
 	 * Global settings.
 	 */
-	class Quotes_WC_Settings_T extends WC_Settings_Page {
+	class Quotes_WC_Settings extends WC_Settings_Page {
 
 		/**
 		 * Construct.
@@ -44,5 +44,5 @@ if ( ! class_exists( 'Quotes_WC_Settings_T' ) && class_exists( 'WC_Settings_Page
 		}
 
 	}
-	new Quotes_WC_Settings_T();
+	return new Quotes_WC_Settings();
 }
