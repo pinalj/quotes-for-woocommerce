@@ -5,8 +5,6 @@
  * @package Quotes For WooCommerce
  */
 
-load_plugin_textdomain( 'quote-wc', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
 if ( ! class_exists( 'Quotes_WC' ) ) {
 
 	/**
@@ -226,6 +224,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_include_files() {
+			// Load plugin text domain.
+			load_plugin_textdomain( 'quote-wc', false, basename( __DIR__ ) . '/languages' );
+			// Include the files.
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-quotes-payment-gateway.php';
 			include_once WP_PLUGIN_DIR . '/quotes-for-woocommerce/includes/class-qwc-email-manager.php';
 		}
