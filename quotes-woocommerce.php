@@ -5,7 +5,7 @@
  * Version: 2.6
  * Author: TechnoVama
  * Requires at least: 4.5
- * WC Requires at least: 4.0
+ * WC requires at least: 4.0
  * WC tested up to: 9.3.1
  * Text Domain: quote-wc
  * Domain Path: /languages/
