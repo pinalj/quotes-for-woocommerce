@@ -721,6 +721,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$order = wc_get_order( $order_id );
 			$order->update_meta_data( '_quote_status', $quote_status );
 			$order->save();
+			do_action( 'qwc_update_quote_order_status', $order_id );
 		}
 
 		/**
