@@ -302,11 +302,18 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			global $post;
 			$post_id = $post->ID;
-			// check if setting is enabled.
-			$enable_quote = product_quote_enabled( $post_id );
+			if ( $post_id > 0 ) {
+				$product = wc_get_product( $post_id );
+				if ( $product ) {
+					// check product price.
+					$purchasable = $product->is_purchasable();
+					// check if setting is enabled.
+					$enable_quote = product_quote_enabled( $post_id );
 
-			if ( $enable_quote ) {
-				$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_add_to_cart_button_text' ), 'quote-wc' ); // phpcs:ignore
+					if ( $enable_quote && $purchasable ) {
+						$cart_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? esc_html__( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_add_to_cart_button_text' ), 'quote-wc' ); // phpcs:ignore
+					}
+				}
 			}
 
 			return $cart_text;
