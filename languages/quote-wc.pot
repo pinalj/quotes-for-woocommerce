@@ -1,15 +1,15 @@
-# Copyright (C) 2024 TechnoVama
+# Copyright (C) 2025 TechnoVama
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 2.5\n"
+"Project-Id-Version: Quotes for WooCommerce 2.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-15T13:10:54+02:00\n"
+"POT-Creation-Date: 2025-01-02T06:34:45+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: quote-wc\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "https://woocommerce.com/vendor/technovama/"
 msgstr ""
 
-#: class-quotes-wc.php:308
+#: class-quotes-wc.php:314
 #: includes/admin/class-quotes-wc-general-settings.php:73
 #: includes/admin/class-quotes-wc-general-settings.php:74
 #: includes/blocks/class-quotes-payment-gateway-blocks.php:88
@@ -42,71 +42,71 @@ msgstr ""
 msgid "Request Quote"
 msgstr ""
 
-#: class-quotes-wc.php:449
+#: class-quotes-wc.php:457
 msgid "Quote emailed"
 msgstr ""
 
-#: class-quotes-wc.php:505
-#: class-quotes-wc.php:955
+#: class-quotes-wc.php:513
+#: class-quotes-wc.php:964
 #: includes/admin/class-quotes-wc-general-settings.php:77
 msgid "Proceed to Checkout"
 msgstr ""
 
 #. translators: Leave price blanks as its not be displayed.
-#: class-quotes-wc.php:582
+#: class-quotes-wc.php:590
 msgid "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
 msgstr ""
 
-#: class-quotes-wc.php:620
+#: class-quotes-wc.php:628
 msgid "It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart."
 msgstr ""
 
-#: class-quotes-wc.php:771
+#: class-quotes-wc.php:780
 msgid "Quote Complete"
 msgstr ""
 
-#: class-quotes-wc.php:775
+#: class-quotes-wc.php:784
 #: includes/emails/class-qwc-send-quote.php:24
 msgid "Send Quote"
 msgstr ""
 
-#: class-quotes-wc.php:777
+#: class-quotes-wc.php:786
 msgid "Resend Quote"
 msgstr ""
 
-#: class-quotes-wc.php:806
+#: class-quotes-wc.php:815
 msgid "Quote Complete."
 msgstr ""
 
-#: class-quotes-wc.php:875
+#: class-quotes-wc.php:884
 msgid "Quote email sent to "
 msgstr ""
 
-#: class-quotes-wc.php:893
-#: class-quotes-wc.php:919
+#: class-quotes-wc.php:902
+#: class-quotes-wc.php:928
 #: includes/admin/class-quotes-wc-general-settings.php:75
 msgid "Cart"
 msgstr ""
 
-#: class-quotes-wc.php:925
+#: class-quotes-wc.php:934
 #: includes/admin/class-quotes-wc-general-settings.php:76
 msgid "Checkout"
 msgstr ""
 
-#: class-quotes-wc.php:1067
+#: class-quotes-wc.php:1076
 #: includes/class-quotes-payment-gateway.php:50
 msgid "Settings"
 msgstr ""
 
-#: class-quotes-wc.php:1068
+#: class-quotes-wc.php:1077
 msgid "Get Quotes Pro"
 msgstr ""
 
-#: class-quotes-wc.php:1083
+#: class-quotes-wc.php:1092
 msgid "Quotes menu has moved!"
 msgstr ""
 
-#: class-quotes-wc.php:1084
+#: class-quotes-wc.php:1093
 msgid "The Quotes settings can now be managed from WooCommerce > Settings > Quotes."
 msgstr ""
 
@@ -356,7 +356,7 @@ msgid "[{blogname}] Quotation for (Order {order_number}) - {order_date}"
 msgstr ""
 
 #. translators: plugin name with link.
-#: quotes-woocommerce.php:34
+#: quotes-woocommerce.php:35
 msgid "Please install and activate %s before activating Quotes for WooCommerce."
 msgstr ""
 
