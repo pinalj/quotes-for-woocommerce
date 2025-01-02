@@ -1,5 +1,12 @@
 *** Quotes for WooCommerce ***
 
+2025-01-02 - Version 2.7
+* Fix - Compatibility errors with WordPress 6.7.1.
+* Fix - Intermittent fatal error with Stream.
+* Tweak - Add a hook to allow users to set a custom order status when quote orders come through.
+* Fix - Request Quote button is displayed on the product listing page for products where no price is set.
+* Fix - Fixed some warnings thrown by the QIT tool in the readme.txt file.
+
 2024-10-16 - Version 2.6
 * Tweak - Added some filters for compatibility with Premium 1.5.
 * Fix - Address WooCommerce Payment Gateway API required fields.

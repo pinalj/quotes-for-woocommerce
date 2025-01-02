@@ -3,13 +3,13 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.6.2
-Stable tag: 2.6
+Tested up to: 6.7.1
+Stable tag: 2.7
 Requires PHP: 7.2
 WC requires at least: 4.0
-WC tested up to: 9.3.1
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.txt
+WC tested up to: 9.5.1
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
 
 This plugin allows the site admin the ability to accept quote requests for products. Prices can be hidden. No payments will be taken at Checkout.
@@ -84,6 +84,13 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.7 ( 02.02.2025 ) =
+* Fix - Compatibility errors with WordPress 6.7.1.
+* Fix - Intermittent fatal error with Stream.
+* Tweak - Add a hook to allow users to set a custom order status when quote orders come through.
+* Fix - Request Quote button is displayed on the product listing page for products where no price is set.
+* Fix - Fixed some warnings thrown by the QIT tool in the readme.txt file.
 
 = 2.6 ( 16.10.2024 ) =
 * Tweak - Added some filters for compatibility with Premium 1.5.
