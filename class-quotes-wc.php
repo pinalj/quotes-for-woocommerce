@@ -281,7 +281,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			global $post;
 
 			$enable_quote = product_quote_enabled( $post->ID );
-
+			$enable_quote = apply_filters( 'qwc_hide_prices', $enable_quote, $post->ID );
 			if ( $enable_quote ) {
 				// Check if price should be displayed or no.
 				$display = get_post_meta( $post->ID, 'qwc_display_prices', true );
