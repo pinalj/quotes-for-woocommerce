@@ -39,7 +39,6 @@ class QWC_Request_Sent extends WC_Email {
 
 		// Other settings.
 		$this->template_base = QUOTES_TEMPLATE_PATH;
-
 	}
 
 	/**
@@ -123,7 +122,6 @@ class QWC_Request_Sent extends WC_Email {
 
 		$order_obj->blogname = get_option( 'blogname' );
 		return $order_obj;
-
 	}
 
 	/**
@@ -226,7 +224,5 @@ class QWC_Request_Sent extends WC_Email {
 			),
 		);
 	}
-
 }
 return new QWC_Request_Sent();
-
