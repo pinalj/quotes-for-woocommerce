@@ -48,7 +48,7 @@ if ( $order ) :
 		case 'completed':
 			$args = array(
 				'show_download_links' => $downloadable,
-				'show_sku'            => false,
+				'show_sku'            => $show_sku,
 				'show_purchase_note'  => true,
 			);
 			if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {
@@ -60,7 +60,7 @@ if ( $order ) :
 		case 'processing':
 			$args = array(
 				'show_download_links' => $downloadable,
-				'show_sku'            => true,
+				'show_sku'            => $show_sku,
 				'show_purchase_note'  => true,
 			);
 			if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {
@@ -72,7 +72,7 @@ if ( $order ) :
 		default:
 			$args = array(
 				'show_download_links' => $downloadable,
-				'show_sku'            => true,
+				'show_sku'            => $show_sku,
 				'show_purchase_note'  => false,
 			);
 			if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {

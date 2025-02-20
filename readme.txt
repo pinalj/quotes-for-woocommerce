@@ -5,7 +5,7 @@ Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 6.7.1
 Stable tag: 2.7
-Requires PHP: 7.2
+Requires PHP: 7.4
 WC requires at least: 4.0
 WC tested up to: 9.5.1
 License: GNU General Public License v3.0

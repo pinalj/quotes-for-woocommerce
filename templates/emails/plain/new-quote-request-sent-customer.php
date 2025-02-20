@@ -31,8 +31,15 @@ if ( $order ) {
 	echo "\n";
 
 	foreach ( $order->get_items() as $items ) {
-		$item_id = $items->get_id();
+		$item_id    = $items->get_id();
+		$product_id = $items->get_variation_id() > 0 ? $items->get_variation_id() : $items->get_product_id();
+		$_product   = wc_get_product( $product_id );
+		$sku        = $_product ? $_product->get_sku() : '';
 		echo wp_kses_post( $items->get_name() );
+		echo "\n";
+		if ( '' !== $sku && $show_sku ) {
+			echo printf( esc_html__( 'SKU', 'quote-wc' ) . ': #' . esc_attr( $sku ) );
+		}
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

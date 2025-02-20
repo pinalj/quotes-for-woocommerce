@@ -172,6 +172,7 @@ class QWC_Request_New_Quote extends WC_Email {
 				'sent_to_admin' => true,
 				'plain_text'    => false,
 				'email'         => $this,
+				'show_sku'      => apply_filters( 'qwc_show_sku', true, $this->id ),
 			),
 			'quotes-for-wc/',
 			$this->template_base
