@@ -11,17 +11,17 @@ echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 if ( $order ) :
 	$billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
 	// translators: Billing First Name.
-	echo sprintf( esc_html__( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) ) . "\n\n";
+	echo esc_html( sprintf( __( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) ) ) . "\n\n";
 endif;
 // translators: Site Name.
-echo sprintf( esc_html__( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order_details->blogname ) );
+echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order_details->blogname ) ) );
 
 if ( $order ) :
 
 	$order_status = $order->get_status();
 	if ( 'pending' === $order_status ) :
 		// translators: Payment Link Url.
-		echo sprintf( esc_html__( 'To pay for this order please use the following link: %s', 'quote-wc' ), esc_url( $order->get_checkout_payment_url() ) );
+		echo wp_kses_post( sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), esc_url( $order->get_checkout_payment_url() ) ) );
 	endif;
 
 	do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email );
@@ -88,7 +88,7 @@ if ( $order ) :
 	if ( $order->get_order_item_totals() ) {
 		$i = 0;
 		foreach ( $order->get_order_item_totals() as $total ) {
-			$i++;
+			++$i;
 			if ( 1 == $i ) { // phpcs:ignore
 				echo esc_html( $total['label'] ) . "\t " . wp_kses_post( $total['value'] ) . "\n";
 			}

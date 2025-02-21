@@ -18,15 +18,17 @@ $billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? 
 if ( $order_details && $billing_first_name && $billing_last_name ) :
 	$order_id  = $order_details->order_id;
 	$order_url = qwc_is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
-	echo sprintf( esc_html( $opening_paragraph ), esc_attr( $billing_first_name . ' ' . $billing_last_name ) );
+	echo esc_html( sprintf( $opening_paragraph, esc_attr( $billing_first_name . ' ' . $billing_last_name ) ) );
 endif;
 
 if ( $order ) {
 	do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email );
 	echo "\n----------------------------------------\n\n";
-	echo sprintf( esc_html__( 'Product', 'quote-wc' ) );
-	echo sprintf( esc_html__( 'Quantity', 'quote-wc' ) );
-	echo sprintf( esc_html__( 'Product Price', 'quote-wc' ) );
+	echo esc_html( sprintf( __( 'Product', 'quote-wc' ) ) );
+	echo "\t";
+	echo esc_html( sprintf( __( 'Quantity', 'quote-wc' ) ) );
+	echo "\t";
+	echo esc_html( sprintf( __( 'Product Price', 'quote-wc' ) ) );
 
 	echo "\n";
 
@@ -36,9 +38,13 @@ if ( $order ) {
 		$_product   = wc_get_product( $product_id );
 		$sku        = $_product ? $_product->get_sku() : '';
 		echo wp_kses_post( $items->get_name() );
-		echo "\n";
+		echo "\t\t";
+		echo esc_attr( $items->get_quantity() );
+		echo "\t\t";
+		echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) );
 		if ( '' !== $sku && $show_sku ) {
-			echo printf( esc_html__( 'SKU', 'quote-wc' ) . ': #' . esc_attr( $sku ) );
+			echo "\n";
+			echo esc_html( printf( __( 'SKU', 'quote-wc' ) . ': #' . $sku ) );
 		}
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
@@ -60,8 +66,6 @@ if ( $order ) {
 
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_end', $item_id, $items, $order, $plain_text );
-		echo esc_attr( $items->get_quantity() );
-		echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) );
 		echo "\n";
 
 	}
@@ -70,7 +74,7 @@ if ( $order ) {
 	do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
 	echo "\n----------------------------------------\n\n";
-	echo sprintf( esc_html__( 'This order is awaiting a quote.', 'quote-wc' ) );
+	echo esc_html( sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) ) );
 	// translators: Admin Url for order.
 	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) ) );
 
