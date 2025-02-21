@@ -155,7 +155,6 @@ class QWC_Request_New_Quote extends WC_Email {
 
 		$order_obj->blogname = get_option( 'blogname' );
 		return $order_obj;
-
 	}
 
 	/**
@@ -206,7 +205,6 @@ class QWC_Request_New_Quote extends WC_Email {
 	 */
 	public function get_default_subject() {
 		return __( '[{blogname}] Quotation Request (Order {order_number}) - {order_date}', 'quote-wc' );
-
 	}
 
 	/**
@@ -264,7 +262,5 @@ class QWC_Request_New_Quote extends WC_Email {
 			),
 		);
 	}
-
 }
 return new QWC_Request_New_Quote();
-
