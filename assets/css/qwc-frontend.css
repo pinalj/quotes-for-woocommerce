@@ -41,6 +41,10 @@ div.wc-block-components-order-summary-item__description span.wc-block-components
 .wc-block-cart-item__prices {
     display: none;
 }
+/* Hide the Actions row in the Order received page.*/
+.woocommerce-table > tfoot > tr:nth-child(1) {
+    display: none;
+}
 /* Only for large screens */
 @media (min-width: 700px) {
     .wc-block-cart__sidebar {
