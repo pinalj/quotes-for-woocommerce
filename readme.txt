@@ -3,11 +3,11 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.7.1
-Stable tag: 2.7
+Tested up to: 6.7.2
+Stable tag: 2.8
 Requires PHP: 7.4
 WC requires at least: 4.0
-WC tested up to: 9.5.1
+WC tested up to: 9.7.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -84,6 +84,11 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.8 ( 03.03.2025 ) =
+* Tweak - Add SKU in quote emails sent to admin.
+* Tweak - Add filter for price display feature.
+* Fix - Hide the Actions column on the Thank you page for quote orders.
 
 = 2.7 ( 02.02.2025 ) =
 * Fix - Compatibility errors with WordPress 6.7.1.

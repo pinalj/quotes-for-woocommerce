@@ -1,5 +1,10 @@
 *** Quotes for WooCommerce ***
 
+2025-03-03 - Version 2.8
+* Tweak - Add SKU in quote emails sent to admin.
+* Tweak - Add filter for price display feature.
+* Fix - Hide the Actions column on the Thank you page for quote orders.
+
 2025-01-02 - Version 2.7
 * Fix - Compatibility errors with WordPress 6.7.1.
 * Fix - Intermittent fatal error with Stream.
