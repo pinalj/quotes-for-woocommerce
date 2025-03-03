@@ -73,6 +73,9 @@ class QWC_Request_Sent extends WC_Email {
 					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->order_date ) );
 
 					$this->find[]    = '{order_number}';
+					$this->replace[] = $this->object->order_number;
+
+					$this->find[]    = '{order_id}';
 					$this->replace[] = $this->object->order_id;
 				} else {
 
@@ -80,6 +83,9 @@ class QWC_Request_Sent extends WC_Email {
 					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->item_hidden_date ) );
 
 					$this->find[]    = '{order_number}';
+					$this->replace[] = __( 'N/A', 'quote-wc' );
+
+					$this->find[]    = '{order_id}';
 					$this->replace[] = __( 'N/A', 'quote-wc' );
 				}
 
@@ -108,6 +114,8 @@ class QWC_Request_Sent extends WC_Email {
 
 		$order = wc_get_order( $order_id );
 
+		// Order Number.
+		$order_obj->order_number = $order->get_order_number();
 		// Order date.
 		$order_obj->order_date = $order->get_date_created();
 
