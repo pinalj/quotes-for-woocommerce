@@ -11,7 +11,7 @@
 
 <?php
 if ( $order ) :
-	$billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
+	$billing_first_name = $order->get_billing_first_name();
 	?>
 	<p>
 		<?php
@@ -24,7 +24,7 @@ if ( $order ) :
 <p>
 	<?php
 	// translators: Site Name.
-	echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order_details->blogname ) ) );
+	echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
 	?>
 </p>
 
@@ -45,12 +45,8 @@ if ( $order ) :
 	<?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
 	<?php
-	if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {
-		$order_date = $order->order_date;
-	} else {
-		$post_date  = strtotime( $order->get_date_created() );
-		$order_date = gmdate( 'Y-m-d H:i:s', $post_date );
-	}
+	$post_date  = strtotime( $order->get_date_created() );
+	$order_date = gmdate( 'Y-m-d H:i:s', $post_date );
 	?>
 	<h2><?php echo esc_html__( 'Order', 'quote-wc' ) . ': ' . esc_html( $order->get_order_number() ); ?> (<?php printf( '<time datetime="%s">%s</time>', wp_kses_post( date_i18n( 'c', strtotime( $order_date ) ) ), wp_kses_post( date_i18n( wc_date_format(), strtotime( $order_date ) ) ) ); ?>)</h2>
 	<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">

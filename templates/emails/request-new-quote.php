@@ -15,10 +15,10 @@ $opening_paragraph = __( 'A request for quote has been made by %s and is awaitin
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php
-$billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
-$billing_last_name  = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name();
-if ( $order_details && $billing_first_name && $billing_last_name ) :
-	$order_id  = $order_details->order_id;
+$billing_first_name = $order->get_billing_first_name();
+$billing_last_name  = $order->get_billing_last_name();
+if ( $order && $billing_first_name && $billing_last_name ) :
+	$order_id  = $order->get_id();
 	$order_url = qwc_is_hpos_enabled() ? admin_url( 'admin.php?page=wc-orders&id=' . $order_id . '&action=edit' ) : admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 	?>
 	<p><?php echo esc_html( sprintf( $opening_paragraph, esc_attr( $billing_first_name . ' ' . $billing_last_name ) ) ); ?></p>
@@ -68,7 +68,7 @@ if ( $order_details && $billing_first_name && $billing_last_name ) :
 			</tr>
 			<?php
 		}
-		do_action( 'qwc_new_quote_admin_row', $order_details->order_id, $order );
+		do_action( 'qwc_new_quote_admin_row', $order->get_id(), $order );
 		?>
 	</tbody>
 </table>
