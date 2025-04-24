@@ -58,7 +58,8 @@ class QWC_Send_Quote extends WC_Email {
 
 			$this->find    = array();
 			$this->replace = array();
-			$this->object  = $this->get_order_details( $order_id );
+			$this->object  = wc_get_order( $order_id );
+			$quote_status  = $this->object->get_meta( '_quote_status' );
 
 			// Allowed quote statuses.
 			$_status = array(
@@ -66,27 +67,33 @@ class QWC_Send_Quote extends WC_Email {
 				'quote-sent',
 			);
 
-			if ( in_array( $this->object->quote_status, $_status, true ) && $this->is_enabled() ) {
+			if ( in_array( $quote_status, $_status, true ) && $this->is_enabled() ) {
 
-				$this->recipient = $this->object->billing_email;
-				if ( $this->object->order_id ) {
+				$this->recipient = $this->object->get_billing_email();
+				if ( $order_id ) {
 
 					$this->find[]    = '{order_date}';
-					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->order_date ) );
+					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->get_date_created() ) );
 
 					$this->find[]    = '{order_number}';
-					$this->replace[] = $this->object->order_id;
+					$this->replace[] = $this->object->get_order_number();
+
+					$this->find[]    = '{order_id}';
+					$this->replace[] = $order_id;
 				} else {
 
 					$this->find[]    = '{order_date}';
-					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->item_hidden_date ) );
+					$this->replace[] = __( 'N/A', 'quote-wc' );
 
 					$this->find[]    = '{order_number}';
+					$this->replace[] = __( 'N/A', 'quote-wc' );
+
+					$this->find[]    = '{order_id}';
 					$this->replace[] = __( 'N/A', 'quote-wc' );
 				}
 
 				$this->find[]    = '{blogname}';
-				$this->replace[] = $this->object->blogname;
+				$this->replace[] = get_option( 'blogname' );
 
 				if ( ! $this->get_recipient() ) {
 					return;
@@ -98,35 +105,6 @@ class QWC_Send_Quote extends WC_Email {
 	}
 
 	/**
-	 * Prepare Order Details.
-	 *
-	 * @param int $order_id - Order ID.
-	 */
-	public function get_order_details( $order_id ) {
-
-		$order_obj = new stdClass();
-
-		$order_obj->order_id = $order_id;
-
-		$order = wc_get_order( $order_id );
-
-		// Order date.
-		$order_obj->order_date = $order->get_date_created();
-
-		// Email address.
-		$order_obj->billing_email = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_email : $order->get_billing_email();
-
-		// Customer ID.
-		$order_obj->customer_id = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->user_id : $order->get_user_id();
-
-		// Quote status.
-		$order_obj->quote_status = $order->get_meta( '_quote_status' );
-
-		$order_obj->blogname = get_option( 'blogname' );
-		return $order_obj;
-	}
-
-	/**
 	 * HTML Email content.
 	 */
 	public function get_content_html() {
@@ -134,8 +112,8 @@ class QWC_Send_Quote extends WC_Email {
 		wc_get_template(
 			$this->template_html,
 			array(
-				'order'         => new WC_Order( $this->object->order_id ),
-				'order_details' => $this->object,
+				'order'         => $this->object,
+				'site_name'     => get_option( 'blogname' ),
 				'email_heading' => $this->get_heading(),
 				'sent_to_admin' => false,
 				'plain_text'    => false,
@@ -156,8 +134,8 @@ class QWC_Send_Quote extends WC_Email {
 		wc_get_template(
 			$this->template_plain,
 			array(
-				'order'         => new WC_Order( $this->object->order_id ),
-				'order_details' => $this->object,
+				'order'         => $this->object,
+				'site_name'     => get_option( 'blogname' ),
 				'email_heading' => $this->get_heading(),
 				'sent_to_admin' => false,
 				'plain_text'    => true,

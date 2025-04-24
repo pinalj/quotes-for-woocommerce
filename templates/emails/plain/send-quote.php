@@ -9,12 +9,12 @@ echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 do_action( 'woocommerce_email_header', $email_heading, $email );
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 if ( $order ) :
-	$billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
+	$billing_first_name = $order->get_billing_first_name();
 	// translators: Billing First Name.
 	echo esc_html( sprintf( __( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) ) ) . "\n\n";
 endif;
 // translators: Site Name.
-echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $order_details->blogname ) ) );
+echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
 
 if ( $order ) :
 
@@ -26,12 +26,9 @@ if ( $order ) :
 
 	do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email );
 
-	if ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) {
-		$order_date = $order->order_date;
-	} else {
-		$post_date  = strtotime( $order->get_date_created() );
-		$order_date = gmdate( 'Y-m-d H:i:s', $post_date );
-	}
+	$post_date  = strtotime( $order->get_date_created() );
+	$order_date = gmdate( 'Y-m-d H:i:s', $post_date );
+
 	echo "\n----------------------------------------\n\n";
 	// translators: order ID.
 	echo sprintf( esc_html__( 'Order number: %s', 'quote-wc' ), esc_attr( $order->get_order_number() ) ) . "\n";

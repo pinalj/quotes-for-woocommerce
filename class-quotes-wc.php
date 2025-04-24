@@ -775,20 +775,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$quote_status = $order->get_meta( '_quote_status' );
 
 			if ( in_array( $order_status, apply_filters( 'qwc_edit_allowed_order_statuses_for_sending_quotes', array( 'pending' ) ), true ) ) {
-				if ( 'quote-pending' === $quote_status ) {
-					?>
-					<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quote-wc' ); ?></button>
-					<?php
-				} else {
-					if ( 'quote-complete' === $quote_status ) {
-						$button_text = esc_html__( 'Send Quote', 'quote-wc' );
-					} elseif ( 'quote-sent' === $quote_status ) {
-						$button_text = esc_html__( 'Resend Quote', 'quote-wc' );
+				if ( isset( $quote_status ) && '' !== $quote_status ) {
+					if ( 'quote-pending' === $quote_status ) {
+						?>
+						<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quote-wc' ); ?></button>
+						<?php
+					} else {
+						if ( 'quote-complete' === $quote_status ) {
+							$button_text = esc_html__( 'Send Quote', 'quote-wc' );
+						} elseif ( 'quote-sent' === $quote_status ) {
+							$button_text = esc_html__( 'Resend Quote', 'quote-wc' );
+						}
+						?>
+						<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
+						<text style='margin-left:0px; font-weight: bold; font-size: 20px;' type='hidden' id='qwc_msg'></text>
+						<?php
 					}
-					?>
-					<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
-					<text style='margin-left:0px; font-weight: bold; font-size: 20px;' type='hidden' id='qwc_msg'></text>
-					<?php
 				}
 			}
 		}

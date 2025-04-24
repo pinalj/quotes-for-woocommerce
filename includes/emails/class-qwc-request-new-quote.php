@@ -57,41 +57,48 @@ class QWC_Request_New_Quote extends WC_Email {
 
 		if ( $order_id > 0 && $send_email ) {
 
-			$this->object = $this->get_order_details( $order_id );
+			$this->object = wc_get_order( $order_id );
+			$quote_status = $this->object->get_meta( '_quote_status' );
 
 			// Allowed quote statuses.
 			$_status = array(
 				'quote-pending',
 			);
 			$_status = apply_filters( 'qwc_request_new_quote_allowed_status', $_status );
-			if ( in_array( $this->object->quote_status, $_status, true ) && $this->is_enabled() ) {
+			if ( in_array( $quote_status, $_status, true ) && $this->is_enabled() ) {
 
 				$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
-				if ( $this->object->order_id ) {
+				if ( $this->object ) {
 
 					$this->find[]    = '{order_date}';
-					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->order_date ) );
+					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->get_date_created() ) );
 
 					$this->find[]    = '{order_number}';
-					$this->replace[] = $this->object->order_id;
+					$this->replace[] = $this->object->get_order_number();
+
+					$this->find[]    = '{order_id}';
+					$this->replace[] = $order_id;
 
 					$this->find[]    = '{billing_first_name}';
-					$this->replace[] = $this->object->billing_first_name;
+					$this->replace[] = $this->object->get_billing_first_name();
 
 					$this->find[]    = '{billing_last_name}';
-					$this->replace[] = $this->object->billing_last_name;
+					$this->replace[] = $this->object->get_billing_last_name();
 
 					$this->find[]    = '{billing_email}';
-					$this->replace[] = $this->object->billing_email;
+					$this->replace[] = $this->object->get_billing_email();
 
 					$this->find[]    = '{billing_phone}';
-					$this->replace[] = $this->object->billing_phone;
+					$this->replace[] = $this->object->get_billing_phone();
 				} else {
 
 					$this->find[]    = '{order_date}';
-					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->item_hidden_date ) );
+					$this->replace[] = __( 'N/A', 'quote-wc' );
 
 					$this->find[]    = '{order_number}';
+					$this->replace[] = __( 'N/A', 'quote-wc' );
+
+					$this->find[]    = '{order_id}';
 					$this->replace[] = __( 'N/A', 'quote-wc' );
 
 					$this->find[]    = '{billing_first_name}';
@@ -108,7 +115,7 @@ class QWC_Request_New_Quote extends WC_Email {
 				}
 
 				$this->find[]    = '{blogname}';
-				$this->replace[] = $this->object->blogname;
+				$this->replace[] = get_option( 'blogname' );
 
 				if ( ! $this->get_recipient() ) {
 					return;
@@ -120,44 +127,6 @@ class QWC_Request_New_Quote extends WC_Email {
 	}
 
 	/**
-	 * Prepare Order Details.
-	 *
-	 * @param int $order_id - Order ID.
-	 */
-	public function get_order_details( $order_id ) {
-
-		$order_obj = new stdClass();
-
-		$order_obj->order_id = $order_id;
-
-		$order = wc_get_order( $order_id );
-
-		// Order date.
-		$order_obj->order_date = $order->get_date_created();
-
-		// Email address.
-		$order_obj->billing_email = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_email : $order->get_billing_email();
-
-		// Customer ID.
-		$order_obj->customer_id = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->user_id : $order->get_user_id();
-
-		// Billing first name.
-		$order_obj->billing_first_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_first_name : $order->get_billing_first_name();
-
-		// Billing last name.
-		$order_obj->billing_last_name = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_last_name : $order->get_billing_last_name();
-
-		// Billing phone.
-		$order_obj->billing_phone = ( version_compare( WOOCOMMERCE_VERSION, '3.0.0' ) < 0 ) ? $order->billing_phone : $order->get_billing_phone();
-
-		// Quote status.
-		$order_obj->quote_status = $order->get_meta( '_quote_status' );
-
-		$order_obj->blogname = get_option( 'blogname' );
-		return $order_obj;
-	}
-
-	/**
 	 * HTML Email content.
 	 */
 	public function get_content_html() {
@@ -165,8 +134,7 @@ class QWC_Request_New_Quote extends WC_Email {
 		wc_get_template(
 			$this->template_html,
 			array(
-				'order'         => new WC_Order( $this->object->order_id ),
-				'order_details' => $this->object,
+				'order'         => $this->object,
 				'email_heading' => $this->get_heading(),
 				'sent_to_admin' => true,
 				'plain_text'    => false,
@@ -187,8 +155,7 @@ class QWC_Request_New_Quote extends WC_Email {
 		wc_get_template(
 			$this->template_plain,
 			array(
-				'order'         => new WC_Order( $this->object->order_id ),
-				'order_details' => $this->object,
+				'order'         => $this->object,
 				'email_heading' => $this->get_heading(),
 				'sent_to_admin' => true,
 				'plain_text'    => true,

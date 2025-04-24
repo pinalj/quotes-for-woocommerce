@@ -16,7 +16,7 @@ $opening_paragraph = __( 'You have made a request for a quote on %s. The details
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php
-if ( $order_details ) :
+if ( $order ) :
 	?>
 	<p><?php printf( esc_html( $opening_paragraph ), esc_attr( $site_name ) ); ?></p>
 <?php endif; ?>
