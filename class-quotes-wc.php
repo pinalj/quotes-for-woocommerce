@@ -412,11 +412,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_thankyou_css( $order_id ) {
-			$order        = wc_get_order( $order_id );
-			$quote_status = $order->get_meta( '_quote_status' );
-
-			if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
-				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+			$order = wc_get_order( $order_id );
+			if ( $order ) {
+				$quote_status = $order->get_meta( '_quote_status' );
+				if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
+					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+				}
 			}
 		}
 
@@ -726,9 +727,11 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$quote_status = 'quote-complete';
 			}
 			$order = wc_get_order( $order_id );
-			$order->update_meta_data( '_quote_status', $quote_status );
-			$order->save();
-			do_action( 'qwc_update_quote_order_status', $order_id );
+			if ( $order ) {
+				$order->update_meta_data( '_quote_status', $quote_status );
+				$order->save();
+				do_action( 'qwc_update_quote_order_status', $order_id );
+			}
 		}
 
 		/**
@@ -827,8 +830,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public static function quote_status_update( $order_id, $_status ) {
 			$order = wc_get_order( $order_id );
-			$order->update_meta_data( '_quote_status', $_status );
-			$order->save();
+			if ( $order ) {
+				$order->update_meta_data( '_quote_status', $_status );
+				$order->save();
+			}
 		}
 
 		/**
@@ -966,7 +971,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
 				?>
 				<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
-					<?php echo esc_html__( $proceed_checkout_label, 'quote-wc' ); ?>
+					<?php echo esc_html__( $proceed_checkout_label, 'quote-wc' ); // phpcs:ignore ?>
 				</a>
 				<?php
 			}
