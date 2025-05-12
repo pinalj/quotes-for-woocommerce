@@ -32,8 +32,8 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 		 * Construct.
 		 */
 		public function __construct() {
-			$this->id   = '';
-			$this->desc = __( 'General', 'quote-wc' );
+			$this->id = '';
+			add_action( 'admin_init', array( $this, 'qwc_init_settings' ) );
 			parent::__construct();
 			add_filter( 'woocommerce_get_settings_qwc_quotes_tab_' . $this->id, array( $this, 'get_settings' ) );
 			add_action( 'add_option_qwc_enable_global_quote', array( &$this, 'qwc_update_global_quotes_callback' ), 10, 2 );
@@ -44,6 +44,15 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			add_action( 'woocommerce_admin_settings_sanitize_option_qwc_enable_global_quote', array( &$this, 'gen_page_sanitize_checkbox' ), 10, 3 );
 			add_action( 'woocommerce_admin_settings_sanitize_option_qwc_enable_global_prices', array( &$this, 'gen_page_sanitize_checkbox' ), 10, 3 );
 			add_action( 'woocommerce_admin_settings_sanitize_option_qwc_hide_address_fields', array( &$this, 'gen_page_sanitize_checkbox' ), 10, 3 );
+		}
+
+		/**
+		 * Tab name.
+		 *
+		 * @since 2.9
+		 */
+		public function qwc_init_settings() {
+			$this->desc = __( 'General', 'quote-wc' );
 		}
 
 		/**
