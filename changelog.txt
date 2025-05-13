@@ -1,5 +1,10 @@
 *** Quotes for WooCommerce ***
 
+2025-05-13 - Version 2.9
+* Fix - Order ID displayed instead of order number in emails.
+* Fix - Compatibility with WordPress 6.8.1 and WooCommerce 9.8.x versions.
+* Fix - Warning displayed on the Add Order page.
+
 2025-03-03 - Version 2.8
 * Tweak - Add SKU in quote emails sent to admin.
 * Tweak - Add filter for price display feature.
