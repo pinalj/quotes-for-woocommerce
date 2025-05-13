@@ -4,9 +4,9 @@ Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
 Tested up to: 6.8.1
-Stable tag: 2.8
+Stable tag: 2.9
 Requires PHP: 7.4
-WC requires at least: 4.0
+WC requires at least: 5.0
 WC tested up to: 9.8.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -258,3 +258,6 @@ Upgrade to this version in order to use the Premium version without any issues.
 
 = 2.4.0 =
 In this upgrade to the plugin the quote settings at the product level have been moved to the premium version. Users can now avail only global quote settings in the free version.
+
+= 2.9.0 =
+Upgrade to this version includes changes in plugin emails to ensure compatibility with WooCommerce 9.x. Kindly test email customizations on a staging site before upgrading.
