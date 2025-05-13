@@ -3,11 +3,11 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.7.2
+Tested up to: 6.8.1
 Stable tag: 2.8
 Requires PHP: 7.4
 WC requires at least: 4.0
-WC tested up to: 9.7.0
+WC tested up to: 9.8.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -84,6 +84,11 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.9 ( 13.05.2025 ) =
+* Fix - Order ID displayed instead of order number in emails.
+* Fix - Compatibility with WordPress 6.8.1 and WooCommerce 9.8.x versions.
+* Fix - Warning displayed on the Add Order page.
 
 = 2.8 ( 03.03.2025 ) =
 * Tweak - Add SKU in quote emails sent to admin.

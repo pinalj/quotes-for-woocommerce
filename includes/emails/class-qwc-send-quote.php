@@ -70,7 +70,7 @@ class QWC_Send_Quote extends WC_Email {
 			if ( in_array( $quote_status, $_status, true ) && $this->is_enabled() ) {
 
 				$this->recipient = $this->object->get_billing_email();
-				if ( $order_id ) {
+				if ( $this->object ) {
 
 					$this->find[]    = '{order_date}';
 					$this->replace[] = date_i18n( wc_date_format(), strtotime( $this->object->get_date_created() ) );
