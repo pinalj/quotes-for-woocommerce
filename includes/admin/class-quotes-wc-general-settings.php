@@ -227,14 +227,35 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 		 */
 		public function qwc_get_post_count() {
 
-			$args         = array(
-				'post_type'        => 'product',
-				'numberposts'      => -1,
-				'post_status'      => array( 'draft', 'publish' ),
-				'suppress_filters' => false,
-			);
-			$product_list = get_posts( $args );
+			$product_list = array();
+			if ( function_exists( 'icl_object_id' ) ) {
+				$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
 
+				if ( ! empty( $languages ) ) {
+					foreach ( $languages as $lang_code => $lang ) {
+						do_action( 'wpml_switch_language', $lang_code );
+						$args  = array(
+							'post_type'        => 'product',
+							'numberposts'      => -1,
+							'post_status'      => array( 'draft', 'publish' ),
+							'suppress_filters' => false,
+						);
+						$posts = get_posts( $args );
+
+						$product_list = array_merge( $product_list, $posts );
+					}
+				}
+			} else {
+				// Non-WPML: just fetch normally.
+				$args = array(
+					'post_type'        => 'product',
+					'numberposts'      => -1,
+					'post_status'      => array( 'draft', 'publish' ),
+					'suppress_filters' => false,
+				);
+
+				$product_list = get_posts( $args );
+			}
 			$count = count( $product_list );
 
 			$number_of_batches = ceil( $count / 500 );
