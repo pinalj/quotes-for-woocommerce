@@ -17,7 +17,16 @@ jQuery( document ).ready( function() {
 	});
 	
 	jQuery( document ).on( 'click', '#qwc_send_quote', function() {
-		// send an email
+		// Add a spinner.
+		jQuery( '#qwc_msg' ).html('');
+		var spinner = jQuery('<span>', {
+			class: 'spinner is-active' // WP core spinner.
+		}).css({
+            float: 'none',   // keep inline.
+            verticalAlign: 'middle'
+        });
+		jQuery('#qwc_msg').prepend(spinner);
+		// send an email.
 		var data = {
 			order_id: qwc_params.order_id,
 			action: 'qwc_send_quote',
@@ -26,8 +35,9 @@ jQuery( document ).ready( function() {
 		
 		jQuery.post( qwc_params.ajax_url, data, function( response ) {
 			if ( 'quote-sent' === response ) {
+				jQuery('.spinner').removeClass('is-active');
 				jQuery( '#qwc_msg' ).html( qwc_params.email_msg );
-				jQuery( '#qwc_msg' ).attr( 'display', 'block' ).fadeOut( 5000 );
+				jQuery( '#qwc_msg' ).attr( 'display', 'block' );
 			}
 		});
 	});
