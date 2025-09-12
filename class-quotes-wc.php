@@ -701,7 +701,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_remove_payment_methods( $available_gateways ) {
 
-			if ( cart_contains_quotable() ) {
+			$modify_payments = apply_filters( 'qwc_update_payments_at_checkout', true );
+			if ( cart_contains_quotable() && $modify_payments ) {
 
 				// Remove all existing gateways & add the Quotes Payment Gateway.
 				unset( $available_gateways );
