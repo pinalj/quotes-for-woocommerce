@@ -3,11 +3,11 @@
 Contributors: pinal.shah
 Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
 Requires at least: 4.5
-Tested up to: 6.8.1
-Stable tag: 2.9
+Tested up to: 6.8.2
+Stable tag: 2.10
 Requires PHP: 7.4
 WC requires at least: 5.0
-WC tested up to: 9.8.5
+WC tested up to: 10.1.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -84,6 +84,12 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.10 (22.09.2025 ) =
+* Fix - WPML compatibility was broken due to which quotes for not enabled for translated products.
+* Fix - Add a loader in the Edit Order page when quote email is being sent.
+* Tweak - Added a new filter to allow Pro to modify payment methods at Checkout.
+* Tweak - Add tweaks in the code to allow Pro users to create quotes orders from WP Dashboard.
 
 = 2.9 ( 13.05.2025 ) =
 * Fix - Order ID displayed instead of order number in emails.
