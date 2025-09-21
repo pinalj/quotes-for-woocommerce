@@ -14,9 +14,11 @@ use Automattic\WooCommerce\Utilities\OrderUtil;
  * @return bool $quotes_enabled - Quote Status.
  */
 function product_quote_enabled( $product_id, $qty = 1 ) {
+	$run_for_order_processing = doing_action( 'woocommerce_process_shop_order_meta' );
+
 	$quote_enabled = false;
 
-	if ( ! is_admin() || wp_doing_ajax() ) {
+	if ( ! is_admin() || wp_doing_ajax() || $run_for_order_processing ) {
 		$quote_setting = get_post_meta( $product_id, 'qwc_enable_quotes', true );
 
 		if ( 'on' === $quote_setting ) {
