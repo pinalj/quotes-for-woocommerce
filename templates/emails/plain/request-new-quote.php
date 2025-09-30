@@ -44,7 +44,7 @@ if ( $order ) {
 		echo wp_kses_post( $order->get_formatted_line_subtotal( $items ) );
 		if ( '' !== $sku && $show_sku ) {
 			echo "\n";
-			echo esc_html( printf( __( 'SKU', 'quote-wc' ) . ': #' . $sku ) );
+			echo esc_html( __( 'SKU', 'quote-wc' ) ) . ': #' . esc_html( $sku );
 		}
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_start', $item_id, $items, $order, $plain_text );
