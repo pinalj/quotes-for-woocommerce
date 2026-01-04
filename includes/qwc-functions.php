@@ -112,7 +112,7 @@ function product_price_display( $product_id ) {
 	if ( 'on' === $display_enabled ) {
 		$display_price = true;
 	}
-
+	$display_price = apply_filters( 'qwc_display_product_price', $display_price, $product_id );
 	return $display_price;
 }
 

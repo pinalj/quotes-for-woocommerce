@@ -493,8 +493,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$product_id = isset( $post->ID ) ? $post->ID : 0;
 
 				if ( $product_id > 0 ) {
-					$enable_quote = product_quote_enabled( $product_id );
-
+					$enable_quote  = product_quote_enabled( $product_id );
+					$display_price = product_price_display( $product_id );
 					if ( $enable_quote ) {
 
 						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
@@ -503,8 +503,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							'qwc-product-js',
 							'qwc_product_params',
 							array(
-								'product_id' => $product_id,
-								'quotes'     => $enable_quote,
+								'product_id'    => $product_id,
+								'quotes'        => $enable_quote,
+								'display_price' => $display_price,
 							)
 						);
 						wp_enqueue_script( 'qwc-product-js' );
