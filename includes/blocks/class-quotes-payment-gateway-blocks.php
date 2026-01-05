@@ -33,7 +33,7 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 	 */
 	public function initialize() {
 		$this->settings = get_option( 'woocommerce_quotes-gateway_settings', array() );
-		$this->gateway  = new Quotes_Payment_Gateway();
+		$this->gateway  = null;
 	}
 
 	/**
@@ -42,6 +42,14 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 	 * @return boolean
 	 */
 	public function is_active() {
+
+		if ( ! class_exists( 'Quotes_Payment_Gateway' ) ) {
+			return false;
+		}
+		if ( null === $this->gateway ) {
+			$this->gateway = new Quotes_Payment_Gateway();
+		}
+
 		return $this->gateway->is_available();
 	}
 

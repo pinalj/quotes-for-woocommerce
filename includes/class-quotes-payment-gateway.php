@@ -29,11 +29,22 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		 * Constructor for the gateway.
 		 */
 		public function __construct() {
-			$this->id                = 'quotes-gateway';
-			$this->icon              = '';
-			$this->has_fields        = false;
-			$this->method_title      = apply_filters( 'qwc_payment_method_name', __( 'Ask for Quote', 'quote-wc' ) );
-			$this->title             = $this->method_title;
+			if ( is_callable( 'parent::__construct' ) ) {
+				parent::__construct();
+			}
+
+			$this->id         = 'quotes-gateway';
+			$this->icon       = '';
+			$this->has_fields = false;
+
+			$this->method_title = __( 'Ask for Quote', 'quote-wc' );
+			$this->init_form_fields();
+			$this->init_settings();
+			// Get title from settings.
+			$setting_title = $this->get_option( 'title', $this->method_title );
+
+			// Allow filter to override setting (backward compatible).
+			$this->title             = apply_filters( 'qwc_payment_method_name', $setting_title );
 			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
 
 			$this->description        = '';
@@ -41,6 +52,8 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			$this->instructions       = '';
 			// Actions.
 			add_filter( 'woocommerce_thankyou_order_received_text', array( &$this, 'thankyou_page' ), 10, 2 );
+			// Save the settings.
+			add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		}
 
 		/**
@@ -51,11 +64,9 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 
 			echo '<h3>' . esc_attr( $title ) . '</h3>';
 
-			echo '<p>' . esc_html__( 'This is a fictitious payment method used for quotes.', 'quote-wc' ) . '</p>';
-			echo '<p>' . esc_html__( 'This gateway requires no configuration.', 'quote-wc' ) . '</p>';
+			echo '<p>' . esc_html__( 'This is a fictitious payment method used for quotes. No payment is taken at Checkout.', 'quote-wc' ) . '</p>';
 
-			// Hides the save button.
-			echo '<style>p.submit input[type="submit"] { display: none }</style>';
+			parent::admin_options();
 		}
 
 		/**
@@ -98,6 +109,24 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 				}
 			}
 			return $message;
+		}
+
+		/**
+		 * Initialise Gateway Settings Form Fields.
+		 *
+		 * @since 2.11
+		 */
+		public function init_form_fields() {
+
+			$this->form_fields = array(
+				'title' => array(
+					'title'       => __( 'Ask for Quote', 'quote-wc' ),
+					'type'        => 'text',
+					'description' => __( 'This sets the name of the payment method shown to customers.', 'quote-wc' ),
+					'default'     => __( 'Ask for Quote', 'quote-wc' ),
+					'desc_tip'    => true,
+				),
+			);
 		}
 	}
 }
