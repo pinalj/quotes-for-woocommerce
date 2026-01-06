@@ -493,8 +493,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$product_id = isset( $post->ID ) ? $post->ID : 0;
 
 				if ( $product_id > 0 ) {
-					$enable_quote  = product_quote_enabled( $product_id );
-					$display_price = product_price_display( $product_id );
+					$enable_quote = product_quote_enabled( $product_id );
 					if ( $enable_quote ) {
 
 						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
@@ -503,9 +502,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							'qwc-product-js',
 							'qwc_product_params',
 							array(
-								'product_id'    => $product_id,
-								'quotes'        => $enable_quote,
-								'display_price' => $display_price,
+								'product_id' => $product_id,
+								'quotes'     => $enable_quote,
 							)
 						);
 						wp_enqueue_script( 'qwc-product-js' );
@@ -528,6 +526,28 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					)
 				);
 				wp_enqueue_script( 'qwc-filter-js' );
+			}
+
+			// Include file on front end pages such as cart, checkout, order recieved and more.
+			if ( class_exists( 'WC_Product_Addons' ) ) {
+				if ( is_product() || is_cart() || is_checkout() ) {
+					$display_price_for_product = false;
+					if ( is_product() ) {
+						global $post;
+						$product_id                = isset( $post->ID ) ? $post->ID : 0;
+						$display_price_for_product = $product_id > 0 ? product_price_display( $product_id ) : false;
+					}
+					wp_register_script( 'qwc-wcpa-compat-js', QUOTES_PLUGIN_URL . '/assets/js/qwc-product-addons-compat.js', array( 'jquery' ), QUOTES_PLUGIN_VERSION, array( 'in_footer' => false ) );
+					wp_localize_script(
+						'qwc-wcpa-compat-js',
+						'qwc_quote_params',
+						array(
+							'display_price_cart' => qwc_cart_display_price(),
+							'display_price_product' => $display_price_for_product,
+						)
+					);
+					wp_enqueue_script( 'qwc-wcpa-compat-js' );
+				}
 			}
 		}
 
