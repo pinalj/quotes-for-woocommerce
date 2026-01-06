@@ -205,6 +205,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_update_db_check() {
 			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
+			// Mark the gateway as enabled.
+			self::qwc_enable_gateway();
 		}
 
 		/**
@@ -1160,6 +1162,21 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						$payment_method_registry->register( new WC_Quotes_Gateway_Blocks_Support() );
 					}
 				);
+			}
+		}
+
+		/**
+		 * Enable the Ask for Quotes payment gateway.
+		 *
+		 * @since 2.11
+		 */
+		public static function qwc_enable_gateway() {
+
+			$settings = get_option( 'woocommerce_quotes-gateway_settings', array() );
+
+			if ( empty( $settings['enabled'] ) ) {
+				$settings['enabled'] = 'yes';
+				update_option( 'woocommerce_quotes-gateway_settings', $settings );
 			}
 		}
 	} // end of class
