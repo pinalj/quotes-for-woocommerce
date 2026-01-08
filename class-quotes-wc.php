@@ -538,17 +538,22 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						global $post;
 						$product_id                = isset( $post->ID ) ? $post->ID : 0;
 						$display_price_for_product = $product_id > 0 ? product_price_display( $product_id ) : false;
+					} else {
+						$product_quote_enabled = get_option( 'qwc_enable_global_quote' );
 					}
-					wp_register_script( 'qwc-wcpa-compat-js', QUOTES_PLUGIN_URL . '/assets/js/qwc-product-addons-compat.js', array( 'jquery' ), QUOTES_PLUGIN_VERSION, array( 'in_footer' => false ) );
-					wp_localize_script(
-						'qwc-wcpa-compat-js',
-						'qwc_quote_params',
-						array(
-							'display_price_cart' => qwc_cart_display_price(),
-							'display_price_product' => $display_price_for_product,
-						)
-					);
-					wp_enqueue_script( 'qwc-wcpa-compat-js' );
+					// enqueue script only if quotes are enabled at the product/global level.
+					if ( $product_quote_enabled ) {
+						wp_register_script( 'qwc-wcpa-compat-js', QUOTES_PLUGIN_URL . '/assets/js/qwc-product-addons-compat.js', array( 'jquery' ), QUOTES_PLUGIN_VERSION, array( 'in_footer' => false ) );
+						wp_localize_script(
+							'qwc-wcpa-compat-js',
+							'qwc_quote_params',
+							array(
+								'display_price_cart' => qwc_cart_display_price(),
+								'display_price_product' => $display_price_for_product,
+							)
+						);
+						wp_enqueue_script( 'qwc-wcpa-compat-js' );
+					}
 				}
 			}
 		}
