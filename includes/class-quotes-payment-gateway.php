@@ -29,9 +29,6 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 		 * Constructor for the gateway.
 		 */
 		public function __construct() {
-			if ( is_callable( 'parent::__construct' ) ) {
-				parent::__construct();
-			}
 
 			$this->id         = 'quotes-gateway';
 			$this->icon       = '';
@@ -127,6 +124,15 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 					'desc_tip'    => true,
 				),
 			);
+		}
+
+		/**
+		 * Return Gateway availability.
+		 *
+		 * @since 2.11
+		 */
+		public function is_available() {
+			return true;
 		}
 	}
 }

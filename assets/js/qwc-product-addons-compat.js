@@ -9,7 +9,7 @@ jQuery( document ).ready( function($) {
     if ( ! hidePricesEnabledCart ) {
         return;
     }
-
+    // Legacy cart and Checkout pages.
 	function hideAddonPriceListings() {
 
 		// Clean up leftover "(+ )" or "(+ )" spacing
@@ -34,6 +34,46 @@ jQuery( document ).ready( function($) {
 		hideAddonPriceListings();
 	});
 
+    // Blocks - Cart and Checkout Pages.
+    function cleanAddonLabels() {
+		document
+			.querySelectorAll('.wc-block-components-product-details__value')
+			.forEach((el) => {
+				// If price span exists and is hidden, remove (+ )
+				const price = el.querySelector('.woocommerce-Price-amount');
+				if (!price) return;
+
+				// Get full text content
+				el.childNodes.forEach((node) => {
+					if (
+						node.nodeType === Node.TEXT_NODE &&
+						node.nodeValue.includes('(+')
+					) {
+						node.nodeValue = node.nodeValue.replace(/\(\+\s*$/, '');
+					}
+
+					if (
+						node.nodeType === Node.TEXT_NODE &&
+						node.nodeValue.trim() === ')'
+					) {
+						node.remove();
+					}
+				});
+			});
+	}
+    // Initial run
+	cleanAddonLabels();
+
+	// Observe Blocks re-renders
+	const observer_blocks = new MutationObserver(() => {
+		cleanAddonLabels();
+	});
+
+	observer_blocks.observe(document.body, {
+		childList: true,
+		subtree: true,
+	});
+
 	// Single Product Page.
     function hidePricesProductPage() {
         // subtotals for each of the addons in the totals section at the bottom.
@@ -48,7 +88,7 @@ jQuery( document ).ready( function($) {
         return;
     }
 
-    // Initial enforcement
+    // Initial enforcement.
     hidePricesProductPage();
 
     // Observe DOM changes inside Product Add-Ons totals.
