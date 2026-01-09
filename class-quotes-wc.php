@@ -551,7 +551,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							'qwc-wcpa-compat-js',
 							'qwc_quote_params',
 							array(
-								'display_price_cart' => qwc_cart_display_price(),
+								'display_price_cart'    => qwc_cart_display_price(),
 								'display_price_product' => $display_price_for_product,
 							)
 						);
