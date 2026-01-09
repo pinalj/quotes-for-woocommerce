@@ -1,13 +1,13 @@
 === Quotes for WooCommerce ===
 
 Contributors: pinal.shah
-Tags: woocommerce, quotes, proposals, hide-price, woocommerce-request-quote
+Tags: quotes, woocommerce-request-quote, hide-price, woocommerce, proposals
 Requires at least: 4.5
-Tested up to: 6.8.2
+Tested up to: 6.9
 Stable tag: 2.10
 Requires PHP: 7.4
 WC requires at least: 5.0
-WC tested up to: 10.1.2
+WC tested up to: 10.4.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -85,7 +85,11 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 
 == Changelog ==
 
-= 2.10 (22.09.2025 ) =
+= 2.11 ( 09.01.2026 ) =
+* Added - New setting to change payment gateway name for 'Ask for Quotes'.
+* Tweak - Add compatibility with WooCommerce Product Addons.
+
+= 2.10 ( 22.09.2025 ) =
 * Fix - WPML compatibility was broken due to which quotes for not enabled for translated products.
 * Fix - Add a loader in the Edit Order page when quote email is being sent.
 * Tweak - Added a new filter to allow Pro to modify payment methods at Checkout.

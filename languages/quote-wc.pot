@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 2.10\n"
+"Project-Id-Version: Quotes for WooCommerce 2.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-06T10:39:35+01:00\n"
+"POT-Creation-Date: 2026-01-09T09:37:55+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: quote-wc\n"
@@ -34,79 +34,79 @@ msgstr ""
 msgid "https://woocommerce.com/vendor/technovama/"
 msgstr ""
 
-#: class-quotes-wc.php:317
+#: class-quotes-wc.php:321
 #: includes/admin/class-quotes-wc-general-settings.php:82
 #: includes/admin/class-quotes-wc-general-settings.php:83
-#: includes/blocks/class-quotes-payment-gateway-blocks.php:96
-#: includes/class-quotes-payment-gateway.php:48
+#: includes/blocks/class-quotes-payment-gateway-blocks.php:104
+#: includes/class-quotes-payment-gateway.php:45
 msgid "Request Quote"
 msgstr ""
 
-#: class-quotes-wc.php:461
+#: class-quotes-wc.php:465
 msgid "Quote emailed"
 msgstr ""
 
-#: class-quotes-wc.php:516
-#: class-quotes-wc.php:996
+#: class-quotes-wc.php:520
+#: class-quotes-wc.php:1006
 #: includes/admin/class-quotes-wc-general-settings.php:86
 msgid "Proceed to Checkout"
 msgstr ""
 
 #. translators: Leave price blanks as its not be displayed.
-#: class-quotes-wc.php:615
+#: class-quotes-wc.php:625
 msgid "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
 msgstr ""
 
-#: class-quotes-wc.php:653
+#: class-quotes-wc.php:663
 msgid "It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart."
 msgstr ""
 
-#: class-quotes-wc.php:809
+#: class-quotes-wc.php:819
 msgid "Quote Complete"
 msgstr ""
 
-#: class-quotes-wc.php:813
+#: class-quotes-wc.php:823
 #: includes/emails/class-qwc-send-quote.php:24
 msgid "Send Quote"
 msgstr ""
 
-#: class-quotes-wc.php:815
+#: class-quotes-wc.php:825
 msgid "Resend Quote"
 msgstr ""
 
-#: class-quotes-wc.php:845
+#: class-quotes-wc.php:855
 msgid "Quote Complete."
 msgstr ""
 
-#: class-quotes-wc.php:916
+#: class-quotes-wc.php:926
 msgid "Quote email sent to "
 msgstr ""
 
-#: class-quotes-wc.php:934
-#: class-quotes-wc.php:960
+#: class-quotes-wc.php:944
+#: class-quotes-wc.php:970
 #: includes/admin/class-quotes-wc-general-settings.php:84
 msgid "Cart"
 msgstr ""
 
-#: class-quotes-wc.php:966
+#: class-quotes-wc.php:976
 #: includes/admin/class-quotes-wc-general-settings.php:85
 msgid "Checkout"
 msgstr ""
 
-#: class-quotes-wc.php:1108
-#: includes/class-quotes-payment-gateway.php:63
+#: class-quotes-wc.php:1118
+#: includes/class-quotes-payment-gateway.php:60
 msgid "Settings"
 msgstr ""
 
-#: class-quotes-wc.php:1109
+#: class-quotes-wc.php:1119
 msgid "Get Quotes Pro"
 msgstr ""
 
-#: class-quotes-wc.php:1124
+#: class-quotes-wc.php:1134
 msgid "Quotes menu has moved!"
 msgstr ""
 
-#: class-quotes-wc.php:1125
+#: class-quotes-wc.php:1135
 msgid "The Quotes settings can now be managed from WooCommerce > Settings > Quotes."
 msgstr ""
 
@@ -195,28 +195,28 @@ msgstr ""
 msgid "Quotes"
 msgstr ""
 
-#: includes/blocks/class-quotes-payment-gateway-blocks.php:94
-#: includes/class-quotes-payment-gateway.php:40
+#: includes/blocks/class-quotes-payment-gateway-blocks.php:96
+#: includes/class-quotes-payment-gateway.php:37
+#: includes/class-quotes-payment-gateway.php:120
 #: includes/class-quotes-payment-gateway.php:123
-#: includes/class-quotes-payment-gateway.php:126
 #: build/index.js:1
 #: src/index.js:9
 msgid "Ask for Quote"
 msgstr ""
 
-#: includes/class-quotes-payment-gateway.php:67
+#: includes/class-quotes-payment-gateway.php:64
 msgid "This is a fictitious payment method used for quotes. No payment is taken at Checkout."
 msgstr ""
 
-#: includes/class-quotes-payment-gateway.php:86
+#: includes/class-quotes-payment-gateway.php:83
 msgid "This order is awaiting quote."
 msgstr ""
 
-#: includes/class-quotes-payment-gateway.php:108
+#: includes/class-quotes-payment-gateway.php:105
 msgid "We have received your request for a quote. You will be notified via email soon."
 msgstr ""
 
-#: includes/class-quotes-payment-gateway.php:125
+#: includes/class-quotes-payment-gateway.php:122
 msgid "This sets the name of the payment method shown to customers."
 msgstr ""
 

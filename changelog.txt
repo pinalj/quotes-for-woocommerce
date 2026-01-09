@@ -1,5 +1,9 @@
 *** Quotes for WooCommerce ***
 
+2026-01-09 -Version 2.11
+* Added - New setting to change payment gateway name for 'Ask for Quotes'.
+* Tweak - Add compatibility with WooCommerce Product Addons.
+
 2025-09-22 - Version 2.10
 * Fix - WPML compatibility was broken due to which quotes for not enabled for translated products.
 * Fix - Add a loader in the Edit Order page when quote email is being sent.
