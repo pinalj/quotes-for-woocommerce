@@ -538,6 +538,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						global $post;
 						$product_id                = isset( $post->ID ) ? $post->ID : 0;
 						$display_price_for_product = $product_id > 0 ? product_price_display( $product_id ) : false;
+						$product_quote_enabled     = product_quote_enabled( $product_id );
 					} else {
 						$product_quote_enabled = get_option( 'qwc_enable_global_quote' );
 					}
