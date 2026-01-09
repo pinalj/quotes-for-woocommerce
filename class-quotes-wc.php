@@ -183,6 +183,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				update_option( 'qwc_menu_notice', 'dismissed' );
 			}
 			update_option( 'quotes_for_wc', QUOTES_PLUGIN_VERSION );
+			// Mark the gateway as enabled.
+			self::qwc_enable_gateway();
 		}
 
 		/**
