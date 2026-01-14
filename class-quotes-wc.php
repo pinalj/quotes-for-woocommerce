@@ -60,12 +60,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
 
 			// Hide price on the cart & checkout pages.
-			add_filter( 'wp_enqueue_scripts', array( &$this, 'qwc_css' ) );
-			// Hide Price on the Thank You page.
-			add_action( 'woocommerce_thankyou', array( &$this, 'qwc_thankyou_css' ), 10, 1 );
-
-			// Hide Price on the My Account->View Orders page.
-			add_action( 'woocommerce_view_order', array( &$this, 'qwc_thankyou_css' ), 10, 1 );
+			add_filter( 'wp_enqueue_scripts', array( &$this, 'qwc_css' ), 10 );
 			// Hide prices on the cart widget.
 			add_filter( 'woocommerce_cart_item_price', array( &$this, 'qwc_cart_widget_prices' ), 10, 2 );
 
@@ -336,7 +331,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( is_cart() || is_checkout() ) {
 				// Add css file only if cart contains products that require quotes.
-				if ( is_checkout_pay_page() || is_order_received_page() ) { // The file should not be enqueued if the order pay or order received page is loaded and quotation has been sent.
+				if ( is_checkout_pay_page() ) { // The file should not be enqueued if the order pay or order received page is loaded and quotation has been sent.
 					// Find the order ID and fetch the quote status.
 					$order_id = absint( get_query_var( 'order-pay' ) );
 					if ( is_numeric( $order_id ) && $order_id > 0 ) {
@@ -363,67 +358,24 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				}
 			}
 
-			// My Account page - Orders List.
-			if ( is_wc_endpoint_url( 'orders' ) ) {
-				global $wpdb;
-
-				$display = true;
-
-				// Check if any products allow for quotes.
-				$results_quotes = $wpdb->get_results( $wpdb->prepare( 'SELECT meta_value FROM `' . $wpdb->prefix . 'postmeta` WHERE meta_key = %s', 'qwc_enable_quotes' ) ); //phpcs:ignore
-
-				if ( isset( $results_quotes ) && count( $results_quotes ) > 0 ) {
-					$found = current(
-						array_filter(
-							$results_quotes,
-							function ( $value ) {
-								return isset( $value->meta_value ) && 'on' === $value->meta_value;
-							}
-						)
-					);
-
-					if ( isset( $found->meta_value ) && 'on' === $found->meta_value ) {
-						// if quote products are present, check if price display is set to on for any of them.
-						$results_price = $wpdb->get_results($wpdb->prepare( 'SELECT meta_value FROM `' . $wpdb->prefix . 'postmeta` WHERE meta_key = %s', 'qwc_display_prices' ) ); // phpcs:ignore
-
-						if ( isset( $results_price ) && count( $results_price ) > 0 ) {
-
-							$found_price = current(
-								array_filter(
-									$results_price,
-									function ( $value ) {
-										return isset( $value->meta_value ) && 'on' === $value->meta_value;
-									}
-								)
-							);
-
-							$display = ( isset( $found_price->meta_value ) && 'on' === $found_price->meta_value ) ? true : false;
-
-						} else {
-							$display = false;
-						}
-					}
-				}
-
-				// Hide the prices.
-				if ( ! $display ) {
+			// My Account page - Orders List & Thank you (Order Received) Page.
+			if ( is_wc_endpoint_url( 'orders' ) || is_order_received_page() ) {
+				// global quotes and price display is off.
+				if ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) {
 					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 				}
 			}
-		}
-
-		/**
-		 * Hide prices on the Thank You page.
-		 *
-		 * @param int $order_id - Order ID.
-		 * @since 1.0
-		 */
-		public function qwc_thankyou_css( $order_id ) {
-			$order = wc_get_order( $order_id );
-			if ( $order ) {
-				$quote_status = $order->get_meta( '_quote_status' );
-				if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+			// My Account > Orders > View Order page.
+			if ( is_wc_endpoint_url( 'view-order' ) ) {
+				$order_id = absint( get_query_var( 'view-order' ) );
+				if ( $order_id ) {
+					$order = wc_get_order( $order_id );
+					if ( $order ) {
+						$quote_status = $order->get_meta( '_quote_status' );
+						if ( 'quote-pending' === $quote_status && ! qwc_order_display_price( $order ) ) {
+							wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+						}
+					}
 				}
 			}
 		}
