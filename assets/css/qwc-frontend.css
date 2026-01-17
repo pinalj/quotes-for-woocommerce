@@ -41,11 +41,14 @@ div.wc-block-components-order-summary-item__description span.wc-block-components
 .wc-block-cart-item__prices {
     display: none;
 }
+.wc-block-components-sale-badge {
+  display: none;
+}
 /* Hide the Actions row in the Order received page.*/
 .woocommerce-table > tfoot > tr:nth-child(1) {
     display: none;
 }
-/* Only for large screens */
+/* Only for large screens - move the proceed to checkout button to below the item list. */
 @media (min-width: 700px) {
     .wc-block-cart__sidebar {
         position: absolute;
