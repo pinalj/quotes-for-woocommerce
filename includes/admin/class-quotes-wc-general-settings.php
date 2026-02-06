@@ -286,10 +286,11 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 		public function qwc_get_post_count() {
 
 			$product_list = array();
-			if ( function_exists( 'icl_object_id' ) ) {
+			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 				$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
 
 				if ( ! empty( $languages ) ) {
+					$original_lang = apply_filters( 'wpml_current_language', null );
 					foreach ( $languages as $lang_code => $lang ) {
 						do_action( 'wpml_switch_language', $lang_code );
 						$args  = array(
@@ -301,6 +302,9 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 						$posts = get_posts( $args );
 
 						$product_list = array_merge( $product_list, $posts );
+					}
+					if ( $original_lang ) {
+						do_action( 'wpml_switch_language', $original_lang );
 					}
 				}
 			} else {
@@ -334,14 +338,39 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			$quote_setting_value = null === $quote_setting_value ? '' : $quote_setting_value;
 
 			// Get the products.
-			$args         = array(
-				'post_type'        => 'product',
-				'numberposts'      => 500, // phpcs:ignore.
-				'suppress_filters' => false,
-				'post_status'      => array( 'publish', 'draft' ),
-				'paged'            => $loop,
-			);
-			$product_list = get_posts( $args );
+			$product_list = array();
+			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+				$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
+
+				if ( ! empty( $languages ) ) {
+					$original_lang = apply_filters( 'wpml_current_language', null );
+					foreach ( $languages as $lang_code => $lang ) {
+						do_action( 'wpml_switch_language', $lang_code );
+						$args  = array(
+							'post_type'        => 'product',
+							'numberposts'      => -1,
+							'post_status'      => array( 'draft', 'publish' ),
+							'suppress_filters' => false,
+						);
+						$posts = get_posts( $args );
+
+						$product_list = array_merge( $product_list, $posts );
+					}
+					if ( $original_lang ) {
+						do_action( 'wpml_switch_language', $original_lang );
+					}
+				}
+			} else {
+				// Non-WPML: just fetch normally.
+				$args = array(
+					'post_type'        => 'product',
+					'numberposts'      => -1,
+					'post_status'      => array( 'draft', 'publish' ),
+					'suppress_filters' => false,
+				);
+
+				$product_list = get_posts( $args );
+			}
 
 			switch ( $quote_setting_name ) {
 				case 'qwc_enable_quotes':
