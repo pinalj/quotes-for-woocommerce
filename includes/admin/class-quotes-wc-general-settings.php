@@ -75,15 +75,29 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 		public function add_settings( $settings ) {
 			global $current_section;
 
+			$settings = array();
+
+			$settings = apply_filters( 'qwc_lite_before_general_settings', $settings );
+			$settings = array_merge(
+				$settings,
+				$this->get_general_settings(),
+				$this->get_shop_product_settings(),
+				$this->get_cart_settings()
+			);
+
+			$settings = apply_filters( 'qwc_lite_after_general_settings', $settings );
+			return $settings;
+		}
+
+		/**
+		 * Return Global Settings Section.
+		 *
+		 * @since 2.12
+		 */
+		public function get_general_settings() {
+
 			$enable_bulk_quotes  = 'on' === get_option( 'qwc_enable_global_quote', '' ) ? 'yes' : '';
 			$enable_bulk_display = 'on' === get_option( 'qwc_enable_global_prices', '' ) ? 'yes' : '';
-			$hide_address        = 'on' === get_option( 'qwc_hide_address_fields', '' ) ? 'yes' : '';
-
-			$place_order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_place_order_text' );
-			$cart_button_text        = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
-			$cart_page_name          = '' === get_option( 'qwc_cart_page_name', '' ) ? __( 'Cart', 'quote-wc' ) : get_option( 'qwc_cart_page_name' );
-			$checkout_page_name      = '' === get_option( 'qwc_checkout_page_name', '' ) ? __( 'Checkout', 'quote-wc' ) : get_option( 'qwc_checkout_page_name' );
-			$proceed_checkout_label  = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
 
 			$settings = array(
 
@@ -107,10 +121,29 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'type'  => 'checkbox',
 					'value' => $enable_bulk_display,
 				),
-				array(
-					'type' => 'sectionend',
-					'id'   => 'qwc_general_settings_section',
-				),
+			);
+
+			$settings = apply_filters( 'qwc_lite_after_global_settings_fields', $settings );
+
+			$settings[] = array(
+				'type' => 'sectionend',
+				'id'   => 'qwc_general_settings_section',
+			);
+
+			return $settings;
+		}
+
+		/**
+		 * Return Product Page Section.
+		 *
+		 * @since 2.12
+		 */
+		public function get_shop_product_settings() {
+
+			$cart_button_text = '' === get_option( 'qwc_add_to_cart_button_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_add_to_cart_button_text' );
+
+			$settings = array(
+
 				array(
 					'title' => __( 'Shop & Product Page Settings', 'quote-wc' ),
 					'type'  => 'title',
@@ -124,10 +157,32 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'id'    => 'qwc_add_to_cart_button_text',
 					'value' => $cart_button_text,
 				),
-				array(
-					'type' => 'sectionend',
-					'id'   => 'qwc_shop_product_settings_section',
-				),
+			);
+
+			$settings = apply_filters( 'qwc_lite_after_product_settings_fields', $settings );
+
+			$settings[] = array(
+				'type' => 'sectionend',
+				'id'   => 'qwc_shop_product_settings_section',
+			);
+			return $settings;
+		}
+
+		/**
+		 * Return Cart Settings Section.
+		 *
+		 * @since 2.12
+		 */
+		public function get_cart_settings() {
+
+			$hide_address            = 'on' === get_option( 'qwc_hide_address_fields', '' ) ? 'yes' : '';
+			$place_order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : get_option( 'qwc_place_order_text' );
+			$cart_page_name          = '' === get_option( 'qwc_cart_page_name', '' ) ? __( 'Cart', 'quote-wc' ) : get_option( 'qwc_cart_page_name' );
+			$checkout_page_name      = '' === get_option( 'qwc_checkout_page_name', '' ) ? __( 'Checkout', 'quote-wc' ) : get_option( 'qwc_checkout_page_name' );
+			$proceed_checkout_label  = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
+
+			$settings = array(
+
 				array(
 					'title' => __( 'Cart & Checkout Settings', 'quote-wc' ),
 					'type'  => 'title',
@@ -173,12 +228,15 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 					'type'     => 'checkbox',
 					'value'    => $hide_address,
 				),
-				array(
-					'type' => 'sectionend',
-					'id'   => 'qwc_cart_settings_section',
-				),
 			);
-			$settings = apply_filters( 'qwc_lite_general_settings', $settings );
+
+			$settings = apply_filters( 'qwc_lite_after_cart_settings_fields', $settings );
+
+			$settings[] = array(
+				'type' => 'sectionend',
+				'id'   => 'qwc_cart_settings_section',
+			);
+
 			return $settings;
 		}
 
@@ -228,10 +286,11 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 		public function qwc_get_post_count() {
 
 			$product_list = array();
-			if ( function_exists( 'icl_object_id' ) ) {
+			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 				$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
 
 				if ( ! empty( $languages ) ) {
+					$original_lang = apply_filters( 'wpml_current_language', null );
 					foreach ( $languages as $lang_code => $lang ) {
 						do_action( 'wpml_switch_language', $lang_code );
 						$args  = array(
@@ -243,6 +302,9 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 						$posts = get_posts( $args );
 
 						$product_list = array_merge( $product_list, $posts );
+					}
+					if ( $original_lang ) {
+						do_action( 'wpml_switch_language', $original_lang );
 					}
 				}
 			} else {
@@ -276,14 +338,39 @@ if ( ! class_exists( 'Quotes_WC_General_Settings' ) ) {
 			$quote_setting_value = null === $quote_setting_value ? '' : $quote_setting_value;
 
 			// Get the products.
-			$args         = array(
-				'post_type'        => 'product',
-				'numberposts'      => 500, // phpcs:ignore.
-				'suppress_filters' => false,
-				'post_status'      => array( 'publish', 'draft' ),
-				'paged'            => $loop,
-			);
-			$product_list = get_posts( $args );
+			$product_list = array();
+			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+				$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
+
+				if ( ! empty( $languages ) ) {
+					$original_lang = apply_filters( 'wpml_current_language', null );
+					foreach ( $languages as $lang_code => $lang ) {
+						do_action( 'wpml_switch_language', $lang_code );
+						$args  = array(
+							'post_type'        => 'product',
+							'numberposts'      => -1,
+							'post_status'      => array( 'draft', 'publish' ),
+							'suppress_filters' => false,
+						);
+						$posts = get_posts( $args );
+
+						$product_list = array_merge( $product_list, $posts );
+					}
+					if ( $original_lang ) {
+						do_action( 'wpml_switch_language', $original_lang );
+					}
+				}
+			} else {
+				// Non-WPML: just fetch normally.
+				$args = array(
+					'post_type'        => 'product',
+					'numberposts'      => -1,
+					'post_status'      => array( 'draft', 'publish' ),
+					'suppress_filters' => false,
+				);
+
+				$product_list = get_posts( $args );
+			}
 
 			switch ( $quote_setting_name ) {
 				case 'qwc_enable_quotes':
