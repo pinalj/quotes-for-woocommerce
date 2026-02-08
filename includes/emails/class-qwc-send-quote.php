@@ -141,6 +141,7 @@ class QWC_Send_Quote extends WC_Email {
 				'sent_to_admin' => false,
 				'plain_text'    => true,
 				'email'         => $this,
+				'show_sku'      => apply_filters( 'qwc_show_sku_email', false, $this->id ),
 			),
 			'quotes-for-wc/',
 			$this->template_base
