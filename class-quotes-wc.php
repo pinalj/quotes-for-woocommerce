@@ -343,7 +343,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							}
 						}
 					}
-				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
+				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) ) {
 					// enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
 					if ( ! class_exists( 'Quotes_WC_Pro' ) ) {
 						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
@@ -352,17 +352,27 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			}
 
 			// Add css file only if cart contains products that require quotes.
-			if ( ! is_checkout_pay_page() && ! is_order_received_page() && ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) || ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) ) {
+			if ( ! is_checkout_pay_page() && ! is_order_received_page() && ( cart_contains_quotable() && ! qwc_cart_display_price() ) ) {
 				if ( ! class_exists( 'Quotes_WC_Pro' ) ) { // enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
 					wp_enqueue_style( 'qwc-mini-cart', plugins_url( '/assets/css/qwc-shop.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 				}
 			}
 
-			// My Account page - Orders List & Thank you (Order Received) Page.
-			if ( is_wc_endpoint_url( 'orders' ) || is_order_received_page() ) {
-				// global quotes and price display is off.
-				if ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) {
-					wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+			// My Account page - Orders List.
+			if ( is_wc_endpoint_url( 'orders' ) && ( 'on' === get_option( 'qwc_enable_global_quote', '' ) && 'on' !== get_option( 'qwc_enable_global_prices', '' ) ) ) {
+				wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+			}
+			// My Account page - Thank you (Order Received) Page.
+			if ( is_order_received_page() ) {
+				$order_id = absint( get_query_var( 'order-received' ) );
+				if ( $order_id > 0 ) {
+					$_order = wc_get_order( $order_id );
+					if ( $_order ) {
+						$quote_status = $_order->get_meta( '_quote_status' );
+						if ( 'quote-pending' === $quote_status ) {
+							wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
+						}
+					}
 				}
 			}
 			// My Account > Orders > View Order page.
