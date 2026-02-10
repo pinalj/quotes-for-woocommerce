@@ -33,7 +33,7 @@ if ( $order ) :
 <p>
 	<?php
 	// translators: Site Name.
-	echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
+	echo esc_html( sprintf( __( 'You have received a quotation for your quote request on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
 	?>
 </p>
 
@@ -46,7 +46,7 @@ if ( $order ) :
 		<p>
 			<?php
 			// translators: Payment Link Url.
-			echo wp_kses_post( sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), '<a href="' . esc_url( $order->get_checkout_payment_url() ) . '">' . esc_html__( 'Pay for order', 'quote-wc' ) . '</a>' ) );
+			echo wp_kses_post( sprintf( __( 'To confirm the quotation and pay for this order please use the following link: %s', 'quote-wc' ), '<a href="' . esc_url( $order->get_checkout_payment_url() ) . '">' . esc_html__( 'Pay for order', 'quote-wc' ) . '</a>' ) );
 			?>
 		</p>
 	<?php endif; ?>

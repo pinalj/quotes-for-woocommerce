@@ -24,12 +24,12 @@ if ( $order ) :
 	echo esc_html( sprintf( __( 'Hello %s', 'quote-wc' ), esc_attr( $billing_first_name ) ) ) . "\n\n";
 
 	// translators: Site Name.
-	echo esc_html( sprintf( __( 'You have received a quotation for your order on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
+	echo esc_html( sprintf( __( 'You have received a quotation for your quote request on %s. The details of the same are shown below.', 'quote-wc' ), esc_attr( $site_name ) ) );
 
 	$order_status = $order->get_status();
 	if ( 'pending' === $order_status ) :
 		// translators: Payment Link Url.
-		echo wp_kses_post( make_clickable( sprintf( __( 'To pay for this order please use the following link: %s', 'quote-wc' ), esc_url( $order->get_checkout_payment_url() ) ) ) );
+		echo wp_kses_post( make_clickable( sprintf( __( 'To confirm the quotation and pay for this order please use the following link: %s', 'quote-wc' ), esc_url( $order->get_checkout_payment_url() ) ) ) );
 	endif;
 
 	do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email );
