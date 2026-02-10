@@ -79,12 +79,8 @@ if ( $order ) :
 	echo "\n----------------------------------------\n\n";
 
 	if ( $order->get_order_item_totals() ) {
-		$i = 0;
 		foreach ( $order->get_order_item_totals() as $total ) {
-			++$i;
-			if ( 1 == $i ) { // phpcs:ignore
-				echo esc_html( $total['label'] ) . "\t " . wp_kses_post( $total['value'] ) . "\n";
-			}
+			echo esc_html( $total['label'] ) . "\t " . wp_kses_post( $total['value'] ) . "\n";
 		}
 	}
 
