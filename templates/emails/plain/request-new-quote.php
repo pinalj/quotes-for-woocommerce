@@ -42,7 +42,7 @@ if ( $order ) {
 		$sku        = $_product ? $_product->get_sku() : '';
 		$item_name  = $item->get_name();
 		$qty        = $item->get_quantity();
-		$line_total = $order->get_formatted_line_subtotal( $item );
+		$line_total = $order->get_line_subtotal( $item );
 
 		if ( $email_improvements_enabled ) {
 
