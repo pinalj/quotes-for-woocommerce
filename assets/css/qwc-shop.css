@@ -10,6 +10,9 @@
 .wd-header-cart .wd-cart-subtotal .amount {
     display: none !important;
 }
+span.onsale {
+    display: none;
+}
 
 /* Cart Block */
 .wp-block-woocommerce-cart-order-summary-block {
