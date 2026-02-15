@@ -19,7 +19,7 @@ $order_quantity_text_align = $email_improvements_enabled ? 'right' : 'left';
 $order_table_class         = $email_improvements_enabled ? 'email-order-details' : '';
 
 // translators: Site Name.
-$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the quote request are as follows:', 'quote-wc' );
 ?>
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
@@ -192,7 +192,7 @@ endif;
 
 <?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text ); ?>
 
-<p><?php esc_html_e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
+<p><?php esc_html_e( 'This request is awaiting a quote.', 'quote-wc' ); ?></p>
 
 <p><?php esc_html_e( 'You shall receive a quote email from the site admin soon.', 'quote-wc' ); ?></p>
 

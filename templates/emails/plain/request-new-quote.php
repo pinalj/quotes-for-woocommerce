@@ -14,7 +14,7 @@ $email_improvements_enabled = FeaturesUtil::feature_is_enabled( 'email_improveme
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
 // translators: Customer Name.
-$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the quote request are as follows:', 'quote-wc' );
 
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 echo esc_html( wp_strip_all_tags( $email_heading ) ) . "\n";
@@ -98,9 +98,9 @@ if ( $order ) {
 	do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 
 	echo "\n\n";
-	echo esc_html( sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) ) );
+	echo esc_html( sprintf( __( 'This request is awaiting a quote.', 'quote-wc' ) ) );
 	// translators: Admin Url for order.
-	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard here: %s', 'quote-wc' ), $order_url ) ) );
+	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this quote in the dashboard here: %s', 'quote-wc' ), $order_url ) ) );
 
 	echo "\n\n";
 	echo wp_kses_post( apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) ) );

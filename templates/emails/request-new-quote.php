@@ -18,7 +18,7 @@ $order_quantity_text_align = $email_improvements_enabled ? 'right' : 'left';
 $order_table_class         = $email_improvements_enabled ? 'email-order-details' : '';
 
 // translators: Customer Name.
-$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'A request for quote has been made by %s and is awaiting your attention. The details of the quote request are as follows:', 'quote-wc' );
 ?>
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
@@ -190,12 +190,12 @@ endif;
 
 <?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text ); ?>
 
-<p><?php esc_html_e( 'This order is awaiting a quote.', 'quote-wc' ); ?></p>
+<p><?php esc_html_e( 'This request is awaiting a quote.', 'quote-wc' ); ?></p>
 
 <p>
 	<?php
 	// translators: Admin Url for order.
-	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this order in the dashboard %s.', 'quote-wc' ), '<a href="' . esc_url( $order_url ) . '" target="_blanks">' . __( 'here', 'quote-wc' ) . '</a>' ) ) );
+	echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this quote in the dashboard %s.', 'quote-wc' ), '<a href="' . esc_url( $order_url ) . '" target="_blanks">' . __( 'here', 'quote-wc' ) . '</a>' ) ) );
 	?>
 </p>
 <?php do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email ); ?>

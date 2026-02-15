@@ -275,7 +275,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @param object $product - WC Product Object.
 		 * @since 1.0
 		 */
-		public function qwc_remove_prices( $price, $product ) {
+		public function qwc_remove_prices( $price, $product ) { // phpcs:ignore
 
 			global $post;
 
@@ -343,7 +343,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 							}
 						}
 					}
-				} elseif ( ( cart_contains_quotable() && ! qwc_cart_display_price() ) ) {
+				} elseif ( cart_contains_quotable() && ! qwc_cart_display_price() ) {
 					// enqueue only if Pro is not active - needed as Pro has settings which makes it possible to override the global settings.
 					if ( ! class_exists( 'Quotes_WC_Pro' ) ) {
 						wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
@@ -801,7 +801,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 * @since 1.0
 		 */
 		public function qwc_update_status() {
-			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-update-status-security' ) ) {
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-update-status-security' ) ) { // phpcs:ignore
 				wp_send_json_error( 'Invalid security token sent.' );
 				wp_die();
 			}
@@ -840,7 +840,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_send_quote() {
 
-			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-send-quote-security' ) ) {
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security_nonce'] ) ), 'qwc-send-quote-security' ) ) { // phpcs:ignore
 				wp_send_json_error( 'Invalid security token sent.' );
 				wp_die();
 			}
@@ -1106,7 +1106,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 		 */
 		public function qwc_menu_notice_dismissed() {
 
-			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'qwc-dismiss' ) ) {
+			if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'qwc-dismiss' ) ) { // phpcs:ignore
 				die( 'Security check' );
 			}
 

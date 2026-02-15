@@ -16,7 +16,7 @@ $text_align    = is_rtl() ? 'right' : 'left';
 $margin_side   = is_rtl() ? 'left' : 'right';
 
 // translators: Site Name.
-$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the order are as follows:', 'quote-wc' );
+$opening_paragraph = __( 'You have made a request for a quote on %s. The details of the quote request are as follows:', 'quote-wc' );
 
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 echo esc_html( wp_strip_all_tags( $email_heading ) ) . "\n";
@@ -96,7 +96,7 @@ do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 
 echo "\n\n";
-echo esc_html( sprintf( __( 'This order is awaiting a quote.', 'quote-wc' ) ) );
+echo esc_html( sprintf( __( 'This request is awaiting a quote.', 'quote-wc' ) ) );
 echo "\n\n";
 echo esc_html( sprintf( __( 'You shall receive a quote email from the site admin soon.', 'quote-wc' ) ) );
 echo "\n\n";
