@@ -368,8 +368,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				if ( $order_id > 0 ) {
 					$_order = wc_get_order( $order_id );
 					if ( $_order ) {
-						$quote_status = $_order->get_meta( '_quote_status' );
-						if ( 'quote-pending' === $quote_status ) {
+						$quote_status        = $_order->get_meta( '_quote_status' );
+						$display_order_price = qwc_order_display_price( $_order );
+						if ( 'quote-pending' === $quote_status && ! $display_order_price ) {
 							wp_enqueue_style( 'qwc-frontend', plugins_url( '/assets/css/qwc-frontend.css', __FILE__ ), '', QUOTES_PLUGIN_VERSION, false );
 						}
 					}
@@ -459,8 +460,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$product_id = isset( $post->ID ) ? $post->ID : 0;
 
 				if ( $product_id > 0 ) {
-					$enable_quote = product_quote_enabled( $product_id );
-					if ( $enable_quote ) {
+					$enable_quote  = product_quote_enabled( $product_id );
+					$display_price = product_price_display( $product_id );
+					if ( $enable_quote && ! $display_price ) {
 
 						wp_register_script( 'qwc-product-js', plugins_url( '/assets/js/qwc-product-page.js', __FILE__ ), '', QUOTES_PLUGIN_VERSION, array( 'in_footer' => true ) );
 
