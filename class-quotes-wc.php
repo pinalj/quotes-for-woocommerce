@@ -871,6 +871,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$_status = array(
 					'quote-complete',
 					'quote-sent',
+					'quote-accept',
+					'quote-reject',
 				);
 
 				// Create an instance of the WC_Emails class , so emails are sent out to customers.
