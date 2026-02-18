@@ -62,9 +62,14 @@ class QWC_Send_Quote extends WC_Email {
 			$quote_status  = $this->object->get_meta( '_quote_status' );
 
 			// Allowed quote statuses.
-			$_status = array(
-				'quote-complete',
-				'quote-sent',
+			$_status = apply_filters(
+				'qwc_send_emails_for_quote_status',
+				array(
+					'quote-complete',
+					'quote-sent',
+					'quote-accept',
+					'quote-reject',
+				)
 			);
 
 			if ( in_array( $quote_status, $_status, true ) && $this->is_enabled() ) {
