@@ -783,11 +783,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						<button id='qwc_quote_complete' type="button" class="button"><?php esc_html_e( 'Quote Complete', 'quote-wc' ); ?></button>
 						<?php
 					} else {
-						if ( 'quote-complete' === $quote_status ) {
-							$button_text = esc_html__( 'Send Quote', 'quote-wc' );
-						} elseif ( 'quote-sent' === $quote_status ) {
-							$button_text = esc_html__( 'Resend Quote', 'quote-wc' );
-						}
+						$button_text = 'quote-sent' === $quote_status ? esc_html__( 'Resend Quote', 'quote-wc' ) : esc_html__( 'Send Quote', 'quote-wc' );
 						?>
 						<button id='qwc_send_quote' type="button" class="button"><?php echo esc_html( $button_text ); ?></button>
 						<text style='margin-left:0px; font-weight: bold; font-size: 20px;' type='hidden' id='qwc_msg'></text>
@@ -875,6 +871,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				$_status = array(
 					'quote-complete',
 					'quote-sent',
+					'quote-accept',
+					'quote-reject',
 				);
 
 				// Create an instance of the WC_Emails class , so emails are sent out to customers.
@@ -883,8 +881,10 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 					do_action( 'qwc_send_quote_notification', $order_id );
 				}
 
-				// Update the quote status.
-				$order->update_meta_data( '_quote_status', 'quote-sent' );
+				// Update the quote status only if it has not been accepted/rejected so far.
+				if ( ! in_array( $quote_status, array( 'quote-accept', 'quote-reject' ), true ) ) {
+					$order->update_meta_data( '_quote_status', 'quote-sent' );
+				}
 				// Add an order note.
 				$billing_email = $order->get_billing_email();
 				$note          = __( 'Quote email sent to ', 'quote-wc' ) . $billing_email;
