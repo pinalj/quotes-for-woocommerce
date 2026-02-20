@@ -69,6 +69,7 @@ if ( $order ) {
 			echo "\n";
 			echo $line_total > 0 ? wp_kses_post( __( 'Price: ', 'quote-wc-pro' ) . wc_price( $line_total ) ) : '';
 		}
+		echo "\n";
 		// allow other plugins to add additional product information here.
 		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, $plain_text );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
