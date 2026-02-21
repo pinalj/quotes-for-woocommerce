@@ -259,3 +259,39 @@ function order_contains_purchase( $order ) {
 
 	return $purchasable;
 }
+
+/**
+ * Return count of products with quotes on.
+ *
+ * @since 2.12
+ */
+function qwc_get_quote_product_count() {
+	global $wpdb;
+	// Check if any products allow for quotes.
+	(int) $quote_count = $wpdb->get_var(  //phpcs:ignore
+		$wpdb->prepare(
+			'SELECT COUNT(*) FROM `' . $wpdb->prefix . 'postmeta` WHERE meta_key = %s AND meta_value = %s',
+			'qwc_enable_quotes',
+			'on'
+		)
+	);
+	return $quote_count;
+}
+
+/**
+ * Return count of products with price display on - quote settings.
+ *
+ * @since 2.12
+ */
+function qwc_get_quote_price_count() {
+	global $wpdb;
+
+	(int) $quote_price_enabled_count = $wpdb->get_var( // phpcs:ignore
+		$wpdb->prepare(
+			'SELECT COUNT(*) FROM `' . $wpdb->prefix . 'postmeta` WHERE meta_key = %s AND meta_value = %s',
+			'qwc_display_prices',
+			'on'
+		)
+	);
+	return $quote_price_enabled_count;
+}

@@ -506,7 +506,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 						$display_price_for_product = $product_id > 0 ? product_price_display( $product_id ) : false;
 						$product_quote_enabled     = product_quote_enabled( $product_id );
 					} else {
-						$product_quote_enabled = get_option( 'qwc_enable_global_quote' );
+						$product_quote_enabled = cart_contains_quotable();
 					}
 					// enqueue script only if quotes are enabled at the product/global level.
 					if ( $product_quote_enabled ) {
