@@ -103,6 +103,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			if ( $order ) {
 				if ( '1' === $order->get_meta( '_qwc_quote' ) && 'pending' === $order->get_status() ) {
 					$message = esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' );
+					$message = apply_filters( 'qwc_quotes_gateway_thankyou_text', $message );
 				}
 			}
 			return $message;
