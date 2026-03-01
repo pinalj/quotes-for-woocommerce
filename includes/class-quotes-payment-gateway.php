@@ -42,7 +42,8 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 
 			// Allow filter to override setting (backward compatible).
 			$this->title             = apply_filters( 'qwc_payment_method_name', $setting_title );
-			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
+			$order_button_text       = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
+			$this->order_button_text = apply_filters( 'qwc_place_order_button_text', $order_button_text );
 
 			$this->description        = '';
 			$this->method_description = '';
