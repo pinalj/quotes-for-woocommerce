@@ -96,12 +96,14 @@ final class WC_Quotes_Gateway_Blocks_Support extends AbstractPaymentMethodType {
 		$title = isset( $settings['title'] ) && '' !== $settings['title'] ? $settings['title'] : __( 'Ask for Quote', 'quote-wc' );
 
 		// Allow existing filter to override (backward compatible).
-		$title = apply_filters( 'qwc_payment_method_name', $title );
+		$title             = apply_filters( 'qwc_payment_method_name', $title );
+		$order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
+		$order_button_text = apply_filters( 'qwc_place_order_button_text', $order_button_text );
 
 		return array(
 			'title'             => $title,
 			'description'       => '',
-			'place_order_label' => '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ), // phpcs:ignore
+			'place_order_label' => $order_button_text,
 		);
 	}
 }

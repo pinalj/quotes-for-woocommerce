@@ -42,7 +42,8 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 
 			// Allow filter to override setting (backward compatible).
 			$this->title             = apply_filters( 'qwc_payment_method_name', $setting_title );
-			$this->order_button_text = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
+			$order_button_text       = '' === get_option( 'qwc_place_order_text', '' ) ? __( 'Request Quote', 'quote-wc' ) : __( get_option( 'qwc_place_order_text' ), 'quote-wc' ); // phpcs:ignore
+			$this->order_button_text = apply_filters( 'qwc_place_order_button_text', $order_button_text );
 
 			$this->description        = '';
 			$this->method_description = '';
@@ -103,6 +104,7 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			if ( $order ) {
 				if ( '1' === $order->get_meta( '_qwc_quote' ) && 'pending' === $order->get_status() ) {
 					$message = esc_html__( 'We have received your request for a quote. You will be notified via email soon.', 'quote-wc' );
+					$message = apply_filters( 'qwc_quotes_gateway_thankyou_text', $message );
 				}
 			}
 			return $message;
