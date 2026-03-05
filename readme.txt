@@ -3,11 +3,11 @@
 Contributors: pinal.shah
 Tags: quotes, woocommerce-request-quote, hide-price, woocommerce, proposals
 Requires at least: 4.5
-Tested up to: 6.9
-Stable tag: 2.11
+Tested up to: 6.9.1
+Stable tag: 2.12
 Requires PHP: 7.4
 WC requires at least: 5.0
-WC tested up to: 10.4.3
+WC tested up to: 10.5.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -84,6 +84,12 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.12 ( 06.03.2026 ) =
+* Added - Make plugin emails compatible with Email Improvements feature in WooCommerce.
+* Fix - Fix a WPML compatibility bug where quotes are not turned on for translated products in secondary languages.
+* Tweak - Add some filters to allow overriding the plugin settings & text messages.
+* Fix - Hide the Sale badge in Cart and Checkout Blocks when quotes are enabled.
 
 = 2.11 ( 09.01.2026 ) =
 * Added - New setting to change payment gateway name for 'Ask for Quotes'.

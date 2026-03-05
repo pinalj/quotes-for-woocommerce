@@ -1,5 +1,11 @@
 *** Quotes for WooCommerce ***
 
+2026-03-06 - Version 2.12
+* Added - Make plugin emails compatible with Email Improvements feature in WooCommerce.
+* Fix - Fix a WPML compatibility bug where quotes are not turned on for translated products in secondary languages.
+* Tweak - Add some filters to allow overriding the plugin settings & text messages.
+* Fix - Hide the Sale badge in Cart and Checkout Blocks when quotes are enabled.
+
 2026-01-09 -Version 2.11
 * Added - New setting to change payment gateway name for 'Ask for Quotes'.
 * Tweak - Add compatibility with WooCommerce Product Addons.
