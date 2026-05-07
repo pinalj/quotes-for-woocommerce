@@ -49,9 +49,9 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			$this->includes();
 			add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
 			// Hide the prices.
-			add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 10, 2 );
-			add_filter( 'woocommerce_variable_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
-			add_filter( 'woocommerce_get_price_html', array( &$this, 'qwc_remove_prices' ), 10, 2 );
+			add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'qwc_remove_prices' ), 999, 2 );
+			add_filter( 'woocommerce_variable_price_html', array( &$this, 'qwc_remove_prices' ), 999, 2 );
+			add_filter( 'woocommerce_get_price_html', array( &$this, 'qwc_remove_prices' ), 999, 2 );
 			// Composite products - individual price display in dropdown.
 			add_filter( 'woocommerce_composited_product_price_string', array( &$this, 'qwc_remove_prices' ), 10, 2 );
 
