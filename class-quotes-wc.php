@@ -122,6 +122,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			// Proceed to Checkout button text edit.
 			add_action( 'woocommerce_proceed_to_checkout', array( &$this, 'qwc_change_proceed_checkout_btn_text' ), 10 );
+			// Avada theme compatibility - Fix #187.
+			add_action( 'wp', array( $this, 'qwc_avada_compat_proceed_to_checkout_btn' ), 10 );
 
 			// Add dismissible notice informing users about the change in menu placement.
 			add_action( 'admin_notices', array( &$this, 'qwc_menu_change_notice' ), 1 );
@@ -974,6 +976,47 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 				</a>
 				<?php
 			}
+		}
+
+		/**
+		 * Remove the action buttons on the Cart page - Avada theme (Fix #187).
+		 *
+		 * @since 2.13
+		 */
+		public function qwc_avada_compat_proceed_to_checkout_btn() {
+
+			$active_theme = wp_get_theme();
+			if ( 'avada' === strtolower( $active_theme->stylesheet ) || 'avada' === strtolower( $active_theme->parent_theme ) ) {
+				global $avada_woocommerce;
+				$modify_text = apply_filters( 'qwc_modify_proceed_checkout_button_text', true );
+				if ( is_object( $avada_woocommerce ) && cart_contains_quotable() && $modify_text ) {
+
+					$quotes_obj = Quotes_WC::get_instance();
+					// Avada button display action removed.
+					remove_action( 'woocommerce_proceed_to_checkout', array( $avada_woocommerce, 'proceed_to_checkout' ), 10 );
+					// Quotes plugin btn display removed as Avada has Update Cart and Proceed btn in a single template.
+					remove_action( 'woocommerce_proceed_to_checkout', array( $quotes_obj, 'qwc_change_proceed_checkout_btn_text' ), 10 );
+					add_action( 'woocommerce_proceed_to_checkout', array( $quotes_obj, 'qwc_avada_theme_cart_btns' ), 10 );
+				}
+			}
+		}
+
+		/**
+		 * Add the action buttons on the Cart page - Avada theme (Fix #187).
+		 *
+		 * @since 2.13
+		 */
+		public function qwc_avada_theme_cart_btns() {
+			remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
+			$proceed_checkout_label = '' === get_option( 'qwc_proceed_checkout_btn_label', '' ) ? __( 'Proceed to Checkout', 'quote-wc' ) : get_option( 'qwc_proceed_checkout_btn_label' );
+			?>
+			<a href="" class="fusion-button button-default fusion-button-default-size button fusion-update-cart">
+				<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>
+			</a>
+			<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="fusion-button button-default fusion-button-default-size checkout-button button alt wc-forward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
+				<?php echo esc_html__( $proceed_checkout_label, 'quote-wc' ); // phpcs:ignore ?>
+			</a>
+			<?php
 		}
 
 		/**
