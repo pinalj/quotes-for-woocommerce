@@ -810,11 +810,12 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 
 			if ( $order_id > 0 && '' !== $quote_status ) {
 				self::quote_status_update( $order_id, $quote_status );
+				// Add order note that quote has been completed.
+				$order = new WC_Order( $order_id );
+				$order->add_order_note( __( 'Quote Complete.', 'quote-wc' ) );
+				do_action( 'qwc_wc_order_marked_completed', $order_id );
 			}
 
-			// Add order note that quote has been completed.
-			$order = new WC_Order( $order_id );
-			$order->add_order_note( __( 'Quote Complete.', 'quote-wc' ) );
 			die();
 		}
 
