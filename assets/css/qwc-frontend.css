@@ -44,6 +44,9 @@ div.wc-block-components-order-summary-item__description span.wc-block-components
 .wc-block-components-sale-badge {
   display: none;
 }
+table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__prices .price {
+	display: none;
+}
 /* Hide the Actions row in the Order received page.*/
 .woocommerce-table > tfoot > tr:nth-child(1) {
     display: none;
