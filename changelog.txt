@@ -1,5 +1,10 @@
 *** Quotes for WooCommerce ***
 
+= 2026-06-16 - Version 2.13
+* Added - Compatibility with plugins - Elex WooCommerce Role-based Pricing & WooCommerce Catalog Mode.
+* Fix - Avada theme compatibility with 2 Proceed to Checkout buttons are displayed on the Cart page.
+* Fix - Emails not being registered in WooCommerce emails.
+
 2026-03-06 - Version 2.12
 * Added - Make plugin emails compatible with Email Improvements feature in WooCommerce.
 * Fix - Fix a WPML compatibility bug where quotes are not turned on for translated products in secondary languages.

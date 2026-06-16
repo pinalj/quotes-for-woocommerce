@@ -3,11 +3,11 @@
 Contributors: pinal.shah
 Tags: quotes, woocommerce-request-quote, hide-price, woocommerce, proposals
 Requires at least: 4.5
-Tested up to: 6.9.1
-Stable tag: 2.12
+Tested up to: 7.0
+Stable tag: 2.13
 Requires PHP: 7.4
 WC requires at least: 5.0
-WC tested up to: 10.5.3
+WC tested up to: 10.8.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://www.paypal.me/pinalj
@@ -84,6 +84,11 @@ You can enable wholesale customer quotes while allowing retail users to place a 
 4. Quote email.
 
 == Changelog ==
+
+= 2.13 ( 16.06.2026 ) =
+* Added - Compatibility with plugins - Elex WooCommerce Role-based Pricing & WooCommerce Catalog Mode.
+* Fix - Avada theme compatibility with 2 Proceed to Checkout buttons are displayed on the Cart page.
+* Fix - Emails not being registered in WooCommerce emails.
 
 = 2.12 ( 06.03.2026 ) =
 * Added - Make plugin emails compatible with Email Improvements feature in WooCommerce.
