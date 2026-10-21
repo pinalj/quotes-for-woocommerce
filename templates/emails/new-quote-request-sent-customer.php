@@ -76,15 +76,16 @@ endif;
 								<?php
 								// Show title/image etc.
 								if ( $show_image ) {
+									$thumbnail_width = $image_size + 24;
 									// Email Order Item Thumbnail hook.
-									echo '<td>' . wp_kses_post( apply_filters( 'woocommerce_order_item_thumbnail', $image, $items ) ) . '</td>';
+									echo '<td class="email-order-item-thumbnail" style="width: ' . esc_attr( $thumbnail_width ) . 'px;">' . wp_kses_post( apply_filters( 'woocommerce_order_item_thumbnail', $image, $items ) ) . '</td>';
 								}
 								?>
 								<td>
 									<?php
 									$order_item_name = $items->get_name();
 									$product_url     = esc_url( get_permalink( $product_id ) );
-									echo wp_kses_post( "<h3 style='font-size: inherit;font-weight: inherit;'><a href='{$product_url}' target='_blank'>{$order_item_name}</a></h3>" );
+									echo wp_kses_post( "<h3 class='wc-product-name' style='font-size: inherit;font-weight: inherit;'><a href='{$product_url}' target='_blank'>{$order_item_name}</a></h3>" );
 
 									// SKU.
 									if ( '' !== $sku && $show_sku ) {
