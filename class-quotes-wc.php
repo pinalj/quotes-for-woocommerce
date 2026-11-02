@@ -58,6 +58,8 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// Modify the 'add to cart' button text.
 			add_filter( 'woocommerce_product_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
 			add_filter( 'woocommerce_product_single_add_to_cart_text', array( &$this, 'qwc_change_button_text' ), 99, 1 );
+			// WPClever Composite Products - single product page button text.
+			add_filter( 'wooco_product_single_add_to_cart_text', array( $this, 'qwc_change_button_text' ), 99, 1 );
 
 			// Hide price on the cart & checkout pages.
 			add_filter( 'wp_enqueue_scripts', array( &$this, 'qwc_css' ), 10 );
@@ -96,7 +98,7 @@ if ( ! class_exists( 'Quotes_WC' ) ) {
 			// Load JS files.
 			add_action( 'admin_enqueue_scripts', array( &$this, 'qwc_load_js' ) );
 			// Frontend JS files.
-			add_action( 'wp_enqueue_scripts', array( &$this, 'qwc_load_js_frontend' ) );
+			add_action( 'wp_enqueue_scripts', array( &$this, 'qwc_load_js_frontend' ), 100 );
 			// Admin ajax.
 			add_action( 'admin_init', array( &$this, 'qwc_ajax_admin' ) );
 
