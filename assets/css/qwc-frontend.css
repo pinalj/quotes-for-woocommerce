@@ -2,6 +2,10 @@ span.woocommerce-Price-amount.amount {
     display: none !important;
 }
 /* Checkout Block Order Summary */
+/* Checkout Blocks Order summary Title */
+.wc-block-components-checkout-order-summary__title-price {
+  display: none;
+}
 /* Subtotal */
 .wp-block-woocommerce-checkout-order-summary-subtotal-block {
     display: none;
