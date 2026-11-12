@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quotes for WooCommerce 2.12\n"
+"Project-Id-Version: Quotes for WooCommerce 2.14\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quotes-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-16T10:20:46+02:00\n"
+"POT-Creation-Date: 2026-11-12T11:53:00+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: quote-wc\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "https://woocommerce.com/vendor/technovama/"
 msgstr ""
 
-#: class-quotes-wc.php:318
+#: class-quotes-wc.php:320
 #: includes/admin/class-quotes-wc-general-settings.php:143
 #: includes/admin/class-quotes-wc-general-settings.php:179
 #: includes/blocks/class-quotes-payment-gateway-blocks.php:100
@@ -42,72 +42,72 @@ msgstr ""
 msgid "Request Quote"
 msgstr ""
 
-#: class-quotes-wc.php:430
+#: class-quotes-wc.php:432
 msgid "Quote emailed"
 msgstr ""
 
-#: class-quotes-wc.php:486
-#: class-quotes-wc.php:973
-#: class-quotes-wc.php:1012
+#: class-quotes-wc.php:488
+#: class-quotes-wc.php:975
+#: class-quotes-wc.php:1014
 #: includes/admin/class-quotes-wc-general-settings.php:182
 msgid "Proceed to Checkout"
 msgstr ""
 
 #. translators: Leave price blanks as its not be displayed.
-#: class-quotes-wc.php:591
+#: class-quotes-wc.php:593
 msgid "<strong>Subtotal:</strong> <span class='amount'>%s</span>"
 msgstr ""
 
-#: class-quotes-wc.php:629
+#: class-quotes-wc.php:631
 msgid "It is not possible to add products that require quotes to the Cart along with ones that do not. Hence, the existing products have been removed from the Cart."
 msgstr ""
 
-#: class-quotes-wc.php:785
+#: class-quotes-wc.php:787
 msgid "Quote Complete"
 msgstr ""
 
-#: class-quotes-wc.php:788
+#: class-quotes-wc.php:790
 msgid "Resend Quote"
 msgstr ""
 
-#: class-quotes-wc.php:788
+#: class-quotes-wc.php:790
 #: includes/emails/class-qwc-send-quote.php:24
 msgid "Send Quote"
 msgstr ""
 
-#: class-quotes-wc.php:815
+#: class-quotes-wc.php:817
 msgid "Quote Complete."
 msgstr ""
 
-#: class-quotes-wc.php:893
+#: class-quotes-wc.php:895
 msgid "Quote email sent to "
 msgstr ""
 
-#: class-quotes-wc.php:911
-#: class-quotes-wc.php:937
+#: class-quotes-wc.php:913
+#: class-quotes-wc.php:939
 #: includes/admin/class-quotes-wc-general-settings.php:180
 msgid "Cart"
 msgstr ""
 
-#: class-quotes-wc.php:943
+#: class-quotes-wc.php:945
 #: includes/admin/class-quotes-wc-general-settings.php:181
 msgid "Checkout"
 msgstr ""
 
-#: class-quotes-wc.php:1126
+#: class-quotes-wc.php:1128
 #: includes/class-quotes-payment-gateway.php:61
 msgid "Settings"
 msgstr ""
 
-#: class-quotes-wc.php:1127
+#: class-quotes-wc.php:1129
 msgid "Get Quotes Pro"
 msgstr ""
 
-#: class-quotes-wc.php:1142
+#: class-quotes-wc.php:1144
 msgid "Quotes menu has moved!"
 msgstr ""
 
-#: class-quotes-wc.php:1143
+#: class-quotes-wc.php:1145
 msgid "The Quotes settings can now be managed from WooCommerce > Settings > Quotes."
 msgstr ""
 
@@ -375,21 +375,21 @@ msgstr ""
 msgid "You have made a request for a quote on %s. The details of the quote request are as follows:"
 msgstr ""
 
-#: templates/emails/new-quote-request-sent-customer.php:91
-#: templates/emails/new-quote-request-sent-customer.php:146
-#: templates/emails/request-new-quote.php:90
-#: templates/emails/request-new-quote.php:145
+#: templates/emails/new-quote-request-sent-customer.php:92
+#: templates/emails/new-quote-request-sent-customer.php:147
+#: templates/emails/request-new-quote.php:91
+#: templates/emails/request-new-quote.php:146
 msgid "SKU"
 msgstr ""
 
-#: templates/emails/new-quote-request-sent-customer.php:195
+#: templates/emails/new-quote-request-sent-customer.php:196
 #: templates/emails/plain/new-quote-request-sent-customer.php:100
 #: templates/emails/plain/request-new-quote.php:102
-#: templates/emails/request-new-quote.php:193
+#: templates/emails/request-new-quote.php:194
 msgid "This request is awaiting a quote."
 msgstr ""
 
-#: templates/emails/new-quote-request-sent-customer.php:197
+#: templates/emails/new-quote-request-sent-customer.php:198
 #: templates/emails/plain/new-quote-request-sent-customer.php:102
 msgid "You shall receive a quote email from the site admin soon."
 msgstr ""
@@ -449,12 +449,12 @@ msgid "Price"
 msgstr ""
 
 #. translators: Admin Url for order.
-#: templates/emails/request-new-quote.php:198
+#: templates/emails/request-new-quote.php:199
 msgid "You can view and edit this quote in the dashboard %s."
 msgstr ""
 
 #. translators: Admin Url for order.
-#: templates/emails/request-new-quote.php:198
+#: templates/emails/request-new-quote.php:199
 msgid "here"
 msgstr ""
 
